@@ -1,0 +1,13 @@
+{
+  "name": "survey-static-generator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "eslint src tests --ext .js",
+    "test": "node tests/index.test.js"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1"
+  }
+}

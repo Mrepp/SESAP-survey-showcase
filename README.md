@@ -27,9 +27,11 @@ Both environments are required before running linting or tests.
 1. Create a feature branch from `main`.
 2. Implement your changes in `llm_pipeline`, `generator`, or supporting directories.
 3. Run the shared validation script from the repository root:
+
    ```bash
    ./scripts/precommit.sh
    ```
+
    This script activates the Python virtualenv, runs `ruff` and `pytest`, ensures Node dependencies are installed, then runs `eslint` and the generator smoke test.
 4. Commit your changes along with any updated snapshots or data scaffolding.
 5. Open a pull request describing the change and its impact on the SESAP workflow.

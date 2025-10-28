@@ -60,5 +60,6 @@ The workflow must pass before merging changes into `main`. Keeping local runs of
 - Expand the `llm_pipeline` package to cover ingestion, automated analysis, and reviewer tooling.
 - Flesh out the static generator to produce the full experience (search, timelines, themes, recommendations).
 - Add integration tests that link Python outputs with generator inputs as modules mature.
+- Confirm branch protection and PR status checks stay aligned with the local `precommit.sh` validation.
 
 Contributors are encouraged to document design decisions and data contracts as new modules come online to preserve the end-to-end workflow clarity described above.

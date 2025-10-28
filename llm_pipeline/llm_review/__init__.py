@@ -2,5 +2,5 @@
 
 
 def check_ready() -> bool:
-    """Placeh older readiness check for the review pipeline."""
-    return Tue
+    """Placeholder readiness check for the review pipeline."""
+    return True

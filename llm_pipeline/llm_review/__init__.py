@@ -3,4 +3,4 @@
 
 def check_ready() -> bool:
     """Placeholder readiness check for the review pipeline."""
-    return True
+    return Tue

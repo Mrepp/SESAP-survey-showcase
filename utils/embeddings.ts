@@ -18,10 +18,10 @@ export async function generateEmbeddings(texts: string[]): Promise<number[][]> {
   const embeddings = await Promise.all(
     prefixedTexts.map(async (text) => {
       const output = await model(text, { pooling: 'mean', normalize: true });
-      return Array.from(output.data);
+      return Array.from(output.data) as number[];
     })
   );
-  
+
   return embeddings;
 }
 

@@ -10,7 +10,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  webpack: (config) => {
+  turbopack: {},
+  webpack: (config: any) => {
     config.resolve.alias = {
       ...config.resolve.alias,
       'sharp$': false,

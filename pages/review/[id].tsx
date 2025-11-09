@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { Interview } from '../../types/interview';
 import { storage } from '../../utils/storage';
 import { calculateDiffScore } from '../../utils/diff';
-import { embedInterviewData } from '../../utils/embeddings';
 import { ArrowLeft, Save, CheckCircle } from 'lucide-react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
@@ -71,17 +70,18 @@ export default function ReviewPage() {
 
   const handleComplete = async () => {
     if (!interview) return;
-    
+
     setError('');
     setIsGeneratingEmbeddings(true);
-    
+
     try {
       const parsedJson = JSON.parse(editedJson);
       const diffScore = calculateDiffScore(interview.originalJson, parsedJson);
-      
-      // Generate embeddings
+
+      // Generate embeddings - dynamically import to avoid SSR issues
+      const { embedInterviewData } = await import('../../utils/embeddings');
       const embeddings = await embedInterviewData(parsedJson);
-      
+
       storage.updateInterview(interview.id, {
         editedJson: parsedJson,
         helpfulnessScore,
@@ -89,7 +89,7 @@ export default function ReviewPage() {
         embeddings,
         status: 'completed',
       });
-      
+
       router.push('/');
     } catch (e: any) {
       setError(e.message || 'Error completing review');

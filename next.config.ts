@@ -1,7 +1,23 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
+const repoName = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const nextConfig = {
+  reactStrictMode: true,
+  output: 'export',
+  basePath: isProd ? repoName : '',
+  assetPrefix: isProd ? repoName : '',
+  images: {
+    unoptimized: true,
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'sharp$': false,
+      'onnxruntime-node$': false,
+    };
+    return config;
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

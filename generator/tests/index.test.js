@@ -1,6 +1,6 @@
 import assert from "assert";
 
-import { renderStaticPage } from "../src/index.js";
+import { renderStaticPage } from "../src/app/index.js";
 
 const title = "Generator Smoke Test";
 

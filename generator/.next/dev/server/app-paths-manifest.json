@@ -2,6 +2,7 @@
   "/_not-found/page": "app/_not-found/page.js",
   "/narratives/page": "app/narratives/page.js",
   "/page": "app/page.js",
-  "/recommendations/page": "app/recommendations/page.js",
+  "/purpose/page": "app/purpose/page.js",
+  "/recs/page": "app/recs/page.js",
   "/visualizations/page": "app/visualizations/page.js"
 }

@@ -1,104 +1,199 @@
 import { useState } from 'react';
-import { X } from 'lucide-react';
+import { Interview } from '../types/interview';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  onAdd: (transcript: string, jsonData: any) => void;
+  onAdd: (interview: Interview) => void;
 }
 
-export default function AddInterviewModal({ isOpen, onClose, onAdd }: Props) {
-  const [transcript, setTranscript] = useState('');
-  const [jsonText, setJsonText] = useState('');
-  const [error, setError] = useState('');
+const EXAMPLE_JSON = `{
+  "interviewId": "osu-2024-003",
+  "intervieweeName": "John Doe",
+  "interviewDate": "2024-03-15T10:00:00Z",
+  "interviewFormat": "Prerecorded Zoom",
+  "interviewerName": "Dr. Smith",
+  "demographics": {
+    "age": "21",
+    "gender": "Male",
+    "major": "Computer Science",
+    "year": "Junior",
+    "other": ""
+  },
+  "transcript": {
+    "fileName": "interview-003.txt",
+    "fileType": "text/plain",
+    "rawText": "Your transcript here...",
+    "wordCount": 450,
+    "validation": {
+      "minimumLengthCheck": {
+        "passed": true,
+        "warningIssued": false,
+        "overrideApprovedBy": ""
+      }
+    }
+  },
+  "analysis": {
+    "model": {
+      "provider": "OpenAI",
+      "modelName": "gpt-4",
+      "temperature": 0.7,
+      "promptVersion": "1.0"
+    },
+    "summaries": [],
+    "timelinePoints": [],
+    "themes": [],
+    "quotes": [],
+    "areasForImprovement": []
+  },
+  "status": "pending"
+}`;
 
-  if (!isOpen) return null;
+export default function AddInterviewModal({ isOpen, onClose, onAdd }: Props) {
+  const [activeTab, setActiveTab] = useState(0);
+  const [jsonInput, setJsonInput] = useState('');
+  const [transcriptText, setTranscriptText] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = () => {
     setError('');
-    
-    if (!transcript.trim()) {
-      setError('Transcript is required');
-      return;
-    }
-    
-    if (!jsonText.trim()) {
-      setError('JSON data is required');
-      return;
-    }
-    
+
     try {
-      const jsonData = JSON.parse(jsonText);
-      onAdd(transcript, jsonData);
-      setTranscript('');
-      setJsonText('');
-    } catch (e) {
-      setError('Invalid JSON format');
+      const parsed = JSON.parse(jsonInput);
+
+      // Validate required fields for OSU schema
+      if (!parsed.interviewId || !parsed.intervieweeName || !parsed.demographics || !parsed.analysis) {
+        setError('Invalid interview data structure. Please ensure the JSON matches the OSU interview schema.');
+        return;
+      }
+
+      // If transcript text is provided, inject it into the parsed JSON
+      if (transcriptText.trim()) {
+        const wordCount = transcriptText.trim().split(/\s+/).length;
+        parsed.transcript = {
+          ...parsed.transcript,
+          rawText: transcriptText.trim(),
+          wordCount: wordCount,
+          validation: {
+            minimumLengthCheck: {
+              passed: wordCount >= 100,
+              warningIssued: wordCount < 100,
+              overrideApprovedBy: ""
+            }
+          }
+        };
+      }
+
+      // Ensure status and metadata are set
+      const interview: Interview = {
+        ...parsed,
+        status: parsed.status || 'pending',
+        metadata: {
+          ...parsed.metadata,
+          createdAt: parsed.metadata?.createdAt || new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          version: parsed.metadata?.version || '1.0',
+          source: parsed.metadata?.source || 'manual-upload',
+          validatedBy: parsed.metadata?.validatedBy || '',
+        },
+      };
+
+      onAdd(interview);
+      setJsonInput('');
+      setTranscriptText('');
+      setError('');
+      setActiveTab(0);
+    } catch {
+      setError('Invalid JSON format. Please check your input.');
     }
   };
 
+  const handleClose = () => {
+    setJsonInput('');
+    setTranscriptText('');
+    setError('');
+    setActiveTab(0);
+    onClose();
+  };
+
+  const loadExample = () => {
+    setJsonInput(EXAMPLE_JSON);
+    setError('');
+  };
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] flex flex-col">
-        <div className="flex justify-between items-center p-6 border-b">
-          <h2 className="text-xl font-semibold text-gray-900">
-            Add New Interview
-          </h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-500"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </div>
+    <Dialog open={isOpen} onClose={handleClose} maxWidth="md" fullWidth>
+      <DialogTitle>Add New Interview</DialogTitle>
+      <DialogContent>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 2 }}>
+          <Tabs value={activeTab} onChange={(e, v) => setActiveTab(v)}>
+            <Tab label="JSON Input" />
+            <Tab label="Transcript" />
+          </Tabs>
+        </Box>
 
-        <div className="flex-1 overflow-y-auto p-6 space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Raw Transcript
-            </label>
-            <textarea
-              value={transcript}
-              onChange={(e) => setTranscript(e.target.value)}
-              className="w-full h-48 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
-              placeholder="Paste the raw interview transcript here..."
+        {activeTab === 0 && (
+          <Box>
+            <Box sx={{ mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Button size="small" onClick={loadExample} variant="outlined">
+                Load Example JSON
+              </Button>
+            </Box>
+            <TextField
+              autoFocus
+              margin="dense"
+              label="Interview JSON Data"
+              multiline
+              rows={18}
+              fullWidth
+              variant="outlined"
+              value={jsonInput}
+              onChange={(e) => setJsonInput(e.target.value)}
+              placeholder={EXAMPLE_JSON}
+              sx={{ fontFamily: 'monospace' }}
             />
-          </div>
+          </Box>
+        )}
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              LLM Generated JSON
-            </label>
-            <textarea
-              value={jsonText}
-              onChange={(e) => setJsonText(e.target.value)}
-              className="w-full h-48 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
-              placeholder='{"sentiment": "positive", "painPoints": [...], ...}'
+        {activeTab === 1 && (
+          <Box>
+            <TextField
+              margin="dense"
+              label="Transcript Text"
+              multiline
+              rows={20}
+              fullWidth
+              variant="outlined"
+              value={transcriptText}
+              onChange={(e) => setTranscriptText(e.target.value)}
+              placeholder="Paste transcript text here... (This will override the transcript.rawText in your JSON)"
+              helperText="Optional: Add or replace the transcript text. Word count will be calculated automatically."
             />
-          </div>
+          </Box>
+        )}
 
-          {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-              {error}
-            </div>
-          )}
-        </div>
-
-        <div className="flex justify-end gap-3 p-6 border-t bg-gray-50">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleSubmit}
-            className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-          >
-            Add Interview
-          </button>
-        </div>
-      </div>
-    </div>
+        {error && (
+          <Alert severity="error" sx={{ mt: 2 }}>
+            {error}
+          </Alert>
+        )}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleSubmit} variant="contained" color="primary">
+          Add Interview
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }

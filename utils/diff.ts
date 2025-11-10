@@ -1,13 +1,13 @@
-export function calculateDiffScore(original: any, edited: any): number {
+export function calculateDiffScore(original: unknown, edited: unknown): number {
   const changes = countChanges(original, edited);
   const totalFields = countTotalFields(original);
-  
+
   if (totalFields === 0) return 0;
-  
+
   return Math.round((changes / totalFields) * 100);
 }
 
-function countChanges(obj1: any, obj2: any): number {
+function countChanges(obj1: unknown, obj2: unknown): number {
   let changes = 0;
 
   if (typeof obj1 !== typeof obj2) {
@@ -47,7 +47,7 @@ function countChanges(obj1: any, obj2: any): number {
   return obj1 !== obj2 ? 1 : 0;
 }
 
-function countTotalFields(obj: any): number {
+function countTotalFields(obj: unknown): number {
   if (typeof obj !== 'object' || obj === null) {
     return 1;
   }

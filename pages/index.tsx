@@ -3,36 +3,50 @@ import { Interview } from '../types/interview';
 import { storage } from '../utils/storage';
 import AddInterviewModal from '../components/AddInterviewModal';
 import InterviewQueue from '../components/InterviewQueue';
-import { Plus } from 'lucide-react';
 import Head from 'next/head';
+import Container from '@mui/material/Container';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import AddIcon from '@mui/icons-material/Add';
+import DownloadIcon from '@mui/icons-material/Download';
 
 export default function Home() {
   const [interviews, setInterviews] = useState<Interview[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   useEffect(() => {
-    setInterviews(storage.getInterviews());
+    // Listen for storage changes (fires when localStorage is updated)
+    const handleStorageChange = () => {
+      setInterviews(storage.getInterviews());
+    };
+
+    // Initialize on mount
+    handleStorageChange();
+
+    window.addEventListener('storage', handleStorageChange);
+
+    // Also listen for custom event for same-page updates
+    window.addEventListener('interviewsUpdated', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('interviewsUpdated', handleStorageChange);
+    };
   }, []);
 
   const pendingInterviews = interviews.filter(
     i => i.status === 'pending' || i.status === 'in-progress'
   );
-  
+
   const completedInterviews = interviews.filter(
     i => i.status === 'completed'
   );
 
-  const handleAddInterview = (rawTranscript: string, jsonData: any) => {
-    const newInterview: Interview = {
-      id: `interview-${Date.now()}`,
-      rawTranscript,
-      originalJson: jsonData,
-      status: 'pending',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-    
-    storage.addInterview(newInterview);
+  const handleAddInterview = (interviewData: Interview) => {
+    storage.addInterview(interviewData);
     setInterviews(storage.getInterviews());
     setIsAddModalOpen(false);
   };
@@ -46,58 +60,82 @@ export default function Home() {
     setInterviews(storage.getInterviews());
   };
 
+  const handleDownloadCompleted = () => {
+    const dataStr = JSON.stringify(completedInterviews, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `completed-interviews-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <>
       <Head>
-        <title>Interview Review System</title>
-        <meta name="description" content="Human review system for LLM-generated interview transcripts" />
+        <title>SESAP OSU Interview Review System</title>
+        <meta name="description" content="SESAP Human review system for OSU student interview analysis" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      
-      <div className="min-h-screen bg-gray-50">
-        <header className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex justify-between items-center">
-              <h1 className="text-2xl font-bold text-gray-900">
-                Interview Review System
-              </h1>
-              <button
-                onClick={() => setIsAddModalOpen(true)}
-                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Add Interview
-              </button>
-            </div>
-          </div>
-        </header>
 
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <InterviewQueue
-              title="Pending Review"
-              interviews={pendingInterviews}
-              onDelete={handleDeleteInterview}
-              onRefresh={refreshInterviews}
-              type="pending"
-            />
-            
-            <InterviewQueue
-              title="Completed & Verified"
-              interviews={completedInterviews}
-              onDelete={handleDeleteInterview}
-              onRefresh={refreshInterviews}
-              type="completed"
-            />
-          </div>
-        </main>
+      <Box sx={{ flexGrow: 1, minHeight: '100vh', bgcolor: 'grey.50' }}>
+        <AppBar position="static" elevation={1}>
+          <Toolbar>
+            <Typography variant="h6" component="h1" sx={{ flexGrow: 1 }}>
+              SESAP OSU Interview Review System
+            </Typography>
+            <Button
+              color="inherit"
+              startIcon={<DownloadIcon />}
+              onClick={handleDownloadCompleted}
+              disabled={completedInterviews.length === 0}
+              sx={{ mr: 2 }}
+            >
+              Download Completed
+            </Button>
+            <Button
+              color="inherit"
+              startIcon={<AddIcon />}
+              onClick={() => setIsAddModalOpen(true)}
+            >
+              Add Interview
+            </Button>
+          </Toolbar>
+        </AppBar>
+
+        <Container maxWidth="xl" sx={{ py: 4 }}>
+          <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
+            <Box sx={{ flex: '1 1 500px', minWidth: 0 }}>
+              <InterviewQueue
+                title="Pending Review"
+                interviews={pendingInterviews}
+                onDelete={handleDeleteInterview}
+                onRefresh={refreshInterviews}
+                type="pending"
+              />
+            </Box>
+
+            <Box sx={{ flex: '1 1 500px', minWidth: 0 }}>
+              <InterviewQueue
+                title="Completed & Verified"
+                interviews={completedInterviews}
+                onDelete={handleDeleteInterview}
+                onRefresh={refreshInterviews}
+                type="completed"
+              />
+            </Box>
+          </Box>
+        </Container>
 
         <AddInterviewModal
           isOpen={isAddModalOpen}
           onClose={() => setIsAddModalOpen(false)}
           onAdd={handleAddInterview}
         />
-      </div>
+      </Box>
     </>
   );
 }

@@ -6,7 +6,7 @@ import {
 export default function Purpose() {
     return (
         <>
-            <Heading size="lg" className="title">About</Heading>
+            <Heading color='beavOrange' size="lg" className="title">About</Heading>
             <Text>
                 The EECS Student Experience Story Archive Project (SESAP) is a forum created to raise awareness for engineering education
                 and industry leaders about what is needed to best support the success and empowerment of EECS students from historically 
@@ -17,7 +17,7 @@ export default function Purpose() {
                 justice in engineering education and the engineering profession.
             </Text>
             
-            <Heading size="lg">The People</Heading>
+            <Heading color='beavOrange' size="lg">The People</Heading>
             <Text>
                 The narratives included in this archive are auto-ethnographic testimonios. The term auto-ethnography designates the agency
                 exercised by each of the participants appearing in the archive as the authors of their own stories that center on their experiences
@@ -34,7 +34,7 @@ export default function Purpose() {
                 primarily appears speaking on their own for the duration of the recording.
             </Text>
       
-            <Heading size="lg">Our Goal</Heading>
+            <Heading color='beavOrange' size="lg">Our Goal</Heading>
             <Text>
                 On behalf of the EECS SESAP program organizers and all of its co-authors, we hope that you will view this archive as a tool
                 to better understand the experiences of engineering students from historically underserved communities, that you will appreciate

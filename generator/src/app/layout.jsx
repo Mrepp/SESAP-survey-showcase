@@ -8,7 +8,7 @@ import Footer from '@/components/Footer'
 export default function RootLayout({ children }) {
     return (
         <html suppressHydrationWarning lang="en">
-            <body><Provider>
+            <body><Provider forcedTheme='light'>
                 <Flex direction="column" minH="100dvh">
                     <Header/>
                     <Navbar/>

@@ -8,7 +8,7 @@ import {
 
 export default function Header () {
     return(
-        <Center bg='bg.emphasized, white' h="100px" maxW="100%">
+        <Center bg='white' h="100px" maxW="100%">
             <Box>
                 <Text fontSize="3xl" fontWeight="bold">
                     Student Experience Story Archive Project

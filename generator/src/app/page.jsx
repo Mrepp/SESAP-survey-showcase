@@ -6,10 +6,8 @@ import {
 
 export default function Home() {
   return (
-    <>
-      <Heading size="xl" className="title">SESAP</Heading>
-      
-      <Heading size="lg">Planned Features</Heading>
+    <>      
+      <Heading color='beavOrange' size="lg">Planned Features</Heading>
 
       <List.Root ps="6">
         <List.Item>Structures Analysis Generation</List.Item>
@@ -28,7 +26,7 @@ export default function Home() {
           </List.Root>
       </List.Root>
 
-      <Heading size="lg">About</Heading>
+      <Heading color='beavOrange' size="lg">About</Heading>
         <Text>
           The EECS Student Experience Story Archive Project (SESAP) collects the narrative statements of students from underserved and marginalized communities. 
           Video testimonies are recorded and submitted by students in order to document their experiences in EECS programs. These are then analyzed in order to 

@@ -8,7 +8,7 @@ import {
 
 export default function Footer () {
     return(
-        <Center bg='#423e3c' borderTop="4px solid #D73F09" h="100px" maxW="100%">
+        <Center bg='osuGray' borderTop="4px solid #D73F09" h="100px" maxW="100%">
             <Box>
                 <Text fontSize="sm" color='white'>
                     footer stuff

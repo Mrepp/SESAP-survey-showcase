@@ -1,15 +1,16 @@
 'use client'
 import {
     Box,
-    Center,
-    Text,  
+    Container,
 } from "@chakra-ui/react"
 
 
 export default function Main ({children}) {
     return(
-        <Box bg='#f7f5f5' w='100%' flexGrow={1}>
-            {children}
-        </Box>
+        <Container bg='osuOffWhite' centerContent='true' flexGrow={1}>
+            <Box w='60%'>
+                {children}
+            </Box>
+        </Container>
     )
 }

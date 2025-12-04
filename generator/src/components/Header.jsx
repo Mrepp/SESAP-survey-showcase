@@ -10,7 +10,7 @@ export default function Header () {
     return(
         <Center bg='white' h="100px" maxW="100%">
             <Box>
-                <Text fontSize="3xl" fontWeight="bold">
+                <Text color='beavOrange' fontSize="3xl" fontWeight="bold">
                     Student Experience Story Archive Project
                 </Text>
             </Box>

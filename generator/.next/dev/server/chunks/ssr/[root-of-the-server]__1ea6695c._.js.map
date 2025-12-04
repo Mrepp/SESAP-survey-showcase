@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///Users/kaelinnchristman/CS/Capstone/SESAP-survey-showcase/generator/src/app/interviews/template/page.jsx"],"sourcesContent":["import {\n    Container,\n    Heading,\n    Text\n} from \"@chakra-ui/react\"\n\nexport default function Template() {\n    return (\n        <>\n            <Container>Video</Container>\n            \n        </>\n    )\n}"],"names":[],"mappings":";;;;;AAAA;;;AAMe,SAAS;IACpB,qBACI;kBACI,cAAA,8OAAC,2MAAS;sBAAC;;;;;;;AAIvB","debugId":null}}]
+}

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///Users/kaelinnchristman/CS/Capstone/SESAP-survey-showcase/generator/src/app/improvements/page.jsx"],"sourcesContent":["import {\n    Container,\n    Heading,\n    Text\n} from \"@chakra-ui/react\"\n\nexport default function Improvements() {\n    return (\n        <Heading>Improvement Dashboard</Heading>\n    )\n}"],"names":[],"mappings":";;;;;AAAA;;;AAMe,SAAS;IACpB,qBACI,8OAAC,mMAAO;kBAAC;;;;;;AAEjB","debugId":null}}]
+}

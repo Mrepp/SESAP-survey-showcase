@@ -1,5 +1,5 @@
-[00:00:00.647] Server  LOG      ✓ Ready in 443ms
-[00:00:06.901] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+[00:00:00.944] Server  LOG      ✓ Ready in 704ms
+[00:00:08.505] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -30,13 +30,13 @@ https://react.dev/link/hydration-mismatch
             <RootLayout>
               <html suppressHydrationWarning={true} lang="en">
                 <body>
-                  <Provider>
+                  <Provider forcedTheme="light">
                     <ChakraProvider value={{$$chakra:true, ...}}>
                       <EmotionGlobal>
                       <EmotionGlobal>
-                      <ColorModeProvider>
-                        <J attribute="class" disableTransitionOnChange={true}>
-                          <V attribute="class" disableTransitionOnChange={true}>
+                      <ColorModeProvider forcedTheme="light">
+                        <J attribute="class" disableTransitionOnChange={true} forcedTheme="light">
+                          <V attribute="class" disableTransitionOnChange={true} forcedTheme="light">
 +                           <script
 +                             suppressHydrationWarning={true}
 +                             nonce=""
@@ -46,253 +46,694 @@ https://react.dev/link/hydration-mismatch
                             ...
         ...
 
-[00:02:22.989] Server  LOG      ✓ Compiled in 60ms
-[00:02:36.315] Server  LOG      ✓ Compiled in 16ms
-[00:02:40.411] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-https://react.dev/link/hydration-mismatch
-
-  ...
-    <RedirectBoundary>
-      <RedirectErrorBoundary router={{...}}>
-        <Head>
-        <__next_root_layout_boundary__>
-          <SegmentViewNode type="layout" pagePath="layout.jsx">
-            <SegmentTrieNode>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <RootLayout>
-              <html suppressHydrationWarning={true} lang="en">
-                <body>
-                  <Provider className="light">
-                    <ChakraProvider value={{$$chakra:true, ...}}>
-                      <EmotionGlobal>
-                      <EmotionGlobal>
-                      <ColorModeProvider className="light">
-                        <J attribute="class" disableTransitionOnChange={true} className="light">
-                          <V attribute="class" disableTransitionOnChange={true} className="light">
-+                           <script
-+                             suppressHydrationWarning={true}
-+                             nonce=""
-+                             dangerouslySetInnerHTML={{__html:"((e, i, s,..."}}
-+                           >
--                           <style data-emotion="css-global ad1llf" data-s="">
-                            ...
-        ...
-
-[00:02:45.105] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-https://react.dev/link/hydration-mismatch
-
-  ...
-    <RedirectBoundary>
-      <RedirectErrorBoundary router={{...}}>
-        <Head>
-        <__next_root_layout_boundary__>
-          <SegmentViewNode type="layout" pagePath="layout.jsx">
-            <SegmentTrieNode>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <RootLayout>
-              <html suppressHydrationWarning={true} lang="en">
-                <body>
-                  <Provider className="light">
-                    <ChakraProvider value={{$$chakra:true, ...}}>
-                      <EmotionGlobal>
-                      <EmotionGlobal>
-                      <ColorModeProvider className="light">
-                        <J attribute="class" disableTransitionOnChange={true} className="light">
-                          <V attribute="class" disableTransitionOnChange={true} className="light">
-+                           <script
-+                             suppressHydrationWarning={true}
-+                             nonce=""
-+                             dangerouslySetInnerHTML={{__html:"((e, i, s,..."}}
-+                           >
--                           <style data-emotion="css-global ad1llf" data-s="">
-                            ...
-        ...
-
-[00:02:46.383] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-https://react.dev/link/hydration-mismatch
-
-  ...
-    <RedirectBoundary>
-      <RedirectErrorBoundary router={{...}}>
-        <Head>
-        <__next_root_layout_boundary__>
-          <SegmentViewNode type="layout" pagePath="layout.jsx">
-            <SegmentTrieNode>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <RootLayout>
-              <html suppressHydrationWarning={true} lang="en">
-                <body>
-                  <Provider className="light">
-                    <ChakraProvider value={{$$chakra:true, ...}}>
-                      <EmotionGlobal>
-                      <EmotionGlobal>
-                      <ColorModeProvider className="light">
-                        <J attribute="class" disableTransitionOnChange={true} className="light">
-                          <V attribute="class" disableTransitionOnChange={true} className="light">
-+                           <script
-+                             suppressHydrationWarning={true}
-+                             nonce=""
-+                             dangerouslySetInnerHTML={{__html:"((e, i, s,..."}}
-+                           >
--                           <style data-emotion="css-global ad1llf" data-s="">
-                            ...
-        ...
-
-[00:02:55.049] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-https://react.dev/link/hydration-mismatch
-
-  ...
-    <RedirectBoundary>
-      <RedirectErrorBoundary router={{...}}>
-        <Head>
-        <__next_root_layout_boundary__>
-          <SegmentViewNode type="layout" pagePath="layout.jsx">
-            <SegmentTrieNode>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <RootLayout>
-              <html suppressHydrationWarning={true} lang="en">
-                <body>
-                  <Provider className="light">
-                    <ChakraProvider value={{$$chakra:true, ...}}>
-                      <EmotionGlobal>
-                      <EmotionGlobal>
-                      <ColorModeProvider className="light">
-                        <J attribute="class" disableTransitionOnChange={true} className="light">
-                          <V attribute="class" disableTransitionOnChange={true} className="light">
-+                           <script
-+                             suppressHydrationWarning={true}
-+                             nonce=""
-+                             dangerouslySetInnerHTML={{__html:"((e, i, s,..."}}
-+                           >
--                           <style data-emotion="css-global ad1llf" data-s="">
-                            ...
-        ...
-
-[00:04:15.636] Server  LOG      ✓ Compiled in 49ms
-[00:04:18.629] Server  LOG      ✓ Compiled in 4ms
-[00:04:22.909] Browser ERROR   ./src/app/layout.jsx:11:41
+[00:08:31.763] Server  LOG      ✓ Compiled in 592ms
+[00:08:40.334] Server  LOG      ✓ Compiled in 602ms
+[00:08:47.458] Server  LOG      ✓ Compiled in 166ms
+[00:08:52.087] Server  LOG      ✓ Compiled in 61ms
+[00:14:30.537] Server  LOG      ✓ Compiled in 348ms
+[00:14:33.084] Server  LOG      ✓ Compiled in 103ms
+[00:14:35.187] Server  LOG      ✓ Compiled in 49ms
+[00:15:03.651] Server  LOG      ✓ Compiled in 18ms
+[00:15:05.670] Server  LOG      ✓ Compiled in 55ms
+[00:15:15.268] Server  LOG      ✓ Compiled in 63ms
+[00:15:16.784] Server  LOG      ✓ Compiled in 24ms
+[00:15:18.526] Server  LOG      ✓ Compiled in 104ms
+[00:15:22.778] Server  LOG      ✓ Compiled in 26ms
+[00:15:36.494] Server  LOG      ✓ Compiled in 21ms
+[00:15:40.389] Server  LOG      ✓ Compiled in 27ms
+[00:15:57.954] Server  LOG      ✓ Compiled in 32ms
+[00:15:59.667] Server  LOG      ✓ Compiled in 10ms
+[00:18:30.817] Server  LOG      ✓ Compiled in 107ms
+[00:18:32.952] Server  LOG      ✓ Compiled in 7ms
+[00:18:45.398] Server  LOG      ✓ Compiled in 19ms
+[00:18:50.614] Server  LOG      ✓ Compiled in 242ms
+[00:18:56.382] Server  LOG      ✓ Compiled in 34ms
+[00:23:15.336] Server  LOG      ✓ Compiled in 173ms
+[00:23:18.047] Server  LOG      ✓ Compiled in 52ms
+[00:23:34.248] Server  LOG      ✓ Compiled in 18ms
+[00:23:37.783] Server  LOG      ✓ Compiled in 117ms
+[00:23:42.346] Server  LOG      ✓ Compiled in 47ms
+[00:23:46.864] Server  LOG      ✓ Compiled in 103ms
+[00:23:49.794] Server  LOG      ✓ Compiled in 28ms
+[00:23:50.932] Server  LOG      ✓ Compiled in 69ms
+[00:23:54.777] Server  LOG      ✓ Compiled in 28ms
+[00:24:24.547] Server  LOG      ✓ Compiled in 18ms
+[00:24:28.937] Server  LOG      ✓ Compiled in 17ms
+[00:24:31.712] Server  LOG      ✓ Compiled in 21ms
+[00:24:33.115] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:24:33.175] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:24:33.280] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Box
+[00:24:33.280] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Box
+[00:24:33.280] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Box
+[00:24:34.412] Server  ERROR    ⨯ ReferenceError: Box is not defined
+[00:24:35.211] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Box
+[00:24:55.461] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:24:55.466] Server  LOG      ✓ Compiled in 95ms
+[00:24:55.930] Server  ERROR    ⨯ ReferenceError: Box is not defined
+[00:24:58.255] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Box
+[00:24:58.791] Server  LOG      ✓ Compiled in 245ms
+[00:24:58.900] Browser ERROR   ./src/app/interviews/page.jsx:39:29
 Parsing ecmascript source code failed
-   9 |     return (
-  10 |         <html suppressHydrationWarning lang="en">
-> 11 |             <body><Provider forcedTheme:"" className='light'>
-     |                                         ^^
-  12 |                 <Flex direction="column" minH="100dvh">
-  13 |                     <Header/>
-  14 |                     <Navbar/>
+  37 |                         <GridItem key={item}>
+  38 |                             <Box>{item}</Box><
+> 39 |                             /GridItem>
+     |                             ^
+  40 |                         ))}
+  41 |                     </Grid>
+  42 |                 </Container>
 
-Expected '</', got 'string literal (, "")'
-[00:04:30.697] Server  LOG      ✓ Compiled in 5ms
-[00:04:33.456] Server  LOG      ✓ Compiled in 4ms
-[00:04:36.536] Server  LOG      ✓ Compiled in 4ms
-[00:04:37.669] Browser ERROR   ./src/app/layout.jsx:11:19
-Ecmascript file had an error
-   9 |     return (
-  10 |         <html suppressHydrationWarning lang="en">
-> 11 |             <body><Provider forcedTheme: className='light'>
-     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 12 |                 <Flex direction="column" minH="100dvh">
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 13 |                     <Header/>
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 14 |                     <Navbar/>
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 15 |                         <Main >
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 16 |                             {children}
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 17 |                         </Main>
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 18 |                     <Footer/>
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 19 |                 </Flex>
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 20 |             </Provider></body>
-     | ^^^^^^^^^^^^^^^^^^^^^^^^
-  21 |         </html>
-  22 |     )
-  23 | }
+Expression expected
 
-JSX Namespace is disabled by default because react does not support it yet. You can specify jsc.transform.react.throwIfNamespace to false to override default behavior
-[00:04:37.669] Browser ERROR   ./src/app/layout.jsx:11:42
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:25:00.265] Server  LOG      ✓ Compiled in 28ms
+[00:25:00.352] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:25:00.536] Server  ERROR    ⨯ ReferenceError: Box is not defined
+[00:25:02.929] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Box
+[00:25:02.972] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:25:02.991] Server  LOG      ✓ Compiled in 143ms
+[00:25:03.540] Server  ERROR    ⨯ ReferenceError: Box is not defined
+[00:25:05.173] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Box
+[00:25:17.446] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:25:17.465] Server  LOG      ✓ Compiled in 19ms
+[00:25:17.874] Server  ERROR    ⨯ ReferenceError: Box is not defined
+[00:25:19.108] Server  LOG      ✓ Compiled in 51ms
+[00:25:19.372] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Box
+[00:25:23.437] Server  ERROR    ⨯ ReferenceError: Box is not defined
+[00:25:24.099] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Box
+[00:25:31.637] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:25:31.639] Server  LOG      ✓ Compiled in 144ms
+[00:25:49.524] Server  LOG      ✓ Compiled in 26ms
+[00:26:12.511] Server  LOG      ✓ Compiled in 22ms
+[00:27:50.929] Browser ERROR   ./src/app/interviews/page.jsx:43:27
 Parsing ecmascript source code failed
-   9 |     return (
-  10 |         <html suppressHydrationWarning lang="en">
-> 11 |             <body><Provider forcedTheme= className='light'>
-     |                                          ^^^^^^^^^
-  12 |                 <Flex direction="column" minH="100dvh">
-  13 |                     <Header/>
-  14 |                     <Navbar/>
+  41 |                             
+  42 |                         </GridItem>
+> 43 |                         ))}
+     |                           ^
+  44 |                     </Grid>
+  45 |                 </Container>
+  46 |                 
 
-Expected '</', got 'className'
-[00:04:40.049] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:27:53.275] Server  LOG      ✓ Compiled in 190ms
+[00:27:55.395] Server  LOG      ✓ Compiled in 45ms
+[00:27:57.460] Server  LOG      ✓ Compiled in 40ms
+[00:27:59.757] Server  LOG      ✓ Compiled in 28ms
+[00:28:00.851] Server  LOG      ✓ Compiled in 25ms
+[00:28:01.748] Browser ERROR   ./src/app/interviews/page.jsx:38:53
+Parsing ecmascript source code failed
+  36 |                     <Grid templateColumns="repeat(3, 1fr)" gap="6" bg='blue'>
+  37 |                         {visibleItems.map((item) => (
+> 38 |                         <GridItem key={item} colSpan=>
+     |                                                     ^^
+  39 |                             
+  40 |                                 {item}
+  41 |                             
+
+Expected '</', got '=>'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:28:01.748] Browser ERROR   ./src/app/interviews/page.jsx:38:56
+Parsing ecmascript source code failed
+  36 |                     <Grid templateColumns="repeat(3, 1fr)" gap="6" bg='blue'>
+  37 |                         {visibleItems.map((item) => (
+> 38 |                         <GridItem key={item} colSpan={}>
+     |                                                        ^
+  39 |                             
+  40 |                                 {item}
+  41 |                             
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:28:01.748] Browser ERROR   ./src/app/interviews/page.jsx:42:26
+Parsing ecmascript source code failed
+  40 |                                 {item}
+  41 |                             
+> 42 |                         </GridItem>
+     |                          ^^^^^^^^^^
+  43 |                         ))}
+  44 |                     </Grid>
+  45 |                 </Container>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:28:01.993] Server  LOG      ✓ Compiled in 65ms
+[00:30:28.895] Server  LOG      ✓ Compiled in 63ms
+[00:30:29.071] Browser ERROR   ./src/app/interviews/page.jsx:42:34
+Parsing ecmascript source code failed
+  40 |         alignItems="center" // Centers vertically>
+  41 |                             
+> 42 |                                 {item}
+     |                                  ^^^^
+  43 |                             
+  44 |                         </GridItem>
+  45 |                         ))}
+
+Expected '</', got 'item'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:30:36.585] Browser ERROR   ./src/app/interviews/page.jsx:42:33
+Parsing ecmascript source code failed
+  40 |         alignItems="center" />
+  41 |                             
+> 42 |                                 {item}
+     |                                 ^
+  43 |                             
+  44 |                         </GridItem>
+  45 |                         ))}
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:31:19.237] Server  LOG      ✓ Compiled in 65ms
+[00:31:22.197] Browser ERROR   ./src/app/interviews/page.jsx:42:33
+Parsing ecmascript source code failed
+  40 |         alignItems="center" />
+  41 |                             
+> 42 |                                 {item}
+     |                                 ^
+  43 |                             
+  44 |                         </GridItem>
+  45 |                         ))}
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:31:22.197] Browser ERROR   ./src/app/interviews/page.jsx:42:33
+Parsing ecmascript source code failed
+  40 |                             alignItems="center" />
+  41 |                             
+> 42 |                                 {item}
+     |                                 ^
+  43 |                             
+  44 |                         </GridItem>
+  45 |                         ))}
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:31:22.197] Browser ERROR   ./src/app/interviews/page.jsx:42:33
+Parsing ecmascript source code failed
+  40 |                                 alignItems="center" />
+  41 |                             
+> 42 |                                 {item}
+     |                                 ^
+  43 |                             
+  44 |                         </GridItem>
+  45 |                         ))}
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:31:22.197] Browser ERROR   ./src/app/interviews/page.jsx:41:33
+Parsing ecmascript source code failed
+  39 |                                 alignItems="center" />
+  40 |                             
+> 41 |                                 {item}
+     |                                 ^
+  42 |                             
+  43 |                         </GridItem>
+  44 |                         ))}
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:31:22.197] Browser ERROR   ./src/app/interviews/page.jsx:41:33
+Parsing ecmascript source code failed
+  39 |                                 alignItems="center" />
+  40 |                             
+> 41 |                                 {item}
+     |                                 ^
+  42 |                             
+  43 |                         </GridItem>
+  44 |                         ))}
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:31:22.197] Browser ERROR   ./src/app/interviews/page.jsx:40:33
+Parsing ecmascript source code failed
+  38 |                         <GridItem key={item} colSpan={1} display="flex" justifyContent="center"alignItems="center" />
+  39 |                             
+> 40 |                                 {item}
+     |                                 ^
+  41 |                             
+  42 |                         </GridItem>
+  43 |                         ))}
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:31:22.197] Browser ERROR   ./src/app/interviews/page.jsx:40:33
+Parsing ecmascript source code failed
+  38 |                         <GridItem key={item} colSpan={1} display="flex" justifyContent="center" alignItems="center" />
+  39 |                             
+> 40 |                                 {item}
+     |                                 ^
+  41 |                             
+  42 |                         </GridItem>
+  43 |                         ))}
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:31:22.197] Browser ERROR   ./src/app/interviews/page.jsx:40:29
+Parsing ecmascript source code failed
+  38 |                         <GridItem key={item} colSpan={1} display="flex" justifyContent="center" alignItems="center" />
+  39 |                             
+> 40 |                             {item}
+     |                             ^
+  41 |                             
+  42 |                         </GridItem>
+  43 |                         ))}
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:31:22.197] Browser ERROR   ./src/app/interviews/page.jsx:39:29
+Parsing ecmascript source code failed
+  37 |                         {visibleItems.map((item) => (
+  38 |                         <GridItem key={item} colSpan={1} display="flex" justifyContent="center" alignItems="center" />
+> 39 |                             {item}
+     |                             ^
+  40 |                             
+  41 |                         </GridItem>
+  42 |                         ))}
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:31:22.197] Browser ERROR   ./src/app/interviews/page.jsx:39:29
+Parsing ecmascript source code failed
+  37 |                         {visibleItems.map((item) => (
+  38 |                         <GridItem key={item} colSpan={1} display="flex" justifyContent="center" alignItems="center" />
+> 39 |                             {item} 
+     |                             ^
+  40 |                         </GridItem>
+  41 |                         ))}
+  42 |                     </Grid>
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:31:32.304] Server  LOG      ✓ Compiled in 57ms
+[00:31:41.113] Server  LOG      ✓ Compiled in 49ms
+[00:32:00.892] Server  LOG      ✓ Compiled in 50ms
+[00:32:13.662] Server  LOG      ✓ Compiled in 24ms
+[00:32:14.769] Server  LOG      ✓ Compiled in 47ms
+[00:32:16.326] Server  LOG      ✓ Compiled in 4ms
+[00:32:20.226] Server  LOG      ✓ Compiled in 10ms
+[00:32:20.870] Browser ERROR   ./src/app/interviews/page.jsx:38:50
+Parsing ecmascript source code failed
+  36 |                     <Grid templateColumns="repeat(3, 1fr)" gap="6" bg='blue'>
+  37 |                         {visibleItems.map((item) => (
+> 38 |                         <GridItem key={item} bg= display="flex" justifyContent="center" alignItems="center">
+     |                                                  ^^^^^^^
+  39 |                             {item} 
+  40 |                         </GridItem>
+  41 |                         ))}
+
+Expected '</', got 'display'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:32:20.871] Browser ERROR   ./src/app/interviews/page.jsx:38:49
+Parsing ecmascript source code failed
+  36 |                     <Grid templateColumns="repeat(3, 1fr)" gap="6" bg='blue'>
+  37 |                         {visibleItems.map((item) => (
+> 38 |                         <GridItem key={item} bg=white display="flex" justifyContent="center" alignItems="center">
+     |                                                 ^^^^^
+  39 |                             {item} 
+  40 |                         </GridItem>
+  41 |                         ))}
+
+Expected '</', got 'white'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:32:34.625] Server  LOG      ✓ Compiled in 143ms
+[00:32:43.315] Server  LOG      ✓ Compiled in 28ms
+[00:32:45.850] Server  LOG      ✓ Compiled in 26ms
+[00:32:51.917] Server  LOG      ✓ Compiled in 16ms
+[00:34:34.671] Server  LOG      ✓ Compiled in 262ms
+[00:34:36.599] Server  LOG      ✓ Compiled in 21ms
+[00:34:38.546] Server  LOG      ✓ Compiled in 42ms
+[00:34:40.388] Server  LOG      ✓ Compiled in 81ms
+[00:34:54.198] Server  LOG      ✓ Compiled in 20ms
+[00:35:52.186] Server  LOG      ✓ Compiled in 191ms
+[00:35:56.721] Server  LOG      ✓ Compiled in 34ms
+[00:36:01.324] Server  LOG      ✓ Compiled in 134ms
+[00:36:18.461] Server  LOG      ✓ Compiled in 26ms
+[00:37:30.640] Server  LOG      ✓ Compiled in 71ms
+[00:37:32.985] Server  LOG      ✓ Compiled in 99ms
+[00:37:48.871] Server  LOG      ✓ Compiled in 59ms
+[00:37:50.819] Server  LOG      ✓ Compiled in 90ms
+[00:46:06.729] Server  LOG      ✓ Compiled in 138ms
+[00:46:08.613] Server  LOG      ✓ Compiled in 48ms
+[00:46:10.578] Server  LOG      ✓ Compiled in 196ms
+[00:46:10.901] Browser ERROR   ./src/app/interviews/page.jsx:45:31
+Parsing ecmascript source code failed
+  43 |                                 <>
+  44 |                                 {item} 
+> 45 |                             </GridItem>
+     |                               ^^^^^^^^
+  46 |                         ))}
+  47 |                     </Grid>
+  48 |                 </Container>
+
+Expected '</', got 'GridItem'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:46:12.896] Server  LOG      ✓ Compiled in 121ms
+[00:46:13.206] Browser ERROR   ./src/app/interviews/page.jsx:44:34
+Parsing ecmascript source code failed
+  42 |                             padding='25%'>
+  43 |                                 <Box
+> 44 |                                 {item} 
+     |                                  ^^^^
+  45 |                             </GridItem>
+  46 |                         ))}
+  47 |                     </Grid>
+
+Expected '</', got 'item'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:46:14.438] Server  LOG      ✓ Compiled in 276ms
+[00:46:15.448] Server  LOG      ✓ Compiled in 64ms
+[00:46:20.893] Server  LOG      ✓ Compiled in 18ms
+[00:46:24.548] Server  LOG      ✓ Compiled in 27ms
+[00:46:25.713] Server  LOG      ✓ Compiled in 8ms
+[00:46:26.815] Server  LOG      ✓ Compiled in 5ms
+[00:46:33.785] Server  LOG      ✓ Compiled in 270ms
+[00:46:45.572] Server  LOG      ✓ Compiled in 32ms
+[00:46:51.587] Server  LOG      ✓ Compiled in 21ms
+[00:47:21.688] Server  LOG      ✓ Compiled in 70ms
+[00:47:24.909] Server  LOG      ✓ Compiled in 70ms
+[00:47:25.222] Browser ERROR   ./src/app/interviews/page.jsx:43:60
+Parsing ecmascript source code failed
+  41 |                             alignItems="center" 
+  42 |                             padding='25%'>
+> 43 |                                 <Box bg='orange' outline={}>
+     |                                                            ^
+  44 |                                     {item}
+  45 |                                 </Box>
+  46 |                             </GridItem>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:47:25.223] Browser ERROR   ./src/app/interviews/page.jsx:45:34
+Parsing ecmascript source code failed
+  43 |                                 <Box bg='orange' outline={}>
+  44 |                                     {item}
+> 45 |                                 </Box>
+     |                                  ^^^^^
+  46 |                             </GridItem>
+  47 |                         ))}
+  48 |                     </Grid>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:47:27.790] Server  LOG      ✓ Compiled in 91ms
+[00:47:28.345] Browser ERROR   ./src/app/interviews/page.jsx:43:65
+Parsing ecmascript source code failed
+  41 |                             alignItems="center" 
+  42 |                             padding='25%'>
+> 43 |                                 <Box bg='orange' outline='solid'}>
+     |                                                                 ^
+  44 |                                     {item}
+  45 |                                 </Box>
+  46 |                             </GridItem>
+
+Expected '</', got '}'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:47:29.009] Browser ERROR   ./src/app/interviews/page.jsx:43:65
+Parsing ecmascript source code failed
+  41 |                             alignItems="center" 
+  42 |                             padding='25%'>
+> 43 |                                 <Box bg='orange' outline='solid'}>
+     |                                                                 ^
+  44 |                                     {item}
+  45 |                                 </Box>
+  46 |                             </GridItem>
+
+Expected '</', got '}'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:47:35.566] Server  LOG      ✓ Compiled in 14ms
+[00:47:35.746] Browser ERROR   ./src/app/interviews/page.jsx:43:65
+Parsing ecmascript source code failed
+  41 |                             alignItems="center" 
+  42 |                             padding='25%'>
+> 43 |                                 <Box bg='orange' outline='solid'\}>
+     |                                                                 ^
+  44 |                                     {item}
+  45 |                                 </Box>
+  46 |                             </GridItem>
+
+Expected unicode escape
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:47:36.845] Browser ERROR   ./src/app/interviews/page.jsx:43:65
+Parsing ecmascript source code failed
+  41 |                             alignItems="center" 
+  42 |                             padding='25%'>
+> 43 |                                 <Box bg='orange' outline='solid'}>
+     |                                                                 ^
+  44 |                                     {item}
+  45 |                                 </Box>
+  46 |                             </GridItem>
+
+Expected '</', got '}'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:47:37.919] Server  LOG      ✓ Compiled in 169ms
+[00:48:03.156] Server  LOG      ✓ Compiled in 19ms
+[00:48:13.722] Server  LOG      ✓ Compiled in 66ms
+[00:48:20.870] Server  LOG      ✓ Compiled in 47ms
+[00:48:29.758] Server  LOG      ✓ Compiled in 30ms
+[00:48:48.822] Server  LOG      ✓ Compiled in 105ms
+[00:48:59.803] Server  LOG      ✓ Compiled in 25ms
+[00:49:03.332] Server  LOG      ✓ Compiled in 15ms
+[00:49:05.089] Server  LOG      ✓ Compiled in 42ms
+[00:49:05.308] Browser ERROR   ./src/app/interviews/page.jsx:43:66
+Parsing ecmascript source code failed
+  41 |                             alignItems="center" 
+  42 |                             padding='25%'>
+> 43 |                                 <Box outline='solid' outlineWidth=>
+     |                                                                  ^^
+  44 |                                     {item}
+  45 |                                 </Box>
+  46 |                             </GridItem>
+
+Expected '</', got '=>'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[00:49:06.992] Server  LOG      ✓ Compiled in 52ms
+[00:49:07.993] Server  LOG      ✓ Compiled in 20ms
+[00:49:10.761] Server  LOG      ✓ Compiled in 61ms
+[00:49:20.819] Server  LOG      ✓ Compiled in 28ms
+[00:56:07.235] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -339,191 +780,183 @@ https://react.dev/link/hydration-mismatch
                             ...
         ...
 
-[00:04:45.860] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+[00:56:55.990] Server  LOG      ✓ Compiled in 91ms
+[00:57:28.360] Server  LOG      ✓ Compiled in 59ms
+[00:57:34.452] Server  LOG      ✓ Compiled in 19ms
+[00:57:36.936] Server  LOG      ✓ Compiled in 21ms
+[00:57:42.348] Server  LOG      ✓ Compiled in 28ms
+[01:02:04.301] Server  LOG      ✓ Compiled in 91ms
+[01:02:04.548] Browser ERROR   ./src/app/interviews/page.jsx:35:32
+Parsing ecmascript source code failed
+  33 |             <Heading>Interviews</Heading>
+  34 |             <Container centerContent='true' bg='purple.200'>
+> 35 |                 <Container bg={.}>
+     |                                ^
+  36 |                     <Grid templateColumns="repeat(3, 1fr)">
+  37 |                         {visibleItems.map((item) => (
+  38 |                             <GridItem key={item} 
 
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
+Expected '</', got '.'
 
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
 
-https://react.dev/link/hydration-mismatch
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[01:02:05.480] Server  LOG      ✓ Compiled in 32ms
+[01:02:05.645] Browser ERROR   ./src/app/interviews/page.jsx:35:31
+Parsing ecmascript source code failed
+  33 |             <Heading>Interviews</Heading>
+  34 |             <Container centerContent='true' bg='purple.200'>
+> 35 |                 <Container bg=}>
+     |                               ^
+  36 |                     <Grid templateColumns="repeat(3, 1fr)">
+  37 |                         {visibleItems.map((item) => (
+  38 |                             <GridItem key={item} 
 
-  ...
-    <RedirectBoundary>
-      <RedirectErrorBoundary router={{...}}>
-        <Head>
-        <__next_root_layout_boundary__>
-          <SegmentViewNode type="layout" pagePath="layout.jsx">
-            <SegmentTrieNode>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <RootLayout>
-              <html suppressHydrationWarning={true} lang="en">
-                <body>
-                  <Provider forcedTheme="light">
-                    <ChakraProvider value={{$$chakra:true, ...}}>
-                      <EmotionGlobal>
-                      <EmotionGlobal>
-                      <ColorModeProvider forcedTheme="light">
-                        <J attribute="class" disableTransitionOnChange={true} forcedTheme="light">
-                          <V attribute="class" disableTransitionOnChange={true} forcedTheme="light">
-+                           <script
-+                             suppressHydrationWarning={true}
-+                             nonce=""
-+                             dangerouslySetInnerHTML={{__html:"((e, i, s,..."}}
-+                           >
--                           <style data-emotion="css-global ad1llf" data-s="">
-                            ...
-        ...
+Expected '</', got '}'
 
-[00:04:51.458] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
 
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[01:02:06.825] Browser ERROR   ./src/app/interviews/page.jsx:35:33
+Parsing ecmascript source code failed
+  33 |             <Heading>Interviews</Heading>
+  34 |             <Container centerContent='true' bg='purple.200'>
+> 35 |                 <Container bg=''}>
+     |                                 ^
+  36 |                     <Grid templateColumns="repeat(3, 1fr)">
+  37 |                         {visibleItems.map((item) => (
+  38 |                             <GridItem key={item} 
 
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+Expected '</', got '}'
 
-https://react.dev/link/hydration-mismatch
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
 
-  ...
-    <RedirectBoundary>
-      <RedirectErrorBoundary router={{...}}>
-        <Head>
-        <__next_root_layout_boundary__>
-          <SegmentViewNode type="layout" pagePath="layout.jsx">
-            <SegmentTrieNode>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <RootLayout>
-              <html suppressHydrationWarning={true} lang="en">
-                <body>
-                  <Provider forcedTheme="light">
-                    <ChakraProvider value={{$$chakra:true, ...}}>
-                      <EmotionGlobal>
-                      <EmotionGlobal>
-                      <ColorModeProvider forcedTheme="light">
-                        <J attribute="class" disableTransitionOnChange={true} forcedTheme="light">
-                          <V attribute="class" disableTransitionOnChange={true} forcedTheme="light">
-+                           <script
-+                             suppressHydrationWarning={true}
-+                             nonce=""
-+                             dangerouslySetInnerHTML={{__html:"((e, i, s,..."}}
-+                           >
--                           <style data-emotion="css-global ad1llf" data-s="">
-                            ...
-        ...
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[01:02:08.987] Server  LOG      ✓ Compiled in 153ms
+[01:02:11.933] Server  LOG      ✓ Compiled in 32ms
+[01:02:18.296] Server  LOG      ✓ Compiled in 37ms
+[01:04:10.091] Server  LOG      ✓ Compiled in 90ms
+[01:04:13.150] Server  LOG      ✓ Compiled in 30ms
+[01:04:17.626] Server  LOG      ✓ Compiled in 108ms
+[01:05:53.767] Server  LOG      ✓ Compiled in 108ms
+[01:07:44.823] Server  LOG      ✓ Compiled in 27ms
+[01:07:46.115] Server  LOG      ✓ Compiled in 32ms
+[01:08:03.355] Server  LOG      ✓ Compiled in 25ms
+[01:08:05.427] Browser ERROR   ./src/app/interviews/page.jsx:36:75
+Parsing ecmascript source code failed
+  34 |             <Container centerContent='true' bg='purple.200'>
+  35 |                 <Container bg='blue.200' width='max-width'>
+> 36 |                     <Grid templateColumns="repeat(3, 1fr)" templateRows={}>
+     |                                                                           ^
+  37 |                         {visibleItems.map((item) => (
+  38 |                             <GridItem key={item} 
+  39 |                             display="flex" 
 
-[00:04:56.208] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+Expression expected
 
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
 
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[01:08:05.427] Browser ERROR   ./src/app/interviews/page.jsx:36:73
+Parsing ecmascript source code failed
+  34 |             <Container centerContent='true' bg='purple.200'>
+  35 |                 <Container bg='blue.200' width='max-width'>
+> 36 |                     <Grid templateColumns="repeat(3, 1fr)" templateRows=}>
+     |                                                                         ^
+  37 |                         {visibleItems.map((item) => (
+  38 |                             <GridItem key={item} 
+  39 |                             display="flex" 
 
-https://react.dev/link/hydration-mismatch
+Expected '</', got '}'
 
-  ...
-    <RedirectBoundary>
-      <RedirectErrorBoundary router={{...}}>
-        <Head>
-        <__next_root_layout_boundary__>
-          <SegmentViewNode type="layout" pagePath="layout.jsx">
-            <SegmentTrieNode>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <RootLayout>
-              <html suppressHydrationWarning={true} lang="en">
-                <body>
-                  <Provider forcedTheme="light">
-                    <ChakraProvider value={{$$chakra:true, ...}}>
-                      <EmotionGlobal>
-                      <EmotionGlobal>
-                      <ColorModeProvider forcedTheme="light">
-                        <J attribute="class" disableTransitionOnChange={true} forcedTheme="light">
-                          <V attribute="class" disableTransitionOnChange={true} forcedTheme="light">
-+                           <script
-+                             suppressHydrationWarning={true}
-+                             nonce=""
-+                             dangerouslySetInnerHTML={{__html:"((e, i, s,..."}}
-+                           >
--                           <style data-emotion="css-global ad1llf" data-s="">
-                            ...
-        ...
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
 
-[00:04:57.080] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[01:08:05.427] Browser ERROR   ./src/app/interviews/page.jsx:36:75
+Parsing ecmascript source code failed
+  34 |             <Container centerContent='true' bg='purple.200'>
+  35 |                 <Container bg='blue.200' width='max-width'>
+> 36 |                     <Grid templateColumns="repeat(3, 1fr)" templateRows=''}>
+     |                                                                           ^
+  37 |                         {visibleItems.map((item) => (
+  38 |                             <GridItem key={item} 
+  39 |                             display="flex" 
 
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
+Expected '</', got '}'
 
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
 
-https://react.dev/link/hydration-mismatch
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[01:08:05.427] Browser ERROR   ./src/app/interviews/page.jsx:36:82
+Parsing ecmascript source code failed
+  34 |             <Container centerContent='true' bg='purple.200'>
+  35 |                 <Container bg='blue.200' width='max-width'>
+> 36 |                     <Grid templateColumns="repeat(3, 1fr)" templateRows='repeat('}>
+     |                                                                                  ^
+  37 |                         {visibleItems.map((item) => (
+  38 |                             <GridItem key={item} 
+  39 |                             display="flex" 
 
-  ...
-    <RedirectBoundary>
-      <RedirectErrorBoundary router={{...}}>
-        <Head>
-        <__next_root_layout_boundary__>
-          <SegmentViewNode type="layout" pagePath="layout.jsx">
-            <SegmentTrieNode>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <script>
-            <RootLayout>
-              <html suppressHydrationWarning={true} lang="en">
-                <body>
-                  <Provider forcedTheme="light">
-                    <ChakraProvider value={{$$chakra:true, ...}}>
-                      <EmotionGlobal>
-                      <EmotionGlobal>
-                      <ColorModeProvider forcedTheme="light">
-                        <J attribute="class" disableTransitionOnChange={true} forcedTheme="light">
-                          <V attribute="class" disableTransitionOnChange={true} forcedTheme="light">
-+                           <script
-+                             suppressHydrationWarning={true}
-+                             nonce=""
-+                             dangerouslySetInnerHTML={{__html:"((e, i, s,..."}}
-+                           >
--                           <style data-emotion="css-global ad1llf" data-s="">
-                            ...
-        ...
+Expected '</', got '}'
 
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[01:08:05.427] Browser ERROR   ./src/app/interviews/page.jsx:36:89
+Parsing ecmascript source code failed
+  34 |             <Container centerContent='true' bg='purple.200'>
+  35 |                 <Container bg='blue.200' width='max-width'>
+> 36 |                     <Grid templateColumns="repeat(3, 1fr)" templateRows='repeat(3, 1fr)'}>
+     |                                                                                         ^
+  37 |                         {visibleItems.map((item) => (
+  38 |                             <GridItem key={item} 
+  39 |                             display="flex" 
+
+Expected '</', got '}'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/page.jsx [Client Component Browser]
+    ./src/app/interviews/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/page.jsx [Client Component SSR]
+    ./src/app/interviews/page.jsx [Server Component]
+[01:08:21.386] Server  LOG      ✓ Compiled in 17ms
+[01:12:19.915] Server  LOG      ✓ Compiled in 172ms
+[01:12:24.017] Server  LOG      ✓ Compiled in 20ms

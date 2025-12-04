@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///Users/kaelinnchristman/CS/Capstone/SESAP-survey-showcase/generator/src/app/interviews/page.jsx"],"sourcesContent":["\nimport {\n    ButtonGroup,\n    Container,\n    Heading,\n    IconButton,\n    Pagination,\n    Text,\n} from \"@chakra-ui/react\"\nimport { useState } from \"react\"\nimport { HiChevronLeft, HiChevronRight } from \"react-icons/hi\"\n\nexport default function Interviews() {\n    return (\n        <>\n            <Heading>Interviews</Heading>\n\n        </>\n    )\n}"],"names":[],"mappings":";;;;;AACA;AAQA;;;;;AAGe,SAAS;IACpB,qBACI;kBACI,cAAA,8OAAC,mMAAO;sBAAC;;;;;;;AAIrB","debugId":null}}]
+}

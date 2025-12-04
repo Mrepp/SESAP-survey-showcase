@@ -1,5 +1,4 @@
-import { createSystem, defaultConfig } from "@chakra-ui/react"
-
+import { createSystem, defaultConfig, defineRecipe } from "@chakra-ui/react"
 
 export const system = createSystem(defaultConfig, {
     theme: {
@@ -13,6 +12,11 @@ export const system = createSystem(defaultConfig, {
             },
         },
     },
+    globalCss: {
+        "h1, h2, h3, h4, h5, h6": {
+            color: "beavOrange",
+        },
+    }
 })
 
 // All colors sourced from OSU brand colors https://communications.oregonstate.edu/brand-guide/colors

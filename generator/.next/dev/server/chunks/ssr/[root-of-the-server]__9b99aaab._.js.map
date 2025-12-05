@@ -2,5 +2,5 @@
   "version": 3,
   "sources": [],
   "sections": [
-    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///Users/kaelinnchristman/CS/Capstone/SESAP-survey-showcase/generator/src/app/search/page.jsx"],"sourcesContent":["import {\n    Container,\n    Heading,\n    Text\n} from \"@chakra-ui/react\"\n\nexport default function Search() {\n      return (\n        <Heading>Search</Heading>\n    )\n}"],"names":[],"mappings":";;;;;AAAA;;;AAMe,SAAS;IAClB,qBACE,8OAAC,mMAAO;kBAAC;;;;;;AAEjB","debugId":null}}]
+    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///Users/kaelinnchristman/CS/Capstone/SESAP-survey-showcase/generator/src/app/search/page.jsx"],"sourcesContent":["import {\n    Container,\n    Heading,\n    Text\n} from \"@chakra-ui/react\"\n\nexport default function Search() {\n    return (\n        <>\n            <Heading>Search</Heading>\n        </>\n    )\n}"],"names":[],"mappings":";;;;;AAAA;;;AAMe,SAAS;IACpB,qBACI;kBACI,cAAA,8OAAC,mMAAO;sBAAC;;;;;;;AAGrB","debugId":null}}]
 }

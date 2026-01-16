@@ -7,9 +7,8 @@ import {
     GridItem,
     Heading,
     IconButton,
+    Link,
     Pagination,
-    Stack,
-    Text,
 } from "@chakra-ui/react"
 import { useState } from "react"
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi"
@@ -31,6 +30,7 @@ export default function Interviews() {
     return (
         <>
             <Heading>Interviews</Heading>
+            <Link color='blue' href='/interviews/template'>Template</Link>
             <Container centerContent='true'>
                 <Container>
                     <Grid templateColumns="repeat(3, 1fr)" templateRows='repeat(3, 1fr)'>

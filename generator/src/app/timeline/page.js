@@ -5,7 +5,7 @@ import {
     Heading,
     Text
 } from "@chakra-ui/react"
-import Timeline from '@/components/Timeline'
+import Timeline from '@/components/visualizations/Timeline'
 
 const stuff = [{year: 2000, event: 'In a hole in the ground there lived a hobbit.'}, 
     {year: 2007, event: 'Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandyhole with nothing in it to sit down on or to eat: it was a hobbit-hole, and that means comfort.'},

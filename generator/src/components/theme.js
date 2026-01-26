@@ -15,6 +15,8 @@ export const system = createSystem(defaultConfig, {
     globalCss: {
         "h1, h2, h3, h4, h5, h6": {
             color: "beavOrange",
+            marginTop: '15px',
+            marginBottom: '15px',
         },
     }
 })

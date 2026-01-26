@@ -16,7 +16,7 @@ import {
     useCarousel
 } from "@chakra-ui/react"
 import { LuChevronLeft, LuChevronRight, LuClipboardList, LuCalendarDays, LuSquareCheck } from "react-icons/lu"
-import Timeline from '@/components/Timeline'
+import Timeline from '@/components/visualizations/Timeline'
 
 export default function Template() {
     const carousel = useCarousel({ slideCount: quotes.length })

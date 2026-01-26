@@ -220,7 +220,9 @@ const system = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$
     },
     globalCss: {
         "h1, h2, h3, h4, h5, h6": {
-            color: "beavOrange"
+            color: "beavOrange",
+            marginTop: '15px',
+            marginBottom: '15px'
         }
     }
 }) // All colors sourced from OSU brand colors https://communications.oregonstate.edu/brand-guide/colors

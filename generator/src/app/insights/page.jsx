@@ -1,3 +1,4 @@
+'use client'
 import {
     Container,
     Heading,
@@ -7,7 +8,7 @@ import {
 export default function Insights() {
     return (
         <>
-            <Heading>Demographic Insights</Heading>
+            <Heading>Insights</Heading>
         </>
         
     )

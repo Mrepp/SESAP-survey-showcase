@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///Users/kaelinnchristman/CS/Capstone/SESAP-survey-showcase/generator/node_modules/%40chakra-ui/react/dist/esm/components/heading/index.js"],"sourcesContent":["\"use strict\";\n\"use client\";\nimport { createRecipeContext } from '../../styled-system/create-recipe-context.js';\n\nconst { withContext, PropsProvider } = createRecipeContext({\n  key: \"heading\"\n});\nconst Heading = withContext(\"h2\");\nHeading.displayName = \"Heading\";\nconst HeadingPropsProvider = PropsProvider;\n\nexport { Heading, HeadingPropsProvider };\n"],"names":[],"mappings":";;;;;;AAEA;AAFA;AACA;;AAGA,MAAM,EAAE,WAAW,EAAE,aAAa,EAAE,GAAG,IAAA,gOAAmB,EAAC;IACzD,KAAK;AACP;AACA,MAAM,UAAU,YAAY;AAC5B,QAAQ,WAAW,GAAG;AACtB,MAAM,uBAAuB","ignoreList":[0],"debugId":null}}]
+}

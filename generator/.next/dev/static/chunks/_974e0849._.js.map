@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/kaelinnchristman/CS/Capstone/SESAP-survey-showcase/generator/src/app/improvements/page.jsx"],"sourcesContent":["'use client'\nimport {\n    Container,\n    Heading,\n    Text\n} from \"@chakra-ui/react\"\n\nexport default function Improvements() {\n    return (\n        <>\n            <Heading>Improvement Dashboard</Heading>\n        </>\n    )\n}"],"names":[],"mappings":";;;;;AACA;AADA;;;AAOe,SAAS;IACpB,qBACI;kBACI,cAAA,6LAAC,sMAAO;sBAAC;;;;;;;AAGrB;KANwB","debugId":null}},
+    {"offset": {"line": 34, "column": 0}, "map": {"version":3,"sources":["file:///Users/kaelinnchristman/CS/Capstone/SESAP-survey-showcase/generator/node_modules/%40chakra-ui/react/dist/esm/components/heading/index.js"],"sourcesContent":["\"use strict\";\n\"use client\";\nimport { createRecipeContext } from '../../styled-system/create-recipe-context.js';\n\nconst { withContext, PropsProvider } = createRecipeContext({\n  key: \"heading\"\n});\nconst Heading = withContext(\"h2\");\nHeading.displayName = \"Heading\";\nconst HeadingPropsProvider = PropsProvider;\n\nexport { Heading, HeadingPropsProvider };\n"],"names":[],"mappings":";;;;;;AAEA;AAFA;AACA;;AAGA,MAAM,EAAE,WAAW,EAAE,aAAa,EAAE,GAAG,IAAA,mOAAmB,EAAC;IACzD,KAAK;AACP;AACA,MAAM,UAAU,YAAY;AAC5B,QAAQ,WAAW,GAAG;AACtB,MAAM,uBAAuB","ignoreList":[0],"debugId":null}}]
+}

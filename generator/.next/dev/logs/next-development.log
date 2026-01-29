@@ -1,560 +1,116 @@
-[00:00:00.683] Server  LOG      ✓ Ready in 477ms
-[00:04:12.558] Server  LOG      ✓ Compiled in 110ms
-[00:04:18.415] Server  LOG      ✓ Compiled in 23ms
-[00:04:22.546] Server  LOG      ✓ Compiled in 23ms
-[00:08:58.522] Server  LOG      ✓ Compiled in 418ms
-[00:09:02.087] Server  LOG      ✓ Compiled in 20ms
-[00:09:04.743] Server  LOG      ✓ Compiled in 100ms
-[00:10:39.963] Server  LOG      ✓ Compiled in 97ms
-[00:11:24.073] Server  LOG      ✓ Compiled in 89ms
-[00:11:25.668] Server  LOG      ✓ Compiled in 261ms
-[00:12:46.063] Browser ERROR   ./src/app/interviews/page.jsx:155:25
+[00:00:00.771] Server  LOG      ✓ Ready in 566ms
+[00:11:04.898] Server  LOG      ✓ Compiled in 513ms
+[00:19:58.486] Server  LOG      ✓ Compiled in 152ms
+[00:20:34.581] Server  LOG      ✓ Compiled in 137ms
+[00:21:02.603] Server  LOG      ✓ Compiled in 396ms
+[00:21:19.853] Server  LOG      ✓ Compiled in 28ms
+[00:21:30.631] Server  LOG      ✓ Compiled in 196ms
+[00:21:35.466] Server  LOG      ✓ Compiled in 95ms
+[00:21:51.215] Server  LOG      ✓ Compiled in 32ms
+[00:22:14.329] Server  LOG      ✓ Compiled in 20ms
+[00:23:32.828] Browser ERROR   ./src/app/themes/page.js:89:38
 Parsing ecmascript source code failed
-  153 |                     </ButtonGroup>
-  154 |                 </Pagination.Root>
-> 155 |             </Container>
-      |                         ^
-> 156 |         </>
-      | ^^^^^^^^^
-  157 |     )
-  158 | }
-
-Expected '</', got 'jsx text (
-        )'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:13:06.487] Server  LOG      ✓ Compiled in 169ms
-[00:13:41.319] Server  LOG      ✓ Compiled in 51ms
-[00:14:38.860] Server  LOG      ✓ Compiled in 77ms
-[00:15:55.108] Server  LOG      ✓ Compiled in 67ms
-[00:16:07.166] Server  LOG      ✓ Compiled in 28ms
-[00:16:11.011] Server  LOG      ✓ Compiled in 64ms
-[00:16:12.272] Server  LOG      ✓ Compiled in 32ms
-[00:16:18.568] Server  LOG      ✓ Compiled in 143ms
-[00:16:20.926] Server  LOG      ✓ Compiled in 139ms
-[00:16:36.681] Server  LOG      ✓ Compiled in 84ms
-[00:16:40.924] Server  LOG      ✓ Compiled in 123ms
-[00:17:21.647] Server  LOG      ✓ Compiled in 111ms
-[00:17:25.871] Server  LOG      ✓ Compiled in 71ms
-[00:17:27.524] Browser ERROR   ./src/app/interviews/page.jsx:65:13
-Parsing ecmascript source code failed
-  63 |             <Link color='blue' href='/interviews/template'>Template</Link>
-  64 |             <Container
-> 65 |             <Container centerContent='true'>
-     |             ^
-  66 |                 <Menu.Root mb={4} >
-  67 |                     <Menu.Trigger asChild>
-  68 |                         <Button variant="outline">
+  87 |                                         Frequency (Lowest to Highest)
+  88 |                                     </Menu.Item>
+> 89 |                                     {*/ }
+     |                                      ^
+  90 |                                     <Menu.Item
+  91 |                                         onClick={() => {
+  92 |                                             setSortBy('name-asc')
 
 Expression expected
 
 Import traces:
   Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
 
   Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:17:28.107] Server  LOG      ✓ Compiled in 22ms
-[00:17:29.196] Server  LOG      ✓ Compiled in 19ms
-[00:17:35.208] Server  LOG      ✓ Compiled in 54ms
-[00:17:38.940] Server  LOG      ✓ Compiled in 15ms
-[00:17:44.660] Server  LOG      ✓ Compiled in 55ms
-[00:17:45.920] Server  LOG      ✓ Compiled in 67ms
-[00:17:49.184] Server  LOG      ✓ Compiled in 8ms
-[00:17:51.356] Server  LOG      ✓ Compiled in 7ms
-[00:17:53.393] Server  LOG      ✓ Compiled in 43ms
-[00:17:58.941] Server  LOG      ✓ Compiled in 11ms
-[00:18:01.868] Server  LOG      ✓ Compiled in 11ms
-[00:18:03.629] Server  LOG      ✓ Compiled in 11ms
-[00:18:04.982] Server  LOG      ✓ Compiled in 11ms
-[00:18:08.699] Server  LOG      ✓ Compiled in 11ms
-[00:18:10.922] Server  LOG      ✓ Compiled in 10ms
-[00:18:17.239] Server  LOG      ✓ Compiled in 5ms
-[00:18:18.829] Browser ERROR   ./src/app/interviews/page.jsx:112:15
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[00:23:32.829] Browser ERROR   ./src/app/themes/page.js:89:39
 Parsing ecmascript source code failed
-  110 |                     </ButtonGroup>
-  111 |                 </Pagination.Root>
-> 112 |             </Container>
-      |               ^^^^^^^^^
-  113 |         </>
-  114 |     )
-  115 | }
+  87 |                                         Frequency (Lowest to Highest)
+  88 |                                     </Menu.Item>
+> 89 |                                     {*/ }
+     |                                       ^^^
+  90 |                                     <Menu.Item
+  91 |                                         onClick={() => {
+  92 |                                             setSortBy('name-asc')
 
-Expected '>', got 'Container'
+Unterminated regexp literal
 
 Import traces:
   Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
 
   Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:18:27.658] Server  LOG      ✓ Compiled in 21ms
-[00:18:34.284] Server  LOG      ✓ Compiled in 6ms
-[00:18:36.952] Server  LOG      ✓ Compiled in 35ms
-[00:18:41.563] Server  LOG      ✓ Compiled in 17ms
-[00:18:42.243] Browser ERROR   ./src/app/interviews/page.jsx:112:50
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[00:23:32.829] Browser ERROR   ./src/app/themes/page.js:89:38
 Parsing ecmascript source code failed
-  110 |                 </Menu.Root>
-  111 |             </Container>
-> 112 |             <Container centerContent='true' bg = blue>
-      |                                                  ^^^^
-  113 |                 <Container>
-  114 |                     <Grid templateColumns="repeat(3, 1fr)" templateRows='repeat(3, 1fr)'>
-  115 |                         {visibleItems.map((item, index) => (
-
-Expected '</', got 'blue'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:19:20.043] Server  LOG      ✓ Compiled in 49ms
-[00:19:22.945] Server  LOG      ✓ Compiled in 8ms
-[00:19:24.596] Server  LOG      ✓ Compiled in 24ms
-[00:19:24.760] Browser ERROR   ./src/app/interviews/page.jsx:113:31
-Parsing ecmascript source code failed
-  111 |             </Container>
-  112 |             <Container centerContent='true' bg='green'>
-> 113 |                 <Container bg=blue>
-      |                               ^^^^
-  114 |                     <Grid templateColumns="repeat(3, 1fr)" templateRows='repeat(3, 1fr)'>
-  115 |                         {visibleItems.map((item, index) => (
-  116 |                             <GridItem key={index} 
-
-Expected '</', got 'blue'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:19:50.259] Server  LOG      ✓ Compiled in 29ms
-[00:19:58.343] Server  LOG      ✓ Compiled in 44ms
-[00:20:15.559] Server  LOG      ✓ Compiled in 26ms
-[00:20:18.444] Server  LOG      ✓ Compiled in 7ms
-[00:20:27.980] Server  LOG      ✓ Compiled in 71ms
-[00:20:30.496] Server  LOG      ✓ Compiled in 10ms
-[00:20:34.456] Server  LOG      ✓ Compiled in 94ms
-[00:20:40.090] Server  LOG      ✓ Compiled in 20ms
-[00:20:59.823] Server  LOG      ✓ Compiled in 32ms
-[00:21:04.033] Server  LOG      ✓ Compiled in 63ms
-[00:21:08.109] Server  LOG      ✓ Compiled in 25ms
-[00:21:10.935] Browser ERROR   ./src/app/interviews/page.jsx:65:53
-Parsing ecmascript source code failed
-  63 |             <Link color='blue' href='/interviews/template'>Template</Link>
-  64 |             <Container  bg='green'>
-> 65 |                 <Container bg='blue' alignContent={}>
-     |                                                     ^
-  66 |                     <Menu.Root mb={4} >
-  67 |                         <Menu.Trigger asChild>
-  68 |                             <Button variant="outline">
+  87 |                                         Frequency (Lowest to Highest)
+  88 |                                     </Menu.Item>
+> 89 |                                     {*/ /}
+     |                                      ^
+  90 |                                     <Menu.Item
+  91 |                                         onClick={() => {
+  92 |                                             setSortBy('name-asc')
 
 Expression expected
 
 Import traces:
   Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
 
   Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:21:10.937] Browser ERROR   ./src/app/interviews/page.jsx:112:18
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[00:23:32.829] Browser ERROR   ./src/app/themes/page.js:89:38
 Parsing ecmascript source code failed
-  110 |                         </Menu.Content>
-  111 |                     </Menu.Root>
-> 112 |                 </Container>
-      |                  ^^^^^^^^^^^
-  113 |
-  114 |                 <Container centerContent='true' bg='yellow'>
-  115 |                     <Grid templateColumns="repeat(3, 1fr)" templateRows='repeat(3, 1fr)'>
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:21:10.937] Browser ERROR   ./src/app/interviews/page.jsx:65:53
-Parsing ecmascript source code failed
-  63 |             <Link color='blue' href='/interviews/template'>Template</Link>
-  64 |             <Container  bg='green'>
-> 65 |                 <Container bg='blue' alignContent=''}>
-     |                                                     ^
-  66 |                     <Menu.Root mb={4} >
-  67 |                         <Menu.Trigger asChild>
-  68 |                             <Button variant="outline">
-
-Expected '</', got '}'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:21:10.937] Browser ERROR   ./src/app/interviews/page.jsx:65:58
-Parsing ecmascript source code failed
-  63 |             <Link color='blue' href='/interviews/template'>Template</Link>
-  64 |             <Container  bg='green'>
-> 65 |                 <Container bg='blue' alignContent='right'}>
-     |                                                          ^
-  66 |                     <Menu.Root mb={4} >
-  67 |                         <Menu.Trigger asChild>
-  68 |                             <Button variant="outline">
-
-Expected '</', got '}'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:21:12.295] Server  LOG      ✓ Compiled in 46ms
-[00:21:28.651] Server  LOG      ✓ Compiled in 24ms
-[00:22:10.351] Server  LOG      ✓ Compiled in 37ms
-[00:22:10.513] Browser ERROR   ./src/app/interviews/page.jsx:112:29
-Parsing ecmascript source code failed
-  110 |                         </Menu.Content>
-  111 |                     </Menu.Root>
-> 112 |                 </Container>
-      |                             ^
-> 113 |
-      | ^
-> 114 |                 <Container centerContent='true' bg='yellow'>
-      | ^^^^^^^^^^^^^^^^^
-  115 |                     <Grid templateColumns="repeat(3, 1fr)" templateRows='repeat(3, 1fr)'>
-  116 |                         {visibleItems.map((item, index) => (
-  117 |                             <GridItem key={index} 
-
-Expected '</', got 'jsx text (
-
-                )'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:22:15.492] Server  LOG      ✓ Compiled in 54ms
-[00:22:26.843] Server  LOG      ✓ Compiled in 95ms
-[00:22:30.279] Server  LOG      ✓ Compiled in 35ms
-[00:23:45.826] Server  LOG      ✓ Compiled in 126ms
-[00:23:53.825] Server  LOG      ✓ Compiled in 34ms
-[00:24:06.807] Server  LOG      ✓ Compiled in 12ms
-[00:24:14.149] Server  LOG      ✓ Compiled in 24ms
-[00:24:54.600] Server  LOG      ✓ Compiled in 25ms
-[00:24:58.785] Server  LOG      ✓ Compiled in 51ms
-[00:25:19.382] Server  LOG      ✓ Compiled in 34ms
-[00:26:50.094] Server  LOG      ✓ Compiled in 118ms
-[00:26:50.454] Browser ERROR   Received `%s` for a non-boolean attribute `%s`.
-
-If you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}. true max max true max
-[00:26:52.960] Server  LOG      ✓ Compiled in 27ms
-[00:26:58.267] Server  LOG      ✓ Compiled in 27ms
-[00:29:54.112] Server  LOG      ✓ Compiled in 82ms
-[00:30:12.897] Server  LOG      ✓ Compiled in 28ms
-[00:30:27.657] Server  LOG      ✓ Compiled in 23ms
-[00:31:49.674] Server  LOG      ✓ Compiled in 28ms
-[00:32:59.206] Server  LOG      ✓ Compiled in 88ms
-[00:33:07.599] Server  LOG      ✓ Compiled in 28ms
-[00:33:30.934] Server  LOG      ✓ Compiled in 25ms
-[00:33:37.949] Server  LOG      ✓ Compiled in 37ms
-[00:33:45.112] Server  LOG      ✓ Compiled in 23ms
-[00:35:07.239] Server  LOG      ✓ Compiled in 87ms
-[00:35:08.156] Server  LOG      ✓ Compiled in 19ms
-[00:35:11.260] Server  LOG      ✓ Compiled in 34ms
-[00:35:15.463] Server  LOG      ✓ Compiled in 142ms
-[00:35:26.304] Server  LOG      ✓ Compiled in 47ms
-[00:35:38.172] Server  LOG      ✓ Compiled in 41ms
-[00:35:44.621] Server  LOG      ✓ Compiled in 36ms
-[00:35:48.697] Server  LOG      ✓ Compiled in 22ms
-[00:35:52.440] Server  LOG      ✓ Compiled in 39ms
-[00:35:54.686] Server  LOG      ✓ Compiled in 20ms
-[00:35:56.706] Server  LOG      ✓ Compiled in 36ms
-[00:36:28.972] Server  LOG      ✓ Compiled in 20ms
-[00:36:39.769] Server  LOG      ✓ Compiled in 22ms
-[00:37:30.603] Browser ERROR   ./src/app/interviews/page.jsx:65:14
-Parsing ecmascript source code failed
-  63 |             <Link color='blue' href='/interviews/template'>Template</Link>
-  64 |
-> 65 |             {/}
-     |              ^^
-  66 |             <Container centerContent='true'>
-  67 |                 <Box alignSelf='flex-end'>
-  68 |                     <Menu.Root mb={4} >
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:37:30.603] Browser ERROR   ./src/app/interviews/page.jsx:65:14
-Parsing ecmascript source code failed
-  63 |             <Link color='blue' href='/interviews/template'>Template</Link>
-  64 |
-> 65 |             {/ sor}
-     |              ^^^^^^
-  66 |             <Container centerContent='true'>
-  67 |                 <Box alignSelf='flex-end'>
-  68 |                     <Menu.Root mb={4} >
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:37:30.604] Browser ERROR   ./src/app/interviews/page.jsx:159:10
-Parsing ecmascript source code failed
-  157 |                 </Pagination.Root>
-  158 |             </Container>
-> 159 |         </>
-      |          ^^
-  160 |     )
-  161 | }
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:37:30.604] Browser ERROR   ./src/app/interviews/page.jsx:159:10
-Parsing ecmascript source code failed
-  157 |                 </Pagination.Root>
-  158 |             </Container>
-> 159 |         </>
-      |          ^^
-  160 |     )
-  161 | }
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:37:30.604] Browser ERROR   ./src/app/interviews/page.jsx:65:15
-Parsing ecmascript source code failed
-  63 |             <Link color='blue' href='/interviews/template'>Template</Link>
-  64 |
-> 65 |             //}
-     |               ^
-  66 |             <Container centerContent='true'>
-  67 |                 <Box alignSelf='flex-end'>
-  68 |                     <Menu.Root mb={4} >
-
-Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:38:16.309] Server  LOG      ✓ Compiled in 45ms
-[00:38:23.579] Server  LOG      ✓ Compiled in 31ms
-[00:38:33.289] Server  LOG      ✓ Compiled in 37ms
-[00:38:44.075] Server  LOG      ✓ Compiled in 37ms
-[00:39:42.136] Server  LOG      ✓ Compiled in 38ms
-[00:39:43.485] Server  LOG      ✓ Compiled in 32ms
-[00:39:50.724] Server  LOG      ✓ Compiled in 36ms
-[00:39:51.127] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Portal
-[00:40:02.287] Server  LOG      ✓ Compiled in 39ms
-[00:40:02.391] Browser ERROR   ./src/app/interviews/page.jsx:82:25
-Parsing ecmascript source code failed
-  80 |                         <Portal>
-  81 |                             <Menu
-> 82 |                         </Portal>
-     |                         ^
-  83 |
-  84 |                         <Menu.Content>
-  85 |                             <Menu.Item
+  87 |                                         Frequency (Lowest to Highest)
+  88 |                                     </Menu.Item>
+> 89 |                                     {*/ /*}
+     |                                      ^
+  90 |                                     <Menu.Item
+  91 |                                         onClick={() => {
+  92 |                                             setSortBy('name-asc')
 
 Expression expected
 
 Import traces:
   Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
 
   Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:40:02.391] Browser ERROR   ./src/app/interviews/page.jsx:82:26
-Parsing ecmascript source code failed
-  80 |                         <Portal>
-  81 |                             <Menu
-> 82 |                         </Portal>
-     |                          ^^^^^^^^
-  83 |
-  84 |                         <Menu.Content>
-  85 |                             <Menu.Item
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:40:16.544] Browser ERROR   ./src/app/interviews/page.jsx:82:25
-Parsing ecmascript source code failed
-  80 |                         <Portal>
-  81 |                             <Menu.Positioner
-> 82 |                         </Portal>
-     |                         ^
-  83 |
-  84 |                         <Menu.Content>
-  85 |                             <Menu.Item
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:40:16.544] Browser ERROR   ./src/app/interviews/page.jsx:82:26
-Parsing ecmascript source code failed
-  80 |                         <Portal>
-  81 |                             <Menu.Positioner
-> 82 |                         </Portal>
-     |                          ^^^^^^^^
-  83 |
-  84 |                         <Menu.Content>
-  85 |                             <Menu.Item
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:40:18.186] Server  LOG      ✓ Compiled in 44ms
-[00:40:18.287] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:40:18.403] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Portal
-[00:40:18.991] Server  ERROR    ⨯ ReferenceError: Portal is not defined
-[00:40:20.455] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Portal
-[00:41:21.345] Server  LOG      ✓ Compiled in 26ms
-[00:41:23.365] Server  LOG      ✓ Compiled in 30ms
-[00:41:27.539] Server  LOG      ✓ Compiled in 15ms
-[00:41:29.906] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:41:29.913] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:41:29.917] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:41:30.227] Server  ERROR    ⨯ ReferenceError: Portal is not defined
-[00:41:30.722] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Portal
-[00:41:40.594] Server  LOG      ✓ Compiled in 529ms
-[00:41:40.603] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:43:41.466] Server  LOG      ✓ Compiled in 87ms
-[00:46:17.689] Server  LOG      ✓ Compiled in 82ms
-[00:46:22.106] Browser ERROR   ./src/app/interviews/page.jsx:123:54
-Parsing ecmascript source code failed
-  121 |                 
-  122 |                 {/* Interview Grid */}
-> 123 |                 <Container centerContent='true' width=>
-      |                                                      ^^
-  124 |                     <Grid templateColumns="repeat(3, 1fr)" templateRows='repeat(3, 1fr)'>
-  125 |                         {visibleItems.map((item, index) => (
-  126 |                             <GridItem key={index} 
-
-Expected '</', got '=>'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:46:23.368] Server  LOG      ✓ Compiled in 89ms
-[00:46:34.861] Server  LOG      ✓ Compiled in 33ms
-[00:47:08.981] Server  LOG      ✓ Compiled in 18ms
-[00:47:12.635] Server  LOG      ✓ Compiled in 16ms
-[00:47:14.703] Browser ERROR   ./src/components/Interview.jsx:15:37
-Parsing ecmascript source code failed
-  13 |             <Image src={data.videoUrl} alt={data.videoAlt} borderTopRadius='25px' />
-  14 |
-> 15 |             <Box p="4" spaceY="2" bg=>
-     |                                     ^^
-  16 |                 <Text fontWeight="medium" color="fg">
-  17 |                 {data.name}
-  18 |                 </Text>
-
-Expected '</', got '=>'
-
-Import traces:
-  Client Component Browser:
-    ./src/components/Interview.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Client Component Browser]
-    ./src/app/interviews/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/components/Interview.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Client Component SSR]
-    ./src/app/interviews/page.jsx [Server Component]
-[00:47:14.870] Server  LOG      ✓ Compiled in 39ms
-[00:47:26.153] Server  LOG      ✓ Compiled in 30ms
-[00:47:36.264] Server  LOG      ✓ Compiled in 26ms
-[00:47:39.776] Server  LOG      ✓ Compiled in 21ms
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[00:24:20.598] Server  LOG      ✓ Compiled in 20ms
+[00:27:25.051] Server  LOG      ✓ Compiled in 98ms
+[00:27:27.427] Server  LOG      ✓ Compiled in 24ms
+[00:27:28.506] Server  LOG      ✓ Compiled in 42ms
+[00:27:35.100] Server  LOG      ✓ Compiled in 27ms
+[00:27:41.878] Server  LOG      ✓ Compiled in 21ms
+[00:27:44.905] Server  LOG      ✓ Compiled in 38ms
+[00:28:03.757] Server  LOG      ✓ Compiled in 30ms
+[00:28:06.501] Server  LOG      ✓ Compiled in 29ms
+[00:28:10.343] Server  LOG      ✓ Compiled in 28ms
+[00:28:12.564] Server  LOG      ✓ Compiled in 28ms
+[00:28:14.160] Server  LOG      ✓ Compiled in 25ms
+[00:32:50.735] Server  LOG      ✓ Compiled in 69ms
+[00:32:57.169] Server  LOG      ✓ Compiled in 22ms
+[00:33:07.801] Server  LOG      ✓ Compiled in 25ms
+[00:33:10.876] Server  LOG      ✓ Compiled in 26ms
+[00:33:18.231] Server  LOG      ✓ Compiled in 25ms
+[00:33:21.649] Server  LOG      ✓ Compiled in 25ms
+[00:33:30.146] Server  LOG      ✓ Compiled in 28ms
+[00:33:33.560] Server  LOG      ✓ Compiled in 25ms
+[00:33:37.168] Server  LOG      ✓ Compiled in 29ms
+[00:33:40.271] Server  LOG      ✓ Compiled in 31ms
+[00:33:44.161] Server  LOG      ✓ Compiled in 35ms
+[00:33:46.690] Server  LOG      ✓ Compiled in 25ms
+[00:34:34.219] Server  LOG      ✓ Compiled in 30ms
+[00:34:39.063] Server  LOG      ✓ Compiled in 25ms

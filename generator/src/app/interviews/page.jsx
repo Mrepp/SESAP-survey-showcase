@@ -69,7 +69,7 @@ export default function Interviews() {
                     <Menu.Root mb={4} >
                         <Menu.Trigger asChild>
                             <Button variant="outline">
-                                Sort: {
+                                Sort by: {
                                     sortBy === 'name-asc' ? 'Name (A to Z)' :
                                     sortBy === 'name-desc' ? 'Name (Z to A)' :
                                     sortBy === 'date-asc' ? 'Date (Oldest)' :

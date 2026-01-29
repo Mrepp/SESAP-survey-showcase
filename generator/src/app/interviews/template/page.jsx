@@ -2,6 +2,7 @@
 import {
     Accordion,
     Box,
+    Button,
     Carousel,
     Container,
     Heading,
@@ -15,14 +16,22 @@ import {
     Text,
     useCarousel
 } from "@chakra-ui/react"
+import { useRouter } from "next/navigation"
 import { LuChevronLeft, LuChevronRight, LuClipboardList, LuCalendarDays, LuSquareCheck } from "react-icons/lu"
 import Timeline from '@/components/visualizations/Timeline'
 
 export default function Template() {
     const carousel = useCarousel({ slideCount: quotes.length })
+    const router = useRouter()
 
     return (
         <>
+            <Box mb={4}>
+                <Button variant="outline" onClick={() => router.back()}>
+                    ← Back
+                </Button>
+            </Box>
+            
             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
 
                 <Container>

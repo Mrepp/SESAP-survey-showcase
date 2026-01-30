@@ -18,7 +18,6 @@ Return valid JSON with:
 - notable_quotes (quote, speaker, reason)
 - improvement_areas (area, suggestion)
 
-Do not hallucinate. Use only the transcript.
 """
 
     response = llm_client.chat.completions.create(

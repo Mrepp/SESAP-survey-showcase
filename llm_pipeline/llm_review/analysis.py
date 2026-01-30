@@ -1,4 +1,3 @@
-# analysis.py
 
 def basic_analysis(transcript: str):
     """
@@ -44,7 +43,6 @@ def basic_analysis(transcript: str):
 def analyze_transcript(transcript: str, llm_client=None):
     """
     Public API for transcript analysis.
-    CLI imports THIS function.
     """
 
     result = basic_analysis(transcript)

@@ -1,8 +1,9 @@
 import json
 import argparse
+from openai import OpenAI
 from pathlib import Path
 
-from .analyze_transcript import analyze_transcript
+from .analysis import analyze_transcript
 
  # python -m llm_pipeline.llm_review.cli --file llm_pipeline\transcripts\interview1.txt --pretty
 
@@ -27,6 +28,10 @@ def main():
 
     )
 
+    parser.add_argument("--llm",
+    action="store_true",
+    help="Enable LLM-based analysis"
+)
     parser.add_argument("--file", "-f", help="Path to transcript text file")
     parser.add_argument("--text", "-t", help="Raw transcript text")
     parser.add_argument("--save", "-s", help="Where to save the resulting JSON")
@@ -37,8 +42,13 @@ def main():
 
     transcript = load_transcript(args.file, args.text)
 
+    llm_client = None
+    if args.llm:
+        llm_client = OpenAI()
+
+
     # Run the actual LLM analysis → your repo will generate structured JSON
-    result = analyze_transcript(transcript)
+    result = analyze_transcript(transcript, llm_client=llm_client)
 
     # Prints JSON as the output
     if args.pretty:

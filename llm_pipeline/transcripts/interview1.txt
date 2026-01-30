@@ -1,0 +1,16 @@
+Interviewer: Thanks for joining me today. Could you start by telling us a little about your background?
+
+Participant: Sure. I grew up in x and studied computer science at Oregon State University. 
+
+Interviewer: What inspired you to pursue software development?
+
+Participant: I love building tools
+
+Interviewer: What projects are you most proud of?
+
+Participant: Recently, I built a wall
+
+Interviewer: What are your future goals?
+
+Participant: I hope to work 
+

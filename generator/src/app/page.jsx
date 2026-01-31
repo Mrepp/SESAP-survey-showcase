@@ -1,15 +1,21 @@
 'use client'
 import {
+    Box,
     Container,
     Heading,
     Stack,
     Text
 } from "@chakra-ui/react"
 import Interview from '@/components/Interview'
+import WordCloud from "@/components/visualizations/WordCloud"
 
 export default function Home() {
     return (
         <>
+            <Box w='fill' marginTop='-20px' marginLeft='-20px' marginRight='-20px' >
+                <WordCloud/>
+            </Box>
+
             <Text>
                 The EECS Student Experience Story Archive Project (SESAP) collects the narrative statements of students from underserved and marginalized communities. 
                 Video testimonies are recorded and submitted by students in order to document their experiences in EECS programs. These are then analyzed in order to 

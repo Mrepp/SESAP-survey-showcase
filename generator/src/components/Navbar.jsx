@@ -12,7 +12,7 @@ export default function Navbar () {
             <Flex gap="10" >
                 <Link color='black' href='/'>Home</Link>
                 <Link color='black' href='/interviews'>Interviews</Link>
-                <Link color='black' href='/insights'>Demographic Insights</Link>
+                <Link color='black' href='/insights'>Insights</Link>
                 <Link color='black' href='/themes'>Themes</Link>
                 <Link color='black' href='/timeline'>Timeline</Link>
                 <Link color='black' href='/improvements'>Improvements</Link>

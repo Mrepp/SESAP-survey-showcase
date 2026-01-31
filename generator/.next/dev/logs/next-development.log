@@ -1,116 +1,178 @@
-[00:00:00.771] Server  LOG      ✓ Ready in 566ms
-[00:11:04.898] Server  LOG      ✓ Compiled in 513ms
-[00:19:58.486] Server  LOG      ✓ Compiled in 152ms
-[00:20:34.581] Server  LOG      ✓ Compiled in 137ms
-[00:21:02.603] Server  LOG      ✓ Compiled in 396ms
-[00:21:19.853] Server  LOG      ✓ Compiled in 28ms
-[00:21:30.631] Server  LOG      ✓ Compiled in 196ms
-[00:21:35.466] Server  LOG      ✓ Compiled in 95ms
-[00:21:51.215] Server  LOG      ✓ Compiled in 32ms
-[00:22:14.329] Server  LOG      ✓ Compiled in 20ms
-[00:23:32.828] Browser ERROR   ./src/app/themes/page.js:89:38
+[00:00:00.676] Server  LOG      ✓ Ready in 477ms
+[00:00:34.240] Server  LOG      ✓ Compiled in 200ms
+[00:00:37.843] Server  LOG      ✓ Compiled in 46ms
+[00:00:39.288] Server  LOG      ✓ Compiled in 5ms
+[00:00:43.259] Server  LOG      ✓ Compiled in 60ms
+[00:00:47.455] Server  LOG      ✓ Compiled in 172ms
+[00:00:48.345] Server  LOG      ✓ Compiled in 25ms
+[00:00:54.750] Server  LOG      ✓ Compiled in 81ms
+[00:00:58.954] Server  LOG      ✓ Compiled in 74ms
+[00:01:07.341] Server  LOG      ✓ Compiled in 62ms
+[00:01:08.258] Browser ERROR   ./src/app/page.jsx:35:11
 Parsing ecmascript source code failed
-  87 |                                         Frequency (Lowest to Highest)
-  88 |                                     </Menu.Item>
-> 89 |                                     {*/ }
-     |                                      ^
-  90 |                                     <Menu.Item
-  91 |                                         onClick={() => {
-  92 |                                             setSortBy('name-asc')
+  33 |                 </Stack>
+  34 |             </Container>
+> 35 |         </>
+     |           ^
+  36 |     )
+  37 | }
+  38 |
 
 Expression expected
 
 Import traces:
   Client Component Browser:
-    ./src/app/themes/page.js [Client Component Browser]
-    ./src/app/themes/page.js [Server Component]
+    ./src/app/page.jsx [Client Component Browser]
+    ./src/app/page.jsx [Server Component]
 
   Client Component SSR:
-    ./src/app/themes/page.js [Client Component SSR]
-    ./src/app/themes/page.js [Server Component]
-[00:23:32.829] Browser ERROR   ./src/app/themes/page.js:89:39
+    ./src/app/page.jsx [Client Component SSR]
+    ./src/app/page.jsx [Server Component]
+[00:01:08.258] Browser ERROR   ./src/app/page.jsx:15:20
 Parsing ecmascript source code failed
-  87 |                                         Frequency (Lowest to Highest)
-  88 |                                     </Menu.Item>
-> 89 |                                     {*/ }
-     |                                       ^^^
-  90 |                                     <Menu.Item
-  91 |                                         onClick={() => {
-  92 |                                             setSortBy('name-asc')
+  13 |     return (
+  14 |         <>
+> 15 |             <Box w=100>
+     |                    ^^^
+  16 |                 <WordCloud/>
+  17 |             </Box>
+  18 |
+
+Expected '</', got 'numeric literal (100, 100)'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.jsx [Client Component Browser]
+    ./src/app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.jsx [Client Component SSR]
+    ./src/app/page.jsx [Server Component]
+[00:01:08.258] Browser ERROR   ./src/app/page.jsx:15:20
+Parsing ecmascript source code failed
+  13 |     return (
+  14 |         <>
+> 15 |             <Box w=100% >
+     |                    ^^^
+  16 |                 <WordCloud/>
+  17 |             </Box>
+  18 |
+
+Expected '</', got 'numeric literal (100, 100)'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.jsx [Client Component Browser]
+    ./src/app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.jsx [Client Component SSR]
+    ./src/app/page.jsx [Server Component]
+[00:01:14.373] Server  LOG      ✓ Compiled in 33ms
+[00:01:19.872] Server  LOG      ✓ Compiled in 49ms
+[00:01:20.205] Browser ERROR   ./src/app/page.jsx:15:38
+Parsing ecmascript source code failed
+  13 |     return (
+  14 |         <>
+> 15 |             <Box w='100%' topMargin= >
+     |                                      ^
+  16 |                 <WordCloud/>
+  17 |             </Box>
+  18 |
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.jsx [Client Component Browser]
+    ./src/app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.jsx [Client Component SSR]
+    ./src/app/page.jsx [Server Component]
+[00:01:20.205] Browser ERROR   ./src/app/page.jsx:17:14
+Parsing ecmascript source code failed
+  15 |             <Box w='100%' topMargin= >
+  16 |                 <WordCloud/>
+> 17 |             </Box>
+     |              ^^^^^
+  18 |
+  19 |             <Text>
+  20 |                 The EECS Student Experience Story Archive Project (SESAP) collects the narrative statements of students from underserved and marginalized communities. 
 
 Unterminated regexp literal
 
 Import traces:
   Client Component Browser:
-    ./src/app/themes/page.js [Client Component Browser]
-    ./src/app/themes/page.js [Server Component]
+    ./src/app/page.jsx [Client Component Browser]
+    ./src/app/page.jsx [Server Component]
 
   Client Component SSR:
-    ./src/app/themes/page.js [Client Component SSR]
-    ./src/app/themes/page.js [Server Component]
-[00:23:32.829] Browser ERROR   ./src/app/themes/page.js:89:38
+    ./src/app/page.jsx [Client Component SSR]
+    ./src/app/page.jsx [Server Component]
+[00:01:21.413] Server  LOG      ✓ Compiled in 25ms
+[00:01:23.083] Server  LOG      ✓ Compiled in 7ms
+[00:01:24.902] Server  LOG      ✓ Compiled in 10ms
+[00:01:31.318] Server  LOG      ✓ Compiled in 25ms
+[00:01:36.876] Server  LOG      ✓ Compiled in 23ms
+[00:01:46.136] Server  LOG      ✓ Compiled in 5ms
+[00:01:50.068] Server  LOG      ✓ Compiled in 29ms
+[00:01:57.496] Server  LOG      ✓ Compiled in 10ms
+[00:02:00.371] Server  LOG      ✓ Compiled in 4ms
+[00:02:05.310] Server  LOG      ✓ Compiled in 60ms
+[00:02:07.119] Server  LOG      ✓ Compiled in 10ms
+[00:02:08.801] Server  LOG      ✓ Compiled in 4ms
+[00:02:12.519] Server  LOG      ✓ Compiled in 29ms
+[00:02:13.944] Browser ERROR   ./src/app/page.jsx:15:19
 Parsing ecmascript source code failed
-  87 |                                         Frequency (Lowest to Highest)
-  88 |                                     </Menu.Item>
-> 89 |                                     {*/ /}
-     |                                      ^
-  90 |                                     <Menu.Item
-  91 |                                         onClick={() => {
-  92 |                                             setSortBy('name-asc')
+  13 |     return (
+  14 |         <>
+> 15 | marginTop='-20px' >
+     |                   ^
+  16 |                 <WordCloud/>
+  17 |             </Box>
+  18 |
 
-Expression expected
+Unexpected token. Did you mean `{'>'}` or `&gt;`?
 
 Import traces:
   Client Component Browser:
-    ./src/app/themes/page.js [Client Component Browser]
-    ./src/app/themes/page.js [Server Component]
+    ./src/app/page.jsx [Client Component Browser]
+    ./src/app/page.jsx [Server Component]
 
   Client Component SSR:
-    ./src/app/themes/page.js [Client Component SSR]
-    ./src/app/themes/page.js [Server Component]
-[00:23:32.829] Browser ERROR   ./src/app/themes/page.js:89:38
+    ./src/app/page.jsx [Client Component SSR]
+    ./src/app/page.jsx [Server Component]
+[00:02:16.086] Server  LOG      ✓ Compiled in 6ms
+[00:02:27.476] Server  LOG      ✓ Compiled in 69ms
+[00:02:30.571] Server  LOG      ✓ Compiled in 6ms
+[00:02:49.397] Server  LOG      ✓ Compiled in 86ms
+[00:02:52.478] Server  ERROR    ⨯ ReferenceError: window is not defined
+[00:03:24.193] Server  LOG      ✓ Compiled in 34ms
+[00:03:28.347] Server  LOG      ✓ Compiled in 42ms
+[00:03:58.233] Server  LOG      ✓ Compiled in 48ms
+[00:04:05.340] Server  LOG      ✓ Compiled in 30ms
+[00:04:28.384] Server  LOG      ✓ Compiled in 117ms
+[00:04:28.668] Browser ERROR   ./src/components/Main.jsx:10:51
 Parsing ecmascript source code failed
-  87 |                                         Frequency (Lowest to Highest)
-  88 |                                     </Menu.Item>
-> 89 |                                     {*/ /*}
-     |                                      ^
-  90 |                                     <Menu.Item
-  91 |                                         onClick={() => {
-  92 |                                             setSortBy('name-asc')
+   8 | export default function Main ({children}) {
+   9 |     return(
+> 10 |         <Container bg='osuOffWhite' flexGrow={1} p=>
+     |                                                   ^^
+  11 |             <Box w='fill' margin='20px' bg='blue'>
+  12 |                 {children}
+  13 |             </Box>
 
-Expression expected
+Unexpected token `=>`. Expected jsx identifier
 
-Import traces:
-  Client Component Browser:
-    ./src/app/themes/page.js [Client Component Browser]
-    ./src/app/themes/page.js [Server Component]
-
-  Client Component SSR:
-    ./src/app/themes/page.js [Client Component SSR]
-    ./src/app/themes/page.js [Server Component]
-[00:24:20.598] Server  LOG      ✓ Compiled in 20ms
-[00:27:25.051] Server  LOG      ✓ Compiled in 98ms
-[00:27:27.427] Server  LOG      ✓ Compiled in 24ms
-[00:27:28.506] Server  LOG      ✓ Compiled in 42ms
-[00:27:35.100] Server  LOG      ✓ Compiled in 27ms
-[00:27:41.878] Server  LOG      ✓ Compiled in 21ms
-[00:27:44.905] Server  LOG      ✓ Compiled in 38ms
-[00:28:03.757] Server  LOG      ✓ Compiled in 30ms
-[00:28:06.501] Server  LOG      ✓ Compiled in 29ms
-[00:28:10.343] Server  LOG      ✓ Compiled in 28ms
-[00:28:12.564] Server  LOG      ✓ Compiled in 28ms
-[00:28:14.160] Server  LOG      ✓ Compiled in 25ms
-[00:32:50.735] Server  LOG      ✓ Compiled in 69ms
-[00:32:57.169] Server  LOG      ✓ Compiled in 22ms
-[00:33:07.801] Server  LOG      ✓ Compiled in 25ms
-[00:33:10.876] Server  LOG      ✓ Compiled in 26ms
-[00:33:18.231] Server  LOG      ✓ Compiled in 25ms
-[00:33:21.649] Server  LOG      ✓ Compiled in 25ms
-[00:33:30.146] Server  LOG      ✓ Compiled in 28ms
-[00:33:33.560] Server  LOG      ✓ Compiled in 25ms
-[00:33:37.168] Server  LOG      ✓ Compiled in 29ms
-[00:33:40.271] Server  LOG      ✓ Compiled in 31ms
-[00:33:44.161] Server  LOG      ✓ Compiled in 35ms
-[00:33:46.690] Server  LOG      ✓ Compiled in 25ms
-[00:34:34.219] Server  LOG      ✓ Compiled in 30ms
-[00:34:39.063] Server  LOG      ✓ Compiled in 25ms
+Import trace:
+  Server Component:
+    ./src/components/Main.jsx
+    ./src/app/layout.jsx
+[00:04:31.375] Server  LOG      ✓ Compiled in 70ms
+[00:04:46.762] Server  LOG      ✓ Compiled in 15ms
+[00:04:55.366] Server  LOG      ✓ Compiled in 32ms
+[00:05:03.618] Server  LOG      ✓ Compiled in 20ms
+[00:05:08.136] Server  LOG      ✓ Compiled in 4ms
+[00:05:12.323] Server  LOG      ✓ Compiled in 25ms
+[00:05:17.651] Server  ERROR    ⨯ ReferenceError: window is not defined

@@ -77,6 +77,7 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "[project]/src/components/visualizations/WordCloud.jsx [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
+// CITE THIS!!!!!!!!!!!!!!
 __turbopack_context__.s([
     "default",
     ()=>WordCloud
@@ -86,6 +87,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2f$src$2f
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$array$2f$src$2f$group$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/d3-array/src/group.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$array$2f$src$2f$descending$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__descending$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-array/src/descending.js [app-client] (ecmascript) <export default as descending>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$selection$2f$src$2f$select$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__select$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-selection/src/select.js [app-client] (ecmascript) <export default as select>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$scale$2d$chromatic$2f$src$2f$categorical$2f$observable10$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__schemeObservable10$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-scale-chromatic/src/categorical/observable10.js [app-client] (ecmascript) <export default as schemeObservable10>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$cloud$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/d3-cloud/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 ;
@@ -94,14 +96,48 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-function WordCloud({ size = (group)=>group.length, word = (d)=>d, marginTop = 0, marginRight = 0, marginBottom = 0, marginLeft = 0, width = window.innerWidth, height = 200, maxWords = 250, fontFamily = "sans-serif", fontScale = 15, fill = null, padding = 0, rotate = 0, invalidation// when this promise resolves, stop the simulation
+function WordCloud({ size = (group)=>group.length, word = (d)=>d, marginTop = 0, marginRight = 0, marginBottom = 0, marginLeft = 0, width = window.innerWidth, height = 200, maxWords = 250, fontFamily = "sans-serif", fontScale = 20, fill = null, padding = 3, rotate = 0, invalidation// when this promise resolves, stop the simulation
  } = {}) {
     _s();
     const svgRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const [stopwords, setStopwords] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(new Set());
+    // Load stopwords from file
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "WordCloud.useEffect": ()=>{
+            async function loadStopwords() {
+                try {
+                    const response = await fetch('/stopwords.txt');
+                    if (!response.ok) {
+                        console.warn('Failed to load stopwords.txt, continuing without stopword filtering');
+                        return;
+                    }
+                    const text = await response.text();
+                    // Parse stopwords: split by newline, filter out comments and empty lines, trim whitespace
+                    const words = text.split('\n').map({
+                        "WordCloud.useEffect.loadStopwords.words": (line)=>line.trim()
+                    }["WordCloud.useEffect.loadStopwords.words"]).filter({
+                        "WordCloud.useEffect.loadStopwords.words": (line)=>line && !line.startsWith('#')
+                    }["WordCloud.useEffect.loadStopwords.words"]);
+                    setStopwords(new Set(words));
+                } catch (error) {
+                    console.warn('Error loading stopwords:', error);
+                }
+            }
+            loadStopwords();
+        }
+    }["WordCloud.useEffect"], []);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "WordCloud.useEffect": ()=>{
+            if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+            ;
             const words = typeof text === "string" ? text.split(/\W+/g) : Array.from(text);
-            const data = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$array$2f$src$2f$group$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["rollups"](words, size, {
+            // Filter out stopwords (if stopwords haven't loaded yet, this will just filter empty strings)
+            const filteredWords = words.map({
+                "WordCloud.useEffect.filteredWords": (w)=>w.toLowerCase().trim()
+            }["WordCloud.useEffect.filteredWords"]).filter({
+                "WordCloud.useEffect.filteredWords": (w)=>w && !stopwords.has(w)
+            }["WordCloud.useEffect.filteredWords"]);
+            const data = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$array$2f$src$2f$group$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["rollups"](filteredWords, size, {
                 "WordCloud.useEffect.data": (w)=>w
             }["WordCloud.useEffect.data"]).sort({
                 "WordCloud.useEffect.data": ([, a], [, b])=>__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$array$2f$src$2f$descending$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__descending$3e$__["descending"](a, b)
@@ -111,21 +147,31 @@ function WordCloud({ size = (group)=>group.length, word = (d)=>d, marginTop = 0,
                         size
                     })
             }["WordCloud.useEffect.data"]);
-            const svg = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$selection$2f$src$2f$select$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__select$3e$__["select"](svgRef.current).attr("viewBox", [
+            const svg = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$selection$2f$src$2f$select$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__select$3e$__["select"](svgRef.current);
+            svg.selectAll("*").remove(); // Clear previous content
+            svg.attr("viewBox", [
                 0,
                 0,
                 width,
                 height
             ]).attr("width", width).attr("font-family", fontFamily).attr("text-anchor", "middle").attr("style", "max-width: 100%; height: auto; height: intrinsic;");
-            const g = svg.append("g").attr("transform", `translate(${marginLeft},${marginTop})`);
+            const g = svg.append("g").attr("transform", `translate(${width / 2},${height / 2})`);
             const cloud = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$cloud$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])().size([
                 width - marginLeft - marginRight,
                 height - marginTop - marginBottom
             ]).words(data).padding(padding).rotate(rotate).font(fontFamily).fontSize({
                 "WordCloud.useEffect.cloud": (d)=>Math.sqrt(d.size) * fontScale
-            }["WordCloud.useEffect.cloud"]).on("word", {
-                "WordCloud.useEffect.cloud": ({ size, x, y, rotate, text })=>{
-                    g.append("text").datum(text).attr("font-size", size).attr("fill", fill).attr("transform", `translate(${x},${y}) rotate(${rotate})`).text(text);
+            }["WordCloud.useEffect.cloud"]).on("end", {
+                "WordCloud.useEffect.cloud": (words)=>{
+                    g.selectAll("text").data(words).enter().append("text").style("font-size", {
+                        "WordCloud.useEffect.cloud": (d)=>`${d.size}px`
+                    }["WordCloud.useEffect.cloud"]).style("font-family", "Arial, sans-serif").style("fill", {
+                        "WordCloud.useEffect.cloud": (d, i)=>__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$scale$2d$chromatic$2f$src$2f$categorical$2f$observable10$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__schemeObservable10$3e$__["schemeObservable10"][i % 10]
+                    }["WordCloud.useEffect.cloud"]).attr("text-anchor", "middle").attr("transform", {
+                        "WordCloud.useEffect.cloud": (d)=>`translate(${d.x},${d.y})rotate(${d.rotate})`
+                    }["WordCloud.useEffect.cloud"]).text({
+                        "WordCloud.useEffect.cloud": (d)=>d.text
+                    }["WordCloud.useEffect.cloud"]);
                 }
             }["WordCloud.useEffect.cloud"]);
             cloud.start();
@@ -147,16 +193,16 @@ function WordCloud({ size = (group)=>group.length, word = (d)=>d, marginTop = 0,
             }
         }, void 0, false, {
             fileName: "[project]/src/components/visualizations/WordCloud.jsx",
-            lineNumber: 67,
+            lineNumber: 102,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/visualizations/WordCloud.jsx",
-        lineNumber: 66,
+        lineNumber: 101,
         columnNumber: 9
     }, this);
 }
-_s(WordCloud, "89Ty783ABEwsfMbSOeu9vscWF34=");
+_s(WordCloud, "PmcLdLEcA44j1cPGHSzl584rKls=");
 _c = WordCloud;
 const text = `I am happy to join with you today in what will go down in history as the greatest demonstration for freedom in the history of our nation.
 
@@ -215,8 +261,6 @@ Let freedom ring from Lookout Mountain of Tennessee!
 Let freedom ring from every hill and molehill of Mississippi. From every mountainside, let freedom ring.
 
 And when this happens, when we allow freedom to ring, when we let it ring from every village and every hamlet, from every state and every city, we will be able to speed up that day when all of God’s children, black men and white men, Jews and Gentiles, Protestants and Catholics, will be able to join hands and sing in the words of the old Negro spiritual, “Free at last! free at last! thank God Almighty, we are free at last!”`;
-const stopwords = new Set("i,me,my,myself,we,us,our,ours,ourselves,you,your,yours,yourself,yourselves,he,him,his,himself,she,her,hers,herself,it,its,itself,they,them,their,theirs,themselves,what,which,who,whom,whose,this,that,these,those,am,is,are,was,were,be,been,being,have,has,had,having,do,does,did,doing,will,would,should,can,could,ought,i'm,you're,he's,she's,it's,we're,they're,i've,you've,we've,they've,i'd,you'd,he'd,she'd,we'd,they'd,i'll,you'll,he'll,she'll,we'll,they'll,isn't,aren't,wasn't,weren't,hasn't,haven't,hadn't,doesn't,don't,didn't,won't,wouldn't,shan't,shouldn't,can't,cannot,couldn't,mustn't,let's,that's,who's,what's,here's,there's,when's,where's,why's,how's,a,an,the,and,but,if,or,because,as,until,while,of,at,by,for,with,about,against,between,into,through,during,before,after,above,below,to,from,up,upon,down,in,out,on,off,over,under,again,further,then,once,here,there,when,where,why,how,all,any,both,each,few,more,most,other,some,such,no,nor,not,only,own,same,so,than,too,very,say,says,said,shall".split(","));
-const words = text.split(/[\s.]+/g).map((w)=>w.replace(/^[“‘"\-—()\[\]{}]+/g, "")).map((w)=>w.replace(/[;:.!?()\[\]{},"'’”\-—]+$/g, "")).map((w)=>w.replace(/['’]s$/g, "")).map((w)=>w.substring(0, 30)).map((w)=>w.toLowerCase()).filter((w)=>w && !stopwords.has(w));
 var _c;
 __turbopack_context__.k.register(_c, "WordCloud");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
@@ -231,7 +275,6 @@ __turbopack_context__.s([
     ()=>Home
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$box$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@chakra-ui/react/dist/esm/components/box/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$container$2f$container$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@chakra-ui/react/dist/esm/components/container/container.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$heading$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@chakra-ui/react/dist/esm/components/heading/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$stack$2f$stack$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@chakra-ui/react/dist/esm/components/stack/stack.js [app-client] (ecmascript)");
@@ -246,26 +289,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$visuali
 function Home() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$box$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Box"], {
-                w: "fill",
-                marginTop: "-20px",
-                marginLeft: "-20px",
-                marginRight: "-20px",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$visualizations$2f$WordCloud$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
-                    fileName: "[project]/src/app/page.jsx",
-                    lineNumber: 16,
-                    columnNumber: 17
-                }, this)
-            }, void 0, false, {
-                fileName: "[project]/src/app/page.jsx",
-                lineNumber: 15,
-                columnNumber: 13
-            }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$text$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
                 children: "The EECS Student Experience Story Archive Project (SESAP) collects the narrative statements of students from underserved and marginalized communities. Video testimonies are recorded and submitted by students in order to document their experiences in EECS programs. These are then analyzed in order to highlight ways in which university and industry leaders can better support engineering students from underserved communities."
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 19,
+                lineNumber: 17,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$heading$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Heading"], {
@@ -273,14 +301,14 @@ function Home() {
                 children: "Overview Statistics"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 24,
+                lineNumber: 22,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$container$2f$container$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Container"], {
                 children: "number of interviews probably ig"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 25,
+                lineNumber: 23,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$heading$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Heading"], {
@@ -288,7 +316,7 @@ function Home() {
                 children: "Recent Interviews"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 29,
+                lineNumber: 27,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$container$2f$container$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Container"], {
@@ -303,17 +331,17 @@ function Home() {
                             data: item
                         }, index, false, {
                             fileName: "[project]/src/app/page.jsx",
-                            lineNumber: 33,
+                            lineNumber: 31,
                             columnNumber: 25
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/src/app/page.jsx",
-                    lineNumber: 31,
+                    lineNumber: 29,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 30,
+                lineNumber: 28,
                 columnNumber: 13
             }, this)
         ]

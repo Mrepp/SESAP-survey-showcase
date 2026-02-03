@@ -1,10 +1,14 @@
 "use client"
-
-import {Input} from "@chakra-ui/react"
+import {Button, Group, Input, Text} from "@chakra-ui/react"
 
 
 export default function SearchBar () {
     return (
-        <Input placeholder="Search interviews" />
+        <Group attached w="full">
+            <Input bg='white' flex="1" placeholder="Search interviews" />
+            <Button variant="outline">
+                <Text color='beavOrange' fontSize='lg' >Search</Text>
+            </Button>
+        </Group>
     )
 }

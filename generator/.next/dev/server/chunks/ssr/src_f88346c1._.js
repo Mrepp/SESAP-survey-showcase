@@ -71,16 +71,14 @@ function Interview({ data }) {
 "[project]/src/components/visualizations/ex.jsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-// CITE THIS!!!!!!!!!!!!!!!!!!!!!!!!
 __turbopack_context__.s([
     "default",
     ()=>WordCloud
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2f$src$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/d3/src/index.js [app-ssr] (ecmascript) <locals>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$array$2f$src$2f$group$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/d3-array/src/group.js [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$array$2f$src$2f$descending$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__descending$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-array/src/descending.js [app-ssr] (ecmascript) <export default as descending>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$selection$2f$src$2f$select$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__select$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-selection/src/select.js [app-ssr] (ecmascript) <export default as select>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$scale$2d$chromatic$2f$src$2f$categorical$2f$category10$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__schemeCategory10$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-scale-chromatic/src/categorical/category10.js [app-ssr] (ecmascript) <export default as schemeCategory10>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$cloud$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/d3-cloud/index.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 'use client';
@@ -88,110 +86,129 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 ;
 ;
-function WordCloud({ size = (group)=>group.length, word = (d)=>d, marginTop = 0, marginRight = 0, marginBottom = 0, marginLeft = 0, maxWords = 250, fontFamily = "sans-serif", fontScale = 15, fill = null, padding = 0, rotate = 0, invalidation// when this promise resolves, stop the simulation
- } = {}) {
-    const containerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+function WordCloud({ width = window.innerWidth, height = 200 }) {
     const svgRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const [dimensions, setDimensions] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
-        width: 800,
-        height: 200
-    });
-    const cloudLayoutRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    // Handle resize
+    const [wordData, setWordData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(true);
+    const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        function updateDimensions() {
-            if (containerRef.current) {
-                const { width, height } = containerRef.current.getBoundingClientRect();
-                setDimensions({
-                    width: width || 800,
-                    height: height || 200
+        // Process text from the text variable
+        const loadData = async ()=>{
+            try {
+                const allWords = [];
+                // Load stopwords
+                let stopwords = new Set();
+                try {
+                    const stopwordsResponse = await fetch('/stopwords.txt');
+                    if (stopwordsResponse.ok) {
+                        const stopwordsText = await stopwordsResponse.text();
+                        stopwords = new Set(stopwordsText.split('\n').map((w)=>w.trim().toLowerCase()).filter((w)=>w && !w.startsWith('#')));
+                    }
+                } catch (err) {
+                    console.warn('Could not load stopwords:', err);
+                }
+                // Extract words from text
+                // Split by whitespace and punctuation, then clean each word
+                const wordsFromText = text.toLowerCase().replace(/[^\w\s]/g, ' ') // Replace punctuation with spaces
+                .split(/\s+/) // Split by whitespace
+                .filter((word)=>word && word.length > 2 && !stopwords.has(word)) // Filter short words and stopwords
+                ;
+                allWords.push(...wordsFromText);
+                console.log(`Total words extracted: ${allWords.length}`);
+                if (allWords.length === 0) {
+                    setError('No words found in text.');
+                    setLoading(false);
+                    return;
+                }
+                // Count word frequencies
+                const wordCounts = {};
+                allWords.forEach((word)=>{
+                    wordCounts[word] = (wordCounts[word] || 0) + 1;
                 });
+                // Convert to array format for d3-cloud
+                const words = Object.entries(wordCounts).map(([text, size])=>({
+                        text,
+                        size
+                    })).sort((a, b)=>b.size - a.size).slice(0, 100) // Top 100 words
+                ;
+                console.log('Loaded words:', words.length, 'Total word count:', allWords.length);
+                setWordData(words);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error loading word cloud data:', error);
+                setError(error.message);
+                setLoading(false);
             }
-        }
-        updateDimensions();
-        const resizeObserver = new ResizeObserver(updateDimensions);
-        if (containerRef.current) {
-            resizeObserver.observe(containerRef.current);
-        }
-        return ()=>{
-            resizeObserver.disconnect();
         };
+        loadData();
     }, []);
-    // Process text and render word cloud
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        if (!svgRef.current) return;
-        const words = typeof text === "string" ? text.split(/\W+/g) : Array.from(text);
-        const data = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$array$2f$src$2f$group$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["rollups"](words, size, (w)=>w).sort(([, a], [, b])=>__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$array$2f$src$2f$descending$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__descending$3e$__["descending"](a, b)).slice(0, maxWords).map(([key, size])=>({
-                text: word(key),
-                size
-            }));
-        const { width, height } = dimensions;
+        if (wordData.length === 0 || !svgRef.current) return;
         // Clear previous content
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$selection$2f$src$2f$select$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__select$3e$__["select"](svgRef.current).selectAll("*").remove();
-        const svg = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$selection$2f$src$2f$select$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__select$3e$__["select"](svgRef.current).attr("viewBox", [
-            0,
-            0,
+        // Set up the layout
+        const layout = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$cloud$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])().size([
             width,
             height
-        ]).attr("width", width).attr("height", height).attr("font-family", fontFamily).attr("text-anchor", "middle").style("max-width", "100%").style("height", "auto");
-        const g = svg.append("g").attr("transform", `translate(${marginLeft},${marginTop})`);
-        // Stop previous layout if it exists
-        if (cloudLayoutRef.current) {
-            cloudLayoutRef.current.stop();
-        }
-        cloudLayoutRef.current = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$cloud$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])().size([
-            width - marginLeft - marginRight,
-            height - marginTop - marginBottom
-        ]).words(data).padding(padding).rotate(rotate).font(fontFamily).fontSize((d)=>Math.sqrt(d.size) * fontScale).on("word", ({ size, x, y, rotate, text })=>{
-            g.append("text").datum(text).attr("font-size", size).attr("fill", fill).attr("transform", `translate(${x},${y}) rotate(${rotate})`).text(text);
-        }).on("end", ()=>{
-        // Layout complete
-        });
-        cloudLayoutRef.current.start();
-        if (invalidation) {
-            invalidation.then(()=>{
-                if (cloudLayoutRef.current) {
-                    cloudLayoutRef.current.stop();
-                }
-            });
+        ]).words(wordData.map((d)=>({
+                text: d.text,
+                size: d.size
+            }))).padding(5).rotate(0) // Random rotation: 0 or 90
+        .font("Arial").fontSize((d)=>Math.sqrt(d.size) * 10).on("end", draw);
+        layout.start();
+        function draw(words) {
+            if (!words || words.length === 0) {
+                console.warn('No words to draw');
+                return;
+            }
+            const svg = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$selection$2f$src$2f$select$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__select$3e$__["select"](svgRef.current);
+            svg.attr("width", width).attr("height", height);
+            const g = svg.append("g").attr("transform", `translate(${width / 2},${height / 2})`);
+            g.selectAll("text").data(words).enter().append("text").style("font-size", (d)=>`${d.size}px`).style("font-family", "Arial, sans-serif").style("fill", (d, i)=>__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$scale$2d$chromatic$2f$src$2f$categorical$2f$category10$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__schemeCategory10$3e$__["schemeCategory10"][i % 10]).attr("text-anchor", "middle").attr("transform", (d)=>`translate(${d.x},${d.y})rotate(${d.rotate})`).text((d)=>d.text);
         }
     }, [
-        dimensions,
-        size,
-        word,
-        marginTop,
-        marginRight,
-        marginBottom,
-        marginLeft,
-        maxWords,
-        fontFamily,
-        fontScale,
-        fill,
-        padding,
-        rotate,
-        invalidation
+        wordData,
+        width,
+        height
     ]);
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        ref: containerRef,
-        style: {
-            width: '100%',
-            height: '200px'
-        },
-        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-            ref: svgRef,
-            style: {
-                width: '100%',
-                height: '100%'
-            }
+    if (loading) {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            children: "Loading word cloud..."
         }, void 0, false, {
             fileName: "[project]/src/components/visualizations/ex.jsx",
-            lineNumber: 117,
-            columnNumber: 13
-        }, this)
+            lineNumber: 119,
+            columnNumber: 16
+        }, this);
+    }
+    if (error) {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            children: [
+                "Error: ",
+                error
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/visualizations/ex.jsx",
+            lineNumber: 123,
+            columnNumber: 16
+        }, this);
+    }
+    if (wordData.length === 0) {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            children: "No data available"
+        }, void 0, false, {
+            fileName: "[project]/src/components/visualizations/ex.jsx",
+            lineNumber: 127,
+            columnNumber: 16
+        }, this);
+    }
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+        ref: svgRef,
+        width: width,
+        height: height
     }, void 0, false, {
         fileName: "[project]/src/components/visualizations/ex.jsx",
-        lineNumber: 116,
-        columnNumber: 9
+        lineNumber: 130,
+        columnNumber: 12
     }, this);
 }
 const text = `I am happy to join with you today in what will go down in history as the greatest demonstration for freedom in the history of our nation.
@@ -251,8 +268,6 @@ Let freedom ring from Lookout Mountain of Tennessee!
 Let freedom ring from every hill and molehill of Mississippi. From every mountainside, let freedom ring.
 
 And when this happens, when we allow freedom to ring, when we let it ring from every village and every hamlet, from every state and every city, we will be able to speed up that day when all of God’s children, black men and white men, Jews and Gentiles, Protestants and Catholics, will be able to join hands and sing in the words of the old Negro spiritual, “Free at last! free at last! thank God Almighty, we are free at last!”`;
-const stopwords = new Set("i,me,my,myself,we,us,our,ours,ourselves,you,your,yours,yourself,yourselves,he,him,his,himself,she,her,hers,herself,it,its,itself,they,them,their,theirs,themselves,what,which,who,whom,whose,this,that,these,those,am,is,are,was,were,be,been,being,have,has,had,having,do,does,did,doing,will,would,should,can,could,ought,i'm,you're,he's,she's,it's,we're,they're,i've,you've,we've,they've,i'd,you'd,he'd,she'd,we'd,they'd,i'll,you'll,he'll,she'll,we'll,they'll,isn't,aren't,wasn't,weren't,hasn't,haven't,hadn't,doesn't,don't,didn't,won't,wouldn't,shan't,shouldn't,can't,cannot,couldn't,mustn't,let's,that's,who's,what's,here's,there's,when's,where's,why's,how's,a,an,the,and,but,if,or,because,as,until,while,of,at,by,for,with,about,against,between,into,through,during,before,after,above,below,to,from,up,upon,down,in,out,on,off,over,under,again,further,then,once,here,there,when,where,why,how,all,any,both,each,few,more,most,other,some,such,no,nor,not,only,own,same,so,than,too,very,say,says,said,shall".split(","));
-const words = text.split(/[\s.]+/g).map((w)=>w.replace(/^[“‘"\-—()\[\]{}]+/g, "")).map((w)=>w.replace(/[;:.!?()\[\]{},"'’”\-—]+$/g, "")).map((w)=>w.replace(/['’]s$/g, "")).map((w)=>w.substring(0, 30)).map((w)=>w.toLowerCase()).filter((w)=>w && !stopwords.has(w));
 }),
 "[project]/src/app/page.jsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -268,7 +283,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$stack$2f$stack$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@chakra-ui/react/dist/esm/components/stack/stack.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$text$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@chakra-ui/react/dist/esm/components/text/index.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Interview$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/Interview.jsx [app-ssr] (ecmascript)");
-//import WordCloud from '@/components/visualizations/WordCloud'
+//import WordCloud from "@/components/visualizations/WordCloud"
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$visualizations$2f$ex$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/visualizations/ex.jsx [app-ssr] (ecmascript)");
 'use client';
 ;
@@ -279,21 +294,18 @@ function Home() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$box$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Box"], {
-                maxH: "200px",
                 w: "fill",
-                overflow: "",
                 marginTop: "-20px",
                 marginLeft: "-20px",
                 marginRight: "-20px",
-                marginBottom: "20px",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$visualizations$2f$ex$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                     fileName: "[project]/src/app/page.jsx",
-                    lineNumber: 17,
+                    lineNumber: 18,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 16,
+                lineNumber: 17,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$text$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -308,14 +320,14 @@ function Home() {
                 children: "Overview Statistics"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 27,
+                lineNumber: 26,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$container$2f$container$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Container"], {
-                children: "number of interviews probably ig started in 2023"
+                children: "number of interviews probably ig"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 28,
+                lineNumber: 27,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$heading$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Heading"], {
@@ -323,7 +335,7 @@ function Home() {
                 children: "Recent Interviews"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 33,
+                lineNumber: 31,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$container$2f$container$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Container"], {
@@ -334,27 +346,27 @@ function Home() {
                         md: "row"
                     },
                     gap: "11",
-                    children: recentInterviews.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Interview$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                    children: data.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Interview$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                             data: item
                         }, index, false, {
                             fileName: "[project]/src/app/page.jsx",
-                            lineNumber: 37,
+                            lineNumber: 35,
                             columnNumber: 25
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/src/app/page.jsx",
-                    lineNumber: 35,
+                    lineNumber: 33,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 34,
+                lineNumber: 32,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true);
 }
-const recentInterviews = [
+const data = [
     {
         videoUrl: '/placeholder16x9.jpg',
         videoAlt: 'example',

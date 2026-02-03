@@ -1,4 +1,4 @@
-
+// CITE THIS!!!!!!!!!!!!!!
 'use client'
 import * as d3 from "d3"
 import d3Cloud from "d3-cloud"
@@ -15,30 +15,63 @@ export default function WordCloud({
     height = 200, // outer height, in pixels
     maxWords = 250, // maximum number of words to extract from the text
     fontFamily = "sans-serif", // font family
-    fontScale = 15, // base font size
+    fontScale = 20, // base font size
     fill = null, // text color, can be a constant or a function of the word
-    padding = 0, // amount of padding between the words (in pixels)
+    padding = 3, // amount of padding between the words (in pixels)
     rotate = 0, // a constant or function to rotate the words
     invalidation // when this promise resolves, stop the simulation
-  } = {}) {
+    } = {}) {
     const svgRef = useRef(null)
+    const [stopwords, setStopwords] = useState(new Set())
+
+    // Load stopwords from file
+    useEffect(() => {
+        async function loadStopwords() {
+            try {
+                const response = await fetch('/stopwords.txt')
+                if (!response.ok) {
+                    console.warn('Failed to load stopwords.txt, continuing without stopword filtering')
+                    return
+                }
+                const text = await response.text()
+                // Parse stopwords: split by newline, filter out comments and empty lines, trim whitespace
+                const words = text
+                    .split('\n')
+                    .map(line => line.trim())
+                    .filter(line => line && !line.startsWith('#'))
+                setStopwords(new Set(words))
+            } catch (error) {
+                console.warn('Error loading stopwords:', error)
+            }
+        }
+        loadStopwords()
+    }, [])
 
     useEffect(() => {
+        if (!text) return
+
         const words = typeof text === "string" ? text.split(/\W+/g) : Array.from(text);
-    
-        const data = d3.rollups(words, size, w => w)
-          .sort(([, a], [, b]) => d3.descending(a, b))
-          .slice(0, maxWords)
-          .map(([key, size]) => ({text: word(key), size}));
         
-          const svg = d3.select(svgRef.current)
-            .attr("viewBox", [0, 0, width, height])
+        // Filter out stopwords (if stopwords haven't loaded yet, this will just filter empty strings)
+        const filteredWords = words
+            .map(w => w.toLowerCase().trim())
+            .filter(w => w && !stopwords.has(w))
+    
+        const data = d3.rollups(filteredWords, size, w => w)
+            .sort(([, a], [, b]) => d3.descending(a, b))
+            .slice(0, maxWords)
+            .map(([key, size]) => ({text: word(key), size}));
+          
+        const svg = d3.select(svgRef.current)
+        svg.selectAll("*").remove() // Clear previous content
+            
+        svg.attr("viewBox", [0, 0, width, height])
             .attr("width", width)
             .attr("font-family", fontFamily)
             .attr("text-anchor", "middle")
             .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
-      
-        const g = svg.append("g").attr("transform", `translate(${marginLeft},${marginTop})`);
+  
+        const g = svg.append("g").attr("transform", `translate(${width / 2},${height / 2})`);
       
         const cloud = d3Cloud()
             .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
@@ -47,28 +80,29 @@ export default function WordCloud({
             .rotate(rotate)
             .font(fontFamily)
             .fontSize(d => Math.sqrt(d.size) * fontScale)
-            .on("word", ({size, x, y, rotate, text}) => {
-              g.append("text")
-                  .datum(text)
-                  .attr("font-size", size)
-                  .attr("fill", fill)
-                  .attr("transform", `translate(${x},${y}) rotate(${rotate})`)
-                  .text(text);
-            });
+            .on("end", (words) => {
+                g.selectAll("text")
+                    .data(words)
+                    .enter()
+                    .append("text")
+                    .style("font-size", d => `${d.size}px`)
+                    .style("font-family", "Arial, sans-serif")
+                    .style("fill", (d, i) => d3.schemeObservable10[i % 10])
+                    .attr("text-anchor", "middle")
+                    .attr("transform", d => `translate(${d.x},${d.y})rotate(${d.rotate})`)
+                    .text(d => d.text)
+            })
 
-            cloud.start();
-            invalidation && invalidation.then(() => cloud.stop());
+        cloud.start();
+        invalidation && invalidation.then(() => cloud.stop());
     })
-    
-  
     
     return (
         <div  style={{ width: '100%', height: '200px' }}>
             <svg ref={svgRef} style={{ width: '100%', height: '100%' }}></svg>
         </div>
     )
-  }
-
+}
 const text = `I am happy to join with you today in what will go down in history as the greatest demonstration for freedom in the history of our nation.
 
 Five score years ago, a great American, in whose symbolic shadow we stand today, signed the Emancipation Proclamation. This momentous decree came as a great beacon light of hope to millions of Negro slaves who had been seared in the flames of withering injustice. It came as a joyous daybreak to end the long night of their captivity.
@@ -126,14 +160,3 @@ Let freedom ring from Lookout Mountain of Tennessee!
 Let freedom ring from every hill and molehill of Mississippi. From every mountainside, let freedom ring.
 
 And when this happens, when we allow freedom to ring, when we let it ring from every village and every hamlet, from every state and every city, we will be able to speed up that day when all of God’s children, black men and white men, Jews and Gentiles, Protestants and Catholics, will be able to join hands and sing in the words of the old Negro spiritual, “Free at last! free at last! thank God Almighty, we are free at last!”`
-
-const stopwords = new Set("i,me,my,myself,we,us,our,ours,ourselves,you,your,yours,yourself,yourselves,he,him,his,himself,she,her,hers,herself,it,its,itself,they,them,their,theirs,themselves,what,which,who,whom,whose,this,that,these,those,am,is,are,was,were,be,been,being,have,has,had,having,do,does,did,doing,will,would,should,can,could,ought,i'm,you're,he's,she's,it's,we're,they're,i've,you've,we've,they've,i'd,you'd,he'd,she'd,we'd,they'd,i'll,you'll,he'll,she'll,we'll,they'll,isn't,aren't,wasn't,weren't,hasn't,haven't,hadn't,doesn't,don't,didn't,won't,wouldn't,shan't,shouldn't,can't,cannot,couldn't,mustn't,let's,that's,who's,what's,here's,there's,when's,where's,why's,how's,a,an,the,and,but,if,or,because,as,until,while,of,at,by,for,with,about,against,between,into,through,during,before,after,above,below,to,from,up,upon,down,in,out,on,off,over,under,again,further,then,once,here,there,when,where,why,how,all,any,both,each,few,more,most,other,some,such,no,nor,not,only,own,same,so,than,too,very,say,says,said,shall".split(","))
-
-const words = text.split(/[\s.]+/g)
-  .map(w => w.replace(/^[“‘"\-—()\[\]{}]+/g, ""))
-  .map(w => w.replace(/[;:.!?()\[\]{},"'’”\-—]+$/g, ""))
-  .map(w => w.replace(/['’]s$/g, ""))
-  .map(w => w.substring(0, 30))
-  .map(w => w.toLowerCase())
-  .filter(w => w && !stopwords.has(w))
-

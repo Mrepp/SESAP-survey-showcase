@@ -1,1563 +1,144 @@
-[00:00:00.740] Server  LOG      ✓ Ready in 513ms
-[00:00:09.548] Server  ERROR    ⨯ ReferenceError: window is not defined
-[00:01:05.921] Server  ERROR    ⨯ ReferenceError: window is not defined
-[00:01:12.944] Server  LOG      ✓ Compiled in 60ms
-[00:01:27.178] Server  LOG      ✓ Compiled in 50ms
-[00:01:29.713] Server  LOG      ✓ Compiled in 76ms
-[00:01:48.567] Server  LOG      ✓ Compiled in 86ms
-[00:01:49.970] Server  LOG      ✓ Compiled in 3ms
-[00:01:55.885] Server  ERROR    ⨯ ReferenceError: Box is not defined
-[00:01:56.431] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Box
-[00:02:03.123] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:02:03.142] Server  LOG      ✓ Compiled in 107ms
-[00:02:03.396] Server  ERROR    ⨯ ReferenceError: window is not defined
-[00:02:54.053] Server  LOG      ✓ Compiled in 150ms
-[00:02:54.176] Browser LOG     Total words extracted: 632
-[00:02:54.176] Browser LOG     Loaded words: 100 Total word count: 632
-[00:02:54.176] Browser LOG     Total words extracted: 632
-[00:02:54.176] Browser LOG     Loaded words: 100 Total word count: 632
-[00:02:59.160] Server  LOG      ✓ Compiled in 127ms
-[00:03:02.581] Server  LOG      ✓ Compiled in 90ms
-[00:03:02.959] Browser LOG     Total words extracted: 632
-[00:03:02.959] Browser LOG     Loaded words: 100 Total word count: 632
-[00:03:02.959] Browser LOG     Total words extracted: 632
-[00:03:02.959] Browser LOG     Loaded words: 100 Total word count: 632
-[00:03:03.686] Server  LOG      ✓ Compiled in 25ms
-[00:04:51.528] Server  ERROR    ⨯ ReferenceError: window is not defined
-[00:06:46.802] Server  LOG      ✓ Compiled in 150ms
-[00:08:57.753] Server  ERROR    ⨯ ReferenceError: window is not defined
-[00:10:24.609] Server  LOG      ✓ Compiled in 25ms
-[00:11:18.443] Server  LOG      ✓ Compiled in 93ms
-[00:11:21.647] Server  LOG      ✓ Compiled in 27ms
-[00:11:26.678] Server  LOG      ✓ Compiled in 103ms
-[00:11:40.822] Server  LOG      ✓ Compiled in 34ms
-[00:11:42.436] Server  LOG      ✓ Compiled in 3ms
-[00:11:43.878] Server  LOG      ✓ Compiled in 34ms
-[00:11:50.222] Server  LOG      ✓ Compiled in 121ms
-[00:11:56.338] Server  LOG      ✓ Compiled in 584ms
-[00:11:56.872] Server  LOG      ✓ Compiled in 71ms
-[00:12:01.255] Browser ERROR   ./src/app/search/page.jsx:16:9
+[00:00:01.556] Server  LOG      ✓ Ready in 1352ms
+[00:00:04.760] Server  ERROR   React does not recognize the `selectedKeys` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `selectedkeys` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+[00:00:05.964] Browser ERROR   React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element. selectedKeys selectedkeys
+[00:00:05.964] Browser ERROR   Unknown event handler property `%s`. It will be ignored. onSelectionChange
+[00:02:20.466] Server  LOG      ✓ Compiled in 123ms
+[00:02:23.392] Server  LOG      ✓ Compiled in 486ms
+[00:02:24.983] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:02:25.052] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:02:25.896] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:02:26.254] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:02:33.675] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:07:05.697] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:07:06.272] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:07:41.315] Server  LOG      ✓ Compiled in 87ms
+[00:07:46.048] Server  LOG      ✓ Compiled in 27ms
+[00:07:54.207] Server  LOG      ✓ Compiled in 46ms
+[00:08:03.197] Server  LOG      ✓ Compiled in 44ms
+[00:08:04.381] Server  LOG      ✓ Compiled in 9ms
+[00:08:29.454] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:08:29.459] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:08:29.461] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:08:29.463] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:08:29.488] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:08:29.845] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:08:30.550] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:09:30.357] Server  LOG      ✓ Compiled in 147ms
+[00:09:30.399] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:09:31.257] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:09:33.422] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:09:35.583] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:09:35.583] Server  LOG      ✓ Compiled in 282ms
+[00:09:35.888] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:09:37.230] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:10:27.270] Server  LOG      ✓ Compiled in 37ms
+[00:11:02.798] Server  LOG      ✓ Compiled in 51ms
+[00:11:04.689] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:11:04.701] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:11:05.194] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:11:05.961] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:11:17.891] Server  LOG      ✓ Compiled in 31ms
+[00:11:17.904] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:11:18.376] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:11:20.697] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:11:27.058] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:11:27.058] Server  LOG      ✓ Compiled in 28ms
+[00:11:27.706] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:11:29.004] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:14:21.871] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:14:22.329] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:17:46.473] Server  LOG      ✓ Compiled in 248ms
+[00:17:50.121] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:17:50.435] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:17:51.018] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:20:44.532] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:20:44.546] Server  LOG      ✓ Compiled in 99ms
+[00:20:44.837] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:20:45.355] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:20:50.773] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:20:50.786] Server  LOG      ✓ Compiled in 32ms
+[00:20:51.171] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:20:52.689] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:20:53.352] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:20:53.415] Server  LOG      ✓ Compiled in 40ms
+[00:20:53.634] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:20:54.907] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:20:55.541] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:20:55.565] Server  LOG      ✓ Compiled in 33ms
+[00:20:55.964] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:20:57.109] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:21:02.587] Server  LOG      ✓ Compiled in 39ms
+[00:21:02.629] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:03.144] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:21:04.347] Server  LOG      ✓ Compiled in 29ms
+[00:21:04.785] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:21:09.884] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:09.906] Server  LOG      ✓ Compiled in 34ms
+[00:21:11.491] Server  LOG      ✓ Compiled in 96ms
+[00:21:11.979] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:34.752] Server  LOG      ✓ Compiled in 99ms
+[00:21:35.091] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:21:35.871] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:35.895] Server  LOG      ✓ Compiled in 53ms
+[00:21:36.116] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:21:36.401] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:21:37.574] Server  LOG      ✓ Compiled in 23ms
+[00:21:37.856] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:21:42.822] Server  LOG      ✓ Compiled in 31ms
+[00:21:42.853] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:43.051] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:21:43.463] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:21:44.785] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:23:48.460] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:23:48.476] Server  LOG      ✓ Compiled in 40ms
+[00:23:48.721] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:23:49.260] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:23:52.498] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:23:52.513] Server  LOG      ✓ Compiled in 23ms
+[00:23:52.830] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:23:54.413] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:25:15.578] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:25:15.595] Server  LOG      ✓ Compiled in 95ms
+[00:25:15.938] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:25:16.503] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:25:25.858] Server  LOG      ✓ Compiled in 42ms
+[00:25:25.879] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:25:26.613] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
+[00:25:28.124] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
+[00:25:33.457] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:25:33.492] Server  LOG      ✓ Compiled in 35ms
+[00:30:23.525] Server  LOG      ✓ Compiled in 412ms
+[00:30:23.901] Browser ERROR   ./src/app/search/page.jsx:24:56
 Parsing ecmascript source code failed
-  14 |
-  15 | <
-> 16 |         </>
-     |         ^
-  17 |     )
-  18 | }
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:12:01.256] Browser ERROR   ./src/app/search/page.jsx:16:10
-Parsing ecmascript source code failed
-  14 |
-  15 | <
-> 16 |         </>
-     |          ^^
-  17 |     )
-  18 | }
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:12:01.531] Browser ERROR   ./src/app/search/page.jsx:21:21
-Parsing ecmascript source code failed
-  19 |
-  20 |                 <Container>
-> 21 |             </Stack>
-     |                     ^
-> 22 |         </>
-     | ^^^^^^^^^
-  23 |     )
-  24 | }
-
-Expected '</', got 'jsx text (
-        )'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:12:13.815] Server  LOG      ✓ Compiled in 43ms
-[00:12:14.137] Browser ERROR   ./src/app/search/page.jsx:16:30
-Parsing ecmascript source code failed
-  14 |
-  15 |             <Stack direction="row" h="fit-content">
-> 16 |                 <Container bg=>
-     |                              ^^
-  17 |
-  18 |                 </Container>
-  19 |
-
-Expected '</', got '=>'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:12:18.323] Server  LOG      ✓ Compiled in 38ms
-[00:12:26.581] Server  LOG      ✓ Compiled in 29ms
-[00:12:32.128] Server  LOG      ✓ Compiled in 41ms
-[00:13:39.236] Server  LOG      ✓ Compiled in 179ms
-[00:13:48.141] Server  LOG      ✓ Compiled in 37ms
-[00:13:51.570] Server  LOG      ✓ Compiled in 40ms
-[00:14:08.927] Server  LOG      ✓ Compiled in 7ms
-[00:14:22.918] Server  LOG      ✓ Compiled in 34ms
-[00:14:29.929] Server  LOG      ✓ Compiled in 34ms
-[00:26:54.676] Server  LOG      ✓ Compiled in 111ms
-[00:27:02.575] Server  LOG      ✓ Compiled in 137ms
-[00:27:10.635] Server  LOG      ✓ Compiled in 112ms
-[00:27:26.106] Server  LOG      ✓ Compiled in 178ms
-[00:27:33.913] Server  LOG      ✓ Compiled in 109ms
-[00:27:46.510] Server  LOG      ✓ Compiled in 173ms
-[00:27:51.728] Server  LOG      ✓ Compiled in 33ms
-[00:33:46.724] Server  LOG      ✓ Compiled in 119ms
-[00:33:46.956] Browser ERROR   ./src/app/search/page.jsx:4:5
-Parsing ecmascript source code failed
-  2 | import {
-  3 |     Accordion
-> 4 |     Checkmark,
-    |     ^^^^^^^^^
-  5 |     Container,
-  6 |     Heading,
-  7 |     Grid,
-
-Expected ',', got 'Checkmark'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:33:47.996] Server  LOG      ✓ Compiled in 285ms
-[00:34:12.704] Server  LOG      ✓ Compiled in 24ms
-[00:35:08.187] Server  LOG      ✓ Compiled in 31ms
-[00:35:14.192] Server  LOG      ✓ Compiled in 40ms
-[00:35:17.988] Server  LOG      ✓ Compiled in 36ms
-[00:35:20.140] Server  LOG      ✓ Compiled in 5ms
-[00:35:22.219] Server  LOG      ✓ Compiled in 41ms
-[00:35:23.942] Server  LOG      ✓ Compiled in 7ms
-[00:35:26.060] Server  LOG      ✓ Compiled in 37ms
-[00:35:26.760] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:35:26.856] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:35:26.931] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:35:26.978] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: frameworks
-[00:35:26.978] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: frameworks
-[00:35:26.978] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: frameworks
-[00:35:26.978] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: frameworks
-[00:35:27.006] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:35:27.107] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:35:27.834] Server  ERROR    ⨯ ReferenceError: frameworks is not defined
-[00:35:27.847] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: frameworks
-[00:35:27.847] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: frameworks
-[00:35:28.615] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: frameworks
-[00:35:38.919] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:35:38.936] Server  LOG      ✓ Compiled in 35ms
-[00:35:39.233] Server  ERROR    ⨯ ReferenceError: yeaars is not defined
-[00:35:39.714] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: yeaars
-[00:35:43.222] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:35:43.244] Server  LOG      ✓ Compiled in 27ms
-[00:36:06.540] Server  LOG      ✓ Compiled in 35ms
-[00:36:07.925] Server  LOG      ✓ Compiled in 3ms
-[00:36:09.427] Server  LOG      ✓ Compiled in 5ms
-[00:36:12.187] Server  LOG      ✓ Compiled in 8ms
-[00:36:13.754] Server  LOG      ✓ Compiled in 6ms
-[00:36:26.542] Server  LOG      ✓ Compiled in 36ms
-[00:36:30.457] Server  LOG      ✓ Compiled in 37ms
-[00:36:31.705] Server  LOG      ✓ Compiled in 6ms
-[00:36:32.758] Server  LOG      ✓ Compiled in 4ms
-[00:36:34.723] Server  LOG      ✓ Compiled in 42ms
-[00:36:36.276] Server  LOG      ✓ Compiled in 6ms
-[00:36:44.736] Server  LOG      ✓ Compiled in 38ms
-[00:36:47.185] Server  LOG      ✓ Compiled in 6ms
-[00:36:49.261] Server  LOG      ✓ Compiled in 7ms
-[00:36:50.425] Server  LOG      ✓ Compiled in 4ms
-[00:36:53.201] Server  LOG      ✓ Compiled in 11ms
-[00:36:55.588] Server  LOG      ✓ Compiled in 24ms
-[00:36:58.931] Server  LOG      ✓ Compiled in 35ms
-[00:37:01.239] Server  LOG      ✓ Compiled in 5ms
-[00:37:03.354] Server  LOG      ✓ Compiled in 38ms
-[00:37:06.769] Server  LOG      ✓ Compiled in 12ms
-[00:37:10.434] Server  LOG      ✓ Compiled in 50ms
-[00:37:15.091] Server  LOG      ✓ Compiled in 31ms
-[00:37:18.845] Server  LOG      ✓ Compiled in 41ms
-[00:37:23.638] Server  LOG      ✓ Compiled in 21ms
-[00:38:19.141] Server  LOG      ✓ Compiled in 44ms
-[00:38:28.188] Server  LOG      ✓ Compiled in 61ms
-[00:38:31.967] Server  LOG      ✓ Compiled in 37ms
-[00:38:38.231] Server  LOG      ✓ Compiled in 31ms
-[00:38:43.766] Server  LOG      ✓ Compiled in 37ms
-[00:38:46.560] Server  LOG      ✓ Compiled in 10ms
-[00:38:48.401] Server  LOG      ✓ Compiled in 8ms
-[00:38:49.857] Server  LOG      ✓ Compiled in 7ms
-[00:38:51.370] Server  LOG      ✓ Compiled in 35ms
-[00:38:53.145] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:38:53.146] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:38:53.146] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:38:53.147] Browser ERROR   ./src/app/search/page.jsx:80:7
-Ecmascript file had an error
-  78 | })
-  79 |
-> 80 | const years = createListCollection({
-     |       ^^^^^
-  81 |   items: [
-  82 |     { label: "2000-2004", value: "react" },
-  83 |     { label: "2005-2009", value: "vue" },
-
-the name `years` is defined multiple times
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:38:53.147] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: sentiment
-[00:38:53.147] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: year
-[00:38:53.147] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: year
-[00:38:53.638] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/search. Falling back to browser navigation. {}
-[00:39:21.553] Server  LOG      ✓ Compiled in 30ms
-[00:39:24.042] Server  LOG      ✓ Compiled in 8ms
-[00:39:26.358] Server  LOG      ✓ Compiled in 24ms
-[00:39:34.807] Server  LOG      ✓ Compiled in 21ms
-[00:39:38.529] Server  LOG      ✓ Compiled in 35ms
-[00:39:44.596] Server  LOG      ✓ Compiled in 29ms
-[00:39:50.836] Server  LOG      ✓ Compiled in 10ms
-[00:39:53.856] Server  LOG      ✓ Compiled in 6ms
-[00:39:55.445] Server  LOG      ✓ Compiled in 7ms
-[00:39:58.191] Server  LOG      ✓ Compiled in 26ms
-[00:39:59.616] Server  LOG      ✓ Compiled in 10ms
-[00:40:02.544] Server  LOG      ✓ Compiled in 9ms
-[00:40:03.727] Server  LOG      ✓ Compiled in 41ms
-[00:40:04.775] Server  LOG      ✓ Compiled in 14ms
-[00:40:05.871] Server  LOG      ✓ Compiled in 5ms
-[00:40:07.543] Server  LOG      ✓ Compiled in 12ms
-[00:40:12.080] Server  LOG      ✓ Compiled in 11ms
-[00:40:13.573] Browser ERROR   ./src/app/search/page.jsx:84:13
-Parsing ecmascript source code failed
-  82 |     { label: "Positive", value: "positive" },
-  83 |     { label: "Neutral", value: "neutral" },
-> 84 | Negative    { label: "2015-2019", value: "svelte" },
-     |             ^
-  85 |     { label: "2020-2024", value: "nextjs" },
-  86 |     { label: "2025-2029", value: "nuxtjs" },
-  87 |   ],
-
-Expected ',', got '{'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:40:49.800] Server  LOG      ✓ Compiled in 24ms
-[00:40:53.755] Server  LOG      ✓ Compiled in 27ms
-[00:41:56.796] Server  LOG      ✓ Compiled in 96ms
-[00:43:54.742] Server  LOG      ✓ Compiled in 68ms
-[00:44:02.769] Server  LOG      ✓ Compiled in 43ms
-[00:44:08.236] Server  LOG      ✓ Compiled in 41ms
-[00:44:16.464] Server  LOG      ✓ Compiled in 29ms
-[00:44:20.660] Server  LOG      ✓ Compiled in 41ms
-[00:44:23.896] Server  LOG      ✓ Compiled in 87ms
-[00:44:26.746] Server  LOG      ✓ Compiled in 24ms
-[00:44:28.658] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:44:28.658] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:88:7
-Ecmascript file had an error
-  86 | })
-  87 |
-> 88 | const years = createListCollection({
-     |       ^^^^^
-  89 |   items: [
-  90 |     { label: "2000-2004", value: "react" },
-  91 |     { label: "2005-2009", value: "vue" },
-
-the name `years` is defined multiple times
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:99:43
-Parsing ecmascript source code failed
-   97 | })
-   98 |
->  99 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  100 |         {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  101 |         {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  102 |         {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:99:43
-Parsing ecmascript source code failed
-   97 | })
-   98 |
->  99 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  100 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  101 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  102 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:99:43
-Parsing ecmascript source code failed
-   97 | })
-   98 |
->  99 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  100 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  101 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  102 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:99:43
-Parsing ecmascript source code failed
-   97 | })
-   98 |
->  99 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  100 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  101 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  102 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:99:43
-Parsing ecmascript source code failed
-   97 | })
-   98 |
->  99 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  100 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  101 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  102 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:99:43
-Parsing ecmascript source code failed
-   97 | })
-   98 |
->  99 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  100 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  101 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  102 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:99:43
-Parsing ecmascript source code failed
-   97 | })
-   98 |
->  99 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  100 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  101 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  102 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:99:43
-Parsing ecmascript source code failed
-   97 | })
-   98 |
->  99 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  100 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  101 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  102 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:99:43
-Parsing ecmascript source code failed
-   97 | })
-   98 |
->  99 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  100 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  101 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  102 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:99:43
-Parsing ecmascript source code failed
-   97 | })
-   98 |
->  99 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  100 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  101 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  102 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:106:43
-Parsing ecmascript source code failed
-  104 | })
-  105 |
-> 106 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  107 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  108 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  109 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:106:43
-Parsing ecmascript source code failed
-  104 | })
-  105 |
-> 106 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  107 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  108 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  109 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:106:43
-Parsing ecmascript source code failed
-  104 | })
-  105 |
-> 106 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  107 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  108 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  109 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:108:43
-Parsing ecmascript source code failed
-  106 | })
-  107 |
-> 108 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  109 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  110 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  111 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:108:43
-Parsing ecmascript source code failed
-  106 | })
-  107 |
-> 108 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  109 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  110 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  111 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:108:43
-Parsing ecmascript source code failed
-  106 | })
-  107 |
-> 108 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  109 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  110 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  111 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   ./src/app/search/page.jsx:107:43
-Parsing ecmascript source code failed
-  105 | })
-  106 |
-> 107 | {theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-      |                                           ^
-  108 | {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-  109 | {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-  110 | {theme: 'Belonging', impactScore: '3', frequency: '6'},
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:44:28.659] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: sentiment
-[00:44:28.659] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: sentiment
-[00:44:43.243] Server  LOG      ✓ Compiled in 51ms
-[00:44:47.006] Server  LOG      ✓ Compiled in 32ms
-[00:44:48.735] Server  LOG      ✓ Compiled in 55ms
-[00:44:52.043] Server  LOG      ✓ Compiled in 32ms
-[00:44:53.512] Server  LOG      ✓ Compiled in 46ms
-[00:44:55.370] Server  LOG      ✓ Compiled in 22ms
-[00:45:52.944] Server  LOG      ✓ Compiled in 58ms
-[00:46:08.576] Server  LOG      ✓ Compiled in 45ms
-[00:46:12.889] Server  LOG      ✓ Compiled in 17ms
-[00:46:17.922] Server  LOG      ✓ Compiled in 31ms
-[00:46:26.937] Server  LOG      ✓ Compiled in 36ms
-[00:46:34.482] Server  LOG      ✓ Compiled in 66ms
-[00:46:34.747] Browser ERROR   ./src/app/search/page.jsx:23:54
-Parsing ecmascript source code failed
-  21 |
-  22 |             <Stack direction="row" h="fit-content">
-> 23 |                 <Container w='250px' bg='blue.100' p=0>
-     |                                                      ^
-  24 |                   <Listbox.Root collection={themes} selectionMode="multiple" w='fill'>
-  25 |                         <Listbox.Label>Themes</Listbox.Label>
-  26 |                         <Listbox.Content>
-
-Expected '</', got 'numeric literal (0, 0)'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:46:37.952] Server  LOG      ✓ Compiled in 47ms
-[00:46:45.958] Server  LOG      ✓ Compiled in 35ms
-[00:46:54.945] Server  LOG      ✓ Compiled in 39ms
-[00:47:03.234] Server  LOG      ✓ Compiled in 54ms
-[00:49:50.458] Server  LOG      ✓ Compiled in 94ms
-[00:49:50.983] Browser ERROR   ./src/app/search/page.jsx:11:5
-Parsing ecmascript source code failed
-   9 |     Listbox,
-  10 |     Separat
-> 11 |     Stack,
-     |     ^^^^^
-  12 |     Text,
-  13 |     createListCollection,
-  14 |   useListboxItemContext,
-
-Expected ',', got 'Stack'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:49:53.199] Browser ERROR   ./src/app/search/page.jsx:11:5
-Parsing ecmascript source code failed
-   9 |     Listbox,
-  10 |     Separator
-> 11 |     Stack,
-     |     ^^^^^
-  12 |     Text,
-  13 |     createListCollection,
-  14 |   useListboxItemContext,
-
-Expected ',', got 'Stack'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:49:54.313] Server  LOG      ✓ Compiled in 408ms
-[00:50:00.509] Server  LOG      ✓ Compiled in 51ms
-[00:50:02.288] Browser ERROR   ./src/app/search/page.jsx:37:21
-Parsing ecmascript source code failed
-  35 |                     </Listbox.Root>
-  36 |                     <Separator
-> 37 |                     <Listbox.Root collection={years} selectionMode="multiple">
-     |                     ^
-  38 |                         <Listbox.Label>Year</Listbox.Label>
-  39 |                         <Listbox.Content>
-  40 |                             {years.items.map((year) => (
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:50:03.180] Server  LOG      ✓ Compiled in 291ms
-[00:50:15.649] Server  LOG      ✓ Compiled in 28ms
-[00:50:21.957] Server  LOG      ✓ Compiled in 38ms
-[00:50:35.587] Server  LOG      ✓ Compiled in 50ms
-[00:50:35.769] Browser ERROR   ./src/app/search/page.jsx:37:35
-Parsing ecmascript source code failed
-  35 |                     </Listbox.Root>
-  36 |
-> 37 |                     <Separator p=/>
-     |                                   ^
-  38 |
-  39 |                     <Listbox.Root collection={years} selectionMode="multiple">
-  40 |                         <Listbox.Label>Year</Listbox.Label>
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:50:39.952] Browser ERROR   ./src/app/search/page.jsx:37:35
-Parsing ecmascript source code failed
-  35 |                     </Listbox.Root>
-  36 |
-> 37 |                     <Separator p=/>
-     |                                   ^
-  38 |
-  39 |                     <Listbox.Root collection={years} selectionMode="multiple">
-  40 |                         <Listbox.Label>Year</Listbox.Label>
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:50:40.897] Server  LOG      ✓ Compiled in 31ms
-[00:50:41.051] Browser ERROR   ./src/app/search/page.jsx:66:38
-Parsing ecmascript source code failed
-  64 |                 </Container>
-  65 |
-> 66 |                 <Container bg='purple.100'>
-     |                                      ^^^^
-  67 |                     hey
-  68 |                 </Container>
-  69 |             </Stack>
-
-Expected '</', got 'numeric literal (0.1, .100)'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:50:43.083] Server  LOG      ✓ Compiled in 48ms
-[00:50:45.915] Server  LOG      ✓ Compiled in 30ms
-[00:50:54.327] Server  LOG      ✓ Compiled in 37ms
-[00:51:03.726] Server  LOG      ✓ Compiled in 40ms
-[00:51:06.917] Server  LOG      ✓ Compiled in 30ms
-[00:51:14.950] Server  LOG      ✓ Compiled in 47ms
-[00:52:05.323] Server  LOG      ✓ Compiled in 28ms
-[00:52:07.203] Server  LOG      ✓ Compiled in 28ms
-[00:52:46.783] Server  LOG      ✓ Compiled in 57ms
-[00:52:46.930] Browser ERROR   ./src/app/search/page.jsx:37:35
-Parsing ecmascript source code failed
-  35 |                     </Listbox.Root>
-  36 |
-> 37 |                     <Separatorsize="lg" colorPalette='red' p='2' />
-     |                                   ^
-  38 |
-  39 |                     <Listbox.Root collection={years} selectionMode="multiple">
-  40 |                         <Listbox.Label>Year</Listbox.Label>
-
-Expected '</', got '='
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:52:48.962] Server  LOG      ✓ Compiled in 61ms
-[00:53:01.976] Server  LOG      ✓ Compiled in 70ms
-[00:53:47.089] Server  LOG      ✓ Compiled in 41ms
-[00:54:39.938] Server  LOG      ✓ Compiled in 184ms
-[00:54:41.431] Server  LOG      ✓ Compiled in 41ms
-[01:25:58.339] Server  LOG      ✓ Compiled in 156ms
-[01:26:05.613] Server  LOG      ✓ Compiled in 476ms
-[01:26:10.198] Server  LOG      ✓ Compiled in 22ms
-[01:26:14.108] Server  LOG      ✓ Compiled in 148ms
-[01:26:15.338] Server  LOG      ✓ Compiled in 31ms
-[01:26:17.254] Server  LOG      ✓ Compiled in 37ms
-[01:26:19.417] Server  LOG      ✓ Compiled in 50ms
-[01:26:21.819] Browser ERROR   ./src/app/search/page.jsx:65:29
-Parsing ecmascript source code failed
-  63 |                 <Container bg='purple.100'>
-  64 |                     <Box>
-> 65 |                 </Container>
-     |                             ^
-> 66 |             </Stack>
-     | ^^^^^^^^^^^^^
-  67 |         </>
-  68 |     )
-  69 | }
-
-Expected '</', got 'jsx text (
-            )'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:26:22.030] Browser ERROR   ./src/app/search/page.jsx:66:17
-Parsing ecmascript source code failed
-  64 |                     <Box>hi</Box>
-  65 |                     <Box
-> 66 |                 </Container>
-     |                 ^
-  67 |             </Stack>
-  68 |         </>
-  69 |     )
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:26:22.031] Browser ERROR   ./src/app/search/page.jsx:66:18
-Parsing ecmascript source code failed
-  64 |                     <Box>hi</Box>
-  65 |                     <Box
-> 66 |                 </Container>
-     |                  ^^^^^^^^^^^
-  67 |             </Stack>
-  68 |         </>
-  69 |     )
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:26:22.912] Server  LOG      ✓ Compiled in 4ms
-[01:26:30.550] Server  LOG      ✓ Compiled in 43ms
-[01:26:30.777] Browser ERROR   ./src/app/search/page.jsx:64:41
-Parsing ecmascript source code failed
-  62 |
-  63 |                 <Container bg='purple.100'>
-> 64 |                     <Box backdropBlur={}>hi</Box>
-     |                                         ^
-  65 |
-  66 |                     <Box>hi</Box>
-  67 |                 </Container>
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:26:30.777] Browser ERROR   ./src/app/search/page.jsx:64:45
-Parsing ecmascript source code failed
-  62 |
-  63 |                 <Container bg='purple.100'>
-> 64 |                     <Box backdropBlur={}>hi</Box>
-     |                                             ^^^^^
-  65 |
-  66 |                     <Box>hi</Box>
-  67 |                 </Container>
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:26:32.375] Server  LOG      ✓ Compiled in 42ms
-[01:26:33.966] Server  LOG      ✓ Compiled in 41ms
-[01:26:38.838] Server  LOG      ✓ Compiled in 32ms
-[01:26:46.504] Server  LOG      ✓ Compiled in 22ms
-[01:26:49.913] Server  LOG      ✓ Compiled in 45ms
-[01:26:56.159] Server  LOG      ✓ Compiled in 23ms
-[01:26:58.963] Server  LOG      ✓ Compiled in 49ms
-[01:27:03.931] Server  LOG      ✓ Compiled in 31ms
-[01:27:15.965] Server  LOG      ✓ Compiled in 4ms
-[01:27:18.522] Server  LOG      ✓ Compiled in 28ms
-[01:27:20.508] Server  LOG      ✓ Compiled in 24ms
-[01:27:23.052] Server  LOG      ✓ Compiled in 38ms
-[01:27:24.669] Server  LOG      ✓ Compiled in 43ms
-[01:27:25.751] Server  LOG      ✓ Compiled in 25ms
-[01:27:27.797] Server  LOG      ✓ Compiled in 33ms
-[01:27:31.667] Browser ERROR   ./src/app/search/page.jsx:71:17
-Parsing ecmascript source code failed
-  69 |                         hi<
-  70 |                         /Box>
-> 71 |                 </Container>
-     |                 ^
-  72 |             </Stack>
-  73 |         </>
-  74 |     )
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:27:31.667] Browser ERROR   ./src/app/search/page.jsx:71:18
-Parsing ecmascript source code failed
-  69 |                         hi<
-  70 |                         /Box>
-> 71 |                 </Container>
-     |                  ^^^^^^^^^^^
-  72 |             </Stack>
-  73 |         </>
-  74 |     )
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:27:32.924] Server  LOG      ✓ Compiled in 30ms
-[01:27:46.021] Server  LOG      ✓ Compiled in 21ms
-[01:27:58.392] Server  LOG      ✓ Compiled in 19ms
-[01:28:03.453] Server  LOG      ✓ Compiled in 9ms
-[01:28:04.934] Server  LOG      ✓ Compiled in 61ms
-[01:28:15.933] Server  LOG      ✓ Compiled in 15ms
-[01:28:35.718] Server  LOG      ✓ Compiled in 89ms
-[01:30:01.188] Server  LOG      ✓ Compiled in 59ms
-[01:30:01.819] Browser ERROR   ./src/app/search/page.jsx:69:21
-Parsing ecmascript source code failed
-  67 |                         <Button
-  68 |                         Clear Filter
-> 69 |                     </Box>
-     |                     ^
-  70 |
-  71 |                     <Box bg='blue.300'>
-  72 |                         hi
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:30:01.822] Browser ERROR   ./src/app/search/page.jsx:69:22
-Parsing ecmascript source code failed
-  67 |                         <Button
-  68 |                         Clear Filter
-> 69 |                     </Box>
-     |                      ^^^^^
-  70 |
-  71 |                     <Box bg='blue.300'>
-  72 |                         hi
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:30:02.665] Server  LOG      ✓ Compiled in 254ms
-[01:30:06.929] Server  LOG      ✓ Compiled in 40ms
-[01:30:33.948] Server  LOG      ✓ Compiled in 47ms
-[01:30:38.617] Server  LOG      ✓ Compiled in 25ms
-[01:31:46.274] Server  LOG      ✓ Compiled in 72ms
-[01:31:46.488] Browser ERROR   ./src/app/search/page.jsx:67:43
-Parsing ecmascript source code failed
-  65 |                     <Box bg='blue.100'>
-  66 |                         # Results 
-> 67 |                         <Button variant={}>Clear Filter</Button>
-     |                                           ^
-  68 |                         
-  69 |                     </Box>
-  70 |
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:31:48.312] Server  LOG      ✓ Compiled in 37ms
-[01:31:48.601] Browser ERROR   ./src/app/search/page.jsx:67:43
-Parsing ecmascript source code failed
-  65 |                     <Box bg='blue.100'>
-  66 |                         # Results 
-> 67 |                         <Button variant=''}>Clear Filter</Button>
-     |                                           ^
-  68 |                         
-  69 |                     </Box>
-  70 |
-
-Expected '</', got '}'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:31:50.269] Server  LOG      ✓ Compiled in 66ms
-[01:31:55.347] Server  LOG      ✓ Compiled in 21ms
-[01:32:07.913] Server  LOG      ✓ Compiled in 38ms
-[01:33:47.200] Server  ERROR    ⨯ ./src/app/search/page.jsx:18:1
-Module not found: Can't resolve 'compositions/lib/color-palettes'
-  16 |   useListboxItemContext,
-  17 | } from "@chakra-ui/react"
-> 18 | import { colorPalettes } from "compositions/lib/color-palettes"
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  19 | import SearchBar from "@/components/SearchBar"
-  20 |
-  21 | export default function Search() {
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[01:33:47.208] Server  ERROR    ⨯ ./src/app/search/page.jsx:18:1
-Module not found: Can't resolve 'compositions/lib/color-palettes'
-  16 |   useListboxItemContext,
-  17 | } from "@chakra-ui/react"
-> 18 | import { colorPalettes } from "compositions/lib/color-palettes"
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  19 | import SearchBar from "@/components/SearchBar"
-  20 |
-  21 | export default function Search() {
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[01:33:47.247] Server  ERROR    ⨯ ./src/app/search/page.jsx:18:1
-Module not found: Can't resolve 'compositions/lib/color-palettes'
-  16 |   useListboxItemContext,
-  17 | } from "@chakra-ui/react"
-> 18 | import { colorPalettes } from "compositions/lib/color-palettes"
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  19 | import SearchBar from "@/components/SearchBar"
-  20 |
-  21 | export default function Search() {
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[01:33:47.253] Server  ERROR    ⨯ ./src/app/search/page.jsx:18:1
-Module not found: Can't resolve 'compositions/lib/color-palettes'
-  16 |   useListboxItemContext,
-  17 | } from "@chakra-ui/react"
-> 18 | import { colorPalettes } from "compositions/lib/color-palettes"
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  19 | import SearchBar from "@/components/SearchBar"
-  20 |
-  21 | export default function Search() {
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[01:33:47.258] Server  ERROR    ⨯ ./src/app/search/page.jsx:18:1
-Module not found: Can't resolve 'compositions/lib/color-palettes'
-  16 |   useListboxItemContext,
-  17 | } from "@chakra-ui/react"
-> 18 | import { colorPalettes } from "compositions/lib/color-palettes"
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  19 | import SearchBar from "@/components/SearchBar"
-  20 |
-  21 | export default function Search() {
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[01:33:47.259] Server  ERROR    ⨯ ./src/app/search/page.jsx:18:1
-Module not found: Can't resolve 'compositions/lib/color-palettes'
-  16 |   useListboxItemContext,
-  17 | } from "@chakra-ui/react"
-> 18 | import { colorPalettes } from "compositions/lib/color-palettes"
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  19 | import SearchBar from "@/components/SearchBar"
-  20 |
-  21 | export default function Search() {
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[01:33:47.263] Server  LOG      ✓ Compiled in 99ms
-[01:33:47.572] Browser ERROR   ./src/app/search/page.jsx:18:1
-Module not found: Can't resolve 'compositions/lib/color-palettes'
-  16 |   useListboxItemContext,
-  17 | } from "@chakra-ui/react"
-> 18 | import { colorPalettes } from "compositions/lib/color-palettes"
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  19 | import SearchBar from "@/components/SearchBar"
-  20 |
-  21 | export default function Search() {
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-[01:35:16.017] Server  LOG      ✓ Compiled in 145ms
-[01:40:24.455] Server  LOG      ✓ Compiled in 90ms
-[01:40:27.929] Server  LOG      ✓ Compiled in 39ms
-[01:40:40.035] Server  LOG      ✓ Compiled in 22ms
-[01:42:11.396] Server  LOG      ✓ Compiled in 22ms
-[01:42:15.810] Server  LOG      ✓ Compiled in 23ms
-[01:42:38.813] Server  LOG      ✓ Compiled in 27ms
-[01:42:41.738] Server  LOG      ✓ Compiled in 468ms
-[01:42:42.712] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: items
-[01:42:46.227] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:42:46.254] Server  LOG      ✓ Compiled in 37ms
-[01:42:46.559] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: items
-[01:42:47.210] Server  ERROR    ⨯ ReferenceError: items is not defined
-[01:42:49.318] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: items
-[01:43:03.948] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:43:03.965] Server  LOG      ✓ Compiled in 29ms
-[01:43:04.566] Server  ERROR    ⨯ ReferenceError: items is not defined
-[01:43:06.580] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: items
-[01:43:30.973] Server  ERROR    ⨯ ReferenceError: Span is not defined
-[01:43:31.529] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Span
-[01:43:41.473] Server  LOG      ✓ Compiled in 155ms
-[01:43:41.615] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:44:18.985] Server  LOG      ✓ Compiled in 57ms
-[01:44:23.805] Server  LOG      ✓ Compiled in 23ms
-[01:44:33.231] Server  LOG      ✓ Compiled in 19ms
-[01:46:21.625] Server  LOG      ✓ Compiled in 21ms
-[01:46:23.599] Server  ERROR    ⨯ ReferenceError: Cannot access 'themes' before initialization
-[01:46:24.249] Browser ERROR   uncaughtError: ReferenceError: Cannot access 'themes' before initialization.
-[01:46:40.273] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:46:40.273] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/app/search/page.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[01:46:40.274] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:46:40.297] Server  LOG      ✓ Compiled in 20ms
-[01:46:40.751] Server  ERROR    ⨯ ReferenceError: items is not defined
-[01:46:42.594] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: items
-[01:46:43.383] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:46:43.644] Server  LOG      ✓ Compiled in 19ms
-[01:46:44.358] Server  ERROR    ⨯ Error: Objects are not valid as a React child (found: object with keys {label, value}). If you meant to render a collection of children, use an array instead.
-[01:46:45.027] Browser ERROR   uncaughtError: Error: Objects are not valid as a React child (found: object with keys {label, value}). If you meant to render a collection of children, use an array instead.
-[01:48:36.478] Server  LOG      ✓ Compiled in 27ms
-[01:48:46.715] Server  LOG      ✓ Compiled in 29ms
-[01:48:51.647] Server  LOG      ✓ Compiled in 21ms
-[01:48:59.169] Server  LOG      ✓ Compiled in 22ms
-[01:49:13.985] Server  LOG      ✓ Compiled in 89ms
-[01:49:16.422] Server  LOG      ✓ Compiled in 51ms
-[01:49:21.123] Server  LOG      ✓ Compiled in 29ms
-[01:49:44.199] Server  LOG      ✓ Compiled in 24ms
-[01:49:48.018] Server  LOG      ✓ Compiled in 25ms
-[01:49:49.176] Server  LOG      ✓ Compiled in 35ms
-[01:49:49.722] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:49:49.805] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:49:49.805] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:49:49.805] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:49:49.806] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:49:49.806] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:49:49.806] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:49:49.806] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:49:49.806] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:49:49.831] Browser ERROR   ./src/app/search/page.jsx:39:68
-Parsing ecmascript source code failed
-  37 |                             <Accordion.ItemContent>
-  38 |                                 <Accordion.ItemBody>
-> 39 |                                     <Listbox.Root collection={item.} selectionMode="multiple">
-     |                                                                    ^
-  40 |                                         <Listbox.Content>
-  41 |                                             {themes.items.map((theme) => (
-  42 |                                             <Listbox.Item item={theme} key={theme.value}>
-
-Expected '</', got '}'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:49:50.675] Server  ERROR    ⨯ TypeError: Cannot read properties of undefined (reading 'map')
-[01:49:51.376] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'item.text.items.map')
-[01:50:39.171] Server  LOG      ✓ Compiled in 56ms
-[01:50:41.681] Server  LOG      ✓ Compiled in 26ms
-[01:50:44.976] Server  LOG      ✓ Compiled in 23ms
-[01:50:58.192] Server  LOG      ✓ Compiled in 31ms
-[01:51:03.800] Server  LOG      ✓ Compiled in 44ms
-[01:51:15.347] Server  LOG      ✓ Compiled in 32ms
-[01:51:22.883] Server  LOG      ✓ Compiled in 22ms
-[01:51:24.541] Server  LOG      ✓ Compiled in 67ms
-[01:51:26.546] Server  LOG      ✓ Compiled in 68ms
-[01:52:35.833] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:52:35.901] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:52:35.902] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:52:35.902] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:52:35.902] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:52:35.902] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:52:35.903] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:52:35.904] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:52:36.002] Browser ERROR   ./src/app/search/page.jsx:41:79
-Parsing ecmascript source code failed
-  39 |                                     <Listbox.Root collection={item.options} selectionMode="multiple">
-  40 |                                         <Listbox.Content>
-> 41 |                                             {<item className="options"></item>.items.map((option) => (
-     |                                                                               ^
-  42 |                                             <Listbox.Item item={option} key={option.value}>
-  43 |                                                 <ListboxItemCheckmark />
-  44 |                                                 <Listbox.ItemText>{option.label}</Listbox.ItemText>
-
-Expected '</', got '.'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:54:18.457] Server  LOG      ✓ Compiled in 93ms
-[01:54:32.574] Server  LOG      ✓ Compiled in 66ms
-[01:54:33.923] Server  LOG      ✓ Compiled in 117ms
-[01:54:42.318] Server  LOG      ✓ Compiled in 19ms
-[01:55:05.940] Server  LOG      ✓ Compiled in 48ms
-[01:56:48.989] Server  LOG      ✓ Compiled in 84ms
-[01:56:51.617] Server  LOG      ✓ Compiled in 30ms
-[01:56:57.660] Server  LOG      ✓ Compiled in 49ms
-[01:56:58.009] Browser ERROR   ./src/app/search/page.jsx:57:17
-Parsing ecmascript source code failed
-  55 |                 <Separ
-  56 |
-> 57 |                 <Container bg='purple.100'>
-     |                 ^
-  58 |                     <Box bg='blue.100'>
-  59 |                         # Results 
-  60 |                         <Button variant='surface' >Clear Filter</Button>
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[01:57:01.204] Server  LOG      ✓ Compiled in 314ms
-[01:57:10.910] Server  LOG      ✓ Compiled in 44ms
-[01:57:21.842] Server  LOG      ✓ Compiled in 18ms
-[01:58:09.694] Server  LOG      ✓ Compiled in 107ms
-[01:58:12.678] Server  LOG      ✓ Compiled in 108ms
-[01:58:15.150] Server  LOG      ✓ Compiled in 102ms
-[01:58:17.730] Server  LOG      ✓ Compiled in 138ms
-[01:58:28.896] Server  LOG      ✓ Compiled in 24ms
-[01:58:42.746] Server  LOG      ✓ Compiled in 18ms
-[01:59:34.373] Server  LOG      ✓ Compiled in 88ms
-[01:59:38.152] Server  LOG      ✓ Compiled in 284ms
-[02:00:51.463] Server  LOG      ✓ Compiled in 39ms
-[02:00:52.798] Server  LOG      ✓ Compiled in 29ms
-[02:00:56.728] Server  LOG      ✓ Compiled in 63ms
-[02:01:06.676] Server  LOG      ✓ Compiled in 69ms
-[02:01:25.259] Server  LOG      ✓ Compiled in 26ms
-[02:01:36.954] Browser ERROR   ./src/app/search/page.jsx:30:18
-Parsing ecmascript source code failed
-  28 |             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
-  29 |
-> 30 |                 {/}
-     |                  ^^
-  31 |                 <Container w='250px' p='0'>
-  32 |                     <Accordion.Root collapsible multiple >
-  33 |                         {items.map((item, index) => (
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[02:01:36.954] Browser ERROR   ./src/app/search/page.jsx:132:2
-Parsing ecmascript source code failed
-  130 |   { value: "b", title: "Year", options: years },
-  131 |   { value: "c", title: "Sentiment", options: sentiments },
-> 132 | ]
-      |  ^
-
-Unterminated block comment
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[02:01:36.955] Browser ERROR   ./src/app/search/page.jsx:30:23
-Parsing ecmascript source code failed
-  28 |             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
-  29 |
-> 30 |                 {/**/ */}
-     |                       ^
-  31 |                 <Container w='250px' p='0'>
-  32 |                     <Accordion.Root collapsible multiple >
-  33 |                         {items.map((item, index) => (
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[02:01:36.955] Browser ERROR   ./src/app/search/page.jsx:30:24
-Parsing ecmascript source code failed
-  28 |             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
-  29 |
-> 30 |                 {/**/ */}
-     |                        ^^
-  31 |                 <Container w='250px' p='0'>
-  32 |                     <Accordion.Root collapsible multiple >
-  33 |                         {items.map((item, index) => (
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[02:02:00.020] Server  LOG      ✓ Compiled in 32ms
-[02:02:00.265] Browser ERROR   ./src/app/search/page.jsx:33:31
-Parsing ecmascript source code failed
-  31 |                 <Container w='250px' p='0'>
-  32 |                     <Accordion.Root collapsible multiple defaultValue={["b"] >
-> 33 |                         {items.map((item, index) => (
-     |                               ^
-  34 |                             <Accordion.Item key={index} value={item.value}>
-  35 |                             <Accordion.ItemTrigger>
-  36 |                                 <Span flex="1">{item.title}</Span>
-
-Expected '</', got '.'
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[02:02:07.885] Server  LOG      ✓ Compiled in 51ms
-[02:02:14.922] Server  LOG      ✓ Compiled in 41ms
-[02:02:23.972] Server  LOG      ✓ Compiled in 64ms
-[02:02:49.475] Server  LOG      ✓ Compiled in 26ms
-[02:02:50.483] Server  LOG      ✓ Compiled in 16ms
-[02:02:50.729] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Results
-[02:02:52.325] Server  LOG      ✓ Compiled in 22ms
-[02:02:52.344] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[02:04:38.221] Server  LOG      ✓ Compiled in 86ms
-[02:04:43.507] Server  LOG      ✓ Compiled in 75ms
-[02:04:45.835] Browser ERROR   ./src/app/search/page.jsx:26:38
-Parsing ecmascript source code failed
-  24 |     return (
-  25 |         <>
-> 26 |             <SearchBar marginBottom=/>
-     |                                      ^
+  22 |
+  23 | export default function Search() {
+> 24 |     const [selectedThemes, setSelectedThemes] = <string[]>([])
+     |                                                        ^
+  25 |     const [selectedYears, setSelectedYears] = useState(new Set())
+  26 |     const [selectedSentiments, setSelectedSentiments] = useState(new Set())
   27 |
-  28 |             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
-  29 |
+
+Unexpected token `[`. Expected jsx identifier
+
+Import traces:
+  Client Component Browser:
+    ./src/app/search/page.jsx [Client Component Browser]
+    ./src/app/search/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/search/page.jsx [Client Component SSR]
+    ./src/app/search/page.jsx [Server Component]
+[00:30:25.186] Server  LOG      ✓ Compiled in 101ms
+[00:30:32.873] Server  LOG      ✓ Compiled in 75ms
+[00:30:33.133] Browser ERROR   ./src/app/search/page.jsx:24:65
+Parsing ecmascript source code failed
+  22 |
+  23 | export default function Search() {
+> 24 |     const [selectedThemes, setSelectedThemes] = useState<string[]>([])
+     |                                                                 ^
+  25 |     const [selectedYears, setSelectedYears] = useState(new Set())
+  26 |     const [selectedSentiments, setSelectedSentiments] = useState(new Set())
+  27 |
 
 Expression expected
 
@@ -1569,62 +150,15 @@ Import traces:
   Client Component SSR:
     ./src/app/search/page.jsx [Client Component SSR]
     ./src/app/search/page.jsx [Server Component]
-[02:04:45.835] Browser ERROR   ./src/app/search/page.jsx:71:10
+[00:30:41.084] Browser ERROR   ./src/app/search/page.jsx:24:65
 Parsing ecmascript source code failed
-  69 |                 </Container>
-  70 |             </Stack>
-> 71 |         </>
-     |          ^^
-  72 |     )
-  73 | }
-  74 |
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[02:04:45.835] Browser ERROR   ./src/app/search/page.jsx:31:34
-Parsing ecmascript source code failed
-  29 |
-  30 |                 {/* Filter Menu */}
-> 31 |                 <Container w='250px' p='0'>
-     |                                  ^
-  32 |                     <Accordion.Root collapsible multiple defaultValue={["a", "b", "c"]} >
-  33 |                         {items.map((item, index) => (
-  34 |                             <Accordion.Item key={index} value={item.value}>
-
-Identifier cannot follow number
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[02:04:46.925] Server  LOG      ✓ Compiled in 38ms
-[02:04:57.311] Server  LOG      ✓ Compiled in 36ms
-[02:05:26.863] Server  LOG      ✓ Compiled in 25ms
-[02:05:30.353] Server  LOG      ✓ Compiled in 52ms
-[02:05:38.428] Server  LOG      ✓ Compiled in 68ms
-[02:05:42.649] Server  LOG      ✓ Compiled in 24ms
-[02:05:44.719] Server  LOG      ✓ Compiled in 45ms
-[02:05:45.676] Browser ERROR   ./src/app/search/page.jsx:73:11
-Parsing ecmascript source code failed
-  71 |                 </Container>
-  72 |             </Stack>
-> 73 |         </>
-     |           ^
-  74 |     )
-  75 | }
-  76 |
+  22 |
+  23 | export default function Search() {
+> 24 |     const [selectedThemes, setSelectedThemes] = useState<string[]>([])
+     |                                                                 ^
+  25 |     const [selectedYears, setSelectedYears] = useState<string[]>([])
+  26 |     const [selectedSentiments, setSelectedSentiments] = useState(new Set())
+  27 |
 
 Expression expected
 
@@ -1636,15 +170,20 @@ Import traces:
   Client Component SSR:
     ./src/app/search/page.jsx [Client Component SSR]
     ./src/app/search/page.jsx [Server Component]
-[02:05:45.676] Browser ERROR   ./src/app/search/page.jsx:30:13
+[00:30:44.294] Server  LOG      ✓ Compiled in 42ms
+[00:30:47.992] Server  LOG      ✓ Compiled in 102ms
+[00:30:50.270] Server  LOG      ✓ Compiled in 59ms
+[00:31:10.599] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:31:10.770] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: string
+[00:31:10.770] Browser ERROR   ./src/app/search/page.jsx:26:73
 Parsing ecmascript source code failed
-  28 |             <SearchBar/
-  29 |
-> 30 |             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
-     |             ^
-  31 |
-  32 |                 {/* Filter Menu */}
-  33 |                 <Container w='250px' p='0'>
+  24 |     const [selectedThemes, setSelectedThemes] = useState<string>([])
+  25 |     const [selectedYears, setSelectedYears] = useState<string>([])
+> 26 |     const [selectedSentiments, setSelectedSentiments] = useState<string[]>([])
+     |                                                                         ^
+  27 |
+  28 |     const clearAllFilters = () => {
+  29 |         setSelectedThemes(new Set())
 
 Expression expected
 
@@ -1656,17 +195,23 @@ Import traces:
   Client Component SSR:
     ./src/app/search/page.jsx [Client Component SSR]
     ./src/app/search/page.jsx [Server Component]
-[02:05:45.676] Browser ERROR   ./src/app/search/page.jsx:28:24
+[00:31:10.770] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: string
+[00:31:11.176] Server  ERROR    ⨯ ReferenceError: string is not defined
+[00:31:11.823] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: string
+[00:33:17.821] Server  LOG      ✓ Compiled in 139ms
+[00:33:21.031] Server  LOG      ✓ Compiled in 82ms
+[00:33:21.333] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:33:21.425] Browser ERROR   ./src/app/search/page.jsx:57:62
 Parsing ecmascript source code failed
-  26 |             <Box
-  27 |                 
-> 28 |             <SearchBar/>
-     |                        ^
-  29 |
-  30 |             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
-  31 |
+  55 |                                         collection={themes} 
+  56 |                                         selectionMode="multiple"
+> 57 |                                         value={selectedThemes]}
+     |                                                              ^
+  58 |                                         onValueChange={(e) => setSelectedThemes(e.value)}
+  59 |                                     >
+  60 |                                         <Listbox.Content>
 
-Expression expected
+Expected '</', got ']'
 
 Import traces:
   Client Component Browser:
@@ -1676,17 +221,33 @@ Import traces:
   Client Component SSR:
     ./src/app/search/page.jsx [Client Component SSR]
     ./src/app/search/page.jsx [Server Component]
-[02:05:45.676] Browser ERROR   ./src/app/search/page.jsx:73:10
+[00:33:21.970] Server  ERROR    ⨯ ReferenceError: string is not defined
+[00:33:22.526] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: string
+[00:34:43.126] Server  LOG      ✓ Compiled in 104ms
+[00:34:43.214] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:34:44.172] Server  ERROR    ⨯ ReferenceError: string is not defined
+[00:34:45.863] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: string
+[00:34:48.223] Server  LOG      ✓ Compiled in 38ms
+[00:34:48.323] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:34:48.884] Server  ERROR    ⨯ ReferenceError: string is not defined
+[00:34:50.650] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: string
+[00:34:52.111] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:34:52.125] Server  LOG      ✓ Compiled in 41ms
+[00:35:03.669] Server  LOG      ✓ Compiled in 23ms
+[00:35:07.090] Server  LOG      ✓ Compiled in 32ms
+[00:35:10.617] Server  LOG      ✓ Compiled in 34ms
+[00:35:27.375] Server  LOG      ✓ Compiled in 54ms
+[00:35:27.574] Browser ERROR   ./src/app/search/page.jsx:84:61
 Parsing ecmascript source code failed
-  71 |                 </Container>
-  72 |             </Stack>
-> 73 |         </>
-     |          ^^
-  74 |     )
-  75 | }
-  76 |
+  82 |                                         collection={years} 
+  83 |                                         selectionMode="multiple"
+> 84 |                                         value={selectedYears]}
+     |                                                             ^
+  85 |                                         onValueChange={(e) => setSelectedYears(e.value)}
+  86 |                                     >
+  87 |                                         <Listbox.Content>
 
-Unterminated regexp literal
+Expected '</', got ']'
 
 Import traces:
   Client Component Browser:
@@ -1696,64 +257,26 @@ Import traces:
   Client Component SSR:
     ./src/app/search/page.jsx [Client Component SSR]
     ./src/app/search/page.jsx [Server Component]
-[02:05:54.633] Server  LOG      ✓ Compiled in 78ms
-[02:05:57.282] Server  LOG      ✓ Compiled in 21ms
-[02:05:59.961] Server  LOG      ✓ Compiled in 61ms
-[02:06:04.919] Server  LOG      ✓ Compiled in 33ms
-[02:06:15.924] Server  LOG      ✓ Compiled in 39ms
-[02:06:35.869] Server  LOG      ✓ Compiled in 34ms
-[02:08:07.135] Server  LOG      ✓ Compiled in 136ms
-[02:08:10.105] Server  LOG      ✓ Compiled in 23ms
-[02:08:12.958] Server  LOG      ✓ Compiled in 26ms
-[02:08:16.456] Server  LOG      ✓ Compiled in 2ms
-[02:08:29.938] Server  LOG      ✓ Compiled in 50ms
-[02:08:39.476] Server  LOG      ✓ Compiled in 43ms
-[02:08:54.412] Server  LOG      ✓ Compiled in 21ms
-[02:08:55.415] Server  LOG      ✓ Compiled in 3ms
-[02:08:55.625] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Search
-[02:08:56.514] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[02:08:56.542] Server  LOG      ✓ Compiled in 3ms
-[02:09:06.757] Server  LOG      ✓ Compiled in 12ms
-[02:09:08.651] Server  LOG      ✓ Compiled in 3ms
-[02:09:14.910] Server  LOG      ✓ Compiled in 25ms
-[02:09:27.895] Server  LOG      ✓ Compiled in 25ms
-[02:09:41.481] Server  LOG      ✓ Compiled in 9ms
-[02:09:42.593] Server  LOG      ✓ Compiled in 3ms
-[02:10:24.580] Server  LOG      ✓ Compiled in 113ms
-[02:10:27.265] Server  LOG      ✓ Compiled in 27ms
-[02:10:29.275] Server  LOG      ✓ Compiled in 32ms
-[02:10:30.841] Server  LOG      ✓ Compiled in 48ms
-[02:10:36.612] Browser ERROR   ./src/components/SearchBar.jsx:10:28
+[00:35:29.113] Server  LOG      ✓ Compiled in 75ms
+[00:35:32.870] Server  LOG      ✓ Compiled in 46ms
+[00:35:33.072] Browser ERROR   ./src/app/search/page.jsx:111:66
 Parsing ecmascript source code failed
-   8 |             <Input flex="1" placeholder="Search interviews" />
-   9 |             <Button bg="bg.subtle" variant="outline">
-> 10 |                 <Text color' >Search</Text>
-     |                            ^^^^^^^^^^^^^^^^
-  11 |                 
-  12 |             </Button>
-  13 |         </Group>
+  109 |                                         collection={sentiments} 
+  110 |                                         selectionMode="multiple"
+> 111 |                                         value={selectedSentiments]}
+      |                                                                  ^
+  112 |                                         onValueChange={(e) => setSelectedSentiments(e.value)}
+  113 |                                     >
+  114 |                                         <Listbox.Content>
 
-Unterminated string constant
+Expected '</', got ']'
 
 Import traces:
   Client Component Browser:
-    ./src/components/SearchBar.jsx [Client Component Browser]
     ./src/app/search/page.jsx [Client Component Browser]
     ./src/app/search/page.jsx [Server Component]
 
   Client Component SSR:
-    ./src/components/SearchBar.jsx [Client Component SSR]
     ./src/app/search/page.jsx [Client Component SSR]
     ./src/app/search/page.jsx [Server Component]
-[02:10:37.928] Server  LOG      ✓ Compiled in 50ms
-[02:10:48.058] Server  LOG      ✓ Compiled in 10ms
-[02:10:48.319] Browser ERROR   Received `%s` for a non-boolean attribute `%s`.
-
-If you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}. true size size true size
-[02:10:49.414] Server  LOG      ✓ Compiled in 3ms
-[02:10:51.879] Server  LOG      ✓ Compiled in 14ms
-[02:11:21.007] Server  LOG      ✓ Compiled in 109ms
-[02:11:44.324] Server  LOG      ✓ Compiled in 24ms
-[02:11:47.723] Server  LOG      ✓ Compiled in 30ms
-[02:11:56.934] Server  LOG      ✓ Compiled in 37ms
-[02:12:13.906] Server  LOG      ✓ Compiled in 22ms
+[00:35:34.554] Server  LOG      ✓ Compiled in 54ms

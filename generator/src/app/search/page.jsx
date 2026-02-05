@@ -5,11 +5,9 @@ import {
     Button,
     Checkmark,
     Container,
-    Heading,
     Grid,
     GridItem,
     Listbox,
-    Separator,
     Span,
     Stack,
     StackSeparator,
@@ -17,34 +15,50 @@ import {
     createListCollection,
   useListboxItemContext,
 } from "@chakra-ui/react"
+import { useState } from "react"
 //import { colorPalettes } from "compositions/lib/color-palettes"
 import SearchBar from "@/components/SearchBar"
+import Result from '@/components/ResultsCard'
 
 export default function Search() {
+    const [selectedThemes, setSelectedThemes] = useState([])
+    const [selectedYears, setSelectedYears] = useState([])
+    const [selectedSentiments, setSelectedSentiments] = useState([])
+
+    const clearAllFilters = () => {
+        setSelectedThemes([])
+        setSelectedYears([])
+        setSelectedSentiments([])
+    }
+
     return (
         <>
             <Box marginBottom='20px' >
                 <SearchBar/>
             </Box>
-                
-            
 
             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
 
                 {/* Filter Menu */}
-                <Container w='250px' p='0'>
+                <Container w='250px' p='0' paddingRight='10px'>
+
+                    {/* Themes */}
                     <Accordion.Root collapsible multiple defaultValue={["a", "b", "c"]} >
-                        {items.map((item, index) => (
-                            <Accordion.Item key={index} value={item.value}>
+                        <Accordion.Item value="a">
                             <Accordion.ItemTrigger>
-                                <Span flex="1">{item.title}</Span>
+                                <Span flex="1">Themes</Span>
                                 <Accordion.ItemIndicator />
                             </Accordion.ItemTrigger>
                             <Accordion.ItemContent>
                                 <Accordion.ItemBody>
-                                    <Listbox.Root collection={item.options} selectionMode="multiple">
+                                    <Listbox.Root 
+                                        collection={themes} 
+                                        selectionMode="multiple"
+                                        value={selectedThemes}
+                                        onValueChange={(e) => setSelectedThemes(e.value)}
+                                    >
                                         <Listbox.Content>
-                                            {item.options.items.map((option) => (
+                                            {themes.items.map((option) => (
                                             <Listbox.Item item={option} key={option.value}>
                                                 <ListboxItemCheckmark />
                                                 <Listbox.ItemText>{option.label}</Listbox.ItemText>
@@ -54,29 +68,93 @@ export default function Search() {
                                     </Listbox.Root>
                                 </Accordion.ItemBody>
                             </Accordion.ItemContent>
-                            </Accordion.Item>
-                        ))}
+                        </Accordion.Item>
+
+                        {/* Year */}
+                        <Accordion.Item value="b">
+                            <Accordion.ItemTrigger>
+                                <Span flex="1">Year</Span>
+                                <Accordion.ItemIndicator />
+                            </Accordion.ItemTrigger>
+                            <Accordion.ItemContent>
+                                <Accordion.ItemBody>
+                                    <Listbox.Root 
+                                        collection={years} 
+                                        selectionMode="multiple"
+                                        value={selectedYears}
+                                        onValueChange={(e) => setSelectedYears(e.value)}
+                                    >
+                                        <Listbox.Content>
+                                            {years.items.map((option) => (
+                                            <Listbox.Item item={option} key={option.value}>
+                                                <ListboxItemCheckmark />
+                                                <Listbox.ItemText>{option.label}</Listbox.ItemText>
+                                            </Listbox.Item>
+                                            ))}
+                                        </Listbox.Content>
+                                    </Listbox.Root>
+                                </Accordion.ItemBody>
+                            </Accordion.ItemContent>
+                        </Accordion.Item>
+
+                        {/* Sentiment */}
+                        <Accordion.Item value="c">
+                            <Accordion.ItemTrigger>
+                                <Span flex="1">Sentiment</Span>
+                                <Accordion.ItemIndicator />
+                            </Accordion.ItemTrigger>
+                            <Accordion.ItemContent>
+                                <Accordion.ItemBody>
+                                    <Listbox.Root 
+                                        collection={sentiments} 
+                                        selectionMode="multiple"
+                                        value={selectedSentiments}
+                                        onValueChange={(e) => setSelectedSentiments(e.value)}
+                                    >
+                                        <Listbox.Content>
+                                            {sentiments.items.map((option) => (
+                                            <Listbox.Item item={option} key={option.value}>
+                                                <ListboxItemCheckmark />
+                                                <Listbox.ItemText>{option.label}</Listbox.ItemText>
+                                            </Listbox.Item>
+                                            ))}
+                                        </Listbox.Content>
+                                    </Listbox.Root>
+                                </Accordion.ItemBody>
+                            </Accordion.ItemContent>
+                        </Accordion.Item>
                     </Accordion.Root>
                 </Container>
                 
+                
                 {/* Results */}
-                <Container bg='purple.100'>
-                    <Box bg='blue.100'>
-                        # Results 
-                        <Button variant='surface' >Clear Filter</Button>
-                        
+                <Container paddingRight='0'>
+
+                    {/* Description */}
+                    <Box marginBottom='20px' display='flex' justifyContent='space-between' alignItems='center'>
+                        <Text>{results.length} Results for </Text>
+                        <Button variant='surface' onClick={clearAllFilters}>Clear Filter</Button>
                     </Box>
 
-                    <Box bg='blue.300'>
-                        Results
+                    {/* Result Items */}
+                    <Box>
+                        {results.map((item, index) => (
+                            <GridItem key={index} 
+                            display="flex" 
+                            justifyContent="center" 
+                            alignItems="center" 
+                            paddingBottom='15px'
+                            >
+                                <Result data={item} />
+                            </GridItem>
+                        ))}
                     </Box>
                 </Container>
+
             </Stack>
         </>
     )
 }
-
-
 
 
 const ListboxItemCheckmark = () => {
@@ -91,6 +169,7 @@ const ListboxItemCheckmark = () => {
   )
 }
 
+// Filters
 const years = createListCollection({
   items: [
     { label: "2000-2004", value: "react" },
@@ -130,8 +209,18 @@ const themes = createListCollection({
 })
 
 
-const items = [
-  { value: "a", title: "Themes", options: themes },
-  { value: "b", title: "Year", options: years },
-  { value: "c", title: "Sentiment", options: sentiments },
+
+
+const results = [
+    {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: "Student discusses challenges with academic workload and finding balance. Emphasizes importance of faculty support and peer relationships in navigating the EECS program successfully."},
+    {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: "Student discusses challenges with academic workload and finding balance. Emphasizes importance of faculty support and peer relationships in navigating the EECS program successfully."},
+    {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: "Student discusses challenges with academic workload and finding balance. Emphasizes importance of faculty support and peer relationships in navigating the EECS program successfully."},
+    {interviewId: '3', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2022-03-31', description: "Student discusses challenges with academic workload and finding balance. Emphasizes importance of faculty support and peer relationships in navigating the EECS program successfully."},
+    {interviewId: '4', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2023-03-31', description: "Student discusses challenges with academic workload and finding balance. Emphasizes importance of faculty support and peer relationships in navigating the EECS program successfully."},
+    {interviewId: '5', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2023-04-30', description: "Student discusses challenges with academic workload and finding balance. Emphasizes importance of faculty support and peer relationships in navigating the EECS program successfully."},
+    {interviewId: '6', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-05-31', description: "Student discusses challenges with academic workload and finding balance. Emphasizes importance of faculty support and peer relationships in navigating the EECS program successfully."},
+    {interviewId: '7', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2025-05-31', description: "Student discusses challenges with academic workload and finding balance. Emphasizes importance of faculty support and peer relationships in navigating the EECS program successfully."},
+    {interviewId: '8', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-05-25', description: "Student discusses challenges with academic workload and finding balance. Emphasizes importance of faculty support and peer relationships in navigating the EECS program successfully."},
+    {interviewId: '9', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: "Student discusses challenges with academic workload and finding balance. Emphasizes importance of faculty support and peer relationships in navigating the EECS program successfully."},
+    {interviewId: '10', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2023-03-31', description: "Student discusses challenges with academic workload and finding balance. Emphasizes importance of faculty support and peer relationships in navigating the EECS program successfully."},
 ]

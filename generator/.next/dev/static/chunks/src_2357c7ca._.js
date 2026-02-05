@@ -75,13 +75,20 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$span$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@chakra-ui/react/dist/esm/components/span/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$stack$2f$stack$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@chakra-ui/react/dist/esm/components/stack/stack.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$stack$2f$stack$2d$separator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@chakra-ui/react/dist/esm/components/stack/stack-separator.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$text$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@chakra-ui/react/dist/esm/components/text/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ark$2d$ui$2f$react$2f$dist$2f$components$2f$collection$2f$list$2d$collection$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@ark-ui/react/dist/components/collection/list-collection.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ark$2d$ui$2f$react$2f$dist$2f$components$2f$listbox$2f$use$2d$listbox$2d$item$2d$context$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@ark-ui/react/dist/components/listbox/use-listbox-item-context.js [app-client] (ecmascript)");
 //import { colorPalettes } from "compositions/lib/color-palettes"
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SearchBar$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/SearchBar.jsx [app-client] (ecmascript)");
+(()=>{
+    const e = new Error("Cannot find module '@/components/'");
+    e.code = 'MODULE_NOT_FOUND';
+    throw e;
+})();
 ;
 var _s = __turbopack_context__.k.signature();
 'use client';
+;
 ;
 ;
 function Search() {
@@ -91,12 +98,12 @@ function Search() {
                 marginBottom: "20px",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SearchBar$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                     fileName: "[project]/src/app/search/page.jsx",
-                    lineNumber: 27,
+                    lineNumber: 28,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/search/page.jsx",
-                lineNumber: 26,
+                lineNumber: 27,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$stack$2f$stack$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Stack"], {
@@ -104,7 +111,7 @@ function Search() {
                 h: "fit-content",
                 separator: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$stack$2f$stack$2d$separator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["StackSeparator"], {}, void 0, false, {
                     fileName: "[project]/src/app/search/page.jsx",
-                    lineNumber: 32,
+                    lineNumber: 31,
                     columnNumber: 63
                 }, void 0),
                 children: [
@@ -119,7 +126,7 @@ function Search() {
                                 "b",
                                 "c"
                             ],
-                            children: items.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$accordion$2f$namespace$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Accordion$3e$__["Accordion"].Item, {
+                            children: filters.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$accordion$2f$namespace$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Accordion$3e$__["Accordion"].Item, {
                                     value: item.value,
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$accordion$2f$namespace$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Accordion$3e$__["Accordion"].ItemTrigger, {
@@ -129,18 +136,18 @@ function Search() {
                                                     children: item.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/search/page.jsx",
-                                                    lineNumber: 40,
+                                                    lineNumber: 39,
                                                     columnNumber: 33
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$accordion$2f$namespace$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Accordion$3e$__["Accordion"].ItemIndicator, {}, void 0, false, {
                                                     fileName: "[project]/src/app/search/page.jsx",
-                                                    lineNumber: 41,
+                                                    lineNumber: 40,
                                                     columnNumber: 33
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/search/page.jsx",
-                                            lineNumber: 39,
+                                            lineNumber: 38,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$accordion$2f$namespace$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Accordion$3e$__["Accordion"].ItemContent, {
@@ -154,56 +161,56 @@ function Search() {
                                                                 children: [
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ListboxItemCheckmark, {}, void 0, false, {
                                                                         fileName: "[project]/src/app/search/page.jsx",
-                                                                        lineNumber: 49,
+                                                                        lineNumber: 48,
                                                                         columnNumber: 49
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$listbox$2f$namespace$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Listbox$3e$__["Listbox"].ItemText, {
                                                                         children: option.label
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/search/page.jsx",
-                                                                        lineNumber: 50,
+                                                                        lineNumber: 49,
                                                                         columnNumber: 49
                                                                     }, this)
                                                                 ]
                                                             }, option.value, true, {
                                                                 fileName: "[project]/src/app/search/page.jsx",
-                                                                lineNumber: 48,
+                                                                lineNumber: 47,
                                                                 columnNumber: 45
                                                             }, this))
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/search/page.jsx",
-                                                        lineNumber: 46,
+                                                        lineNumber: 45,
                                                         columnNumber: 41
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/search/page.jsx",
-                                                    lineNumber: 45,
+                                                    lineNumber: 44,
                                                     columnNumber: 37
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/search/page.jsx",
-                                                lineNumber: 44,
+                                                lineNumber: 43,
                                                 columnNumber: 33
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/search/page.jsx",
-                                            lineNumber: 43,
+                                            lineNumber: 42,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, index, true, {
                                     fileName: "[project]/src/app/search/page.jsx",
-                                    lineNumber: 38,
+                                    lineNumber: 37,
                                     columnNumber: 29
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/src/app/search/page.jsx",
-                            lineNumber: 36,
+                            lineNumber: 35,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/search/page.jsx",
-                        lineNumber: 35,
+                        lineNumber: 34,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$container$2f$container$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Container"], {
@@ -211,20 +218,32 @@ function Search() {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$box$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Box"], {
                                 bg: "blue.100",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
                                 children: [
-                                    "# Results",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$text$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
+                                        children: [
+                                            results.length,
+                                            " Results"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/search/page.jsx",
+                                        lineNumber: 64,
+                                        columnNumber: 25
+                                    }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$button$2f$button$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                         variant: "surface",
                                         children: "Clear Filter"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/search/page.jsx",
-                                        lineNumber: 66,
+                                        lineNumber: 65,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/search/page.jsx",
-                                lineNumber: 64,
+                                lineNumber: 63,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$box$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Box"], {
@@ -232,19 +251,19 @@ function Search() {
                                 children: "Results"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/search/page.jsx",
-                                lineNumber: 70,
+                                lineNumber: 68,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/search/page.jsx",
-                        lineNumber: 63,
+                        lineNumber: 62,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/search/page.jsx",
-                lineNumber: 32,
+                lineNumber: 31,
                 columnNumber: 13
             }, this)
         ]
@@ -261,7 +280,7 @@ const ListboxItemCheckmark = ()=>{
         disabled: itemState.disabled
     }, void 0, false, {
         fileName: "[project]/src/app/search/page.jsx",
-        lineNumber: 85,
+        lineNumber: 82,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -271,6 +290,7 @@ _s(ListboxItemCheckmark, "gUGJHrisf+4qgzY1iGu7Kp0LZk4=", false, function() {
     ];
 });
 _c1 = ListboxItemCheckmark;
+// Filters
 const years = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ark$2d$ui$2f$react$2f$dist$2f$components$2f$collection$2f$list$2d$collection$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createListCollection"])({
     items: [
         {
@@ -375,7 +395,7 @@ const themes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$
         }
     ]
 });
-const items = [
+const filters = [
     {
         value: "a",
         title: "Themes",
@@ -390,6 +410,96 @@ const items = [
         value: "c",
         title: "Sentiment",
         options: sentiments
+    }
+];
+const results = [
+    {
+        interviewId: '0',
+        videoUrl: '/placeholder16x9.jpg',
+        videoAlt: 'example',
+        name: 'Firstname Lastname',
+        date: '2023-03-31',
+        description: "kadj flkaj fklaj klajdksjdkf jkaljd flksjdlk faksdj ksdjf lakdjf dksjfklsaj;df sdlkf j"
+    },
+    {
+        interviewId: '1',
+        videoUrl: '/placeholder16x9.jpg',
+        videoAlt: 'example',
+        name: '2Firstname Lastname',
+        date: '2024-03-31',
+        description: "kadj flkaj fklaj klajdksjdkf jkaljd flksjdlk faksdj ksdjf lakdjf dksjfklsaj;df sdlkf j"
+    },
+    {
+        interviewId: '2',
+        videoUrl: '/placeholder16x9.jpg',
+        videoAlt: 'example',
+        name: '3Firstname Lastname',
+        date: '2025-03-31',
+        description: "kadj flkaj fklaj klajdksjdkf jkaljd flksjdlk faksdj ksdjf lakdjf dksjfklsaj;df sdlkf j"
+    },
+    {
+        interviewId: '3',
+        videoUrl: '/placeholder16x9.jpg',
+        videoAlt: 'example',
+        name: 'Firstname Lastname',
+        date: '2022-03-31',
+        description: "kadj flkaj fklaj klajdksjdkf jkaljd flksjdlk faksdj ksdjf lakdjf dksjfklsaj;df sdlkf j"
+    },
+    {
+        interviewId: '4',
+        videoUrl: '/placeholder16x9.jpg',
+        videoAlt: 'example',
+        name: '2Firstname Lastname',
+        date: '2023-03-31',
+        description: "kadj flkaj fklaj klajdksjdkf jkaljd flksjdlk faksdj ksdjf lakdjf dksjfklsaj;df sdlkf j"
+    },
+    {
+        interviewId: '5',
+        videoUrl: '/placeholder16x9.jpg',
+        videoAlt: 'example',
+        name: '3Firstname Lastname',
+        date: '2023-04-30',
+        description: "kadj flkaj fklaj klajdksjdkf jkaljd flksjdlk faksdj ksdjf lakdjf dksjfklsaj;df sdlkf j"
+    },
+    {
+        interviewId: '6',
+        videoUrl: '/placeholder16x9.jpg',
+        videoAlt: 'example',
+        name: 'Firstname Lastname',
+        date: '2023-05-31',
+        description: "kadj flkaj fklaj klajdksjdkf jkaljd flksjdlk faksdj ksdjf lakdjf dksjfklsaj;df sdlkf j"
+    },
+    {
+        interviewId: '7',
+        videoUrl: '/placeholder16x9.jpg',
+        videoAlt: 'example',
+        name: '2Firstname Lastname',
+        date: '2025-05-31',
+        description: "kadj flkaj fklaj klajdksjdkf jkaljd flksjdlk faksdj ksdjf lakdjf dksjfklsaj;df sdlkf j"
+    },
+    {
+        interviewId: '8',
+        videoUrl: '/placeholder16x9.jpg',
+        videoAlt: 'example',
+        name: '3Firstname Lastname',
+        date: '2025-05-25',
+        description: "kadj flkaj fklaj klajdksjdkf jkaljd flksjdlk faksdj ksdjf lakdjf dksjfklsaj;df sdlkf j"
+    },
+    {
+        interviewId: '9',
+        videoUrl: '/placeholder16x9.jpg',
+        videoAlt: 'example',
+        name: 'Firstname Lastname',
+        date: '2023-03-31',
+        description: "kadj flkaj fklaj klajdksjdkf jkaljd flksjdlk faksdj ksdjf lakdjf dksjfklsaj;df sdlkf j"
+    },
+    {
+        interviewId: '10',
+        videoUrl: '/placeholder16x9.jpg',
+        videoAlt: 'example',
+        name: '2Firstname Lastname',
+        date: '2023-03-31',
+        description: "kadj flkaj fklaj klajdksjdkf jkaljd flksjdlk faksdj ksdjf lakdjf dksjfklsaj;df sdlkf j"
     }
 ];
 var _c, _c1;

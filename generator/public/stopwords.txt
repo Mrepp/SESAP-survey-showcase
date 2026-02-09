@@ -11,6 +11,7 @@ across
 after
 again
 against
+ago
 all
 almost
 alone
@@ -19,6 +20,7 @@ already
 also
 although
 always
+am
 among
 an
 and
@@ -237,6 +239,7 @@ no
 nobody
 non
 noone
+nor
 not
 nothing
 now
@@ -420,8 +423,10 @@ works
 would
 x
 y
+yeah
 year
 years
+yes
 yet
 you
 young

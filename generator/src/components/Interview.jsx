@@ -9,7 +9,7 @@ import { HiStar } from "react-icons/hi"
 
 export default function Interview ({data}) {
     return (
-        <Box maxW="sm" borderWidth="1px" shadow="md" borderRadius='25px' overflow="hidden">
+        <Box maxW="xs" borderWidth="1px" shadow="md" borderRadius='25px' overflow="hidden">
             <Image src={data.videoUrl} alt={data.videoAlt} borderTopRadius='25px' />
 
             <Box p="4" spaceY="2" bg='white'>

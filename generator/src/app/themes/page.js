@@ -115,18 +115,74 @@ export default function Themes() {
     )
 }
 
-const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9'},
-        {theme: 'Faculty Support', impactScore: '2', frequency: '8'},
-        {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
-        {theme: 'Belonging', impactScore: '3', frequency: '6'},
-        {theme: 'Cultural Representation', impactScore: '4', frequency: '6'},
-        {theme: 'Financial Struggles', impactScore: '5', frequency: '5'},
-        {theme: 'Mental Health', impactScore: '5', frequency: '4'},
-        {theme: 'Family Pressure', impactScore: '6', frequency: '3'},
-        {theme: 'Work-Life Balance', impactScore: '1', frequency: '2'},
-        {theme: 'Identity & Discrimination', impactScore: '2', frequency: '3'},
-        {theme: 'Career Preparation', impactScore: '9', frequency: '4'},
-        {theme: 'Language Barriers', impactScore: '8', frequency: '1'},
-        {theme: 'Support Networks', impactScore: '8', frequency: '1'},
-        {theme: 'Personal Growth', impactScore: '7', frequency: '2'},
+const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: [
+    {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+    {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+    {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+]},
+        {theme: 'Faculty Support', impactScore: '2', frequency: '8', interviews: [
+            {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+            {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+            {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+        ]},
+        {theme: 'Peer Relationships', impactScore: '2', frequency: '7', interviews: [
+            {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+            {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+            {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+        ]},
+        {theme: 'Belonging', impactScore: '3', frequency: '6', interviews: [
+            {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+            {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+            {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+        ]},
+        {theme: 'Cultural Representation', impactScore: '4', frequency: '6', interviews: [
+            {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+            {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+            {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+        ]},
+        {theme: 'Financial Struggles', impactScore: '5', frequency: '5', interviews: [
+            {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+            {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+            {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+        ]},
+        {theme: 'Mental Health', impactScore: '5', frequency: '4', interviews: [
+            {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+            {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+            {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+        ]},
+        {theme: 'Family Pressure', impactScore: '6', frequency: '3', interviews: [
+            {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+            {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+            {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+        ]},
+        {theme: 'Work-Life Balance', impactScore: '1', frequency: '2', interviews: [
+            {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+            {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+            {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+        ]},
+        {theme: 'Identity & Discrimination', impactScore: '2', frequency: '3', interviews: [
+            {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+            {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+            {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+        ]},
+        {theme: 'Career Preparation', impactScore: '9', frequency: '4', interviews: [
+            {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+            {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+            {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+        ]},
+        {theme: 'Language Barriers', impactScore: '8', frequency: '1', interviews: [
+            {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+            {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+            {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+        ]},
+        {theme: 'Support Networks', impactScore: '8', frequency: '1', interviews: [
+            {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+            {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+            {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+        ]},
+        {theme: 'Personal Growth', impactScore: '7', frequency: '2', interviews: [
+            {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+            {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+            {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+        ]},
 ]

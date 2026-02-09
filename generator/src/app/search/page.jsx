@@ -33,7 +33,7 @@ export default function Search() {
 
     return (
         <>
-            <Box marginBottom='20px' >
+            <Box marginBottom='50px' >
                 <SearchBar/>
             </Box>
 
@@ -46,7 +46,7 @@ export default function Search() {
                     <Accordion.Root collapsible multiple defaultValue={["a", "b", "c"]} >
                         <Accordion.Item value="a">
                             <Accordion.ItemTrigger>
-                                <Span flex="1">Themes</Span>
+                                <Span flex="1" color='beavOrange'>Themes</Span>
                                 <Accordion.ItemIndicator />
                             </Accordion.ItemTrigger>
                             <Accordion.ItemContent>
@@ -73,7 +73,7 @@ export default function Search() {
                         {/* Year */}
                         <Accordion.Item value="b">
                             <Accordion.ItemTrigger>
-                                <Span flex="1">Year</Span>
+                                <Span flex="1" color='beavOrange'>Year</Span>
                                 <Accordion.ItemIndicator />
                             </Accordion.ItemTrigger>
                             <Accordion.ItemContent>
@@ -100,7 +100,7 @@ export default function Search() {
                         {/* Sentiment */}
                         <Accordion.Item value="c">
                             <Accordion.ItemTrigger>
-                                <Span flex="1">Sentiment</Span>
+                                <Span flex="1" color='beavOrange'>Sentiment</Span>
                                 <Accordion.ItemIndicator />
                             </Accordion.ItemTrigger>
                             <Accordion.ItemContent>

@@ -15,7 +15,7 @@ export default function Result ({data}) {
                 <Image maxH='150px' src={data.videoUrl} alt={data.videoAlt} />
 
                 <Box w='stretch' p="4" spaceY="2" bg='white'>
-                    <Text fontWeight="medium" color="fg">
+                    <Text fontWeight="medium" color='beavOrange'>
                         {data.name}
                     </Text>
                     <HStack color="fg.muted">

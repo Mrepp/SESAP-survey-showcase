@@ -1,282 +1,2172 @@
-[00:00:01.556] Server  LOG      ✓ Ready in 1352ms
-[00:00:04.760] Server  ERROR   React does not recognize the `selectedKeys` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `selectedkeys` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
-[00:00:05.964] Browser ERROR   React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element. selectedKeys selectedkeys
-[00:00:05.964] Browser ERROR   Unknown event handler property `%s`. It will be ignored. onSelectionChange
-[00:02:20.466] Server  LOG      ✓ Compiled in 123ms
-[00:02:23.392] Server  LOG      ✓ Compiled in 486ms
-[00:02:24.983] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:02:25.052] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:02:25.896] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:02:26.254] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:02:33.675] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:07:05.697] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:07:06.272] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:07:41.315] Server  LOG      ✓ Compiled in 87ms
-[00:07:46.048] Server  LOG      ✓ Compiled in 27ms
-[00:07:54.207] Server  LOG      ✓ Compiled in 46ms
-[00:08:03.197] Server  LOG      ✓ Compiled in 44ms
-[00:08:04.381] Server  LOG      ✓ Compiled in 9ms
-[00:08:29.454] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:08:29.459] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:08:29.461] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:08:29.463] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:08:29.488] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:08:29.845] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:08:30.550] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:09:30.357] Server  LOG      ✓ Compiled in 147ms
-[00:09:30.399] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:09:31.257] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:09:33.422] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:09:35.583] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:09:35.583] Server  LOG      ✓ Compiled in 282ms
-[00:09:35.888] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:09:37.230] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:10:27.270] Server  LOG      ✓ Compiled in 37ms
-[00:11:02.798] Server  LOG      ✓ Compiled in 51ms
-[00:11:04.689] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:11:04.701] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:11:05.194] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:11:05.961] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:11:17.891] Server  LOG      ✓ Compiled in 31ms
-[00:11:17.904] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:11:18.376] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:11:20.697] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:11:27.058] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:11:27.058] Server  LOG      ✓ Compiled in 28ms
-[00:11:27.706] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:11:29.004] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:14:21.871] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:14:22.329] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:17:46.473] Server  LOG      ✓ Compiled in 248ms
-[00:17:50.121] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:17:50.435] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:17:51.018] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:20:44.532] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:20:44.546] Server  LOG      ✓ Compiled in 99ms
-[00:20:44.837] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:20:45.355] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:20:50.773] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:20:50.786] Server  LOG      ✓ Compiled in 32ms
-[00:20:51.171] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:20:52.689] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:20:53.352] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:20:53.415] Server  LOG      ✓ Compiled in 40ms
-[00:20:53.634] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:20:54.907] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:20:55.541] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:20:55.565] Server  LOG      ✓ Compiled in 33ms
-[00:20:55.964] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:20:57.109] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:21:02.587] Server  LOG      ✓ Compiled in 39ms
-[00:21:02.629] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:21:03.144] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:21:04.347] Server  LOG      ✓ Compiled in 29ms
-[00:21:04.785] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:21:09.884] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:21:09.906] Server  LOG      ✓ Compiled in 34ms
-[00:21:11.491] Server  LOG      ✓ Compiled in 96ms
-[00:21:11.979] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:21:34.752] Server  LOG      ✓ Compiled in 99ms
-[00:21:35.091] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:21:35.871] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:21:35.895] Server  LOG      ✓ Compiled in 53ms
-[00:21:36.116] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:21:36.401] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:21:37.574] Server  LOG      ✓ Compiled in 23ms
-[00:21:37.856] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:21:42.822] Server  LOG      ✓ Compiled in 31ms
-[00:21:42.853] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:21:43.051] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:21:43.463] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:21:44.785] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:23:48.460] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:23:48.476] Server  LOG      ✓ Compiled in 40ms
-[00:23:48.721] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:23:49.260] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:23:52.498] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:23:52.513] Server  LOG      ✓ Compiled in 23ms
-[00:23:52.830] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:23:54.413] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:25:15.578] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:25:15.595] Server  LOG      ✓ Compiled in 95ms
-[00:25:15.938] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:25:16.503] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:25:25.858] Server  LOG      ✓ Compiled in 42ms
-[00:25:25.879] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:25:26.613] Server  ERROR    ⨯ TypeError: context.get(...).includes is not a function
-[00:25:28.124] Browser ERROR   uncaughtError: TypeError: context.get("value").includes is not a function. (In 'context.get("value").includes(value2)', 'context.get("value").includes' is undefined)
-[00:25:33.457] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:25:33.492] Server  LOG      ✓ Compiled in 35ms
-[00:30:23.525] Server  LOG      ✓ Compiled in 412ms
-[00:30:23.901] Browser ERROR   ./src/app/search/page.jsx:24:56
+[00:00:00.745] Server  LOG      ✓ Ready in 541ms
+[00:03:17.988] Server  LOG      ✓ Compiled in 206ms
+[00:03:27.181] Server  LOG      ✓ Compiled in 55ms
+[00:03:29.026] Server  LOG      ✓ Compiled in 135ms
+[00:03:29.979] Server  LOG      ✓ Compiled in 10ms
+[00:03:48.267] Server  LOG      ✓ Compiled in 35ms
+[00:03:50.802] Server  LOG      ✓ Compiled in 63ms
+[00:03:52.799] Server  LOG      ✓ Compiled in 12ms
+[00:03:54.327] Server  LOG      ✓ Compiled in 11ms
+[00:03:56.152] Server  LOG      ✓ Compiled in 27ms
+[00:03:58.010] Server  LOG      ✓ Compiled in 29ms
+[00:04:02.191] Server  LOG      ✓ Compiled in 43ms
+[00:04:04.928] Server  LOG      ✓ Compiled in 6ms
+[00:04:08.185] Server  LOG      ✓ Compiled in 44ms
+[00:04:09.466] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/app/themes/page.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:04:09.466] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/app/themes/page.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:04:09.466] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/app/themes/page.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:04:09.467] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/app/themes/page.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:04:09.467] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/app/themes/page.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:04:09.467] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/app/themes/page.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:04:09.467] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/app/themes/page.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:04:09.467] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/app/themes/page.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:04:09.468] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/app/themes/page.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:04:09.672] Browser ERROR   ./src/app/themes/page.js:120:82
 Parsing ecmascript source code failed
-  22 |
-  23 | export default function Search() {
-> 24 |     const [selectedThemes, setSelectedThemes] = <string[]>([])
-     |                                                        ^
-  25 |     const [selectedYears, setSelectedYears] = useState(new Set())
-  26 |     const [selectedSentiments, setSelectedSentiments] = useState(new Set())
-  27 |
-
-Unexpected token `[`. Expected jsx identifier
-
-Import traces:
-  Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:30:25.186] Server  LOG      ✓ Compiled in 101ms
-[00:30:32.873] Server  LOG      ✓ Compiled in 75ms
-[00:30:33.133] Browser ERROR   ./src/app/search/page.jsx:24:65
-Parsing ecmascript source code failed
-  22 |
-  23 | export default function Search() {
-> 24 |     const [selectedThemes, setSelectedThemes] = useState<string[]>([])
-     |                                                                 ^
-  25 |     const [selectedYears, setSelectedYears] = useState(new Set())
-  26 |     const [selectedSentiments, setSelectedSentiments] = useState(new Set())
-  27 |
+  118 |
+  119 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {}},
+> 120 |         {theme: 'Faculty Support', impactScore: '2', frequency: '8', interviews: },
+      |                                                                                  ^
+  121 |         {theme: 'Peer Relationships', impactScore: '2', frequency: '7'},
+  122 |         {theme: 'Belonging', impactScore: '3', frequency: '6'},
+  123 |         {theme: 'Cultural Representation', impactScore: '4', frequency: '6'},
 
 Expression expected
 
 Import traces:
   Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
 
   Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:30:41.084] Browser ERROR   ./src/app/search/page.jsx:24:65
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[00:04:09.672] Browser ERROR   ./src/app/themes/page.js:123:89
 Parsing ecmascript source code failed
-  22 |
-  23 | export default function Search() {
-> 24 |     const [selectedThemes, setSelectedThemes] = useState<string[]>([])
-     |                                                                 ^
-  25 |     const [selectedYears, setSelectedYears] = useState<string[]>([])
-  26 |     const [selectedSentiments, setSelectedSentiments] = useState(new Set())
-  27 |
+  121 |         {theme: 'Peer Relationships', impactScore: '2', frequency: '7', interviews: {}},
+  122 |         {theme: 'Belonging', impactScore: '3', frequency: '6', interviews: {}},
+> 123 |         {theme: 'Cultural Representation', impactScore: '4', frequency: '6'}, interviews: {},
+      |                                                                                         ^
+  124 |         {theme: 'Financial Struggles', impactScore: '5', frequency: '5'},
+  125 |         {theme: 'Mental Health', impactScore: '5', frequency: '4'},
+  126 |         {theme: 'Family Pressure', impactScore: '6', frequency: '3'},
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[00:04:09.673] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/themes. Falling back to browser navigation. {}
+[00:04:09.673] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/themes. Falling back to browser navigation. {}
+[00:51:20.602] Server  LOG      ✓ Compiled in 576ms
+[00:52:02.032] Server  LOG      ✓ Compiled in 354ms
+[00:52:49.313] Server  LOG      ✓ Compiled in 133ms
+[00:52:51.211] Server  LOG      ✓ Compiled in 34ms
+[01:03:14.850] Server  LOG      ✓ Compiled in 102ms
+[01:03:28.402] Browser ERROR   ./src/app/themes/page.js:118:98
+Parsing ecmascript source code failed
+  116 | }
+  117 |
+> 118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {'1'}},
+      |                                                                                                  ^
+  119 |         {theme: 'Faculty Support', impactScore: '2', frequency: '8', interviews: {}},
+  120 |         {theme: 'Peer Relationships', impactScore: '2', frequency: '7', interviews: {}},
+  121 |         {theme: 'Belonging', impactScore: '3', frequency: '6', interviews: {}},
+
+Unexpected token `}`. Expected identifier
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:03:28.402] Browser ERROR   ./src/app/themes/page.js:118:98
+Parsing ecmascript source code failed
+  116 | }
+  117 |
+> 118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {'1',}},
+      |                                                                                                  ^
+  119 |         {theme: 'Faculty Support', impactScore: '2', frequency: '8', interviews: {}},
+  120 |         {theme: 'Peer Relationships', impactScore: '2', frequency: '7', interviews: {}},
+  121 |         {theme: 'Belonging', impactScore: '3', frequency: '6', interviews: {}},
+
+Unexpected token `,`. Expected identifier
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:03:28.402] Browser ERROR   ./src/app/themes/page.js:118:98
+Parsing ecmascript source code failed
+  116 | }
+  117 |
+> 118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {'1','2'}},
+      |                                                                                                  ^
+  119 |         {theme: 'Faculty Support', impactScore: '2', frequency: '8', interviews: {}},
+  120 |         {theme: 'Peer Relationships', impactScore: '2', frequency: '7', interviews: {}},
+  121 |         {theme: 'Belonging', impactScore: '3', frequency: '6', interviews: {}},
+
+Unexpected token `,`. Expected identifier
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:03:28.402] Browser ERROR   ./src/app/themes/page.js:118:98
+Parsing ecmascript source code failed
+  116 | }
+  117 |
+> 118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {'1','2',}},
+      |                                                                                                  ^
+  119 |         {theme: 'Faculty Support', impactScore: '2', frequency: '8', interviews: {}},
+  120 |         {theme: 'Peer Relationships', impactScore: '2', frequency: '7', interviews: {}},
+  121 |         {theme: 'Belonging', impactScore: '3', frequency: '6', interviews: {}},
+
+Unexpected token `,`. Expected identifier
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:03:28.402] Browser ERROR   ./src/app/themes/page.js:118:98
+Parsing ecmascript source code failed
+  116 | }
+  117 |
+> 118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {'1','2','3'}},
+      |                                                                                                  ^
+  119 |         {theme: 'Faculty Support', impactScore: '2', frequency: '8', interviews: {}},
+  120 |         {theme: 'Peer Relationships', impactScore: '2', frequency: '7', interviews: {}},
+  121 |         {theme: 'Belonging', impactScore: '3', frequency: '6', interviews: {}},
+
+Unexpected token `,`. Expected identifier
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:03:28.402] Browser ERROR   ./src/app/themes/page.js:118:98
+Parsing ecmascript source code failed
+  116 | }
+  117 |
+> 118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {'1', '2','3'}},
+      |                                                                                                  ^
+  119 |         {theme: 'Faculty Support', impactScore: '2', frequency: '8', interviews: {}},
+  120 |         {theme: 'Peer Relationships', impactScore: '2', frequency: '7', interviews: {}},
+  121 |         {theme: 'Belonging', impactScore: '3', frequency: '6', interviews: {}},
+
+Unexpected token `,`. Expected identifier
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:03:28.402] Browser ERROR   ./src/app/themes/page.js:118:98
+Parsing ecmascript source code failed
+  116 | }
+  117 |
+> 118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {'1', '2', '3'}},
+      |                                                                                                  ^
+  119 |         {theme: 'Faculty Support', impactScore: '2', frequency: '8', interviews: {}},
+  120 |         {theme: 'Peer Relationships', impactScore: '2', frequency: '7', interviews: {}},
+  121 |         {theme: 'Belonging', impactScore: '3', frequency: '6', interviews: {}},
+
+Unexpected token `,`. Expected identifier
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:03:28.402] Browser ERROR   ./src/app/themes/page.js:119:9
+Parsing ecmascript source code failed
+  117 |
+  118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {},
+> 119 |         {theme: 'Faculty Support', impactScore: '2', frequency: '8', interviews: {}},
+      |         ^
+  120 |         {theme: 'Peer Relationships', impactScore: '2', frequency: '7', interviews: {}},
+  121 |         {theme: 'Belonging', impactScore: '3', frequency: '6', interviews: {}},
+  122 |         {theme: 'Cultural Representation', impactScore: '4', frequency: '6', interviews: {}},
+
+Unexpected token `{`. Expected identifier, string literal, numeric literal or [ for the computed key
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:04:15.605] Server  LOG      ✓ Compiled in 37ms
+[01:04:23.768] Server  LOG      ✓ Compiled in 28ms
+[01:04:32.295] Server  LOG      ✓ Compiled in 13ms
+[01:04:55.659] Server  ERROR    ⨯ ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                 Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+
+
+[01:04:55.864] Browser ERROR   ./src/components/ThemeCard.jsx:39:22
+Parsing ecmascript source code failed
+  37 |             </VStack>
+  38 |         </Box>
+> 39 |         <Drawer.Root size="md">
+     |                      ^^^^
+  40 |       <Drawer.Trigger asChild>
+  41 |         <Button variant="outline" size="sm">
+  42 |           Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:04:55.865] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |       <Drawer.Trigger asChild>
+  42 |         <Button variant="outline" size="sm">
+  43 |           Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:04:55.865] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |         <Drawer.Trigger asChild>
+  42 |             <Button variant="outline" size="sm">
+  43 |             Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:04:55.865] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                 Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:04:55.865] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                 Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:04:55.865] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                 Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:04:57.084] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                 Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:04:57.264] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                 Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:04:57.646] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                 Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:04:57.664] Server  ERROR    ⨯ ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                 Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+
+
+[01:04:57.819] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                 Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:04:58.333] Browser ERROR   uncaughtError: Error: ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                 Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+
+
+[01:04:58.475] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                 Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:04:58.577] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                 Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:06:05.523] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                     Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:06:05.523] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                     Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:07:11.419] Server  LOG      ✓ Compiled in 221ms
+[01:07:27.778] Server  LOG      ✓ Compiled in 48ms
+[01:07:27.966] Browser ERROR   ./src/components/ThemeCard.jsx:40:22
+Parsing ecmascript source code failed
+  38 |         </Box>
+  39 |         
+> 40 |         <Drawer.Root size="md">
+     |                      ^^^^
+  41 |             <Drawer.Trigger asChild>
+  42 |                 <Button variant="outline" size="sm">
+  43 |                     Open Drawer
+
+Expected ',', got 'size'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:09:51.397] Server  LOG      ✓ Compiled in 116ms
+[01:09:55.064] Server  LOG      ✓ Compiled in 213ms
+[01:10:48.690] Server  LOG      ✓ Compiled in 18ms
+[01:10:59.212] Server  LOG      ✓ Compiled in 28ms
+[01:11:37.174] Server  LOG      ✓ Compiled in 12ms
+[01:11:49.594] Server  LOG      ✓ Compiled in 17ms
+[01:12:04.044] Server  LOG      ✓ Compiled in 24ms
+[01:12:12.352] Server  LOG      ✓ Compiled in 22ms
+[01:12:22.239] Server  LOG      ✓ Compiled in 19ms
+[01:12:38.210] Server  LOG      ✓ Compiled in 29ms
+[01:12:53.322] Server  LOG      ✓ Compiled in 124ms
+[01:13:41.885] Server  LOG      ✓ Compiled in 39ms
+[01:13:45.810] Server  LOG      ✓ Compiled in 9ms
+[01:13:47.768] Browser ERROR   uncaughtError: Error: Objects are not valid as a React child (found: object with keys {}). If you meant to render a collection of children, use an array instead.
+[01:15:25.506] Server  LOG      ✓ Compiled in 122ms
+[01:15:56.065] Server  LOG      ✓ Compiled in 51ms
+[01:16:28.880] Server  LOG      ✓ Compiled in 56ms
+[01:16:32.022] Server  LOG      ✓ Compiled in 62ms
+[01:16:34.334] Server  LOG      ✓ Compiled in 9ms
+[01:16:40.724] Server  LOG      ✓ Compiled in 51ms
+[01:16:45.187] Server  LOG      ✓ Compiled in 7ms
+[01:17:18.150] Server  LOG      ✓ Compiled in 40ms
+[01:17:37.524] Server  LOG      ✓ Compiled in 21ms
+[01:17:45.024] Server  LOG      ✓ Compiled in 38ms
+[01:17:52.117] Server  LOG      ✓ Compiled in 27ms
+[01:17:58.652] Server  LOG      ✓ Compiled in 45ms
+[01:18:01.480] Server  LOG      ✓ Compiled in 35ms
+[01:18:02.920] Server  LOG      ✓ Compiled in 42ms
+[01:18:04.470] Server  LOG      ✓ Compiled in 34ms
+[01:18:05.609] Server  LOG      ✓ Compiled in 62ms
+[01:18:07.089] Server  LOG      ✓ Compiled in 27ms
+[01:18:08.298] Server  LOG      ✓ Compiled in 59ms
+[01:18:14.104] Server  LOG      ✓ Compiled in 52ms
+[01:18:21.699] Server  LOG      ✓ Compiled in 64ms
+[01:18:24.474] Server  LOG      ✓ Compiled in 51ms
+[01:18:26.496] Server  LOG      ✓ Compiled in 26ms
+[01:18:34.319] Server  LOG      ✓ Compiled in 64ms
+[01:18:37.241] Server  LOG      ✓ Compiled in 33ms
+[01:19:17.317] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:17.415] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:17.537] Browser ERROR   ./src/app/themes/page.js:119:5
+Parsing ecmascript source code failed
+  117 |
+  118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {
+> 119 |     {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+      |     ^
+  120 |     {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+  121 |     {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+  122 | }},
+
+Unexpected token `{`. Expected identifier, string literal, numeric literal or [ for the computed key
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:19:17.537] Browser ERROR   ./src/app/themes/page.js:119:5
+Parsing ecmascript source code failed
+  117 |
+  118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {
+> 119 |     {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+      |     ^
+  120 |     {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+  121 |     {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},]
+  122 | }},
+
+Unexpected token `{`. Expected identifier, string literal, numeric literal or [ for the computed key
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:19:17.537] Browser ERROR   ./src/app/themes/page.js:119:143
+Parsing ecmascript source code failed
+  117 |
+  118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {
+> 119 |     [{interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+      |                                                                                                                                               ^
+  120 |     {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+  121 |     {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},]
+  122 | }},
+
+Expected ']', got ','
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:19:17.537] Browser ERROR   ./src/app/themes/page.js:119:143
+Parsing ecmascript source code failed
+  117 |
+  118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {
+> 119 |     [{interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+      |                                                                                                                                               ^
+  120 |     {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+  121 |     {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},]
+  122 | }},
+
+Expected ']', got ','
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:19:17.537] Browser ERROR   ./src/app/themes/page.js:119:143
+Parsing ecmascript source code failed
+  117 |
+  118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {
+> 119 |     [{interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+      |                                                                                                                                               ^
+  120 |     {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+  121 |     {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},]
+  122 | },
+
+Expected ']', got ','
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:19:17.537] Browser ERROR   ./src/app/themes/page.js:119:143
+Parsing ecmascript source code failed
+  117 |
+  118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {
+> 119 |     [{interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+      |                                                                                                                                               ^
+  120 |     {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+  121 |     {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},]
+  122 | }},
+
+Expected ']', got ','
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:19:17.537] Browser ERROR   ./src/app/themes/page.js:119:143
+Parsing ecmascript source code failed
+  117 |
+  118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: {
+> 119 |     [{interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+      |                                                                                                                                               ^
+  120 |     {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+  121 |     {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},]
+  122 | },
+
+Expected ']', got ','
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:19:17.537] Browser ERROR   ./src/app/themes/page.js:120:5
+Parsing ecmascript source code failed
+  118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: 
+  119 |     {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+> 120 |     {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+      |     ^
+  121 |     {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},]
+  122 | },
+  123 |         {theme: 'Faculty Support', impactScore: '2', frequency: '8', interviews: []},
+
+Unexpected token `{`. Expected identifier, string literal, numeric literal or [ for the computed key
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:19:17.537] Browser ERROR   ./src/app/themes/page.js:119:5
+Parsing ecmascript source code failed
+  117 |
+  118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: []
+> 119 |     {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+      |     ^
+  120 |     {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+  121 |     {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},]
+  122 | },
+
+Expected ',', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:19:17.537] Browser ERROR   ./src/app/themes/page.js:119:5
+Parsing ecmascript source code failed
+  117 |
+  118 | const themes = [{theme: 'Academic Difficulty', impactScore: '1', frequency: '9', interviews: []
+> 119 |     {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+      |     ^
+  120 |     {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+  121 |     {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+  122 | },
+
+Expected ',', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:19:17.553] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:17.603] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.369] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.369] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.369] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.369] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.369] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.369] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.369] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.369] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.369] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.369] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.370] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.370] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.370] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.370] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:18.370] Browser ERROR   ./src/app/themes/page.js:179:2
+Parsing ecmascript source code failed
+  177 |             {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+  178 |             {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+> 179 | ]
+      |  ^
+  180 |
+
+Expected ',', got '<eof>'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:19:18.370] Browser ERROR   ./src/app/themes/page.js:164:150
+Parsing ecmascript source code failed
+  162 |         ]},
+  163 |         {theme: 'Identity & Discrimination', impactScore: '2', frequency: '3', interviews: {[
+> 164 |             {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+      |                                                                                                                                                      ^
+  165 |             {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+  166 |             {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+  167 |         ]}},
+
+Expected ']', got ','
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:19:18.370] Browser ERROR   ./src/app/themes/page.js:164:142
+Parsing ecmascript source code failed
+  162 |         ]},
+  163 |         {theme: 'Identity & Discrimination', impactScore: '2', frequency: '3', interviews: {[
+> 164 |     {interviewId: '0', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+      |                                                                                                                                              ^
+  165 |     {interviewId: '1', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2024-03-31', description: ""},
+  166 |     {interviewId: '2', videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2025-03-31', description: ""},
+  167 | ]}},
+
+Expected ']', got ','
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:19:19.876] Browser ERROR   uncaughtError: Error: Objects are not valid as a React child (found: object with keys {interviewId, videoUrl, videoAlt, name, date, description}). If you meant to render a collection of children, use an array instead.
+[01:19:30.048] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:19:30.069] Server  LOG      ✓ Compiled in 38ms
+[01:19:34.225] Server  LOG      ✓ Compiled in 33ms
+[01:21:57.395] Server  LOG      ✓ Compiled in 128ms
+[01:22:16.077] Server  LOG      ✓ Compiled in 70ms
+[01:22:31.840] Server  LOG      ✓ Compiled in 47ms
+[01:22:40.349] Server  LOG      ✓ Compiled in 38ms
+[01:24:01.691] Server  LOG      ✓ Compiled in 145ms
+[01:24:38.525] Server  LOG      ✓ Compiled in 15ms
+[01:25:28.235] Browser ERROR   ./src/components/ThemeCard.jsx:15:1
+Parsing ecmascript source code failed
+  13 |
+  14 |
+> 15 | export default function ThemeCard ({data}) {
+     | ^^^^^^
+  16 |     return(
+  17 |         
+  18 |         
+
+Expected 'from', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:25:28.235] Browser ERROR   ./src/components/ThemeCard.jsx:57:25
+Parsing ecmascript source code failed
+  55 |                         <Drawer.Body>
+  56 |                             <Interview
+> 57 |                         </Drawer.Body>
+     |                         ^
+  58 |                     </Drawer.Content>
+  59 |                 </Drawer.Positioner>
+  60 |             </Portal>
 
 Expression expected
 
 Import traces:
   Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
 
   Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:30:44.294] Server  LOG      ✓ Compiled in 42ms
-[00:30:47.992] Server  LOG      ✓ Compiled in 102ms
-[00:30:50.270] Server  LOG      ✓ Compiled in 59ms
-[00:31:10.599] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:31:10.770] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: string
-[00:31:10.770] Browser ERROR   ./src/app/search/page.jsx:26:73
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:25:28.235] Browser ERROR   ./src/components/ThemeCard.jsx:57:26
 Parsing ecmascript source code failed
-  24 |     const [selectedThemes, setSelectedThemes] = useState<string>([])
-  25 |     const [selectedYears, setSelectedYears] = useState<string>([])
-> 26 |     const [selectedSentiments, setSelectedSentiments] = useState<string[]>([])
-     |                                                                         ^
-  27 |
-  28 |     const clearAllFilters = () => {
-  29 |         setSelectedThemes(new Set())
+  55 |                         <Drawer.Body>
+  56 |                             <Interview
+> 57 |                         </Drawer.Body>
+     |                          ^^^^^^^^^^^^^
+  58 |                     </Drawer.Content>
+  59 |                 </Drawer.Positioner>
+  60 |             </Portal>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:25:28.235] Browser ERROR   ./src/components/ThemeCard.jsx:56:46
+Parsing ecmascript source code failed
+  54 |                         </Drawer.Header>
+  55 |                         <Drawer.Body>
+> 56 |                             <Interview data=/>
+     |                                              ^
+  57 |                         </Drawer.Body>
+  58 |                     </Drawer.Content>
+  59 |                 </Drawer.Positioner>
 
 Expression expected
 
 Import traces:
   Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
 
   Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:31:10.770] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: string
-[00:31:11.176] Server  ERROR    ⨯ ReferenceError: string is not defined
-[00:31:11.823] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: string
-[00:33:17.821] Server  LOG      ✓ Compiled in 139ms
-[00:33:21.031] Server  LOG      ✓ Compiled in 82ms
-[00:33:21.333] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:33:21.425] Browser ERROR   ./src/app/search/page.jsx:57:62
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:25:28.235] Browser ERROR   ./src/components/ThemeCard.jsx:56:45
 Parsing ecmascript source code failed
-  55 |                                         collection={themes} 
-  56 |                                         selectionMode="multiple"
-> 57 |                                         value={selectedThemes]}
-     |                                                              ^
-  58 |                                         onValueChange={(e) => setSelectedThemes(e.value)}
-  59 |                                     >
-  60 |                                         <Listbox.Content>
+  54 |                         </Drawer.Header>
+  55 |                         <Drawer.Body>
+> 56 |                             <Interview data=[/>
+     |                                             ^
+  57 |                         </Drawer.Body>
+  58 |                     </Drawer.Content>
+  59 |                 </Drawer.Positioner>
 
-Expected '</', got ']'
+Expected '</', got '['
 
 Import traces:
   Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
 
   Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:33:21.970] Server  ERROR    ⨯ ReferenceError: string is not defined
-[00:33:22.526] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: string
-[00:34:43.126] Server  LOG      ✓ Compiled in 104ms
-[00:34:43.214] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:34:44.172] Server  ERROR    ⨯ ReferenceError: string is not defined
-[00:34:45.863] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: string
-[00:34:48.223] Server  LOG      ✓ Compiled in 38ms
-[00:34:48.323] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:34:48.884] Server  ERROR    ⨯ ReferenceError: string is not defined
-[00:34:50.650] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: string
-[00:34:52.111] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:34:52.125] Server  LOG      ✓ Compiled in 41ms
-[00:35:03.669] Server  LOG      ✓ Compiled in 23ms
-[00:35:07.090] Server  LOG      ✓ Compiled in 32ms
-[00:35:10.617] Server  LOG      ✓ Compiled in 34ms
-[00:35:27.375] Server  LOG      ✓ Compiled in 54ms
-[00:35:27.574] Browser ERROR   ./src/app/search/page.jsx:84:61
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:25:28.235] Browser ERROR   ./src/components/ThemeCard.jsx:56:46
 Parsing ecmascript source code failed
-  82 |                                         collection={years} 
-  83 |                                         selectionMode="multiple"
-> 84 |                                         value={selectedYears]}
-     |                                                             ^
-  85 |                                         onValueChange={(e) => setSelectedYears(e.value)}
-  86 |                                     >
-  87 |                                         <Listbox.Content>
+  54 |                         </Drawer.Header>
+  55 |                         <Drawer.Body>
+> 56 |                             <Interview data={/>
+     |                                              ^^
+  57 |                         </Drawer.Body>
+  58 |                     </Drawer.Content>
+  59 |                 </Drawer.Positioner>
 
-Expected '</', got ']'
+Unterminated regexp literal
 
 Import traces:
   Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
 
   Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:35:29.113] Server  LOG      ✓ Compiled in 75ms
-[00:35:32.870] Server  LOG      ✓ Compiled in 46ms
-[00:35:33.072] Browser ERROR   ./src/app/search/page.jsx:111:66
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:25:28.235] Browser ERROR   ./src/components/ThemeCard.jsx:56:49
 Parsing ecmascript source code failed
-  109 |                                         collection={sentiments} 
-  110 |                                         selectionMode="multiple"
-> 111 |                                         value={selectedSentiments]}
-      |                                                                  ^
-  112 |                                         onValueChange={(e) => setSelectedSentiments(e.value)}
-  113 |                                     >
-  114 |                                         <Listbox.Content>
+  54 |                         </Drawer.Header>
+  55 |                         <Drawer.Body>
+> 56 |                             <Interview data={} />
+     |                                                 ^
+  57 |                         </Drawer.Body>
+  58 |                     </Drawer.Content>
+  59 |                 </Drawer.Positioner>
 
-Expected '</', got ']'
+Expression expected
 
 Import traces:
   Client Component Browser:
-    ./src/app/search/page.jsx [Client Component Browser]
-    ./src/app/search/page.jsx [Server Component]
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
 
   Client Component SSR:
-    ./src/app/search/page.jsx [Client Component SSR]
-    ./src/app/search/page.jsx [Server Component]
-[00:35:34.554] Server  LOG      ✓ Compiled in 54ms
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:25:28.235] Browser ERROR   ./src/components/ThemeCard.jsx:56:51
+Parsing ecmascript source code failed
+  54 |                         </Drawer.Header>
+  55 |                         <Drawer.Body>
+> 56 |                             <Interview data={data.} />
+     |                                                   ^
+  57 |                         </Drawer.Body>
+  58 |                     </Drawer.Content>
+  59 |                 </Drawer.Positioner>
+
+Expected '</', got '}'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:25:28.235] Browser ERROR   ./src/app/themes/page.js:112:18
+Parsing ecmascript source code failed
+  110 |                         </GridItem>
+  111 |                     ))
+> 112 |                 </Grid>
+      |                  ^^^^^^
+  113 |             </Container>
+  114 |         </>
+  115 |     )
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:25:28.235] Browser ERROR   ./src/app/themes/page.js:102:53
+Parsing ecmascript source code failed
+  100 |
+  101 |                 <Grid templateColumns="repeat(auto-fit, minmax(250px, 1fr))" w='100%' >
+> 102 |                     sortedThemes.map((item, index) => (
+      |                                                     ^
+  103 |                         <GridItem key={index} 
+  104 |                         display="flex" 
+  105 |                         justifyContent="center" 
+
+Unexpected token. Did you mean `{'>'}` or `&gt;`?
+
+Import traces:
+  Client Component Browser:
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:25:28.235] Browser ERROR   ./src/components/ThemeCard.jsx:56:75
+Parsing ecmascript source code failed
+  54 |                         </Drawer.Header>
+  55 |                         <Drawer.Body>
+> 56 |                             {<data value="" className="interviews"></data>.map((item, index) => (
+     |                                                                           ^
+  57 |                                 <GridItem key={index} 
+  58 |                                 display="flex" 
+  59 |                                 justifyContent="center" 
+
+Expected '</', got '.'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:25:44.015] Server  LOG      ✓ Compiled in 48ms
+[01:25:55.216] Server  LOG      ✓ Compiled in 43ms
+[01:26:03.093] Server  LOG      ✓ Compiled in 24ms
+[01:26:04.957] Browser ERROR   ./src/components/ThemeCard.jsx:58:29
+Parsing ecmascript source code failed
+  56 |                             {data.interviews.map((item, index) => (
+  57 |                                 <Interview
+> 58 |                             ))}
+     |                             ^
+  59 |                             <Interview data={interview} />
+  60 |                         </Drawer.Body>
+  61 |                     </Drawer.Content>
+
+Expected '</', got ')'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:26:04.957] Browser ERROR   ./src/components/ThemeCard.jsx:57:50
+Parsing ecmascript source code failed
+  55 |                         <Drawer.Body>
+  56 |                             {data.interviews.map((item, index) => (
+> 57 |                                 <Interview data=/>
+     |                                                  ^
+  58 |                             ))}
+  59 |                             <Interview data={interview} />
+  60 |                         </Drawer.Body>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:26:04.957] Browser ERROR   ./src/components/ThemeCard.jsx:57:55
+Parsing ecmascript source code failed
+  55 |                         <Drawer.Body>
+  56 |                             {data.interviews.map((item, index) => (
+> 57 |                                 <Interview data={item/>
+     |                                                       ^
+  58 |                             ))}
+  59 |                             <Interview data={interview} />
+  60 |                         </Drawer.Body>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:26:04.957] Browser ERROR   ./src/components/ThemeCard.jsx:57:54
+Parsing ecmascript source code failed
+  55 |                         <Drawer.Body>
+  56 |                             {data.interviews.map((item, index) => (
+> 57 |                                 <Interview data={item{/>
+     |                                                      ^
+  58 |                             ))}
+  59 |                             <Interview data={interview} />
+  60 |                         </Drawer.Body>
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:26:04.957] Browser ERROR   ./src/components/ThemeCard.jsx:57:44
+Ecmascript file had an error
+  55 |                         <Drawer.Body>
+  56 |                             {data.interviews.map((item, index) => (
+> 57 |                                 <Interview key data={item} />
+     |                                            ^^^
+  58 |                             ))}
+  59 |                             <Interview data={interview} />
+  60 |                         </Drawer.Body>
+
+The value of property 'key' should not be empty
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:26:04.957] Browser ERROR   ./src/components/ThemeCard.jsx:57:51
+Parsing ecmascript source code failed
+  55 |                         <Drawer.Body>
+  56 |                             {data.interviews.map((item, index) => (
+> 57 |                                 <Interview key={} data={item} />
+     |                                                   ^^^^
+  58 |                             ))}
+  59 |                             <Interview data={interview} />
+  60 |                         </Drawer.Body>
+
+Expected '</', got 'data'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:26:08.213] Server  ERROR    ⨯ ReferenceError: interview is not defined
+[01:26:08.891] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: interview
+[01:26:23.725] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:26:23.725] Server  LOG      ✓ Compiled in 62ms
+[01:26:30.106] Server  LOG      ✓ Compiled in 21ms
+[01:26:36.493] Server  LOG      ✓ Compiled in 63ms
+[01:26:36.634] Browser ERROR   ./src/components/ThemeCard.jsx:57:48
+Parsing ecmascript source code failed
+  55 |                         <Drawer.Body>
+  56 |                             {data.interviews.map((interview, index) => (
+> 57 |                                 <Interview key=[] data={interview} />
+     |                                                ^
+  58 |                             ))}
+  59 |                             
+  60 |                         </Drawer.Body>
+
+Expected '</', got '['
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:26:42.556] Server  LOG      ✓ Compiled in 47ms
+[01:26:45.791] Server  LOG      ✓ Compiled in 34ms
+[01:26:48.218] Server  LOG      ✓ Compiled in 34ms
+[01:28:20.928] Server  LOG      ✓ Compiled in 58ms
+[01:28:26.368] Server  LOG      ✓ Compiled in 108ms
+[01:28:28.795] Browser ERROR   ./src/components/ThemeCard.jsx:43:23
+Parsing ecmascript source code failed
+  41 |                         <Text textStyle='sm'>Frequency: {data.frequency}</Text>
+  42 |                     </VStack>
+> 43 |                 </Box>
+     |                       ^
+> 44 |             </Drawer.Trigger>
+     | ^^^^^^^^^^^^^
+  45 |             <Portal>
+  46 |                 <Drawer.Backdrop />
+  47 |                 <Drawer.Positioner>
+
+Expected '</', got 'jsx text (
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:28:40.257] Server  LOG      ✓ Compiled in 56ms
+[01:28:40.390] Browser ERROR   ./src/components/ThemeCard.jsx:43:21
+Parsing ecmascript source code failed
+  41 |                         <Text textStyle='sm'>Frequency: {data.frequency}</Text>
+  42 |                     </VStack>
+> 43 |                 </B>
+     |                     ^
+> 44 |             </Drawer.Trigger>
+     | ^^^^^^^^^^^^^
+  45 |             <Portal>
+  46 |                 <Drawer.Backdrop />
+  47 |                 <Drawer.Positioner>
+
+Expected '</', got 'jsx text (
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:28:42.320] Server  LOG      ✓ Compiled in 69ms
+[01:30:10.613] Server  LOG      ✓ Compiled in 128ms
+[01:30:14.739] Server  LOG      ✓ Compiled in 101ms
+[01:30:15.154] Browser ERROR   ./src/components/ThemeCard.jsx:22:17
+Parsing ecmascript source code failed
+  20 |             <Drawer.Trigger asChild>
+  21 |                 <
+> 22 |                 <Box
+     |                 ^
+  23 |                     width='150px' 
+  24 |                     aspectRatio='1/1'
+  25 |                     borderWidth="1px" 
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:30:17.083] Browser ERROR   ./src/components/ThemeCard.jsx:22:17
+Parsing ecmascript source code failed
+  20 |             <Drawer.Trigger asChild>
+  21 |                 <Button
+> 22 |                 <Box
+     |                 ^
+  23 |                     width='150px' 
+  24 |                     aspectRatio='1/1'
+  25 |                     borderWidth="1px" 
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:30:20.293] Server  LOG      ✓ Compiled in 88ms
+[01:30:22.433] Server  LOG      ✓ Compiled in 12ms
+[01:30:25.519] Server  ERROR    ⨯ ./src/components/ThemeCard.jsx:45:30
+Parsing ecmascript source code failed
+  43 |                     </VStack>
+  44 |                 </Box>
+> 45 |             </Drawer.Trigger>
+     |                              ^
+> 46 |             <Portal>
+     | ^^^^^^^^^^^^^
+  47 |                 <Drawer.Backdrop />
+  48 |                 <Drawer.Positioner>
+  49 |                     <Drawer.Content>
+
+Expected '</', got 'jsx text (
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+
+
+[01:30:25.536] Browser ERROR   ./src/components/ThemeCard.jsx:45:30
+Parsing ecmascript source code failed
+  43 |                     </VStack>
+  44 |                 </Box>
+> 45 |             </Drawer.Trigger>
+     |                              ^
+> 46 |             <Portal>
+     | ^^^^^^^^^^^^^
+  47 |                 <Drawer.Backdrop />
+  48 |                 <Drawer.Positioner>
+  49 |                     <Drawer.Content>
+
+Expected '</', got 'jsx text (
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:30:25.662] Browser ERROR   ./src/components/ThemeCard.jsx:45:30
+Parsing ecmascript source code failed
+  43 |                     </VStack>
+  44 |                 </Box>
+> 45 |             </Drawer.Trigger>
+     |                              ^
+> 46 |             <Portal>
+     | ^^^^^^^^^^^^^
+  47 |                 <Drawer.Backdrop />
+  48 |                 <Drawer.Positioner>
+  49 |                     <Drawer.Content>
+
+Expected '</', got 'jsx text (
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:30:25.663] Browser ERROR   ./src/components/ThemeCard.jsx:45:30
+Parsing ecmascript source code failed
+  43 |                     </VStack>
+  44 |                 </Box>
+> 45 |             </Drawer.Trigger>
+     |                              ^
+> 46 |             <Portal>
+     | ^^^^^^^^^^^^^
+  47 |                 <Drawer.Backdrop />
+  48 |                 <Drawer.Positioner>
+  49 |                     <Drawer.Content>
+
+Expected '</', got 'jsx text (
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:30:25.685] Server  ERROR    ⨯ ./src/components/ThemeCard.jsx:45:30
+Parsing ecmascript source code failed
+  43 |                     </VStack>
+  44 |                 </Box>
+> 45 |             </Drawer.Trigger>
+     |                              ^
+> 46 |             <Portal>
+     | ^^^^^^^^^^^^^
+  47 |                 <Drawer.Backdrop />
+  48 |                 <Drawer.Positioner>
+  49 |                     <Drawer.Content>
+
+Expected '</', got 'jsx text (
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+
+
+[01:30:25.883] Browser ERROR   ./src/components/ThemeCard.jsx:45:30
+Parsing ecmascript source code failed
+  43 |                     </VStack>
+  44 |                 </Box>
+> 45 |             </Drawer.Trigger>
+     |                              ^
+> 46 |             <Portal>
+     | ^^^^^^^^^^^^^
+  47 |                 <Drawer.Backdrop />
+  48 |                 <Drawer.Positioner>
+  49 |                     <Drawer.Content>
+
+Expected '</', got 'jsx text (
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:30:26.194] Browser ERROR   uncaughtError: Error: ./src/components/ThemeCard.jsx:45:30
+Parsing ecmascript source code failed
+  43 |                     </VStack>
+  44 |                 </Box>
+> 45 |             </Drawer.Trigger>
+     |                              ^
+> 46 |             <Portal>
+     | ^^^^^^^^^^^^^
+  47 |                 <Drawer.Backdrop />
+  48 |                 <Drawer.Positioner>
+  49 |                     <Drawer.Content>
+
+Expected '</', got 'jsx text (
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+
+
+[01:30:26.253] Browser ERROR   ./src/components/ThemeCard.jsx:45:30
+Parsing ecmascript source code failed
+  43 |                     </VStack>
+  44 |                 </Box>
+> 45 |             </Drawer.Trigger>
+     |                              ^
+> 46 |             <Portal>
+     | ^^^^^^^^^^^^^
+  47 |                 <Drawer.Backdrop />
+  48 |                 <Drawer.Positioner>
+  49 |                     <Drawer.Content>
+
+Expected '</', got 'jsx text (
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:30:26.272] Server  LOG      ✓ Compiled in 49ms
+[01:30:36.707] Server  LOG      ✓ Compiled in 45ms
+[01:32:54.525] Server  LOG      ✓ Compiled in 128ms
+[01:32:55.820] Server  LOG      ✓ Compiled in 26ms
+[01:32:58.489] Server  LOG      ✓ Compiled in 53ms
+[01:32:58.765] Browser ERROR   ./src/components/ThemeCard.jsx:45:26
+Parsing ecmascript source code failed
+  43 |                     </VStack>
+  44 |                 </Box>
+> 45 |                 </Button>
+     |                          ^
+> 46 |             </Drawer.Trigger>
+     | ^^^^^^^^^^^^^
+  47 |             <Portal>
+  48 |                 <Drawer.Backdrop />
+  49 |                 <Drawer.Positioner>
+
+Expected '</', got 'jsx text (
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:33:02.061] Server  LOG      ✓ Compiled in 85ms
+[01:33:06.666] Server  LOG      ✓ Compiled in 32ms
+[01:33:08.222] Server  LOG      ✓ Compiled in 55ms
+[01:33:11.525] Browser ERROR   uncaughtError: Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: boolean.
+
+Check the render method of `Box`.
+[01:33:11.526] Browser ERROR   ./src/components/ThemeCard.jsx:24:21
+Parsing ecmascript source code failed
+  22 |                 <Box
+  23 |                     as=
+> 24 |                     width='150px' 
+     |                     ^^^^^
+  25 |                     aspectRatio='1/1'
+  26 |                     borderWidth="1px" 
+  27 |                     borderRadius='25px'
+
+Expected '</', got 'width'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:33:12.323] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:33:12.330] Server  LOG      ✓ Compiled in 89ms
+[01:34:15.915] Server  LOG      ✓ Compiled in 44ms
+[01:34:20.587] Server  LOG      ✓ Compiled in 26ms
+[01:34:27.794] Server  LOG      ✓ Compiled in 40ms
+[01:34:31.514] Server  LOG      ✓ Compiled in 7ms
+[01:34:34.798] Server  LOG      ✓ Compiled in 90ms
+[01:34:36.699] Server  LOG      ✓ Compiled in 71ms
+[01:34:38.211] Server  LOG      ✓ Compiled in 8ms
+[01:34:41.477] Server  LOG      ✓ Compiled in 28ms
+[01:34:42.037] Browser ERROR   ./src/components/ThemeCard.jsx:45:23
+Parsing ecmascript source code failed
+  43 |                         <Text textStyle='sm'>Frequency: {data.frequency}</Text>
+  44 |                     </VStack>
+> 45 |                 </Box>
+     |                       ^
+> 46 |                 
+     | ^^^^^^^^^^^^^^^^
+> 47 |             </Drawer.Trigger>
+     | ^^^^^^^^^^^^^
+  48 |             <Portal>
+  49 |                 <Drawer.Backdrop />
+  50 |                 <Drawer.Positioner>
+
+Expected '</', got 'jsx text (
+                
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:35:35.754] Server  LOG      ✓ Compiled in 52ms
+[01:35:35.899] Browser ERROR   ./src/components/ThemeCard.jsx:46:23
+Parsing ecmascript source code failed
+  44 |                     </VStack>
+  45 |                     
+> 46 |                 </Box>
+     |                       ^
+> 47 |                 
+     | ^^^^^^^^^^^^^^^^
+> 48 |             </Drawer.Trigger>
+     | ^^^^^^^^^^^^^
+  49 |             <Portal>
+  50 |                 <Drawer.Backdrop />
+  51 |                 <Drawer.Positioner>
+
+Expected '</', got 'jsx text (
+                
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:35:40.727] Browser ERROR   ./src/components/ThemeCard.jsx:46:23
+Parsing ecmascript source code failed
+  44 |                     </VStack>
+  45 |                     
+> 46 |                 </Box>
+     |                       ^
+> 47 |                 </Button>
+     | ^^^^^^^^^^^^^^^^^
+  48 |             </Drawer.Trigger>
+  49 |             <Portal>
+  50 |                 <Drawer.Backdrop />
+
+Expected '</', got 'jsx text (
+                )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:35:44.861] Browser ERROR   ./src/components/ThemeCard.jsx:47:26
+Parsing ecmascript source code failed
+  45 |                     
+  46 |                 </Box>
+> 47 |                 </Button>
+     |                          ^
+> 48 |             </Drawer.Trigger>
+     | ^^^^^^^^^^^^^
+  49 |             <Portal>
+  50 |                 <Drawer.Backdrop />
+  51 |                 <Drawer.Positioner>
+
+Expected '</', got 'jsx text (
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:35:46.821] Server  LOG      ✓ Compiled in 53ms
+[01:36:01.884] Server  LOG      ✓ Compiled in 97ms
+[01:36:35.146] Server  LOG      ✓ Compiled in 28ms
+[01:36:36.503] Server  LOG      ✓ Compiled in 36ms
+[01:36:36.705] Browser ERROR   ./src/components/ThemeCard.jsx:36:36
+Parsing ecmascript source code failed
+  34 |                     justifyContent="center"
+  35 |                     alignItems="center"
+> 36 |                     cursor: pointer;
+     |                                    ^
+  37 |                     >
+  38 |                     <Text fontWeight="medium" color="fg" textAlign="center">
+  39 |                         {data.theme}
+
+Expected '</', got ';'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:36:40.741] Browser ERROR   ./src/components/ThemeCard.jsx:36:28
+Parsing ecmascript source code failed
+  34 |                     justifyContent="center"
+  35 |                     alignItems="center"
+> 36 |                     cursor=pointer;
+     |                            ^^^^^^^
+  37 |                     >
+  38 |                     <Text fontWeight="medium" color="fg" textAlign="center">
+  39 |                         {data.theme}
+
+Expected '</', got 'pointer'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:36:44.097] Server  LOG      ✓ Compiled in 91ms
+[01:38:15.493] Server  LOG      ✓ Compiled in 122ms
+[01:38:21.782] Server  LOG      ✓ Compiled in 37ms
+[01:38:27.275] Server  LOG      ✓ Compiled in 27ms
+[01:38:40.844] Server  LOG      ✓ Compiled in 26ms
+[01:38:42.940] Server  LOG      ✓ Compiled in 10ms
+[01:39:10.226] Server  LOG      ✓ Compiled in 42ms
+[01:39:32.430] Server  LOG      ✓ Compiled in 248ms
+[01:40:00.333] Server  LOG      ✓ Compiled in 20ms
+[01:40:01.332] Server  LOG      ✓ Compiled in 9ms
+[01:40:12.216] Server  LOG      ✓ Compiled in 24ms
+[01:40:29.599] Server  LOG      ✓ Compiled in 31ms
+[01:40:40.501] Server  LOG      ✓ Compiled in 45ms
+[01:40:44.079] Server  LOG      ✓ Compiled in 25ms
+[01:40:55.682] Server  LOG      ✓ Compiled in 87ms
+[01:40:58.702] Server  LOG      ✓ Compiled in 92ms
+[01:41:02.414] Server  LOG      ✓ Compiled in 44ms
+[01:41:04.015] Browser ERROR   ./src/components/ThemeCard.jsx:61:33
+Parsing ecmascript source code failed
+  59 |                         <Drawer.Body>
+  60 |                             {data.interviews.map((interview, index) => (
+> 61 |                                 <
+     |                                 ^
+  62 |                                 <Interview key={index} data={interview} />
+  63 |                             ))}
+  64 |                         </Drawer.Body>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:41:04.015] Browser ERROR   ./src/components/ThemeCard.jsx:64:44
+Parsing ecmascript source code failed
+  62 |                                     
+  63 |                                 </Box>
+> 64 |                                 <Interview key={index} data={interview} />
+     |                                            ^^^
+  65 |                             ))}
+  66 |                         </Drawer.Body>
+  67 |
+
+Expected '</', got 'key'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:41:04.016] Browser ERROR   ./src/components/ThemeCard.jsx:62:44
+Parsing ecmascript source code failed
+  60 |                             {data.interviews.map((interview, index) => (
+  61 |                                 <Box></Box>
+> 62 |                                 <Interview key={index} data={interview} />
+     |                                            ^^^
+  63 |                             ))}
+  64 |                         </Drawer.Body>
+  65 |
+
+Expected '</', got 'key'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:41:04.016] Browser ERROR   ./src/components/ThemeCard.jsx:64:44
+Parsing ecmascript source code failed
+  62 |                                     
+  63 |                                 </Box>
+> 64 |                                 <Interview key={index} data={interview} />
+     |                                            ^^^
+  65 |                             ))}
+  66 |                         </Drawer.Body>
+  67 |
+
+Expected '</', got 'key'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:41:04.016] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `chakra(div)`.  It was passed a child from ThemeCard.
+[01:41:04.193] Server  LOG      ✓ Compiled in 26ms
+[01:41:13.455] Server  LOG      ✓ Compiled in 28ms
+[01:43:18.016] Server  LOG      ✓ Compiled in 159ms
+[01:43:21.505] Server  LOG      ✓ Compiled in 301ms
+[01:43:27.020] Server  LOG      ✓ Compiled in 62ms
+[01:43:28.781] Server  LOG      ✓ Compiled in 10ms
+[01:43:35.527] Server  LOG      ✓ Compiled in 56ms
+[01:43:36.958] Server  LOG      ✓ Compiled in 11ms
+[01:43:41.417] Server  LOG      ✓ Compiled in 80ms
+[01:43:49.128] Server  LOG      ✓ Compiled in 33ms
+[01:43:59.041] Server  LOG      ✓ Compiled in 38ms
+[01:44:00.459] Browser ERROR   ./src/components/ThemeCard.jsx:62:34
+Parsing ecmascript source code failed
+  60 |                                 
+  61 |                                     <Interview key={index} data={interview} />
+> 62 |                                 </Box>
+     |                                  ^^^^^
+  63 |                                 
+  64 |                             ))}
+  65 |                         </Drawer.Body>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:44:00.459] Browser ERROR   ./src/components/ThemeCard.jsx:61:37
+Parsing ecmascript source code failed
+  59 |                             {data.interviews.map((interview, index) => (
+  60 |                                 <Stack
+> 61 |                                     <Interview key={index} data={interview} />
+     |                                     ^
+  62 |                                 
+  63 |                                 
+  64 |                             ))}
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:44:00.459] Browser ERROR   ./src/components/ThemeCard.jsx:63:48
+Parsing ecmascript source code failed
+  61 |                                     
+  62 |                                 </Stack>
+> 63 |                                     <Interview key={index} data={interview} />
+     |                                                ^^^
+  64 |                                 
+  65 |                                 
+  66 |                             ))}
+
+Expected '</', got 'key'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:44:34.608] Server  LOG      ✓ Compiled in 26ms
+[01:44:37.811] Server  LOG      ✓ Compiled in 25ms
+[01:44:42.838] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `chakra(div)`.  It was passed a child from ThemeCard.
+[01:45:02.589] Server  LOG      ✓ Compiled in 114ms
+[01:45:02.795] Browser ERROR   ./src/components/ThemeCard.jsx:60:64
+Parsing ecmascript source code failed
+  58 |                         <Drawer.Body>
+  59 |                             {data.interviews.map((interview, index) => (
+> 60 |                                 <Stack direction='column' gap= bg='green'>
+     |                                                                ^^
+  61 |                                     <Interview key={index} data={interview} />
+  62 |                                 </Stack>
+  63 |                             ))}
+
+Expected '</', got 'bg'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:45:05.286] Server  LOG      ✓ Compiled in 81ms
+[01:45:09.482] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `chakra(div)`.  It was passed a child from ThemeCard.
+[01:45:23.193] Server  LOG      ✓ Compiled in 53ms
+[01:45:23.409] Browser ERROR   ./src/components/ThemeCard.jsx:63:34
+Parsing ecmascript source code failed
+  61 |                                 
+  62 |                                     <Interview key={index} data={interview} />
+> 63 |                                 </Stack>
+     |                                  ^^^^^^^
+  64 |                             ))}
+  65 |                         </Drawer.Body>
+  66 |
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:45:25.309] Server  LOG      ✓ Compiled in 11ms
+[01:45:25.534] Browser ERROR   ./src/components/ThemeCard.jsx:65:39
+Parsing ecmascript source code failed
+  63 |                                 
+  64 |                             ))}
+> 65 |                         </Drawer.Body>
+     |                                       ^
+> 66 |
+     | ^
+> 67 |                     </Drawer.Content>
+     | ^^^^^^^^^^^^^^^^^^^^^
+  68 |                 </Drawer.Positioner>
+  69 |             </Portal>
+  70 |         </Drawer.Root>
+
+Expected '</', got 'jsx text (
+
+                    )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ThemeCard.jsx [Client Component Browser]
+    ./src/app/themes/page.js [Client Component Browser]
+    ./src/app/themes/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/components/ThemeCard.jsx [Client Component SSR]
+    ./src/app/themes/page.js [Client Component SSR]
+    ./src/app/themes/page.js [Server Component]
+[01:45:26.713] Server  LOG      ✓ Compiled in 29ms
+[01:45:29.842] Server  LOG      ✓ Compiled in 7ms
+[01:45:32.790] Server  LOG      ✓ Compiled in 15ms
+[01:45:37.356] Server  LOG      ✓ Compiled in 7ms
+[01:46:40.257] Server  LOG      ✓ Compiled in 54ms
+[01:48:32.241] Server  LOG      ✓ Compiled in 36ms
+[01:48:38.208] Server  LOG      ✓ Compiled in 26ms

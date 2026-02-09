@@ -1,8 +1,17 @@
-// CITE THIS!!!!!!!!!!!!!!
+// CITE THIS!!!!!!!!!!!!!! https://observablehq.com/@d3/word-cloud
 'use client'
 import * as d3 from "d3"
 import d3Cloud from "d3-cloud"
 import { useEffect, useRef, useState } from "react"
+import useWindowSize from "@rooks/use-window-size"
+
+
+// can't put window.innerWidth directly into function so this is workaround
+// use-window-size package https://www.npmjs.com/package/@rooks/use-window-size
+function window() {
+    const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
+    return innerWidth
+}
 
 export default function WordCloud({
     size = group => group.length, // Given a grouping of words, returns the size factor for that word
@@ -11,7 +20,7 @@ export default function WordCloud({
     marginRight = 0, // right margin, in pixels
     marginBottom = 0, // bottom margin, in pixels
     marginLeft = 0, // left margin, in pixels
-    width = window.innerWidth, // outer width, in pixels
+    width = window(), // outer width, in pixels
     height = 200, // outer height, in pixels
     maxWords = 250, // maximum number of words to extract from the text
     fontFamily = "sans-serif", // font family

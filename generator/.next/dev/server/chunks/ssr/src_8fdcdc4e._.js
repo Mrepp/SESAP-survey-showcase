@@ -169,12 +169,319 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$chart$2e$js$2f$dist$2f$chart$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/chart.js/dist/chart.js [app-ssr] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$chartjs$2d$2$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-chartjs-2/dist/index.js [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$faker$2d$js$2f$faker$2f$dist$2f$chunk$2d$MVUZLZE2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__a__as__faker$3e$__ = __turbopack_context__.i("[project]/node_modules/@faker-js/faker/dist/chunk-MVUZLZE2.js [app-ssr] (ecmascript) <export a as faker>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
+'use client';
 ;
 ;
 ;
 ;
 __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$chart$2e$js$2f$dist$2f$chart$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["Chart"].register(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$chart$2e$js$2f$dist$2f$chart$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["CategoryScale"], __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$chart$2e$js$2f$dist$2f$chart$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["LinearScale"], __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$chart$2e$js$2f$dist$2f$chart$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["BarElement"], __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$chart$2e$js$2f$dist$2f$chart$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["Title"], __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$chart$2e$js$2f$dist$2f$chart$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["Tooltip"], __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$chart$2e$js$2f$dist$2f$chart$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["Legend"]);
+const interviewData = [
+    {
+        theme: 'Academic Difficulty',
+        identities: {
+            Disabled: 1,
+            'First-Generation': 2,
+            Immigrant: 3,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    },
+    {
+        theme: 'Belonging',
+        identities: {
+            Disabled: 13,
+            'First-Generation': 2,
+            Immigrant: 3,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    },
+    {
+        theme: 'Career Preparation',
+        identities: {
+            Disabled: 1,
+            'First-Generation': 2,
+            Immigrant: 3,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    },
+    {
+        theme: 'Cultural Representation',
+        identities: {
+            Disabled: 1,
+            'First-Generation': 2,
+            Immigrant: 3,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    },
+    {
+        theme: 'Faculty Support',
+        identities: {
+            Disabled: 1,
+            'First-Generation': 2,
+            Immigrant: 3,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    },
+    {
+        theme: 'Family Pressure',
+        identities: {
+            Disabled: 1,
+            'First-Generation': 2,
+            Immigrant: 3,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    },
+    {
+        theme: 'Financial Struggles',
+        identities: {
+            Disabled: 1,
+            'First-Generation': 2,
+            Immigrant: 3,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    },
+    {
+        theme: 'Identity & Discrimination',
+        identities: {
+            Disabled: 1,
+            'First-Generation': 2,
+            Immigrant: 3,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    },
+    {
+        theme: 'Mental Health',
+        identities: {
+            Disabled: 1,
+            'First-Generation': 2,
+            Immigrant: 3,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    },
+    {
+        theme: 'Language Barriers',
+        identities: {
+            Disabled: 1,
+            'First-Generation': 2,
+            Immigrant: 5,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    },
+    {
+        theme: 'Peer Relationships',
+        identities: {
+            Disabled: 1,
+            'First-Generation': 2,
+            Immigrant: 3,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    },
+    {
+        theme: 'Personal Growth',
+        identities: {
+            Disabled: 1,
+            'First-Generation': 2,
+            Immigrant: 3,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    },
+    {
+        theme: 'Support Networks',
+        identities: {
+            Disabled: 1,
+            'First-Generation': 2,
+            Immigrant: 3,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    },
+    {
+        theme: 'Work-Life Balance',
+        identities: {
+            Disabled: 1,
+            'First-Generation': 2,
+            Immigrant: 3,
+            'International Student': 4,
+            'LGBTQ+': 5,
+            'Low-Income': 6,
+            'Non-Traditional Age': 7,
+            Parent: 8,
+            Religious: 9,
+            Rural: 10,
+            'STEM Minoritized': 11,
+            'Student of Color': 12,
+            'Transfer Student': 13,
+            Veteran: 14,
+            'Working Student': 14
+        }
+    }
+];
+// Generate colors for each theme
+const generateColors = (count)=>{
+    const colors = [
+        'rgb(255, 99, 132)',
+        'rgb(75, 192, 192)',
+        'rgb(53, 162, 235)',
+        'rgb(255, 206, 86)',
+        'rgb(153, 102, 255)',
+        'rgb(255, 159, 64)',
+        'rgb(199, 199, 199)',
+        'rgb(83, 102, 255)',
+        'rgb(255, 99, 255)',
+        'rgb(99, 255, 132)',
+        'rgb(255, 132, 99)',
+        'rgb(132, 99, 255)',
+        'rgb(99, 255, 255)',
+        'rgb(255, 255, 99)'
+    ];
+    // Cycle through colors if we have more themes than colors
+    return Array.from({
+        length: count
+    }, (_, i)=>colors[i % colors.length]);
+};
+const themeColors = generateColors(interviewData.length);
 const options = {
     indexAxis: 'y',
     plugins: {
@@ -196,10 +503,8 @@ const options = {
         }
     }
 };
-// labels loaded from identities.txt
-// Text file provides an easy way to change/add to identities from one place
-// Identity labels are hard coded as back up in case fails to load txt file
-const labels = [
+// Hardcoded labels as fallback in case identities.txt fails to load
+const fallbackLabels = [
     'Disabled',
     'First-Generation',
     'Immigrant',
@@ -216,42 +521,66 @@ const labels = [
     'Veteran',
     'Working Student'
 ];
-const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Dataset 1',
-            data: labels.map(()=>__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$faker$2d$js$2f$faker$2f$dist$2f$chunk$2d$MVUZLZE2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__a__as__faker$3e$__["faker"].number.float({
-                    min: 0,
-                    max: 1000
-                })),
-            backgroundColor: 'rgb(255, 99, 132)'
-        },
-        {
-            label: 'Dataset 2',
-            data: labels.map(()=>__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$faker$2d$js$2f$faker$2f$dist$2f$chunk$2d$MVUZLZE2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__a__as__faker$3e$__["faker"].number.float({
-                    min: 0,
-                    max: 1000
-                })),
-            backgroundColor: 'rgb(75, 192, 192)'
-        },
-        {
-            label: 'Dataset 3',
-            data: labels.map(()=>__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$faker$2d$js$2f$faker$2f$dist$2f$chunk$2d$MVUZLZE2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__a__as__faker$3e$__["faker"].number.float({
-                    min: 0,
-                    max: 1000
-                })),
-            backgroundColor: 'rgb(53, 162, 235)'
-        }
-    ]
-};
 function BarChart() {
+    const [labels, setLabels] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(fallbackLabels);
+    const [chartData, setChartData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    // Load identities from identities.txt
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        async function loadIdentities() {
+            try {
+                const response = await fetch('/identities.txt');
+                if (!response.ok) {
+                    console.warn('Failed to load identities.txt, using fallback labels');
+                    setLabels(fallbackLabels);
+                    return;
+                }
+                const text = await response.text();
+                // Parse identities: split by newline, trim whitespace, filter out empty lines and comments
+                const identities = text.split('\n').map((line)=>line.trim()).filter((line)=>line && !line.startsWith('#'));
+                if (identities.length > 0) {
+                    setLabels(identities);
+                } else {
+                    console.warn('identities.txt is empty, using fallback labels');
+                    setLabels(fallbackLabels);
+                }
+            } catch (error) {
+                console.warn('Error loading identities.txt:', error);
+                setLabels(fallbackLabels);
+            }
+        }
+        loadIdentities();
+    }, []);
+    // Update chart data when labels are loaded
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (labels.length > 0) {
+            setChartData({
+                labels,
+                datasets: interviewData.map((item, index)=>({
+                        label: item.theme,
+                        // Map over labels to get values in the correct order
+                        data: labels.map((label)=>item.identities[label] || 0),
+                        backgroundColor: themeColors[index]
+                    }))
+            });
+        }
+    }, [
+        labels
+    ]);
+    if (!chartData) {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            children: "Loading chart..."
+        }, void 0, false, {
+            fileName: "[project]/src/components/visualizations/BarChart.jsx",
+            lineNumber: 139,
+            columnNumber: 16
+        }, this);
+    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$chartjs$2d$2$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Bar"], {
         options: options,
-        data: data
+        data: chartData
     }, void 0, false, {
         fileName: "[project]/src/components/visualizations/BarChart.jsx",
-        lineNumber: 88,
+        lineNumber: 142,
         columnNumber: 12
     }, this);
 }

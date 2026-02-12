@@ -17,7 +17,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$
 ;
 function Interview({ data }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$box$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Box"], {
-        maxW: "sm",
+        maxW: "xs",
         borderWidth: "1px",
         shadow: "md",
         borderRadius: "25px",
@@ -77,7 +77,7 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "[project]/src/components/visualizations/WordCloud.jsx [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-// CITE THIS!!!!!!!!!!!!!!
+// https://observablehq.com/@d3/word-cloud
 __turbopack_context__.s([
     "default",
     ()=>WordCloud
@@ -90,15 +90,29 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$select
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$scale$2d$chromatic$2f$src$2f$categorical$2f$observable10$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__schemeObservable10$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-scale-chromatic/src/categorical/observable10.js [app-client] (ecmascript) <export default as schemeObservable10>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$cloud$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/d3-cloud/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$rooks$2f$use$2d$window$2d$size$2f$lib$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@rooks/use-window-size/lib/index.esm.js [app-client] (ecmascript)");
 ;
-var _s = __turbopack_context__.k.signature();
+var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
 ;
-function WordCloud({ size = (group)=>group.length, word = (d)=>d, marginTop = 0, marginRight = 0, marginBottom = 0, marginLeft = 0, width = window.innerWidth, height = 200, maxWords = 250, fontFamily = "sans-serif", fontScale = 20, fill = null, padding = 3, rotate = 0, invalidation// when this promise resolves, stop the simulation
- } = {}) {
+;
+// can't put window.innerWidth directly into function so this is workaround
+// use-window-size package https://www.npmjs.com/package/@rooks/use-window-size
+function window() {
     _s();
+    const { innerWidth, innerHeight, outerHeight, outerWidth } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$rooks$2f$use$2d$window$2d$size$2f$lib$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])();
+    return innerWidth;
+}
+_s(window, "Nm8LCqVDEnyiCLvrc++kUP4yZcA=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$rooks$2f$use$2d$window$2d$size$2f$lib$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+    ];
+});
+function WordCloud({ size = (group)=>group.length, word = (d)=>d, marginTop = 0, marginRight = 0, marginBottom = 0, marginLeft = 0, width = window(), height = 350, maxWords = 250, fontFamily = "sans-serif", fontScale = 20, fill = null, padding = 3, rotate = ()=>Math.floor(Math.random() * 2) * 90, invalidation// when this promise resolves, stop the simulation
+ } = {}) {
+    _s1();
     const svgRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const [stopwords, setStopwords] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(new Set());
     // Load stopwords from file
@@ -183,7 +197,7 @@ function WordCloud({ size = (group)=>group.length, word = (d)=>d, marginTop = 0,
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         style: {
             width: '100%',
-            height: '200px'
+            height: '100%'
         },
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
             ref: svgRef,
@@ -193,16 +207,16 @@ function WordCloud({ size = (group)=>group.length, word = (d)=>d, marginTop = 0,
             }
         }, void 0, false, {
             fileName: "[project]/src/components/visualizations/WordCloud.jsx",
-            lineNumber: 102,
+            lineNumber: 111,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/visualizations/WordCloud.jsx",
-        lineNumber: 101,
+        lineNumber: 110,
         columnNumber: 9
     }, this);
 }
-_s(WordCloud, "PmcLdLEcA44j1cPGHSzl584rKls=");
+_s1(WordCloud, "PmcLdLEcA44j1cPGHSzl584rKls=");
 _c = WordCloud;
 const text = `I am happy to join with you today in what will go down in history as the greatest demonstration for freedom in the history of our nation.
 
@@ -293,7 +307,7 @@ function Home() {
                 children: "The EECS Student Experience Story Archive Project (SESAP) collects the narrative statements of students from underserved and marginalized communities. Video testimonies are recorded and submitted by students in order to document their experiences in EECS programs. These are then analyzed in order to highlight ways in which university and industry leaders can better support engineering students from underserved communities."
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 17,
+                lineNumber: 16,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$heading$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Heading"], {
@@ -301,14 +315,14 @@ function Home() {
                 children: "Overview Statistics"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 22,
+                lineNumber: 21,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$container$2f$container$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Container"], {
-                children: "number of interviews probably ig"
+                children: "number of interviews probably ig started 2023"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 23,
+                lineNumber: 22,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$heading$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Heading"], {
@@ -316,7 +330,7 @@ function Home() {
                 children: "Recent Interviews"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 27,
+                lineNumber: 26,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$container$2f$container$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Container"], {
@@ -331,17 +345,17 @@ function Home() {
                             data: item
                         }, index, false, {
                             fileName: "[project]/src/app/page.jsx",
-                            lineNumber: 31,
+                            lineNumber: 30,
                             columnNumber: 25
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/src/app/page.jsx",
-                    lineNumber: 29,
+                    lineNumber: 28,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
-                lineNumber: 28,
+                lineNumber: 27,
                 columnNumber: 13
             }, this)
         ]

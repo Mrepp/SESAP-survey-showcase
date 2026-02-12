@@ -1,46 +1,1783 @@
-[00:00:00.721] Server  LOG      ✓ Ready in 512ms
-[00:01:57.580] Server  LOG      ✓ Compiled in 525ms
-[00:01:59.204] Browser ERROR   ./src/components/visualizations/BarChart.jsx:73:9
+[00:00:00.752] Server  LOG      ✓ Ready in 540ms
+[00:03:21.466] Server  LOG      ✓ Compiled in 155ms
+[00:05:30.385] Server  LOG      ✓ Compiled in 272ms
+[00:06:04.095] Server  LOG      ✓ Compiled in 123ms
+[00:06:45.478] Server  LOG      ✓ Compiled in 106ms
+[00:06:48.424] Server  LOG      ✓ Compiled in 20ms
+[00:08:39.451] Server  LOG      ✓ Compiled in 123ms
+[00:08:58.894] Server  LOG      ✓ Compiled in 15ms
+[00:09:02.119] Server  LOG      ✓ Compiled in 18ms
+[00:11:04.607] Server  LOG      ✓ Compiled in 150ms
+[00:11:04.962] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:46:4
 Parsing ecmascript source code failed
-  71 |             backgroundColor: 'rgb(255, 99, 132)',}
-  72 |         ))
-> 73 |         {
-     |         ^
-  74 |             label: interviewData[0].theme,
-  75 |             data: interviewData[0].identities,
-  76 |             backgroundColor: 'rgb(255, 99, 132)',
+  44 |
+  45 | [
+> 46 |   0: Object {a: "economy (mpg)", b: "economy (mpg)", correlation: 1}
+     |    ^
+  47 |   1: Object {a: "economy (mpg)", b: "cylinders", correlation: -0.7344439168932237}
+  48 |   2: Object {a: "economy (mpg)", b: "displacement (cc)", correlation: -0.7631146400584955}
+  49 |   3: Object {a: "economy (mpg)", b: "power (hp)", correlation: -0.7229174398328041}
 
-Expected ',', got '{'
+Expected ',', got ':'
 
 Import traces:
   Client Component Browser:
-    ./src/components/visualizations/BarChart.jsx [Client Component Browser]
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
     ./src/app/insights/page.jsx [Client Component Browser]
     ./src/app/insights/page.jsx [Server Component]
 
   Client Component SSR:
-    ./src/components/visualizations/BarChart.jsx [Client Component SSR]
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
     ./src/app/insights/page.jsx [Client Component SSR]
     ./src/app/insights/page.jsx [Server Component]
-[00:03:31.854] Server  LOG      ✓ Compiled in 99ms
-[00:03:36.144] Server  LOG      ✓ Compiled in 26ms
-[00:05:31.154] Server  LOG      ✓ Compiled in 79ms
-[00:05:57.032] Server  LOG      ✓ Compiled in 216ms
-[00:08:39.803] Server  LOG      ✓ Compiled in 50ms
-[00:09:57.618] Server  LOG      ✓ Compiled in 136ms
-[00:10:02.052] Server  LOG      ✓ Compiled in 39ms
-[00:10:51.553] Server  LOG      ✓ Compiled in 34ms
-[00:10:53.883] Server  LOG      ✓ Compiled in 19ms
-[00:10:55.468] Server  LOG      ✓ Compiled in 67ms
-[00:11:02.861] Server  LOG      ✓ Compiled in 15ms
-[00:11:04.458] Server  LOG      ✓ Compiled in 295ms
-[00:12:42.364] Server  LOG      ✓ Compiled in 319ms
-[00:12:46.380] Server  LOG      ✓ Compiled in 97ms
-[00:12:55.177] Server  LOG      ✓ Compiled in 33ms
-[00:14:07.399] Server  LOG      ✓ Compiled in 95ms
-[00:14:34.005] Server  LOG      ✓ Compiled in 40ms
-[00:14:44.557] Server  LOG      ✓ Compiled in 40ms
-[00:14:53.335] Server  LOG      ✓ Compiled in 27ms
-[00:14:57.879] Server  LOG      ✓ Compiled in 39ms
-[00:15:04.538] Server  LOG      ✓ Compiled in 32ms
-[00:16:00.514] Server  LOG      ✓ Compiled in 23ms
+[00:11:06.115] Server  LOG      ✓ Compiled in 41ms
+[00:14:59.154] Server  LOG      ✓ Compiled in 90ms
+[00:14:59.276] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:21:4
+Parsing ecmascript source code failed
+  19 |
+  20 | correlations = Array(16) [
+> 21 |   0: Object {a: "culmen_length_mm", b: "culmen_length_mm", correlation: 1}
+     |    ^
+  22 |   1: Object {a: "culmen_length_mm", b: "culmen_depth_mm", correlation: -0.2350528703555326}
+  23 |   2: Object {a: "culmen_length_mm", b: "flipper_length_mm", correlation: 0.6561813407464275}
+  24 |   3: Object {a: "culmen_length_mm", b: "body_mass_g", correlation: 0.5951098244376305}
+
+Expected ']', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:45.908] Server  LOG      ✓ Compiled in 73ms
+[00:15:59.217] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:21:4
+Parsing ecmascript source code failed
+  19 |
+  20 | correlations = [
+> 21 |   0: Object {a: "culmen_length_mm", b: "culmen_length_mm", correlation: 1}
+     |    ^
+  22 |   1: Object {a: "culmen_length_mm", b: "culmen_depth_mm", correlation: -0.2350528703555326}
+  23 |   2: Object {a: "culmen_length_mm", b: "flipper_length_mm", correlation: 0.6561813407464275}
+  24 |   3: Object {a: "culmen_length_mm", b: "body_mass_g", correlation: 0.5951098244376305}
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:59.217] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:21:4
+Parsing ecmascript source code failed
+  19 |
+  20 | concorrelations = [
+> 21 |   0: Object {a: "culmen_length_mm", b: "culmen_length_mm", correlation: 1}
+     |    ^
+  22 |   1: Object {a: "culmen_length_mm", b: "culmen_depth_mm", correlation: -0.2350528703555326}
+  23 |   2: Object {a: "culmen_length_mm", b: "flipper_length_mm", correlation: 0.6561813407464275}
+  24 |   3: Object {a: "culmen_length_mm", b: "body_mass_g", correlation: 0.5951098244376305}
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:59.217] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:21:4
+Parsing ecmascript source code failed
+  19 |
+  20 | const correlations = [
+> 21 |   0: Object {a: "culmen_length_mm", b: "culmen_length_mm", correlation: 1}
+     |    ^
+  22 |   1: Object {a: "culmen_length_mm", b: "culmen_depth_mm", correlation: -0.2350528703555326}
+  23 |   2: Object {a: "culmen_length_mm", b: "flipper_length_mm", correlation: 0.6561813407464275}
+  24 |   3: Object {a: "culmen_length_mm", b: "body_mass_g", correlation: 0.5951098244376305}
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:59.217] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:22:3
+Parsing ecmascript source code failed
+  20 | const correlations = [
+  21 |   {a: "culmen_length_mm", b: "culmen_length_mm", correlation: 1}
+> 22 |   1: Object {a: "culmen_length_mm", b: "culmen_depth_mm", correlation: -0.2350528703555326}
+     |   ^
+  23 |   2: Object {a: "culmen_length_mm", b: "flipper_length_mm", correlation: 0.6561813407464275}
+  24 |   3: Object {a: "culmen_length_mm", b: "body_mass_g", correlation: 0.5951098244376305}
+  25 |   4: Object {a: "culmen_depth_mm", b: "culmen_length_mm", correlation: -0.2350528703555326}
+
+Expected ',', got 'numeric literal (1, 1)'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:59.217] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:22:4
+Parsing ecmascript source code failed
+  20 | const correlations = [
+  21 |   {a: "culmen_length_mm", b: "culmen_length_mm", correlation: 1},
+> 22 |   1: Object {a: "culmen_length_mm", b: "culmen_depth_mm", correlation: -0.2350528703555326}
+     |    ^
+  23 |   2: Object {a: "culmen_length_mm", b: "flipper_length_mm", correlation: 0.6561813407464275}
+  24 |   3: Object {a: "culmen_length_mm", b: "body_mass_g", correlation: 0.5951098244376305}
+  25 |   4: Object {a: "culmen_depth_mm", b: "culmen_length_mm", correlation: -0.2350528703555326}
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:59.217] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:23:3
+Parsing ecmascript source code failed
+  21 |   {a: "culmen_length_mm", b: "culmen_length_mm", correlation: 1},
+  22 |   {a: "culmen_length_mm", b: "culmen_depth_mm", correlation: -0.2350528703555326}
+> 23 |   2: Object {a: "culmen_length_mm", b: "flipper_length_mm", correlation: 0.6561813407464275}
+     |   ^
+  24 |   3: Object {a: "culmen_length_mm", b: "body_mass_g", correlation: 0.5951098244376305}
+  25 |   4: Object {a: "culmen_depth_mm", b: "culmen_length_mm", correlation: -0.2350528703555326}
+  26 |   5: Object {a: "culmen_depth_mm", b: "culmen_depth_mm", correlation: 1}
+
+Expected ',', got 'numeric literal (2, 2)'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:59.217] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:23:4
+Parsing ecmascript source code failed
+  21 |   {a: "culmen_length_mm", b: "culmen_length_mm", correlation: 1},
+  22 |   {a: "culmen_length_mm", b: "culmen_depth_mm", correlation: -0.2350528703555326},
+> 23 |   2: Object {a: "culmen_length_mm", b: "flipper_length_mm", correlation: 0.6561813407464275}
+     |    ^
+  24 |   3: Object {a: "culmen_length_mm", b: "body_mass_g", correlation: 0.5951098244376305}
+  25 |   4: Object {a: "culmen_depth_mm", b: "culmen_length_mm", correlation: -0.2350528703555326}
+  26 |   5: Object {a: "culmen_depth_mm", b: "culmen_depth_mm", correlation: 1}
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:59.217] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:24:4
+Parsing ecmascript source code failed
+  22 |   {a: "culmen_length_mm", b: "culmen_depth_mm", correlation: -0.2350528703555326},
+  23 |   {a: "culmen_length_mm", b: "flipper_length_mm", correlation: 0.6561813407464275},
+> 24 |   3: Object {a: "culmen_length_mm", b: "body_mass_g", correlation: 0.5951098244376305}
+     |    ^
+  25 |   4: Object {a: "culmen_depth_mm", b: "culmen_length_mm", correlation: -0.2350528703555326}
+  26 |   5: Object {a: "culmen_depth_mm", b: "culmen_depth_mm", correlation: 1}
+  27 |   6: Object {a: "culmen_depth_mm", b: "flipper_length_mm", correlation: -0.5838512164654125}
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:59.217] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:25:4
+Parsing ecmascript source code failed
+  23 |   {a: "culmen_length_mm", b: "flipper_length_mm", correlation: 0.6561813407464275},
+  24 |   {a: "culmen_length_mm", b: "body_mass_g", correlation: 0.5951098244376305},
+> 25 |   4: Object {a: "culmen_depth_mm", b: "culmen_length_mm", correlation: -0.2350528703555326}
+     |    ^
+  26 |   5: Object {a: "culmen_depth_mm", b: "culmen_depth_mm", correlation: 1}
+  27 |   6: Object {a: "culmen_depth_mm", b: "flipper_length_mm", correlation: -0.5838512164654125}
+  28 |   7: Object {a: "culmen_depth_mm", b: "body_mass_g", correlation: -0.4719156211860666}
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:59.217] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:26:4
+Parsing ecmascript source code failed
+  24 |   {a: "culmen_length_mm", b: "body_mass_g", correlation: 0.5951098244376305},
+  25 |   {a: "culmen_depth_mm", b: "culmen_length_mm", correlation: -0.2350528703555326},
+> 26 |   5: Object {a: "culmen_depth_mm", b: "culmen_depth_mm", correlation: 1}
+     |    ^
+  27 |   6: Object {a: "culmen_depth_mm", b: "flipper_length_mm", correlation: -0.5838512164654125}
+  28 |   7: Object {a: "culmen_depth_mm", b: "body_mass_g", correlation: -0.4719156211860666}
+  29 |   8: Object {a: "flipper_length_mm", b: "culmen_length_mm", correlation: 0.6561813407464275}
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:59.217] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:28:4
+Parsing ecmascript source code failed
+  26 |   {a: "culmen_depth_mm", b: "culmen_depth_mm", correlation: 1},
+  27 |   {a: "culmen_depth_mm", b: "flipper_length_mm", correlation: -0.5838512164654125},
+> 28 |   7: Object {a: "culmen_depth_mm", b: "body_mass_g", correlation: -0.4719156211860666}
+     |    ^
+  29 |   8: Object {a: "flipper_length_mm", b: "culmen_length_mm", correlation: 0.6561813407464275}
+  30 |   9: Object {a: "flipper_length_mm", b: "culmen_depth_mm", correlation: -0.5838512164654125}
+  31 |   10: Object {a: "flipper_length_mm", b: "flipper_length_mm", correlation: 1}
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:59.217] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:28:4
+Parsing ecmascript source code failed
+  26 |   {a: "culmen_depth_mm", b: "culmen_depth_mm", correlation: 1},
+  27 |   {a: "culmen_depth_mm", b: "flipper_length_mm", correlation: -0.5838512164654125},
+> 28 |   7: Object {a: "culmen_depth_mm", b: "body_mass_g", correlation: -0.4719156211860666}
+     |    ^
+  29 |   8: Object {a: "flipper_length_mm", b: "culmen_length_mm", correlation: 0.6561813407464275}
+  30 |   9: Object {a: "flipper_length_mm", b: "culmen_depth_mm", correlation: -0.5838512164654125}
+  31 |   10: Object {a: "flipper_length_mm", b: "flipper_length_mm", correlation: 1}
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:59.217] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:41:5
+Ecmascript file had an error
+  39 | export default function Correlation() {
+  40 |
+> 41 |     correlations = d3.cross(fields, fields).map(([a, b]) => ({
+     |     ^^^^^^^^^^^^
+  42 |         a,
+  43 |         b,
+  44 |         correlation: corr(Plot.valueof(data, a), Plot.valueof(data, b))
+
+cannot reassign to a variable declared with `const`
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:16:20.548] Server  LOG      ✓ Compiled in 53ms
+[00:16:20.684] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:39:40
+Parsing ecmascript source code failed
+  37 | ]
+  38 |
+> 39 | export default function Correlation() {
+     |                                        ^
+  40 |
+  41 |     /*correlations = d3.cross(fields, fields).map(([a, b]) => ({
+  42 |         a,
+
+Expected '}', got '<eof>'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:16:20.684] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:66:1
+Parsing ecmascript source code failed
+  64 | }
+  65 | 
+> 66 | 
+     | ^
+
+Unterminated block comment
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:16:23.072] Server  LOG      ✓ Compiled in 147ms
+[00:17:32.280] Server  LOG      ✓ Compiled in 27ms
+[00:17:34.808] Server  LOG      ✓ Compiled in 65ms
+[00:17:35.046] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:63:12
+Parsing ecmascript source code failed
+  61 |     })
+  62 |
+> 63 |     return (
+     |            ^
+> 64 |         
+     | ^^^^^^^^
+> 65 |     )
+     | ^^^^^^
+  66 |
+  67 | }
+  68 |
+
+Parenthesized expression cannot be empty
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:17:52.133] Server  LOG      ✓ Compiled in 31ms
+[00:17:55.176] Server  LOG      ✓ Compiled in 39ms
+[00:18:33.256] Server  LOG      ✓ Compiled in 32ms
+[00:18:40.528] Server  LOG      ✓ Compiled in 97ms
+[00:18:41.704] Server  LOG      ✓ Compiled in 21ms
+[00:18:42.930] Server  LOG      ✓ Compiled in 37ms
+[00:18:46.691] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:47:11
+Parsing ecmascript source code failed
+  45 |     }))*/
+  46 |
+> 47 |     const corPlotPlot.plot({
+     |           ^^^^^^^^^^^
+  48 |         marginLeft: 100,
+  49 |         label: null,
+  50 |         color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation" },
+
+'const' declarations must be initialized
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:18:46.691] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:47:22
+Parsing ecmascript source code failed
+  45 |     }))*/
+  46 |
+> 47 |     const corPlotPlot.plot({
+     |                      ^
+  48 |         marginLeft: 100,
+  49 |         label: null,
+  50 |         color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation" },
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:18:46.691] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:63:12
+Parsing ecmascript source code failed
+  61 |     })
+  62 |
+> 63 |     return (
+     |            ^
+> 64 |
+     | ^
+> 65 |     )
+     | ^^^^^^
+  66 |
+  67 | }
+  68 |
+
+Parenthesized expression cannot be empty
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:18:46.691] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:63:12
+Parsing ecmascript source code failed
+  61 |     })
+  62 |
+> 63 |     return (
+     |            ^
+> 64 |         
+     | ^^^^^^^^
+> 65 |     )
+     | ^^^^^^
+  66 |
+  67 | }
+  68 |
+
+Parenthesized expression cannot be empty
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:18:46.691] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:64:9
+Parsing ecmascript source code failed
+  62 |
+  63 |     return (
+> 64 |         <
+     |         ^
+  65 |     )
+  66 |
+  67 | }
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:18:46.691] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:67:1
+Parsing ecmascript source code failed
+  65 |     )
+  66 |
+> 67 | }
+     | ^
+  68 |
+  69 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:18:57.632] Server  LOG      ✓ Compiled in 17ms
+[00:19:15.329] Server  LOG      ✓ Compiled in 34ms
+[00:19:15.609] Browser ERROR   ./src/app/insights/page.jsx:23:9
+Parsing ecmascript source code failed
+  21 |
+  22 |             <
+> 23 |         </>
+     |         ^
+  24 |     )
+  25 | }
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:19:15.610] Browser ERROR   ./src/app/insights/page.jsx:23:10
+Parsing ecmascript source code failed
+  21 |
+  22 |             <
+> 23 |         </>
+     |          ^^
+  24 |     )
+  25 | }
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:19:22.069] Server  LOG      ✓ Compiled in 85ms
+[00:19:27.172] Browser ERROR   ./src/app/insights/page.jsx:23:9
+Parsing ecmascript source code failed
+  21 |
+  22 |             <Correlation
+> 23 |         </>
+     |         ^
+  24 |     )
+  25 | }
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:19:27.172] Browser ERROR   ./src/app/insights/page.jsx:23:10
+Parsing ecmascript source code failed
+  21 |
+  22 |             <Correlation
+> 23 |         </>
+     |          ^^
+  24 |     )
+  25 | }
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:19:27.172] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Plot
+[00:19:39.299] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:19:39.308] Server  LOG      ✓ Compiled in 208ms
+[00:19:39.466] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Plot
+[00:19:40.231] Server  ERROR    ⨯ ReferenceError: Plot is not defined
+[00:19:42.608] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Plot
+[00:20:08.619] Server  LOG      ✓ Compiled in 1425ms
+[00:20:08.855] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:20:10.024] Server  ERROR    ⨯ TypeError: Cannot read properties of undefined (reading 'documentElement')
+[00:20:10.684] Browser ERROR   uncaughtError: Error: Objects are not valid as a React child (found: [object HTMLElement]). If you meant to render a collection of children, use an array instead.
+[00:20:56.961] Server  LOG      ✓ Compiled in 98ms
+[00:21:01.213] Server  LOG      ✓ Compiled in 32ms
+[00:21:13.266] Server  LOG      ✓ Compiled in 108ms
+[00:21:13.450] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:13.451] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:13.457] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:13.457] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:13.459] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:13.462] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/components/visualizations/CorrelationHeatMap.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:21:13.462] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:13.719] Server  ERROR   Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:21:14.377] Server  ERROR    ⨯ TypeError: Cannot read properties of null (reading 'useRef')
+[00:21:15.109] Browser ERROR   uncaughtError: Error: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:21:35.556] Server  LOG      ✓ Compiled in 110ms
+[00:21:35.811] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:48:15
+Parsing ecmascript source code failed
+  46 |         correlation: corr(Plot.valueof(data, a), Plot.valueof(data, b))
+  47 |     }))*/
+> 48 |     useEffect(())
+     |               ^^
+  49 |     const corPlot = Plot.plot({
+  50 |         marginLeft: 100,
+  51 |         label: null,
+
+Parenthesized expression cannot be empty
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:21:40.007] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:48:15
+Parsing ecmascript source code failed
+  46 |         correlation: corr(Plot.valueof(data, a), Plot.valueof(data, b))
+  47 |     }))*/
+> 48 |     useEffect(() )
+     |               ^^
+  49 |     const corPlot = Plot.plot({
+  50 |         marginLeft: 100,
+  51 |         label: null,
+
+Parenthesized expression cannot be empty
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:21:41.177] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:48:15
+Parsing ecmascript source code failed
+  46 |         correlation: corr(Plot.valueof(data, a), Plot.valueof(data, b))
+  47 |     }))*/
+> 48 |     useEffect(() =)
+     |               ^^
+  49 |     const corPlot = Plot.plot({
+  50 |         marginLeft: 100,
+  51 |         label: null,
+
+Parenthesized expression cannot be empty
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:21:44.157] Server  LOG      ✓ Compiled in 59ms
+[00:21:44.262] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:48:21
+Parsing ecmascript source code failed
+  46 |         correlation: corr(Plot.valueof(data, a), Plot.valueof(data, b))
+  47 |     }))*/
+> 48 |     useEffect(() => )
+     |                     ^
+  49 |     const corPlot = Plot.plot({
+  50 |         marginLeft: 100,
+  51 |         label: null,
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:21:48.204] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:48.204] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/components/visualizations/CorrelationHeatMap.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:21:48.204] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:48.205] Server  LOG      ✓ Compiled in 65ms
+[00:21:48.690] Server  ERROR   Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:21:48.930] Server  ERROR    ⨯ TypeError: Cannot read properties of null (reading 'useRef')
+[00:21:51.629] Browser ERROR   uncaughtError: Error: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:21:54.455] Server  LOG      ✓ Compiled in 26ms
+[00:21:54.463] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:54.463] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/components/visualizations/CorrelationHeatMap.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:21:54.463] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:21:54.723] Server  ERROR   Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:21:54.996] Server  ERROR    ⨯ TypeError: Cannot read properties of null (reading 'useRef')
+[00:21:56.803] Browser ERROR   uncaughtError: Error: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:22:02.570] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:22:02.570] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/components/visualizations/CorrelationHeatMap.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:22:02.570] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:22:02.598] Server  LOG      ✓ Compiled in 296ms
+[00:22:02.804] Server  ERROR   Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:22:03.107] Server  ERROR    ⨯ TypeError: Cannot read properties of null (reading 'useRef')
+[00:22:05.084] Browser ERROR   uncaughtError: Error: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:22:05.776] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:22:05.776] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/components/visualizations/CorrelationHeatMap.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:22:05.776] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:22:05.799] Server  LOG      ✓ Compiled in 81ms
+[00:22:06.486] Server  ERROR   Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:22:07.027] Server  ERROR    ⨯ TypeError: Cannot read properties of null (reading 'useRef')
+[00:22:08.582] Browser ERROR   uncaughtError: Error: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:22:14.805] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:22:14.805] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/components/visualizations/CorrelationHeatMap.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:22:14.806] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:22:14.825] Server  LOG      ✓ Compiled in 39ms
+[00:22:15.124] Server  ERROR   Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:22:15.473] Server  ERROR    ⨯ TypeError: Cannot read properties of null (reading 'useRef')
+[00:22:17.527] Browser ERROR   uncaughtError: Error: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:22:38.658] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:22:38.658] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/components/visualizations/CorrelationHeatMap.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:22:38.658] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:22:38.674] Server  LOG      ✓ Compiled in 20ms
+[00:22:39.136] Server  ERROR   Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:22:39.422] Server  ERROR    ⨯ TypeError: Cannot read properties of null (reading 'useRef')
+[00:22:41.239] Browser ERROR   uncaughtError: Error: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:22:44.556] Server  LOG      ✓ Compiled in 20ms
+[00:22:44.590] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:22:44.590] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/components/visualizations/CorrelationHeatMap.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:22:44.590] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:22:44.897] Server  ERROR   Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[00:22:45.184] Server  ERROR    ⨯ TypeError: Cannot read properties of null (reading 'useRef')
+[00:22:47.272] Browser ERROR   uncaughtError: Error: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[01:43:25.790] Server  LOG      ✓ Compiled in 640ms
+[01:43:29.072] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:43:29.077] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/components/visualizations/CorrelationHeatMap.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[01:43:29.108] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:43:31.352] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:43:31.352] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/components/visualizations/CorrelationHeatMap.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[01:43:31.352] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:43:31.744] Server  LOG      ✓ Compiled in 5ms
+[01:43:47.508] Server  LOG      ✓ Compiled in 40ms
+[01:43:53.770] Server  LOG      ✓ Compiled in 36ms
+[01:43:54.984] Server  LOG      ✓ Compiled in 117ms
+[01:43:55.439] Browser ERROR   ./src/app/insights/page.jsx:23:26
+Parsing ecmascript source code failed
+  21 |
+  22 |             <
+> 23 |             <Correlation/>
+     |                          ^
+  24 |         </>
+  25 |     )
+  26 | }
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:43:58.726] Server  LOG      ✓ Compiled in 201ms
+[01:44:02.572] Server  LOG      ✓ Compiled in 34ms
+[01:44:08.190] Server  LOG      ✓ Compiled in 36ms
+[01:44:10.000] Server  LOG      ✓ Compiled in 26ms
+[01:44:16.083] Server  LOG      ✓ Compiled in 30ms
+[01:45:01.366] Server  LOG      ✓ Compiled in 82ms
+[01:45:06.652] Server  LOG      ✓ Compiled in 24ms
+[01:45:06.929] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: containerRef
+[01:45:08.177] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:45:08.200] Server  LOG      ✓ Compiled in 38ms
+[01:45:09.823] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: containerRef
+[01:45:12.167] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: containerRef
+[01:45:12.192] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:45:12.254] Server  LOG      ✓ Compiled in 14ms
+[01:45:14.150] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: plot
+[01:45:22.324] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:45:22.350] Server  LOG      ✓ Compiled in 31ms
+[01:45:49.288] Server  LOG      ✓ Compiled in 136ms
+[01:46:14.076] Server  LOG      ✓ Compiled in 129ms
+[01:46:19.656] Server  LOG      ✓ Compiled in 34ms
+[01:46:19.967] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: plot
+[01:46:24.516] Server  LOG      ✓ Compiled in 26ms
+[01:46:27.578] Server  LOG      ✓ Compiled in 26ms
+[01:46:29.812] Server  LOG      ✓ Compiled in 26ms
+[01:46:32.205] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:46:32.645] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:46:33.081] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:46:33.280] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: corPlot
+[01:46:33.281] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: corPlot
+[01:47:44.286] Server  LOG      ✓ Compiled in 130ms
+[01:47:49.140] Server  LOG      ✓ Compiled in 38ms
+[01:49:10.084] Server  LOG      ✓ Compiled in 33ms
+[01:49:16.882] Server  LOG      ✓ Compiled in 248ms
+[01:49:24.418] Server  LOG      ✓ Compiled in 167ms
+[01:49:25.259] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:73:30
+Parsing ecmascript source code failed
+  71 |     
+  72 |
+> 73 |     return <div style={ width: '100%', height: '200px' }} ref={corRef} />
+     |                              ^
+  74 |
+  75 | }
+  76 |
+
+Expected '}', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:49:25.259] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:73:30
+Parsing ecmascript source code failed
+  71 |     
+  72 |
+> 73 |     return <div style={ width: '100%', height: '200px' } ref={corRef} />
+     |                              ^
+  74 |
+  75 | }
+  76 |
+
+Expected '}', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:49:50.121] Server  LOG      ✓ Compiled in 35ms
+[01:49:55.132] Server  LOG      ✓ Compiled in 40ms
+[01:50:01.323] Server  LOG      ✓ Compiled in 12ms
+[01:51:13.006] Server  LOG      ✓ Compiled in 171ms
+[01:51:13.392] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:55:47
+Parsing ecmascript source code failed
+  53 |             marginLeft: 150,
+  54 |             label: null,
+> 55 |             color: { scheme: "rdylbu", pivot: 09, legend: true, label: "correlation" },
+     |                                               ^^
+  56 |             marks: [
+  57 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+  58 |
+
+Legacy decimal escape is not permitted in strict mode
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:51:15.392] Server  LOG      ✓ Compiled in 257ms
+[01:51:24.897] Server  LOG      ✓ Compiled in 93ms
+[01:51:25.191] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:55:47
+Parsing ecmascript source code failed
+  53 |             marginLeft: 150,
+  54 |             label: null,
+> 55 |             color: { scheme: "rdylbu", pivot: , legend: true, label: "correlation" },
+     |                                               ^
+  56 |             marks: [
+  57 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+  58 |
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:51:26.165] Server  LOG      ✓ Compiled in 141ms
+[01:51:26.267] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:55:47
+Parsing ecmascript source code failed
+  53 |             marginLeft: 150,
+  54 |             label: null,
+> 55 |             color: { scheme: "rdylbu", pivot: 09, legend: true, label: "correlation" },
+     |                                               ^^
+  56 |             marks: [
+  57 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+  58 |
+
+Legacy decimal escape is not permitted in strict mode
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:51:29.162] Server  LOG      ✓ Compiled in 60ms
+[01:53:10.931] Server  LOG      ✓ Compiled in 107ms
+[01:53:11.911] Server  LOG      ✓ Compiled in 22ms
+[01:53:12.613] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: margin
+[01:53:12.623] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:53:13.351] Server  LOG      ✓ Compiled in 300ms
+[01:53:13.675] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: marginLeft
+[01:53:13.675] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:55:98
+Parsing ecmascript source code failed
+  53 |             marginLeft: 150,
+  54 |             label: null,
+> 55 |             color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation", marginLeft: },
+     |                                                                                                  ^
+  56 |             marks: [
+  57 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+  58 |
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:53:13.745] Server  ERROR    ⨯ ./src/components/visualizations/CorrelationHeatMap.jsx:55:98
+Parsing ecmascript source code failed
+  53 |             marginLeft: 150,
+  54 |             label: null,
+> 55 |             color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation", marginLeft: },
+     |                                                                                                  ^
+  56 |             marks: [
+  57 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+  58 |
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+
+
+[01:53:13.868] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:55:98
+Parsing ecmascript source code failed
+  53 |             marginLeft: 150,
+  54 |             label: null,
+> 55 |             color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation", marginLeft: },
+     |                                                                                                  ^
+  56 |             marks: [
+  57 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+  58 |
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:53:13.868] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:55:98
+Parsing ecmascript source code failed
+  53 |             marginLeft: 150,
+  54 |             label: null,
+> 55 |             color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation", marginLeft: },
+     |                                                                                                  ^
+  56 |             marks: [
+  57 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+  58 |
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:53:15.878] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:55:98
+Parsing ecmascript source code failed
+  53 |             marginLeft: 150,
+  54 |             label: null,
+> 55 |             color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation", marginLeft: },
+     |                                                                                                  ^
+  56 |             marks: [
+  57 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+  58 |
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:53:16.527] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:53:16.788] Server  LOG      ○ Compiling /_error ...
+[01:53:18.311] Browser WARN    Error loading stopwords: {}
+[01:53:18.311] Browser WARN    Error loading identities.txt: {}
+[01:53:18.790] Browser ERROR   uncaughtError: Error: ./src/components/visualizations/CorrelationHeatMap.jsx:55:98
+Parsing ecmascript source code failed
+  53 |             marginLeft: 150,
+  54 |             label: null,
+> 55 |             color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation", marginLeft: },
+     |                                                                                                  ^
+  56 |             marks: [
+  57 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+  58 |
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+
+
+[01:54:27.308] Server  LOG      ✓ Compiled in 152ms
+[01:54:36.865] Server  LOG      ✓ Compiled in 34ms
+[01:54:37.878] Server  LOG      ✓ Compiled in 14ms
+[01:54:40.155] Server  LOG      ✓ Compiled in 40ms
+[01:54:50.119] Server  LOG      ✓ Compiled in 35ms
+[01:55:15.026] Server  LOG      ✓ Compiled in 210ms
+[01:55:15.359] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:55:92
+Parsing ecmascript source code failed
+  53 |             marginLeft: 150,
+  54 |             label: null,
+> 55 |             color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation", width marginLeft: '150' },
+     |                                                                                            ^^^^^^^^^^
+  56 |             marks: [
+  57 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+  58 |
+
+Unexpected token `marginLeft`. Expected ... , *,  (, [, :, , ?, = or an identifier
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:55:18.062] Server  LOG      ✓ Compiled in 65ms
+[01:55:18.206] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:55:103
+Parsing ecmascript source code failed
+  53 |             marginLeft: 150,
+  54 |             label: null,
+> 55 |             color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation", width: marginLeft: '150' },
+     |                                                                                                       ^
+  56 |             marks: [
+  57 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+  58 |
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:55:20.105] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:55:93
+Parsing ecmascript source code failed
+  53 |             marginLeft: 150,
+  54 |             label: null,
+> 55 |             color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation", width: , marginLeft: '150' },
+     |                                                                                             ^
+  56 |             marks: [
+  57 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+  58 |
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:55:21.781] Server  LOG      ✓ Compiled in 118ms
+[01:55:24.110] Server  LOG      ✓ Compiled in 22ms
+[01:55:33.099] Server  LOG      ✓ Compiled in 26ms
+[01:55:40.154] Server  LOG      ✓ Compiled in 28ms
+[01:55:45.858] Server  LOG      ✓ Compiled in 117ms
+[01:55:47.312] Server  LOG      ✓ Compiled in 77ms
+[01:55:55.150] Server  LOG      ✓ Compiled in 28ms
+[01:56:04.113] Server  LOG      ✓ Compiled in 40ms
+[01:56:43.141] Server  LOG      ✓ Compiled in 34ms
+[01:57:02.167] Server  LOG      ✓ Compiled in 46ms
+[01:57:14.419] Server  LOG      ✓ Compiled in 21ms
+[01:57:18.040] Server  LOG      ✓ Compiled in 77ms
+[01:57:18.361] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:55:13
+Parsing ecmascript source code failed
+  53 |             marginLeft: 0,
+  54 |             width
+> 55 |             label: null,
+     |             ^^^^^
+  56 |             color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation", width: '500', marginLeft: '150' },
+  57 |             marks: [
+  58 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+
+Unexpected token `label`. Expected ... , *,  (, [, :, , ?, = or an identifier
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:57:19.294] Server  LOG      ✓ Compiled in 64ms
+[01:57:19.499] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:55:18
+Parsing ecmascript source code failed
+  53 |             marginLeft: 0,
+  54 |             width:
+> 55 |             label: null,
+     |                  ^
+  56 |             color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation", width: '500', marginLeft: '150' },
+  57 |             marks: [
+  58 |                 Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:57:20.580] Server  LOG      ✓ Compiled in 16ms
+[01:57:20.731] Browser ERROR   ./src/components/visualizations/CorrelationHeatMap.jsx:54:20
+Parsing ecmascript source code failed
+  52 |         const plot = Plot.plot({
+  53 |             marginLeft: 0,
+> 54 |             width: ,
+     |                    ^
+  55 |             label: null,
+  56 |             color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation", width: '500', marginLeft: '150' },
+  57 |             marks: [
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/CorrelationHeatMap.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[01:57:38.225] Server  LOG      ✓ Compiled in 116ms
+[01:57:47.121] Server  LOG      ✓ Compiled in 28ms
+[01:58:19.131] Server  LOG      ✓ Compiled in 30ms
+[01:58:45.192] Server  LOG      ✓ Compiled in 93ms
+[01:58:51.198] Server  LOG      ✓ Compiled in 79ms
+[01:59:02.018] Server  LOG      ✓ Compiled in 41ms
+[01:59:33.504] Server  LOG      ✓ Compiled in 40ms
+[02:06:53.349] Server  LOG      ✓ Compiled in 1255ms
+[02:13:14.287] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <Head>
+        <__next_root_layout_boundary__>
+          <SegmentViewNode type="layout" pagePath="layout.jsx">
+            <SegmentTrieNode>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <RootLayout>
+              <html suppressHydrationWarning={true} lang="en">
+                <body>
+                  <Provider forcedTheme="light">
+                    <ChakraProvider value={{$$chakra:true, ...}}>
+                      <EmotionGlobal>
+                      <EmotionGlobal>
+                      <ColorModeProvider forcedTheme="light">
+                        <J attribute="class" disableTransitionOnChange={true} forcedTheme="light">
+                          <V attribute="class" disableTransitionOnChange={true} forcedTheme="light">
++                           <script
++                             suppressHydrationWarning={true}
++                             nonce=""
++                             dangerouslySetInnerHTML={{__html:"((e, i, s,..."}}
++                           >
+-                           <style data-emotion="css-global ad1llf" data-s="">
+                            ...
+        ...
+
+[02:14:17.955] Server  LOG      ✓ Compiled in 95ms
+[02:15:08.878] Server  LOG      ✓ Compiled in 154ms
+[02:16:07.520] Server  LOG      ✓ Compiled in 198ms
+[02:16:11.945] Server  LOG      ✓ Compiled in 89ms
+[02:16:39.165] Server  LOG      ✓ Compiled in 42ms
+[02:17:53.012] Server  LOG      ✓ Compiled in 36ms
+[02:18:02.876] Server  LOG      ✓ Compiled in 533ms
+[02:18:03.089] Browser ERROR   ./src/components/visualizations/WordCloud.jsx:89:62
+Parsing ecmascript source code failed
+  87 |             .words(data)
+  88 |             .padding(padding)
+> 89 |             .rotate(() => Math.floor(Math.random() * 2) * 90))
+     |                                                              ^
+  90 |             .font(fontFamily)
+  91 |             .fontSize(d => Math.sqrt(d.size) * fontScale)
+  92 |             .on("end", (words) => {
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/WordCloud.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/WordCloud.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[02:18:03.737] Server  LOG      ✓ Compiled in 84ms
+[02:18:05.914] Server  LOG      ✓ Compiled in 34ms
+[02:18:11.866] Server  LOG      ✓ Compiled in 27ms
+[02:18:18.580] Server  LOG      ✓ Compiled in 36ms
+[02:18:22.516] Server  LOG      ✓ Compiled in 91ms
+[02:18:22.799] Browser ERROR   ./src/components/visualizations/WordCloud.jsx:101:119
+Parsing ecmascript source code failed
+   99 |                     .style("fill", (d, i) => d3.schemeObservable10[i % 10])
+  100 |                     .attr("text-anchor", "middle")
+> 101 |                     .attr("transform", d => `translate(${d.x},${d.y})rotate(${() => Math.floor(Math.random() * 2) * 90)})`)
+      |                                                                                                                       ^
+  102 |                     .text(d => d.text)
+  103 |             })
+  104 |
+
+Unexpected token `)`. Expected `}`
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/WordCloud.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/WordCloud.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[02:18:27.824] Server  LOG      ✓ Compiled in 58ms
+[02:18:30.273] Server  LOG      ✓ Compiled in 100ms
+[02:18:30.442] Browser ERROR   ./src/components/visualizations/WordCloud.jsx:101:119
+Parsing ecmascript source code failed
+   99 |                     .style("fill", (d, i) => d3.schemeObservable10[i % 10])
+  100 |                     .attr("text-anchor", "middle")
+> 101 |                     .attr("transform", d => `translate(${d.x},${d.y})rotate(${() => Math.floor(Math.random() * 2) * 90)})`)
+      |                                                                                                                       ^
+  102 |                     .text(d => d.text)
+  103 |             })
+  104 |
+
+Unexpected token `)`. Expected `}`
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/WordCloud.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/WordCloud.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[02:18:35.684] Server  LOG      ✓ Compiled in 94ms
+[02:18:41.374] Server  LOG      ✓ Compiled in 68ms
+[02:18:50.070] Server  LOG      ✓ Compiled in 61ms
+[02:18:51.652] Server  LOG      ✓ Compiled in 24ms
+[02:18:52.662] Browser ERROR   ./src/components/visualizations/WordCloud.jsx:101:119
+Parsing ecmascript source code failed
+   99 |                     .style("fill", (d, i) => d3.schemeObservable10[i % 10])
+  100 |                     .attr("text-anchor", "middle")
+> 101 |                     .attr("transform", d => `translate(${d.x},${d.y})rotate(${() => Math.floor(Math.random() * 2) * 90)})`)
+      |                                                                                                                       ^
+  102 |                     .text(d => d.text)
+  103 |             })
+  104 |
+
+Unexpected token `)`. Expected `}`
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/WordCloud.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/WordCloud.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[02:18:52.851] Server  ERROR    ⨯ ./src/components/visualizations/WordCloud.jsx:101:119
+Parsing ecmascript source code failed
+   99 |                     .style("fill", (d, i) => d3.schemeObservable10[i % 10])
+  100 |                     .attr("text-anchor", "middle")
+> 101 |                     .attr("transform", d => `translate(${d.x},${d.y})rotate(${() => Math.floor(Math.random() * 2) * 90)})`)
+      |                                                                                                                       ^
+  102 |                     .text(d => d.text)
+  103 |             })
+  104 |
+
+Unexpected token `)`. Expected `}`
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/WordCloud.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/WordCloud.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+
+
+[02:18:52.987] Server  LOG      ✓ Compiled in 116ms
+[02:18:53.521] Browser ERROR   ./src/components/visualizations/WordCloud.jsx:101:119
+Parsing ecmascript source code failed
+   99 |                     .style("fill", (d, i) => d3.schemeObservable10[i % 10])
+  100 |                     .attr("text-anchor", "middle")
+> 101 |                     .attr("transform", d => `translate(${d.x},${d.y})rotate(${() => Math.floor(Math.random() * 2) * 90)}`)
+      |                                                                                                                       ^
+  102 |                     .text(d => d.text)
+  103 |             })
+  104 |
+
+Unexpected token `)`. Expected `}`
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/WordCloud.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/WordCloud.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[02:18:53.521] Browser ERROR   ./src/components/visualizations/WordCloud.jsx:101:119
+Parsing ecmascript source code failed
+   99 |                     .style("fill", (d, i) => d3.schemeObservable10[i % 10])
+  100 |                     .attr("text-anchor", "middle")
+> 101 |                     .attr("transform", d => `translate(${d.x},${d.y})rotate(${() => Math.floor(Math.random() * 2) * 90)})`)
+      |                                                                                                                       ^
+  102 |                     .text(d => d.text)
+  103 |             })
+  104 |
+
+Unexpected token `)`. Expected `}`
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/WordCloud.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/WordCloud.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[02:18:53.521] Browser ERROR   ./src/components/visualizations/WordCloud.jsx:101:119
+Parsing ecmascript source code failed
+   99 |                     .style("fill", (d, i) => d3.schemeObservable10[i % 10])
+  100 |                     .attr("text-anchor", "middle")
+> 101 |                     .attr("transform", d => `translate(${d.x},${d.y})rotate(${() => Math.floor(Math.random() * 2) * 90)})`)
+      |                                                                                                                       ^
+  102 |                     .text(d => d.text)
+  103 |             })
+  104 |
+
+Unexpected token `)`. Expected `}`
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/WordCloud.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/WordCloud.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[02:19:06.429] Server  LOG      ✓ Compiled in 27ms
+[02:19:09.826] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <Head>
+        <__next_root_layout_boundary__>
+          <SegmentViewNode type="layout" pagePath="layout.jsx">
+            <SegmentTrieNode>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <RootLayout>
+              <html suppressHydrationWarning={true} lang="en">
+                <body>
+                  <Provider forcedTheme="light">
+                    <ChakraProvider value={{$$chakra:true, ...}}>
+                      <EmotionGlobal>
+                      <EmotionGlobal>
+                      <ColorModeProvider forcedTheme="light">
+                        <J attribute="class" disableTransitionOnChange={true} forcedTheme="light">
+                          <V attribute="class" disableTransitionOnChange={true} forcedTheme="light">
++                           <script
++                             suppressHydrationWarning={true}
++                             nonce=""
++                             dangerouslySetInnerHTML={{__html:"((e, i, s,..."}}
++                           >
+-                           <style data-emotion="css-global ad1llf" data-s="">
+                            ...
+        ...
+
+[02:19:14.714] Server  LOG      ✓ Compiled in 36ms
+[02:21:04.189] Server  LOG      ✓ Compiled in 51ms
+[02:21:08.357] Server  LOG      ✓ Compiled in 27ms
+[02:22:03.958] Server  LOG      ✓ Compiled in 22ms
+[02:22:54.345] Browser ERROR   ./src/app/page.jsx:19:13
+Parsing ecmascript source code failed
+  17 |                             <WordCloud/>
+  18 |                         </Bo
+> 19 |             <Heading size="lg">Overview Statistics</Heading>
+     |             ^
+  20 |             <Container>
+  21 |                 number of interviews probably ig
+  22 |             </Container>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.jsx [Client Component Browser]
+    ./src/app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.jsx [Client Component SSR]
+    ./src/app/page.jsx [Server Component]
+[02:22:58.901] Server  LOG      ✓ Compiled in 40ms
+[02:23:43.385] Server  LOG      ✓ Compiled in 84ms
+[02:23:43.498] Browser ERROR   ./src/app/page.jsx:16:21
+Parsing ecmascript source code failed
+  14 |     return (
+  15 |         <>
+> 16 |             <Box h= w='fill' marginTop='-30px' marginLeft='-30px' marginRight='-30px' >
+     |                     ^
+  17 |                 <WordCloud/>
+  18 |             </Box>
+  19 |             <Heading size="lg">Overview Statistics</Heading>
+
+Expected '</', got 'w'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.jsx [Client Component Browser]
+    ./src/app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.jsx [Client Component SSR]
+    ./src/app/page.jsx [Server Component]
+[02:23:46.167] Server  LOG      ✓ Compiled in 84ms
+[02:24:00.138] Server  LOG      ✓ Compiled in 37ms
+[02:24:06.218] Server  LOG      ✓ Compiled in 114ms
+[02:24:18.130] Server  LOG      ✓ Compiled in 41ms
+[02:24:58.196] Server  LOG      ✓ Compiled in 32ms
+[02:25:00.704] Server  LOG      ✓ Compiled in 116ms
+[02:25:00.838] Browser ERROR   ./src/components/visualizations/WordCloud.jsx:110:22
+Parsing ecmascript source code failed
+  108 |     
+  109 |     return (
+> 110 |         <div height: '100%'  style={{ width: '100%',  }}>
+      |                      ^^^^^^
+  111 |             <svg ref={svgRef} style={{ width: '100%', height: '100%' }}></svg>
+  112 |         </div>
+  113 |     )
+
+Unexpected token `string literal (100%, '100%')`. Expected jsx identifier
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/WordCloud.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/WordCloud.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[02:25:08.738] Server  LOG      ✓ Compiled in 106ms
+[02:25:17.167] Server  LOG      ✓ Compiled in 30ms
+[02:25:23.878] Server  LOG      ✓ Compiled in 96ms
+[02:25:24.103] Browser ERROR   ./src/components/visualizations/WordCloud.jsx:24:14
+Parsing ecmascript source code failed
+  22 |     marginLeft = 0, // left margin, in pixels
+  23 |     width = window(), // outer width, in pixels
+> 24 |     height = , // outer height, in pixels
+     |              ^
+  25 |     maxWords = 250, // maximum number of words to extract from the text
+  26 |     fontFamily = "sans-serif", // font family
+  27 |     fontScale = 20, // base font size
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/WordCloud.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/WordCloud.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[02:25:26.171] Server  LOG      ✓ Compiled in 23ms
+[02:25:52.147] Server  LOG      ✓ Compiled in 28ms
+[02:25:57.461] Server  LOG      ✓ Compiled in 104ms
+[02:26:03.285] Server  LOG      ✓ Compiled in 132ms
+[02:26:03.396] Browser ERROR   ./src/components/visualizations/WordCloud.jsx:24:18
+Parsing ecmascript source code failed
+  22 |     marginLeft = 0, // left margin, in pixels
+  23 |     width = window(), // outer width, in pixels
+> 24 |     height = 100%, // outer height, in pixels
+     |                  ^
+  25 |     maxWords = 250, // maximum number of words to extract from the text
+  26 |     fontFamily = "sans-serif", // font family
+  27 |     fontScale = 20, // base font size
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/WordCloud.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/WordCloud.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[02:26:09.163] Server  LOG      ✓ Compiled in 68ms
+[02:26:19.151] Server  LOG      ✓ Compiled in 96ms
+[02:26:20.675] Server  LOG      ✓ Compiled in 33ms
+[02:29:48.132] Server  LOG      ✓ Compiled in 44ms
+[02:29:51.630] Server  LOG      ✓ Compiled in 14ms
+[02:30:03.180] Server  LOG      ✓ Compiled in 34ms
+[02:30:19.219] Server  LOG      ✓ Compiled in 37ms
+[02:30:21.754] Server  LOG      ✓ Compiled in 9ms
+[02:30:56.147] Server  LOG      ✓ Compiled in 31ms
+[02:31:03.168] Server  LOG      ✓ Compiled in 60ms
+[02:33:44.772] Server  LOG      ✓ Compiled in 399ms
+[02:38:23.623] Server  LOG      ✓ Compiled in 41ms

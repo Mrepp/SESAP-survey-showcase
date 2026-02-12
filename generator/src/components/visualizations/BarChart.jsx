@@ -141,3 +141,6 @@ export default function BarChart () {
 
     return <Bar options={options} data={chartData} />
 }
+
+// https://react-chartjs-2.js.org/components/bar
+// https://react-chartjs-2.js.org/examples/stacked-bar-chart

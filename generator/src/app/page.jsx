@@ -7,6 +7,7 @@ import {
     Text
 } from "@chakra-ui/react"
 import Interview from '@/components/Interview'
+import WordCloud from "@/components/visualizations/WordCloud"
 
 
 export default function Home() {
@@ -19,7 +20,7 @@ export default function Home() {
             </Text>
             <Heading size="lg">Overview Statistics</Heading>
             <Container>
-                number of interviews probably ig
+                number of interviews probably ig started 2023
             </Container>
 
             <Heading size="lg">Recent Interviews</Heading>

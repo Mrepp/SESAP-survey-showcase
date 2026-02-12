@@ -1,4 +1,4 @@
-// CITE THIS!!!!!!!!!!!!!! https://observablehq.com/@d3/word-cloud
+// https://observablehq.com/@d3/word-cloud
 'use client'
 import * as d3 from "d3"
 import d3Cloud from "d3-cloud"
@@ -21,13 +21,13 @@ export default function WordCloud({
     marginBottom = 0, // bottom margin, in pixels
     marginLeft = 0, // left margin, in pixels
     width = window(), // outer width, in pixels
-    height = 200, // outer height, in pixels
+    height = 350, // outer height, in pixels
     maxWords = 250, // maximum number of words to extract from the text
     fontFamily = "sans-serif", // font family
     fontScale = 20, // base font size
     fill = null, // text color, can be a constant or a function of the word
     padding = 3, // amount of padding between the words (in pixels)
-    rotate = 0, // a constant or function to rotate the words
+    rotate = () => Math.floor(Math.random() * 2) * 90, // a constant or function to rotate the words
     invalidation // when this promise resolves, stop the simulation
     } = {}) {
     const svgRef = useRef(null)
@@ -107,7 +107,7 @@ export default function WordCloud({
     })
     
     return (
-        <div  style={{ width: '100%', height: '200px' }}>
+        <div  style={{ width: '100%', height: '100%' }}>
             <svg ref={svgRef} style={{ width: '100%', height: '100%' }}></svg>
         </div>
     )

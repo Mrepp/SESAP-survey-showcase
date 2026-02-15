@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
                 <Flex direction="column" minH="100dvh">
                     <Header/>
                     <Navbar/>
-                        <Main >
+                        <Main>
                             {children}
                         </Main>
                     <Footer/>

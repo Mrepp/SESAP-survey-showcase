@@ -3,15 +3,6 @@
 import * as d3 from "d3"
 import d3Cloud from "d3-cloud"
 import { useEffect, useRef, useState } from "react"
-import useWindowSize from "@rooks/use-window-size"
-
-
-// can't put window.innerWidth directly into function so this is workaround
-// use-window-size package https://www.npmjs.com/package/@rooks/use-window-size
-function window() {
-    const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
-    return innerWidth
-}
 
 export default function WordCloud({
     size = group => group.length, // Given a grouping of words, returns the size factor for that word
@@ -20,8 +11,8 @@ export default function WordCloud({
     marginRight = 0, // right margin, in pixels
     marginBottom = 0, // bottom margin, in pixels
     marginLeft = 0, // left margin, in pixels
-    width = window(), // outer width, in pixels
-    height = 350, // outer height, in pixels
+    width, // outer width, in pixels (will be set from container if not provided)
+    height, // outer height, in pixels (will be set from container if not provided)
     maxWords = 250, // maximum number of words to extract from the text
     fontFamily = "sans-serif", // font family
     fontScale = 20, // base font size
@@ -31,7 +22,38 @@ export default function WordCloud({
     invalidation // when this promise resolves, stop the simulation
     } = {}) {
     const svgRef = useRef(null)
+    const containerRef = useRef(null)
     const [stopwords, setStopwords] = useState(new Set())
+    const [dimensions, setDimensions] = useState({ width: width || 800, height: height || 350 })
+
+    // Measure container and update dimensions
+    useEffect(() => {
+        if (!containerRef.current) return
+
+        const updateDimensions = () => {
+            if (containerRef.current) {
+                const containerWidth = containerRef.current.clientWidth
+                const containerHeight = containerRef.current.clientHeight
+                
+                // Only update if dimensions are provided via props, otherwise use container size
+                const newWidth = width || containerWidth || 800
+                const newHeight = height || containerHeight || 350
+                
+                setDimensions({ width: newWidth, height: newHeight })
+            }
+        }
+
+        // Initial measurement
+        updateDimensions()
+
+        // Use ResizeObserver to track container size changes
+        const resizeObserver = new ResizeObserver(updateDimensions)
+        resizeObserver.observe(containerRef.current)
+
+        return () => {
+            resizeObserver.disconnect()
+        }
+    }, [width, height])
 
     // Load stopwords from file
     useEffect(() => {
@@ -58,6 +80,7 @@ export default function WordCloud({
 
     useEffect(() => {
         if (!text) return
+        if (!dimensions.width || !dimensions.height) return
 
         const words = typeof text === "string" ? text.split(/\W+/g) : Array.from(text);
         
@@ -74,16 +97,17 @@ export default function WordCloud({
         const svg = d3.select(svgRef.current)
         svg.selectAll("*").remove() // Clear previous content
             
-        svg.attr("viewBox", [0, 0, width, height])
-            .attr("width", width)
+        svg.attr("viewBox", [0, 0, dimensions.width, dimensions.height])
+            .attr("width", dimensions.width)
+            .attr("height", dimensions.height)
             .attr("font-family", fontFamily)
             .attr("text-anchor", "middle")
             .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
   
-        const g = svg.append("g").attr("transform", `translate(${width / 2},${height / 2})`);
+        const g = svg.append("g").attr("transform", `translate(${dimensions.width / 2},${dimensions.height / 2})`);
       
         const cloud = d3Cloud()
-            .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
+            .size([dimensions.width - marginLeft - marginRight, dimensions.height - marginTop - marginBottom])
             .words(data)
             .padding(padding)
             .rotate(rotate)
@@ -104,10 +128,10 @@ export default function WordCloud({
 
         cloud.start();
         invalidation && invalidation.then(() => cloud.stop());
-    })
+    }, [text, dimensions, stopwords, size, word, maxWords, fontFamily, fontScale, padding, rotate, marginTop, marginRight, marginBottom, marginLeft, invalidation])
     
     return (
-        <div  style={{ width: '100%', height: '100%' }}>
+        <div ref={containerRef} style={{ width: '100%', height: '100%' }}>
             <svg ref={svgRef} style={{ width: '100%', height: '100%' }}></svg>
         </div>
     )

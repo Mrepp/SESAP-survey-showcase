@@ -18,6 +18,9 @@ export const system = createSystem(defaultConfig, {
             marginTop: '15px',
             marginBottom: '15px',
         },
+        'body': {
+            color: "osuGray",
+        },
     }
 })
 

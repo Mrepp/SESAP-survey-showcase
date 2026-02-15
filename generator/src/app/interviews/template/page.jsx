@@ -79,7 +79,7 @@ export default function Template() {
                             </Accordion.Root>
 
                             <Heading>Quotes</Heading>
-                            <Carousel.RootProvider value={carousel} maxW="xl" mx="auto">
+                            <Carousel.RootProvider value={carousel}>
                                 <Carousel.ItemGroup>
                                     {quotes.map((item, index) => (
                                     <Carousel.Item key={index} index={index}>

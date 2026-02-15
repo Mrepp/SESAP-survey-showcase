@@ -1,1 +1,589 @@
-[00:00:00.730] Server  LOG      ✓ Ready in 526ms
+[00:00:00.710] Server  LOG      ✓ Ready in 505ms
+[00:28:31.187] Server  LOG      ✓ Compiled in 273ms
+[00:28:32.694] Server  ERROR    ⨯ ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+
+
+[00:28:35.522] Server  ERROR    ⨯ ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+
+
+[00:28:35.543] Browser ERROR   ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+[00:28:35.543] Browser ERROR   ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+[00:28:35.543] Browser ERROR   ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+[00:28:35.543] Browser ERROR   ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+[00:28:35.543] Browser ERROR   ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+[00:28:35.586] Server  ERROR    ⨯ ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+
+
+[00:28:36.392] Browser ERROR   ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+[00:28:36.392] Browser ERROR   ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+[00:28:36.489] Server  ERROR    ⨯ ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+
+
+[00:28:40.096] Browser ERROR   uncaughtError: Error: ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+
+
+[00:28:40.331] Browser ERROR   ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+[00:28:40.331] Browser ERROR   ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+[00:28:40.331] Browser ERROR   ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+[00:28:40.331] Browser ERROR   ./src/app/layout.jsx:14:5
+Parsing ecmascript source code failed
+  12 |
+  13 | export default function RootLayout({ children }) {
+> 14 |     return (
+     |     ^^^^^^
+  15 |         <html suppressHydrationWarning lang="en">
+  16 |             <body><Provider forcedTheme='light'>
+  17 |                 <Flex direction="column" minH="100dvh">
+
+Expected '</', got 'return'
+[00:28:40.848] Server  LOG      ✓ Compiled in 17ms
+[00:33:06.061] Server  LOG      ✓ Compiled in 688ms
+[01:13:15.586] Server  LOG      ✓ Compiled in 37ms
+[01:13:17.665] Server  LOG      ✓ Compiled in 97ms
+[01:13:18.090] Browser ERROR   ./src/components/Footer.jsx:17:10
+Parsing ecmascript source code failed
+  15 |                 </Text>
+  16 |             </Box>
+> 17 |         </Center>
+     |          ^^^^^^^^
+  18 |     )
+  19 | }
+
+Unterminated regexp literal
+
+Import trace:
+  Server Component:
+    ./src/components/Footer.jsx
+    ./src/app/layout.jsx
+[01:13:20.789] Server  LOG      ✓ Compiled in 398ms
+[01:13:23.128] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/search. Falling back to browser navigation. {}
+[01:13:23.128] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/search. Falling back to browser navigation. {}
+[01:13:23.128] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/search. Falling back to browser navigation. {}
+[01:13:23.128] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/search. Falling back to browser navigation. {}
+[01:13:23.128] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/search. Falling back to browser navigation. {}
+[01:13:23.128] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/search. Falling back to browser navigation. {}
+[01:13:23.413] Server  LOG      ✓ Compiled in 10ms
+[01:13:41.231] Server  LOG      ✓ Compiled in 14ms
+[01:13:44.449] Server  LOG      ✓ Compiled in 54ms
+[01:15:12.491] Server  LOG      ✓ Compiled in 114ms
+[01:15:22.609] Server  LOG      ✓ Compiled in 60ms
+[01:16:53.634] Server  LOG      ✓ Compiled in 265ms
+[01:16:54.158] Browser ERROR   ./src/components/Footer.jsx:14:20
+Parsing ecmascript source code failed
+  12 |             <Heading fontSize="sm" color='beavOrange'>
+  13 |                 SESAP
+> 14 |             </Text>
+     |                    ^
+> 15 |         </Box>
+     | ^^^^^^^^^
+  16 |     )
+  17 | }
+
+Expected '</', got 'jsx text (
+        )'
+
+Import trace:
+  Server Component:
+    ./src/components/Footer.jsx
+    ./src/app/layout.jsx
+[01:16:57.833] Server  LOG      ✓ Compiled in 754ms
+[01:16:59.443] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Heading
+[01:17:04.031] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:17:04.051] Server  LOG      ✓ Compiled in 364ms
+[01:17:04.099] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:17:08.443] Server  LOG      ✓ Compiled in 36ms
+[01:23:03.274] Server  LOG      ✓ Compiled in 109ms
+[01:23:45.986] Server  LOG      ✓ Compiled in 371ms
+[01:23:54.588] Server  LOG      ✓ Compiled in 35ms
+[01:24:12.084] Server  LOG      ✓ Compiled in 21ms
+[01:24:16.936] Server  LOG      ✓ Compiled in 25ms
+[01:24:48.473] Server  LOG      ✓ Compiled in 45ms
+[01:25:34.441] Server  LOG      ✓ Compiled in 52ms
+[01:25:46.895] Server  LOG      ✓ Compiled in 27ms
+[01:26:15.664] Server  LOG      ✓ Compiled in 231ms
+[01:26:19.721] Server  LOG      ✓ Compiled in 29ms
+[01:26:31.848] Server  LOG      ✓ Compiled in 83ms
+[01:26:32.139] Browser ERROR   ./src/components/Footer.jsx:13:106
+Parsing ecmascript source code failed
+  11 |     return(
+  12 |         <Box bg='osuGray' borderTop="4px solid #D73F09" maxH="100px" maxW="100%">
+> 13 |             <Image src="/favicon_io_transparent/android-chrome-512x512.png" alt="John Doe" h='100px' m= />
+     |                                                                                                          ^
+  14 |         </Box>
+  15 |     )
+  16 | }
+
+Expression expected
+
+Import trace:
+  Server Component:
+    ./src/components/Footer.jsx
+    ./src/app/layout.jsx
+[01:26:35.457] Server  LOG      ✓ Compiled in 77ms
+[01:27:26.530] Server  LOG      ✓ Compiled in 149ms
+[01:27:59.901] Server  LOG      ✓ Compiled in 105ms
+[02:01:28.652] Server  LOG      ✓ Compiled in 166ms
+[02:01:33.009] Server  LOG      ✓ Compiled in 29ms
+[02:01:35.116] Server  LOG      ✓ Compiled in 40ms
+[02:01:37.356] Server  LOG      ✓ Compiled in 25ms
+[02:02:11.155] Server  LOG      ✓ Compiled in 85ms
+[02:02:14.336] Server  LOG      ✓ Compiled in 38ms
+[02:02:23.787] Server  LOG      ✓ Compiled in 408ms
+[02:02:45.349] Server  LOG      ✓ Compiled in 214ms
+[02:03:10.077] Server  LOG      ✓ Compiled in 50ms
+[02:03:19.394] Server  LOG      ✓ Compiled in 27ms
+[02:03:25.485] Server  LOG      ✓ Compiled in 70ms
+[02:03:31.427] Server  LOG      ✓ Compiled in 48ms
+[02:04:45.494] Server  LOG      ✓ Compiled in 87ms
+[02:06:33.083] Server  LOG      ✓ Compiled in 103ms
+[02:06:35.214] Server  LOG      ✓ Compiled in 133ms
+[02:06:36.799] Browser ERROR   ./src/components/Footer.jsx:14:13
+Parsing ecmascript source code failed
+  12 |         <Box bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%">
+  13 |             <
+> 14 |             <Image src="/favicon_io_transparent/android-chrome-512x512.png" href='/' alt="SESAP logo" h='100px' paddingLeft='15px' />
+     |             ^
+  15 |         </Box>
+  16 |     )
+  17 | }
+
+Expression expected
+
+Import trace:
+  Server Component:
+    ./src/components/Footer.jsx
+    ./src/app/layout.jsx
+[02:06:38.934] Browser ERROR   ./src/components/Footer.jsx:14:13
+Parsing ecmascript source code failed
+  12 |         <Box bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%">
+  13 |             <
+> 14 |             <Image src="/favicon_io_transparent/android-chrome-512x512.png" href='/' alt="SESAP logo" h='100px' paddingLeft='15px' />
+     |             ^
+  15 |         </Box>
+  16 |     )
+  17 | }
+
+Expression expected
+
+Import trace:
+  Server Component:
+    ./src/components/Footer.jsx
+    ./src/app/layout.jsx
+[02:06:43.512] Server  LOG      ✓ Compiled in 58ms
+[02:06:48.901] Server  LOG      ✓ Compiled in 29ms
+[02:06:50.952] Server  LOG      ✓ Compiled in 31ms
+[02:07:09.626] Server  LOG      ✓ Compiled in 130ms
+[02:08:03.762] Server  LOG      ✓ Compiled in 124ms
+[02:08:09.170] Server  LOG      ✓ Compiled in 122ms
+[02:08:09.409] Browser ERROR   ./src/components/Footer.jsx:15:13
+Parsing ecmascript source code failed
+  13 |         <Box bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%">
+  14 |             <Link
+> 15 |             <Image src="/favicon_io_transparent/android-chrome-512x512.png" alt="SESAP logo" h='100px' paddingLeft='15px' />
+     |             ^
+  16 |         </Box>
+  17 |     )
+  18 | }
+
+Expression expected
+
+Import trace:
+  Server Component:
+    ./src/components/Footer.jsx
+    ./src/app/layout.jsx
+[02:08:10.944] Server  LOG      ✓ Compiled in 678ms
+[02:08:12.018] Server  LOG      ✓ Compiled in 26ms
+[02:08:23.497] Server  LOG      ✓ Compiled in 161ms
+[02:08:27.263] Server  LOG      ✓ Compiled in 144ms
+[02:08:30.416] Server  LOG      ✓ Compiled in 29ms
+[02:14:58.732] Server  LOG      ✓ Compiled in 185ms
+[02:15:08.981] Server  LOG      ✓ Compiled in 32ms
+[02:15:14.493] Server  LOG      ✓ Compiled in 26ms
+[02:15:19.403] Server  LOG      ✓ Compiled in 32ms
+[02:15:26.450] Server  LOG      ✓ Compiled in 12ms
+[02:15:30.531] Server  LOG      ✓ Compiled in 130ms
+[02:15:44.921] Server  LOG      ✓ Compiled in 28ms
+[02:15:46.631] Server  LOG      ✓ Compiled in 5ms
+[02:15:47.329] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Science
+[02:15:47.815] Server  LOG      ✓ Compiled in 14ms
+[02:15:47.862] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[02:16:00.829] Server  LOG      ✓ Compiled in 86ms
+[02:16:02.831] Server  LOG      ✓ Compiled in 22ms
+[02:16:22.460] Server  LOG      ✓ Compiled in 49ms
+[02:16:30.246] Server  LOG      ✓ Compiled in 37ms
+[02:16:34.535] Server  LOG      ✓ Compiled in 46ms
+[02:16:41.518] Server  LOG      ✓ Compiled in 29ms
+[02:16:51.711] Server  LOG      ✓ Compiled in 39ms
+[02:17:00.682] Server  LOG      ✓ Compiled in 28ms
+[02:17:03.459] Server  LOG      ✓ Compiled in 86ms
+[02:17:08.914] Server  LOG      ✓ Compiled in 33ms
+[02:17:10.040] Server  LOG      ✓ Compiled in 145ms
+[02:17:10.371] Browser ERROR   ./src/components/Header.jsx:19:29
+Parsing ecmascript source code failed
+  17 |                 </Box>
+  18 |
+> 19 |                 <Box padding=>
+     |                             ^^
+  20 |                     <Text fontSize="lg" margin='0px'>
+  21 |                         Electrical Engineering and Computer Science
+  22 |                     </Text>
+
+Expected '</', got '=>'
+
+Import trace:
+  Server Component:
+    ./src/components/Header.jsx
+    ./src/app/layout.jsx
+[02:17:17.421] Server  LOG      ✓ Compiled in 48ms
+[02:17:26.502] Server  LOG      ✓ Compiled in 39ms
+[02:17:43.905] Server  LOG      ✓ Compiled in 46ms
+[02:17:57.403] Server  LOG      ✓ Compiled in 35ms
+[02:18:12.561] Server  LOG      ✓ Compiled in 88ms
+[02:18:12.727] Browser ERROR   ./src/components/Header.jsx:20:55
+Parsing ecmascript source code failed
+  18 |
+  19 |                 <Box padding='10px'>
+> 20 |                     <Text fontSize="lg" margin='0px' p=>
+     |                                                       ^^
+  21 |                         Electrical Engineering and Computer Science
+  22 |                     </Text>
+  23 |                     <Text color='beavOrange' fontSize="2xl" fontWeight="bold" m='0' p='0' >
+
+Expected '</', got '=>'
+
+Import trace:
+  Server Component:
+    ./src/components/Header.jsx
+    ./src/app/layout.jsx
+[02:18:14.463] Server  LOG      ✓ Compiled in 54ms
+[02:18:16.599] Server  LOG      ✓ Compiled in 143ms
+[02:19:19.503] Server  LOG      ✓ Compiled in 115ms
+[02:19:22.106] Server  LOG      ✓ Compiled in 18ms
+[02:20:59.437] Server  LOG      ✓ Compiled in 55ms
+[02:21:03.424] Server  LOG      ✓ Compiled in 44ms
+[02:21:09.441] Server  LOG      ✓ Compiled in 56ms
+[02:21:15.382] Server  LOG      ✓ Compiled in 28ms
+[02:24:25.388] Browser ERROR   ./src/components/Header.jsx:19:54
+Parsing ecmascript source code failed
+  17 |                 </Box>
+  18 |
+> 19 |                 <Box padding='10px' justifyContent={}>
+     |                                                      ^
+  20 |                     <Text fontSize="lg" >
+  21 |                         Electrical Engineering and Computer Science
+  22 |                     </Text>
+
+Expression expected
+
+Import trace:
+  Server Component:
+    ./src/components/Header.jsx
+    ./src/app/layout.jsx
+[02:24:28.471] Server  LOG      ✓ Compiled in 73ms
+[02:25:37.525] Server  LOG      ✓ Compiled in 120ms
+[02:26:02.509] Server  LOG      ✓ Compiled in 119ms
+[02:26:51.497] Server  LOG      ✓ Compiled in 97ms
+[02:26:57.084] Server  LOG      ✓ Compiled in 159ms
+[02:27:20.457] Server  LOG      ✓ Compiled in 59ms
+[02:27:24.825] Server  LOG      ✓ Compiled in 55ms
+[02:27:29.384] Server  LOG      ✓ Compiled in 24ms
+[02:34:04.637] Server  LOG      ✓ Compiled in 208ms
+[02:34:24.434] Server  LOG      ✓ Compiled in 107ms
+[02:34:32.771] Server  LOG      ✓ Compiled in 35ms
+[02:34:36.109] Server  LOG      ✓ Compiled in 154ms
+[02:34:36.512] Browser ERROR   ./src/components/Footer.jsx:23:38
+Parsing ecmascript source code failed
+  21 |             </Link>
+  22 |
+> 23 |             <Link href='<Link href='/'>
+     |                                      ^^
+  24 |                 <Image
+  25 |                     src="/favicon_io_transparent/android-chrome-512x512.png"
+  26 |                     alt="SESAP logo"
+
+Unterminated string constant
+
+Import trace:
+  Server Component:
+    ./src/components/Footer.jsx
+    ./src/app/layout.jsx
+[02:34:37.475] Server  LOG      ✓ Compiled in 72ms
+[02:34:46.651] Server  LOG      ✓ Compiled in 14ms
+[02:34:54.402] Server  LOG      ✓ Compiled in 44ms
+[02:35:47.521] Server  LOG      ✓ Compiled in 125ms
+[02:36:21.082] Server  LOG      ✓ Compiled in 33ms
+[02:36:22.727] Server  LOG      ✓ Compiled in 59ms
+[02:36:23.221] Browser ERROR   ./src/components/Footer.jsx:13:109
+Parsing ecmascript source code failed
+  11 | export default function Footer () {
+  12 |     return(
+> 13 |         <Box bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%" display=>
+     |                                                                                                             ^^
+  14 |             <Link href='/'>
+  15 |                 <Image
+  16 |                     src="/favicon_io_transparent/android-chrome-512x512.png"
+
+Unexpected token `=>`. Expected jsx identifier
+
+Import trace:
+  Server Component:
+    ./src/components/Footer.jsx
+    ./src/app/layout.jsx
+[02:36:27.449] Server  LOG      ✓ Compiled in 72ms
+[02:38:24.499] Server  LOG      ✓ Compiled in 132ms
+[02:38:41.827] Server  LOG      ✓ Compiled in 80ms
+[02:38:44.163] Server  LOG      ✓ Compiled in 45ms
+[02:38:46.441] Server  LOG      ✓ Compiled in 56ms
+[02:38:58.823] Server  LOG      ✓ Compiled in 27ms
+[02:39:00.443] Server  LOG      ✓ Compiled in 112ms
+[02:39:00.837] Browser ERROR   ./src/components/Footer.jsx:24:17
+Parsing ecmascript source code failed
+  22 |
+  23 |             <Box alignSelf='flex-end'
+> 24 |                 <Link  color='white' href='https://scarc.library.oregonstate.edu/findingaids/?p=collections/findingaid&id=3242'>
+     |                 ^
+  25 |                     SCARC
+  26 |                 </Link>
+  27 |             </Box>
+
+Expression expected
+
+Import trace:
+  Server Component:
+    ./src/components/Footer.jsx
+    ./src/app/layout.jsx
+[02:39:02.159] Browser ERROR   ./src/components/Footer.jsx:24:17
+Parsing ecmascript source code failed
+  22 |
+  23 |             <Box 
+> 24 |                 <Link  color='white' href='https://scarc.library.oregonstate.edu/findingaids/?p=collections/findingaid&id=3242'>
+     |                 ^
+  25 |                     SCARC
+  26 |                 </Link>
+  27 |             </Box>
+
+Expression expected
+
+Import trace:
+  Server Component:
+    ./src/components/Footer.jsx
+    ./src/app/layout.jsx
+[02:39:03.176] Server  LOG      ✓ Compiled in 88ms
+[02:39:04.684] Server  LOG      ✓ Compiled in 0ms
+[02:43:44.329] Server  LOG      ✓ Compiled in 146ms
+[02:43:44.489] Browser ERROR   ./src/components/Footer.jsx:13:134
+Parsing ecmascript source code failed
+  11 | export default function Footer () {
+  12 |     return(
+> 13 |         <Box bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%" display='flex' justifyContent={}>
+     |                                                                                                                                      ^
+  14 |             <Link href='/'>
+  15 |                 <Image
+  16 |                     src="/favicon_io_transparent/android-chrome-512x512.png"
+
+Expression expected
+
+Import trace:
+  Server Component:
+    ./src/components/Footer.jsx
+    ./src/app/layout.jsx
+[02:43:46.430] Browser ERROR   ./src/components/Footer.jsx:13:134
+Parsing ecmascript source code failed
+  11 | export default function Footer () {
+  12 |     return(
+> 13 |         <Box bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%" display='flex' justifyContent={}>
+     |                                                                                                                                      ^
+  14 |             <Link href='/'>
+  15 |                 <Image
+  16 |                     src="/favicon_io_transparent/android-chrome-512x512.png"
+
+Expression expected
+
+Import trace:
+  Server Component:
+    ./src/components/Footer.jsx
+    ./src/app/layout.jsx
+[02:43:49.055] Server  LOG      ✓ Compiled in 99ms
+[02:43:52.368] Server  LOG      ✓ Compiled in 21ms
+[02:44:01.425] Server  LOG      ✓ Compiled in 43ms
+[02:44:04.420] Server  LOG      ✓ Compiled in 26ms
+[02:44:18.760] Server  LOG      ✓ Compiled in 99ms
+[02:44:20.896] Server  LOG      ✓ Compiled in 122ms
+[02:44:21.587] Browser ERROR   ./src/components/Footer.jsx:23:38
+Parsing ecmascript source code failed
+  21 |             </Link>
+  22 |
+> 23 |             <Box bg='blue' alignItems'>
+     |                                      ^^
+  24 |                 <Link color='white' href='https://scarc.library.oregonstate.edu/findingaids/?p=collections/findingaid&id=3242'>
+  25 |                     SCARC
+  26 |                 </Link>
+
+Unterminated string constant
+
+Import trace:
+  Server Component:
+    ./src/components/Footer.jsx
+    ./src/app/layout.jsx
+[02:44:24.470] Server  LOG      ✓ Compiled in 51ms
+[02:44:37.274] Server  LOG      ✓ Compiled in 24ms
+[02:44:52.525] Server  LOG      ✓ Compiled in 41ms
+[02:45:13.564] Server  LOG      ✓ Compiled in 22ms
+[02:45:15.139] Server  LOG      ✓ Compiled in 5ms
+[02:45:18.374] Server  LOG      ✓ Compiled in 23ms
+[02:45:37.538] Server  LOG      ✓ Compiled in 33ms
+[02:46:01.792] Server  LOG      ✓ Compiled in 28ms
+[02:46:04.368] Server  LOG      ✓ Compiled in 15ms
+[02:46:11.150] Server  LOG      ✓ Compiled in 28ms
+[02:47:07.587] Server  LOG      ✓ Compiled in 175ms
+[02:47:37.520] Server  LOG      ✓ Compiled in 101ms

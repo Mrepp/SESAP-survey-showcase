@@ -130,7 +130,7 @@ export default function Search() {
                 {/* Results */}
                 <Container paddingRight='0'>
 
-                    {/* Description */}
+                    {/* Description and Clear Button */}
                     <Box marginBottom='20px' display='flex' justifyContent='space-between' alignItems='center'>
                         <Text>{results.length} Results for </Text>
                         <Button variant='surface' onClick={clearAllFilters}>Clear Filter</Button>

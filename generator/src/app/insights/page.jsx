@@ -7,6 +7,7 @@ import {
     Text,
 } from "@chakra-ui/react"
 import BarChart from '@/components/visualizations/BarChart'
+import BubbleChart from "@/components/visualizations/BubbleChart"
 import Correlation from '@/components/visualizations/CorrelationHeatMap'
 import WordCloud from "@/components/visualizations/WordCloud"
 
@@ -22,6 +23,10 @@ export default function Insights() {
                     <WordCloud/>
                 </Box>
 
+                <Box bg='white'  borderWidth="1px" borderRadius='25px'>
+                    <BubbleChart data={themes}/>
+                </Box>
+
                 <Stack>
                     <Box w='100%' h='fit-content' bg='white' borderWidth="1px" borderRadius='25px' w='fit-content' paddingLeft='20px' paddingTop='20px' paddingBottom='20px'>
                         <Correlation/>
@@ -35,3 +40,10 @@ export default function Insights() {
         </>
     )
 }
+
+const themes = [
+    {"title": "Language Barriers", "impactScore": 10, "category": "cat1",},
+    {"title": "Support Networks", "impactScore": 5, "category": "cat2",},
+    {"title": "Career Preparation", "impactScore": 7, "category": "cat1",},
+    {"title": "Identity & Discrimination", "impactScore": 7, "category": "cat2",},
+]

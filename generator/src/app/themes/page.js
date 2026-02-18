@@ -8,6 +8,7 @@ import {
     Heading,
     Menu,
     Portal,
+    Text,
 } from "@chakra-ui/react"
 import { useState, useMemo } from "react"
 import ThemeCard from "@/components/ThemeCard"
@@ -37,6 +38,7 @@ export default function Themes() {
     return (
         <>
             <Heading>Themes</Heading>
+            <Text>Click on any theme to see related interviews.</Text>
 
             {/* Sort Menu */}
             <Container centerContent='true'>

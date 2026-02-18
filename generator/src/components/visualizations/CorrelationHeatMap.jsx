@@ -2,7 +2,7 @@
 'use client'
 import * as d3 from "d3"
 import * as Plot from "@observablehq/plot";
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 
 // https://en.wikipedia.org/wiki/Correlation#Sample_correlation_coefficient
 function corr(x, y) {
@@ -46,7 +46,7 @@ export default function Correlation() {
         correlation: corr(Plot.valueof(data, a), Plot.valueof(data, b))
     }))*/
 
-   const corRef = useRef(null)
+   const chartRef = useRef(null)
 
     useEffect(() => {
         const plot = Plot.plot({
@@ -66,12 +66,12 @@ export default function Correlation() {
             ]
         })
 
-        corRef.current.append(plot)
+        chartRef.current.append(plot)
         return () => plot.remove()
     }, [correlations])
     
 
-    return <div ref={corRef} />
+    return <div ref={chartRef} />
 
 }
 

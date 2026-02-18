@@ -1,589 +1,810 @@
-[00:00:00.710] Server  LOG      ✓ Ready in 505ms
-[00:28:31.187] Server  LOG      ✓ Compiled in 273ms
-[00:28:32.694] Server  ERROR    ⨯ ./src/app/layout.jsx:14:5
+[00:00:00.736] Server  LOG      ✓ Ready in 526ms
+[00:00:25.427] Server  LOG      ○ Compiling /insights ...
+[00:00:25.932] Server  ERROR    ⨯ ReferenceError: document is not defined
+[00:00:27.185] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: names
+[00:01:02.153] Server  LOG      ✓ Compiled in 76ms
+[00:01:06.216] Server  LOG      ✓ Compiled in 69ms
+[00:01:10.660] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:01:10.745] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:60:51
 Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
+  58 |     // Add a label.
+  59 |     const text = node.append("text")
+> 60 |         .attr("clip-path", d => `circle(${d.r})`);
+     |                                                   ^
+  61 |
+  62 |     // Add a tspan for each CamelCase-separated word.
+  63 |     /*text.selectAll()
 
-Expected '</', got 'return'
+Expected '}', got '<eof>'
 
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
 
-[00:28:35.522] Server  ERROR    ⨯ ./src/app/layout.jsx:14:5
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:01:10.745] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:78:2
 Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
+  76 | 
+  77 |     return Object.assign(svg.node(), {scales: {color}});
+> 78 | }
+     |  ^
 
-Expected '</', got 'return'
+Unterminated block comment
 
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
 
-[00:28:35.543] Browser ERROR   ./src/app/layout.jsx:14:5
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:01:11.161] Server  ERROR    ⨯ ReferenceError: document is not defined
+[00:01:12.122] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: names
+[00:02:27.313] Server  LOG      ✓ Compiled in 116ms
+[00:02:30.686] Server  LOG      ✓ Compiled in 39ms
+[00:02:33.760] Server  LOG      ✓ Compiled in 5ms
+[00:02:35.413] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:02:35.420] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:02:35.424] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:02:35.755] Server  ERROR    ⨯ ReferenceError: document is not defined
+[00:02:36.323] Browser ERROR   uncaughtError: Error: Objects are not valid as a React child (found: [object SVGSVGElement]). If you meant to render a collection of children, use an array instead.
+[00:03:18.240] Server  LOG      ✓ Compiled in 522ms
+[00:03:24.540] Server  LOG      ✓ Compiled in 109ms
+[00:03:41.364] Server  LOG      ✓ Compiled in 54ms
+[00:03:45.609] Server  LOG      ✓ Compiled in 25ms
+[00:03:50.094] Server  LOG      ✓ Compiled in 35ms
+[00:03:51.802] Server  LOG      ✓ Compiled in 39ms
+[00:03:53.367] Server  LOG      ✓ Compiled in 7ms
+[00:03:58.125] Server  LOG      ✓ Compiled in 278ms
+[00:04:00.681] Server  LOG      ✓ Compiled in 26ms
+[00:04:05.113] Server  LOG      ✓ Compiled in 37ms
+[00:05:15.561] Server  LOG      ✓ Compiled in 88ms
+[00:05:17.015] Server  LOG      ✓ Compiled in 33ms
+[00:05:25.608] Server  LOG      ✓ Compiled in 64ms
+[00:05:30.098] Server  LOG      ✓ Compiled in 34ms
+[00:05:34.865] Server  LOG      ✓ Compiled in 20ms
+[00:05:46.851] Server  LOG      ✓ Compiled in 67ms
+[00:05:51.239] Server  LOG      ✓ Compiled in 44ms
+[00:06:19.976] Server  LOG      ✓ Compiled in 74ms
+[00:06:36.188] Server  LOG      ✓ Compiled in 46ms
+[00:06:42.661] Server  LOG      ✓ Compiled in 79ms
+[00:06:54.977] Server  LOG      ✓ Compiled in 75ms
+[00:06:57.740] Server  LOG      ✓ Compiled in 201ms
+[00:07:40.338] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.341] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.341] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.341] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.343] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.345] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.346] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.347] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.347] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.347] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.347] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.347] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.360] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.361] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.361] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.366] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.366] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.368] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.369] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:40.431] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:84:2
 Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
+  82 |     return Object.assign(svg.node(), {scales: {color}});
+  83 |     //return <div ref={chartRef} />
+> 84 | }
+     |  ^
 
-Expected '</', got 'return'
-[00:28:35.543] Browser ERROR   ./src/app/layout.jsx:14:5
+Expected ',', got '<eof>'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:07:40.431] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:17:5
 Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
+  15 |
+  16 |     // Specify the dimensions of the chart.
+> 17 |     const margin = 1; // to avoid clipping the root circle stroke
+     |     ^^^^^
+  18 |     const name = d => d.title
+  19 |     const category = d => d.category
+  20 |     //const names = d => name(d).split(/(?=[A-Z][a-z])|\s+/g); // ["Legend", "Item"] of "flare.vis.legend.LegendItems"
 
-Expected '</', got 'return'
-[00:28:35.543] Browser ERROR   ./src/app/layout.jsx:14:5
+Expected ',', got 'const'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:07:40.432] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:18:5
 Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
+  16 |
+  17 |     // Specify the dimensions of the chart.
+> 18 |     const margin = 1; // to avoid clipping the root circle stroke
+     |     ^^^^^
+  19 |     const name = d => d.title
+  20 |     const category = d => d.category
+  21 |     //const names = d => name(d).split(/(?=[A-Z][a-z])|\s+/g); // ["Legend", "Item"] of "flare.vis.legend.LegendItems"
 
-Expected '</', got 'return'
-[00:28:35.543] Browser ERROR   ./src/app/layout.jsx:14:5
+Expected ',', got 'const'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:07:40.432] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:85:2
 Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
+  83 |     return Object.assign(svg.node(), {scales: {color}});
+  84 |     //return <div ref={chartRef} />
+> 85 | }
+     |  ^
 
-Expected '</', got 'return'
-[00:28:35.543] Browser ERROR   ./src/app/layout.jsx:14:5
+Expected ',', got '<eof>'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:07:40.924] Server  ERROR    ⨯ ReferenceError: useRef is not defined
+[00:07:41.645] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: useRef
+[00:08:04.479] Server  LOG      ✓ Compiled in 231ms
+[00:08:15.021] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:08:15.446] Server  ERROR    ⨯ ReferenceError: svg is not defined
+[00:08:16.232] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: svg
+[00:08:44.075] Server  LOG      ✓ Compiled in 39ms
+[00:09:22.352] Server  LOG      ✓ Compiled in 35ms
+[00:10:00.368] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:10:00.371] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:10:00.786] Server  ERROR    ⨯ ReferenceError: svg is not defined
+[00:10:01.786] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: svg
+[00:12:44.313] Server  LOG      ✓ Compiled in 330ms
+[00:12:55.148] Server  LOG      ✓ Compiled in 32ms
+[00:12:58.250] Server  LOG      ✓ Compiled in 34ms
+[00:13:09.224] Server  LOG      ✓ Compiled in 581ms
+[00:13:12.261] Server  LOG      ✓ Compiled in 35ms
+[00:13:31.581] Server  LOG      ✓ Compiled in 31ms
+[00:13:52.178] Server  LOG      ✓ Compiled in 97ms
+[00:13:58.453] Server  LOG      ✓ Compiled in 167ms
+[00:14:06.826] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:14:06.840] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:14:06.841] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:14:06.841] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:14:06.841] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:14:06.898] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:40:15
+Ecmascript file had an error
+  38 |                     svg.selectAll("*").remove() // Clear previous content
+  39 |         // Create the SVG container.
+> 40 |         const svg = d3.create("svg")
+     |               ^^^
+  41 |             .attr("width", width)
+  42 |             .attr("height", height)
+  43 |             .attr("viewBox", [-margin, -margin, width, height])
+
+the name `svg` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:14:06.898] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:40:15
+Ecmascript file had an error
+  38 |                     svg.selectAll("*").remove() // Clear previous content
+  39 |         // Create the SVG container.
+> 40 |         const svg = d3.create("svg")
+     |               ^^^
+  41 |             .attr("width", width)
+  42 |             .attr("height", height)
+  43 |             .attr("viewBox", [-margin, -margin, width, height])
+
+the name `svg` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:14:06.898] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:40:15
+Ecmascript file had an error
+  38 |         svg.selectAll("*").remove() // Clear previous content
+  39 |         // Create the SVG container.
+> 40 |         const svg = d3.create("svg")
+     |               ^^^
+  41 |             .attr("width", width)
+  42 |             .attr("height", height)
+  43 |             .attr("viewBox", [-margin, -margin, width, height])
+
+the name `svg` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:14:06.898] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:41:15
+Ecmascript file had an error
+  39 |         
+  40 |         // Create the SVG container.
+> 41 |         const svg = d3.create("svg")
+     |               ^^^
+  42 |             .attr("width", width)
+  43 |             .attr("height", height)
+  44 |             .attr("viewBox", [-margin, -margin, width, height])
+
+the name `svg` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:14:06.899] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:41:15
+Ecmascript file had an error
+  39 |
+  40 |         
+> 41 |         const svg = d3.create("svg")
+     |               ^^^
+  42 |             .attr("width", width)
+  43 |             .attr("height", height)
+  44 |             .attr("viewBox", [-margin, -margin, width, height])
+
+the name `svg` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:14:06.899] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:42:15
+Ecmascript file had an error
+  40 |
+  41 |         
+> 42 |         const svg = d3.create("svg")
+     |               ^^^
+  43 |             .attr("width", width)
+  44 |             .attr("height", height)
+  45 |             .attr("viewBox", [-margin, -margin, width, height])
+
+the name `svg` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:14:06.899] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:42:15
+Ecmascript file had an error
+  40 |
+  41 |         
+> 42 |         const svg = d3.create("svg")
+     |               ^^^
+  43 |             .attr("width", width)
+  44 |             .attr("height", height)
+  45 |             .attr("viewBox", [-margin, -margin, width, height])
+
+the name `svg` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:15:25.025] Server  LOG      ✓ Compiled in 130ms
+[00:15:51.550] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: svg
+[00:16:10.440] Server  LOG      ✓ Compiled in 103ms
+[00:16:10.560] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:16:19.732] Server  LOG      ✓ Compiled in 59ms
+[00:16:22.904] Server  LOG      ✓ Compiled in 66ms
+[00:18:30.080] Server  LOG      ✓ Compiled in 109ms
+[00:18:32.199] Server  LOG      ✓ Compiled in 24ms
+[00:18:44.247] Server  LOG      ✓ Compiled in 21ms
+[00:24:14.939] Server  LOG      ✓ Compiled in 156ms
+[00:26:00.435] Server  LOG      ✓ Compiled in 96ms
+[00:26:04.789] Server  LOG      ✓ Compiled in 111ms
+[00:26:06.043] Server  LOG      ✓ Compiled in 26ms
+[00:27:01.359] Server  LOG      ✓ Compiled in 207ms
+[00:27:04.692] Server  LOG      ✓ Compiled in 33ms
+[00:27:06.677] Server  LOG      ✓ Compiled in 11ms
+[00:27:32.911] Server  LOG      ✓ Compiled in 28ms
+[00:28:55.039] Server  LOG      ✓ Compiled in 397ms
+[00:28:56.725] Server  LOG      ✓ Compiled in 137ms
+[00:29:12.635] Browser ERROR   ./src/components/visualizations/BubbleChart.jsx:72:34
 Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
+  70 |         // Add a title (tooltip).
+  71 |         node.append("title")
+> 72 |             .text(d => `${d.data.}\n${format(d.impactScore)}`);
+     |                                  ^
+  73 |
+  74 |         // Add a filled circle.
+  75 |         node.append("circle")
 
-Expected '</', got 'return'
-[00:28:35.586] Server  ERROR    ⨯ ./src/app/layout.jsx:14:5
+Expected ident
+
+Import traces:
+  Client Component Browser:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Client Component Browser]
+    ./src/app/insights/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/visualizations/BubbleChart.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Client Component SSR]
+    ./src/app/insights/page.jsx [Server Component]
+[00:30:31.161] Server  LOG      ✓ Compiled in 127ms
+[00:31:08.937] Server  LOG      ✓ Compiled in 104ms
+[00:31:10.968] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: category
+[00:31:29.943] Server  LOG      ✓ Compiled in 25ms
+[00:31:41.538] Server  LOG      ✓ Compiled in 55ms
+[00:31:44.249] Server  LOG      ✓ Compiled in 29ms
+[00:31:51.744] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:31:51.749] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:31:51.749] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:32:23.992] Server  LOG      ✓ Compiled in 27ms
+[00:32:37.883] Server  LOG      ✓ Compiled in 24ms
+[00:32:47.727] Server  LOG      ✓ Compiled in 26ms
+[00:37:21.702] Server  LOG      ✓ Compiled in 63ms
+[00:37:37.000] Server  LOG      ✓ Compiled in 33ms
+[00:37:38.395] Server  LOG      ✓ Compiled in 23ms
+[00:38:00.120] Server  LOG      ✓ Compiled in 23ms
+[00:38:13.424] Server  LOG      ✓ Compiled in 27ms
+[00:38:19.233] Server  LOG      ✓ Compiled in 27ms
+[00:38:23.488] Server  LOG      ✓ Compiled in 24ms
+[00:38:26.392] Server  LOG      ✓ Compiled in 33ms
+[00:38:46.275] Browser ERROR   uncaughtError: TypeError: name.split is not a function. (In 'name.split(/(?=[A-Z][a-z])|\s+/g)', 'name.split' is undefined)
+[00:40:45.487] Server  LOG      ✓ Compiled in 146ms
+[00:40:52.139] Server  LOG      ✓ Compiled in 36ms
+[00:40:54.506] Server  LOG      ✓ Compiled in 29ms
+[00:40:56.159] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:40:56.204] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:40:56.205] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:45:41.893] Server  LOG      ✓ Compiled in 123ms
+[00:45:49.704] Server  LOG      ✓ Compiled in 31ms
+[00:45:53.864] Server  LOG      ✓ Compiled in 25ms
+[00:46:34.481] Server  LOG      ✓ Compiled in 118ms
+[00:46:40.339] Server  LOG      ✓ Compiled in 31ms
+[00:46:42.530] Server  LOG      ✓ Compiled in 50ms
+[00:46:45.033] Server  LOG      ✓ Compiled in 37ms
+[00:46:46.286] Server  LOG      ✓ Compiled in 27ms
+[00:46:51.188] Server  LOG      ✓ Compiled in 31ms
+[00:46:53.432] Server  LOG      ✓ Compiled in 23ms
+[00:49:53.433] Server  LOG      ✓ Compiled in 115ms
+[00:49:56.671] Server  LOG      ✓ Compiled in 46ms
+[00:49:59.266] Server  LOG      ✓ Compiled in 21ms
+[00:50:48.405] Server  LOG      ✓ Compiled in 142ms
+[00:50:53.335] Server  LOG      ✓ Compiled in 104ms
+[00:50:58.275] Server  LOG      ✓ Compiled in 38ms
+[00:51:02.263] Server  LOG      ✓ Compiled in 30ms
+[00:51:14.093] Server  LOG      ✓ Compiled in 115ms
+[00:51:24.085] Server  LOG      ✓ Compiled in 111ms
+[00:51:27.254] Server  LOG      ✓ Compiled in 52ms
+[00:51:44.719] Server  LOG      ✓ Compiled in 26ms
+[00:51:53.785] Server  LOG      ✓ Compiled in 19ms
+[00:51:58.186] Server  LOG      ✓ Compiled in 119ms
+[00:52:00.267] Server  LOG      ✓ Compiled in 22ms
+[00:52:12.147] Server  LOG      ✓ Compiled in 49ms
+[00:52:13.236] Server  LOG      ✓ Compiled in 31ms
+[00:52:18.392] Server  LOG      ✓ Compiled in 25ms
+[00:53:34.939] Server  LOG      ✓ Compiled in 23ms
+[00:54:19.235] Server  LOG      ✓ Compiled in 33ms
+[00:55:11.257] Server  LOG      ✓ Compiled in 38ms
+[00:55:15.329] Server  LOG      ✓ Compiled in 19ms
+[00:57:23.269] Server  LOG      ✓ Compiled in 129ms
+[00:57:27.696] Server  LOG      ✓ Compiled in 109ms
+[00:57:34.382] Server  LOG      ✓ Compiled in 197ms
+[00:57:37.907] Server  LOG      ✓ Compiled in 75ms
+[00:57:41.755] Server  LOG      ✓ Compiled in 38ms
+[00:57:42.798] Server  LOG      ✓ Compiled in 17ms
+[00:57:45.369] Server  LOG      ✓ Compiled in 54ms
+[00:57:51.058] Browser ERROR   ./src/app/interviews/template/page.jsx:130:25
 Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
+  128 |
+  129 |                             <Bubble
+> 130 |                         </Tabs.Content>
+      |                         ^
+  131 |
+  132 |                         {/* Timeline */}
+  133 |                         <Tabs.Content value="timeline">
 
-Expected '</', got 'return'
+Expression expected
 
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
 
-[00:28:36.392] Browser ERROR   ./src/app/layout.jsx:14:5
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:57:51.058] Browser ERROR   ./src/app/interviews/template/page.jsx:130:26
 Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
-
-Expected '</', got 'return'
-[00:28:36.392] Browser ERROR   ./src/app/layout.jsx:14:5
-Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
-
-Expected '</', got 'return'
-[00:28:36.489] Server  ERROR    ⨯ ./src/app/layout.jsx:14:5
-Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
-
-Expected '</', got 'return'
-
-
-[00:28:40.096] Browser ERROR   uncaughtError: Error: ./src/app/layout.jsx:14:5
-Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
-
-Expected '</', got 'return'
-
-
-[00:28:40.331] Browser ERROR   ./src/app/layout.jsx:14:5
-Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
-
-Expected '</', got 'return'
-[00:28:40.331] Browser ERROR   ./src/app/layout.jsx:14:5
-Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
-
-Expected '</', got 'return'
-[00:28:40.331] Browser ERROR   ./src/app/layout.jsx:14:5
-Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
-
-Expected '</', got 'return'
-[00:28:40.331] Browser ERROR   ./src/app/layout.jsx:14:5
-Parsing ecmascript source code failed
-  12 |
-  13 | export default function RootLayout({ children }) {
-> 14 |     return (
-     |     ^^^^^^
-  15 |         <html suppressHydrationWarning lang="en">
-  16 |             <body><Provider forcedTheme='light'>
-  17 |                 <Flex direction="column" minH="100dvh">
-
-Expected '</', got 'return'
-[00:28:40.848] Server  LOG      ✓ Compiled in 17ms
-[00:33:06.061] Server  LOG      ✓ Compiled in 688ms
-[01:13:15.586] Server  LOG      ✓ Compiled in 37ms
-[01:13:17.665] Server  LOG      ✓ Compiled in 97ms
-[01:13:18.090] Browser ERROR   ./src/components/Footer.jsx:17:10
-Parsing ecmascript source code failed
-  15 |                 </Text>
-  16 |             </Box>
-> 17 |         </Center>
-     |          ^^^^^^^^
-  18 |     )
-  19 | }
+  128 |
+  129 |                             <Bubble
+> 130 |                         </Tabs.Content>
+      |                          ^^^^^^^^^^^^^^
+  131 |
+  132 |                         {/* Timeline */}
+  133 |                         <Tabs.Content value="timeline">
 
 Unterminated regexp literal
 
-Import trace:
-  Server Component:
-    ./src/components/Footer.jsx
-    ./src/app/layout.jsx
-[01:13:20.789] Server  LOG      ✓ Compiled in 398ms
-[01:13:23.128] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/search. Falling back to browser navigation. {}
-[01:13:23.128] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/search. Falling back to browser navigation. {}
-[01:13:23.128] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/search. Falling back to browser navigation. {}
-[01:13:23.128] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/search. Falling back to browser navigation. {}
-[01:13:23.128] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/search. Falling back to browser navigation. {}
-[01:13:23.128] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/search. Falling back to browser navigation. {}
-[01:13:23.413] Server  LOG      ✓ Compiled in 10ms
-[01:13:41.231] Server  LOG      ✓ Compiled in 14ms
-[01:13:44.449] Server  LOG      ✓ Compiled in 54ms
-[01:15:12.491] Server  LOG      ✓ Compiled in 114ms
-[01:15:22.609] Server  LOG      ✓ Compiled in 60ms
-[01:16:53.634] Server  LOG      ✓ Compiled in 265ms
-[01:16:54.158] Browser ERROR   ./src/components/Footer.jsx:14:20
-Parsing ecmascript source code failed
-  12 |             <Heading fontSize="sm" color='beavOrange'>
-  13 |                 SESAP
-> 14 |             </Text>
-     |                    ^
-> 15 |         </Box>
-     | ^^^^^^^^^
-  16 |     )
-  17 | }
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
 
-Expected '</', got 'jsx text (
-        )'
-
-Import trace:
-  Server Component:
-    ./src/components/Footer.jsx
-    ./src/app/layout.jsx
-[01:16:57.833] Server  LOG      ✓ Compiled in 754ms
-[01:16:59.443] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Heading
-[01:17:04.031] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:17:04.051] Server  LOG      ✓ Compiled in 364ms
-[01:17:04.099] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:17:08.443] Server  LOG      ✓ Compiled in 36ms
-[01:23:03.274] Server  LOG      ✓ Compiled in 109ms
-[01:23:45.986] Server  LOG      ✓ Compiled in 371ms
-[01:23:54.588] Server  LOG      ✓ Compiled in 35ms
-[01:24:12.084] Server  LOG      ✓ Compiled in 21ms
-[01:24:16.936] Server  LOG      ✓ Compiled in 25ms
-[01:24:48.473] Server  LOG      ✓ Compiled in 45ms
-[01:25:34.441] Server  LOG      ✓ Compiled in 52ms
-[01:25:46.895] Server  LOG      ✓ Compiled in 27ms
-[01:26:15.664] Server  LOG      ✓ Compiled in 231ms
-[01:26:19.721] Server  LOG      ✓ Compiled in 29ms
-[01:26:31.848] Server  LOG      ✓ Compiled in 83ms
-[01:26:32.139] Browser ERROR   ./src/components/Footer.jsx:13:106
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:57:51.058] Browser ERROR   ./src/app/interviews/template/page.jsx:130:25
 Parsing ecmascript source code failed
-  11 |     return(
-  12 |         <Box bg='osuGray' borderTop="4px solid #D73F09" maxH="100px" maxW="100%">
-> 13 |             <Image src="/favicon_io_transparent/android-chrome-512x512.png" alt="John Doe" h='100px' m= />
-     |                                                                                                          ^
-  14 |         </Box>
-  15 |     )
-  16 | }
+  128 |
+  129 |                             <BubbleChart
+> 130 |                         </Tabs.Content>
+      |                         ^
+  131 |
+  132 |                         {/* Timeline */}
+  133 |                         <Tabs.Content value="timeline">
 
 Expression expected
 
-Import trace:
-  Server Component:
-    ./src/components/Footer.jsx
-    ./src/app/layout.jsx
-[01:26:35.457] Server  LOG      ✓ Compiled in 77ms
-[01:27:26.530] Server  LOG      ✓ Compiled in 149ms
-[01:27:59.901] Server  LOG      ✓ Compiled in 105ms
-[02:01:28.652] Server  LOG      ✓ Compiled in 166ms
-[02:01:33.009] Server  LOG      ✓ Compiled in 29ms
-[02:01:35.116] Server  LOG      ✓ Compiled in 40ms
-[02:01:37.356] Server  LOG      ✓ Compiled in 25ms
-[02:02:11.155] Server  LOG      ✓ Compiled in 85ms
-[02:02:14.336] Server  LOG      ✓ Compiled in 38ms
-[02:02:23.787] Server  LOG      ✓ Compiled in 408ms
-[02:02:45.349] Server  LOG      ✓ Compiled in 214ms
-[02:03:10.077] Server  LOG      ✓ Compiled in 50ms
-[02:03:19.394] Server  LOG      ✓ Compiled in 27ms
-[02:03:25.485] Server  LOG      ✓ Compiled in 70ms
-[02:03:31.427] Server  LOG      ✓ Compiled in 48ms
-[02:04:45.494] Server  LOG      ✓ Compiled in 87ms
-[02:06:33.083] Server  LOG      ✓ Compiled in 103ms
-[02:06:35.214] Server  LOG      ✓ Compiled in 133ms
-[02:06:36.799] Browser ERROR   ./src/components/Footer.jsx:14:13
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:57:51.058] Browser ERROR   ./src/app/interviews/template/page.jsx:130:26
 Parsing ecmascript source code failed
-  12 |         <Box bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%">
-  13 |             <
-> 14 |             <Image src="/favicon_io_transparent/android-chrome-512x512.png" href='/' alt="SESAP logo" h='100px' paddingLeft='15px' />
-     |             ^
-  15 |         </Box>
-  16 |     )
-  17 | }
+  128 |
+  129 |                             <BubbleChart
+> 130 |                         </Tabs.Content>
+      |                          ^^^^^^^^^^^^^^
+  131 |
+  132 |                         {/* Timeline */}
+  133 |                         <Tabs.Content value="timeline">
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:57:51.058] Browser ERROR   ./src/app/interviews/template/page.jsx:129:48
+Parsing ecmascript source code failed
+  127 |                             </Carousel.RootProvider>
+  128 |
+> 129 |                             <BubbleChart data=/>
+      |                                                ^
+  130 |                         </Tabs.Content>
+  131 |
+  132 |                         {/* Timeline */}
 
 Expression expected
 
-Import trace:
-  Server Component:
-    ./src/components/Footer.jsx
-    ./src/app/layout.jsx
-[02:06:38.934] Browser ERROR   ./src/components/Footer.jsx:14:13
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:57:51.058] Browser ERROR   ./src/app/interviews/template/page.jsx:129:48
 Parsing ecmascript source code failed
-  12 |         <Box bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%">
-  13 |             <
-> 14 |             <Image src="/favicon_io_transparent/android-chrome-512x512.png" href='/' alt="SESAP logo" h='100px' paddingLeft='15px' />
-     |             ^
-  15 |         </Box>
-  16 |     )
-  17 | }
+  127 |                             </Carousel.RootProvider>
+  128 |
+> 129 |                             <BubbleChart data=/>
+      |                                                ^
+  130 |                         </Tabs.Content>
+  131 |
+  132 |                         {/* Timeline */}
 
 Expression expected
 
-Import trace:
-  Server Component:
-    ./src/components/Footer.jsx
-    ./src/app/layout.jsx
-[02:06:43.512] Server  LOG      ✓ Compiled in 58ms
-[02:06:48.901] Server  LOG      ✓ Compiled in 29ms
-[02:06:50.952] Server  LOG      ✓ Compiled in 31ms
-[02:07:09.626] Server  LOG      ✓ Compiled in 130ms
-[02:08:03.762] Server  LOG      ✓ Compiled in 124ms
-[02:08:09.170] Server  LOG      ✓ Compiled in 122ms
-[02:08:09.409] Browser ERROR   ./src/components/Footer.jsx:15:13
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:57:51.058] Browser ERROR   ./src/app/interviews/template/page.jsx:129:48
 Parsing ecmascript source code failed
-  13 |         <Box bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%">
-  14 |             <Link
-> 15 |             <Image src="/favicon_io_transparent/android-chrome-512x512.png" alt="SESAP logo" h='100px' paddingLeft='15px' />
-     |             ^
-  16 |         </Box>
-  17 |     )
-  18 | }
+  127 |                             </Carousel.RootProvider>
+  128 |
+> 129 |                             <BubbleChart data={/>
+      |                                                ^^
+  130 |                         </Tabs.Content>
+  131 |
+  132 |                         {/* Timeline */}
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:57:51.058] Browser ERROR   ./src/app/interviews/template/page.jsx:129:50
+Parsing ecmascript source code failed
+  127 |                             </Carousel.RootProvider>
+  128 |
+> 129 |                             <BubbleChart data={}/>
+      |                                                  ^
+  130 |                         </Tabs.Content>
+  131 |
+  132 |                         {/* Timeline */}
 
 Expression expected
 
-Import trace:
-  Server Component:
-    ./src/components/Footer.jsx
-    ./src/app/layout.jsx
-[02:08:10.944] Server  LOG      ✓ Compiled in 678ms
-[02:08:12.018] Server  LOG      ✓ Compiled in 26ms
-[02:08:23.497] Server  LOG      ✓ Compiled in 161ms
-[02:08:27.263] Server  LOG      ✓ Compiled in 144ms
-[02:08:30.416] Server  LOG      ✓ Compiled in 29ms
-[02:14:58.732] Server  LOG      ✓ Compiled in 185ms
-[02:15:08.981] Server  LOG      ✓ Compiled in 32ms
-[02:15:14.493] Server  LOG      ✓ Compiled in 26ms
-[02:15:19.403] Server  LOG      ✓ Compiled in 32ms
-[02:15:26.450] Server  LOG      ✓ Compiled in 12ms
-[02:15:30.531] Server  LOG      ✓ Compiled in 130ms
-[02:15:44.921] Server  LOG      ✓ Compiled in 28ms
-[02:15:46.631] Server  LOG      ✓ Compiled in 5ms
-[02:15:47.329] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Science
-[02:15:47.815] Server  LOG      ✓ Compiled in 14ms
-[02:15:47.862] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[02:16:00.829] Server  LOG      ✓ Compiled in 86ms
-[02:16:02.831] Server  LOG      ✓ Compiled in 22ms
-[02:16:22.460] Server  LOG      ✓ Compiled in 49ms
-[02:16:30.246] Server  LOG      ✓ Compiled in 37ms
-[02:16:34.535] Server  LOG      ✓ Compiled in 46ms
-[02:16:41.518] Server  LOG      ✓ Compiled in 29ms
-[02:16:51.711] Server  LOG      ✓ Compiled in 39ms
-[02:17:00.682] Server  LOG      ✓ Compiled in 28ms
-[02:17:03.459] Server  LOG      ✓ Compiled in 86ms
-[02:17:08.914] Server  LOG      ✓ Compiled in 33ms
-[02:17:10.040] Server  LOG      ✓ Compiled in 145ms
-[02:17:10.371] Browser ERROR   ./src/components/Header.jsx:19:29
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:58:16.724] Server  LOG      ✓ Compiled in 32ms
+[00:58:18.437] Server  LOG      ✓ Compiled in 51ms
+[00:58:21.943] Server  LOG      ✓ Compiled in 44ms
+[00:58:22.296] Browser ERROR   ./src/app/interviews/template/page.jsx:129:63
 Parsing ecmascript source code failed
-  17 |                 </Box>
-  18 |
-> 19 |                 <Box padding=>
-     |                             ^^
-  20 |                     <Text fontSize="lg" margin='0px'>
-  21 |                         Electrical Engineering and Computer Science
-  22 |                     </Text>
-
-Expected '</', got '=>'
-
-Import trace:
-  Server Component:
-    ./src/components/Header.jsx
-    ./src/app/layout.jsx
-[02:17:17.421] Server  LOG      ✓ Compiled in 48ms
-[02:17:26.502] Server  LOG      ✓ Compiled in 39ms
-[02:17:43.905] Server  LOG      ✓ Compiled in 46ms
-[02:17:57.403] Server  LOG      ✓ Compiled in 35ms
-[02:18:12.561] Server  LOG      ✓ Compiled in 88ms
-[02:18:12.727] Browser ERROR   ./src/components/Header.jsx:20:55
-Parsing ecmascript source code failed
-  18 |
-  19 |                 <Box padding='10px'>
-> 20 |                     <Text fontSize="lg" margin='0px' p=>
-     |                                                       ^^
-  21 |                         Electrical Engineering and Computer Science
-  22 |                     </Text>
-  23 |                     <Text color='beavOrange' fontSize="2xl" fontWeight="bold" m='0' p='0' >
-
-Expected '</', got '=>'
-
-Import trace:
-  Server Component:
-    ./src/components/Header.jsx
-    ./src/app/layout.jsx
-[02:18:14.463] Server  LOG      ✓ Compiled in 54ms
-[02:18:16.599] Server  LOG      ✓ Compiled in 143ms
-[02:19:19.503] Server  LOG      ✓ Compiled in 115ms
-[02:19:22.106] Server  LOG      ✓ Compiled in 18ms
-[02:20:59.437] Server  LOG      ✓ Compiled in 55ms
-[02:21:03.424] Server  LOG      ✓ Compiled in 44ms
-[02:21:09.441] Server  LOG      ✓ Compiled in 56ms
-[02:21:15.382] Server  LOG      ✓ Compiled in 28ms
-[02:24:25.388] Browser ERROR   ./src/components/Header.jsx:19:54
-Parsing ecmascript source code failed
-  17 |                 </Box>
-  18 |
-> 19 |                 <Box padding='10px' justifyContent={}>
-     |                                                      ^
-  20 |                     <Text fontSize="lg" >
-  21 |                         Electrical Engineering and Computer Science
-  22 |                     </Text>
+  127 |                             </Carousel.RootProvider>
+  128 |
+> 129 |                             <BubbleChart data={themes} width=/>
+      |                                                               ^
+  130 |                         </Tabs.Content>
+  131 |
+  132 |                         {/* Timeline */}
 
 Expression expected
 
-Import trace:
-  Server Component:
-    ./src/components/Header.jsx
-    ./src/app/layout.jsx
-[02:24:28.471] Server  LOG      ✓ Compiled in 73ms
-[02:25:37.525] Server  LOG      ✓ Compiled in 120ms
-[02:26:02.509] Server  LOG      ✓ Compiled in 119ms
-[02:26:51.497] Server  LOG      ✓ Compiled in 97ms
-[02:26:57.084] Server  LOG      ✓ Compiled in 159ms
-[02:27:20.457] Server  LOG      ✓ Compiled in 59ms
-[02:27:24.825] Server  LOG      ✓ Compiled in 55ms
-[02:27:29.384] Server  LOG      ✓ Compiled in 24ms
-[02:34:04.637] Server  LOG      ✓ Compiled in 208ms
-[02:34:24.434] Server  LOG      ✓ Compiled in 107ms
-[02:34:32.771] Server  LOG      ✓ Compiled in 35ms
-[02:34:36.109] Server  LOG      ✓ Compiled in 154ms
-[02:34:36.512] Browser ERROR   ./src/components/Footer.jsx:23:38
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:58:27.366] Server  LOG      ✓ Compiled in 74ms
+[00:58:27.543] Browser ERROR   ./src/app/interviews/template/page.jsx:129:63
 Parsing ecmascript source code failed
-  21 |             </Link>
-  22 |
-> 23 |             <Link href='<Link href='/'>
-     |                                      ^^
-  24 |                 <Image
-  25 |                     src="/favicon_io_transparent/android-chrome-512x512.png"
-  26 |                     alt="SESAP logo"
+  127 |                             </Carousel.RootProvider>
+  128 |
+> 129 |                             <BubbleChart data={themes} width={/>
+      |                                                               ^^
+  130 |                         </Tabs.Content>
+  131 |
+  132 |                         {/* Timeline */}
 
-Unterminated string constant
+Unterminated regexp literal
 
-Import trace:
-  Server Component:
-    ./src/components/Footer.jsx
-    ./src/app/layout.jsx
-[02:34:37.475] Server  LOG      ✓ Compiled in 72ms
-[02:34:46.651] Server  LOG      ✓ Compiled in 14ms
-[02:34:54.402] Server  LOG      ✓ Compiled in 44ms
-[02:35:47.521] Server  LOG      ✓ Compiled in 125ms
-[02:36:21.082] Server  LOG      ✓ Compiled in 33ms
-[02:36:22.727] Server  LOG      ✓ Compiled in 59ms
-[02:36:23.221] Browser ERROR   ./src/components/Footer.jsx:13:109
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:58:28.372] Server  LOG      ✓ Compiled in 24ms
+[00:58:28.560] Browser ERROR   ./src/app/interviews/template/page.jsx:129:65
 Parsing ecmascript source code failed
-  11 | export default function Footer () {
-  12 |     return(
-> 13 |         <Box bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%" display=>
-     |                                                                                                             ^^
-  14 |             <Link href='/'>
-  15 |                 <Image
-  16 |                     src="/favicon_io_transparent/android-chrome-512x512.png"
-
-Unexpected token `=>`. Expected jsx identifier
-
-Import trace:
-  Server Component:
-    ./src/components/Footer.jsx
-    ./src/app/layout.jsx
-[02:36:27.449] Server  LOG      ✓ Compiled in 72ms
-[02:38:24.499] Server  LOG      ✓ Compiled in 132ms
-[02:38:41.827] Server  LOG      ✓ Compiled in 80ms
-[02:38:44.163] Server  LOG      ✓ Compiled in 45ms
-[02:38:46.441] Server  LOG      ✓ Compiled in 56ms
-[02:38:58.823] Server  LOG      ✓ Compiled in 27ms
-[02:39:00.443] Server  LOG      ✓ Compiled in 112ms
-[02:39:00.837] Browser ERROR   ./src/components/Footer.jsx:24:17
-Parsing ecmascript source code failed
-  22 |
-  23 |             <Box alignSelf='flex-end'
-> 24 |                 <Link  color='white' href='https://scarc.library.oregonstate.edu/findingaids/?p=collections/findingaid&id=3242'>
-     |                 ^
-  25 |                     SCARC
-  26 |                 </Link>
-  27 |             </Box>
+  127 |                             </Carousel.RootProvider>
+  128 |
+> 129 |                             <BubbleChart data={themes} width={}/>
+      |                                                                 ^
+  130 |                         </Tabs.Content>
+  131 |
+  132 |                         {/* Timeline */}
 
 Expression expected
 
-Import trace:
-  Server Component:
-    ./src/components/Footer.jsx
-    ./src/app/layout.jsx
-[02:39:02.159] Browser ERROR   ./src/components/Footer.jsx:24:17
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:58:35.051] Server  LOG      ✓ Compiled in 75ms
+[00:59:09.100] Server  LOG      ✓ Compiled in 53ms
+[00:59:13.704] Server  LOG      ✓ Compiled in 131ms
+[00:59:13.809] Browser ERROR   ./src/app/interviews/template/page.jsx:131:29
 Parsing ecmascript source code failed
-  22 |
-  23 |             <Box 
-> 24 |                 <Link  color='white' href='https://scarc.library.oregonstate.edu/findingaids/?p=collections/findingaid&id=3242'>
-     |                 ^
-  25 |                     SCARC
-  26 |                 </Link>
-  27 |             </Box>
+  129 |                             <B
+  130 |
+> 131 |                             <BubbleChart data={themes} width={300}/>
+      |                             ^
+  132 |                         </Tabs.Content>
+  133 |
+  134 |                         {/* Timeline */}
 
 Expression expected
 
-Import trace:
-  Server Component:
-    ./src/components/Footer.jsx
-    ./src/app/layout.jsx
-[02:39:03.176] Server  LOG      ✓ Compiled in 88ms
-[02:39:04.684] Server  LOG      ✓ Compiled in 0ms
-[02:43:44.329] Server  LOG      ✓ Compiled in 146ms
-[02:43:44.489] Browser ERROR   ./src/components/Footer.jsx:13:134
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:59:17.330] Server  LOG      ✓ Compiled in 73ms
+[00:59:22.526] Server  LOG      ✓ Compiled in 129ms
+[00:59:26.498] Server  LOG      ✓ Compiled in 75ms
+[00:59:28.759] Server  LOG      ✓ Compiled in 12ms
+[00:59:32.197] Server  LOG      ✓ Compiled in 29ms
+[00:59:34.809] Server  LOG      ✓ Compiled in 18ms
+[00:59:46.497] Server  LOG      ✓ Compiled in 51ms
+[00:59:47.714] Server  LOG      ✓ Compiled in 7ms
+[00:59:49.921] Server  LOG      ✓ Compiled in 63ms
+[00:59:50.040] Browser ERROR   ./src/app/interviews/template/page.jsx:129:53
 Parsing ecmascript source code failed
-  11 | export default function Footer () {
-  12 |     return(
-> 13 |         <Box bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%" display='flex' justifyContent={}>
-     |                                                                                                                                      ^
-  14 |             <Link href='/'>
-  15 |                 <Image
-  16 |                     src="/favicon_io_transparent/android-chrome-512x512.png"
+  127 |                             </Carousel.RootProvider>
+  128 |                             
+> 129 |                             <Box bg='white' width={}>
+      |                                                     ^
+  130 |                                 <BubbleChart data={themes} width={300}/>
+  131 |                             </Box>
+  132 |                         </Tabs.Content>
 
 Expression expected
 
-Import trace:
-  Server Component:
-    ./src/components/Footer.jsx
-    ./src/app/layout.jsx
-[02:43:46.430] Browser ERROR   ./src/components/Footer.jsx:13:134
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:59:50.040] Browser ERROR   ./src/app/interviews/template/page.jsx:131:30
 Parsing ecmascript source code failed
-  11 | export default function Footer () {
-  12 |     return(
-> 13 |         <Box bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%" display='flex' justifyContent={}>
-     |                                                                                                                                      ^
-  14 |             <Link href='/'>
-  15 |                 <Image
-  16 |                     src="/favicon_io_transparent/android-chrome-512x512.png"
+  129 |                             <Box bg='white' width={}>
+  130 |                                 <BubbleChart data={themes} width={300}/>
+> 131 |                             </Box>
+      |                              ^^^^^
+  132 |                         </Tabs.Content>
+  133 |
+  134 |                         {/* Timeline */}
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[00:59:53.684] Server  LOG      ✓ Compiled in 91ms
+[00:59:56.267] Server  LOG      ✓ Compiled in 11ms
+[00:59:58.187] Server  LOG      ✓ Compiled in 14ms
+[01:00:22.973] Server  LOG      ✓ Compiled in 34ms
+[01:00:24.232] Server  LOG      ✓ Compiled in 40ms
+[01:00:28.026] Server  LOG      ✓ Compiled in 41ms
+[01:00:30.119] Browser ERROR   ./src/app/interviews/template/page.jsx:130:80
+Parsing ecmascript source code failed
+  128 |                             
+  129 |                             <Box bg='white' width='fit-content'>
+> 130 |                                 <BubbleChart data={themes} width={300} height=/>
+      |                                                                                ^
+  131 |                             </Box>
+  132 |                         </Tabs.Content>
+  133 |
 
 Expression expected
 
-Import trace:
-  Server Component:
-    ./src/components/Footer.jsx
-    ./src/app/layout.jsx
-[02:43:49.055] Server  LOG      ✓ Compiled in 99ms
-[02:43:52.368] Server  LOG      ✓ Compiled in 21ms
-[02:44:01.425] Server  LOG      ✓ Compiled in 43ms
-[02:44:04.420] Server  LOG      ✓ Compiled in 26ms
-[02:44:18.760] Server  LOG      ✓ Compiled in 99ms
-[02:44:20.896] Server  LOG      ✓ Compiled in 122ms
-[02:44:21.587] Browser ERROR   ./src/components/Footer.jsx:23:38
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:00:30.119] Browser ERROR   ./src/app/interviews/template/page.jsx:130:82
 Parsing ecmascript source code failed
-  21 |             </Link>
-  22 |
-> 23 |             <Box bg='blue' alignItems'>
-     |                                      ^^
-  24 |                 <Link color='white' href='https://scarc.library.oregonstate.edu/findingaids/?p=collections/findingaid&id=3242'>
-  25 |                     SCARC
-  26 |                 </Link>
+  128 |                             
+  129 |                             <Box bg='white' width='fit-content'>
+> 130 |                                 <BubbleChart data={themes} width={300} height={}/>
+      |                                                                                  ^
+  131 |                             </Box>
+  132 |                         </Tabs.Content>
+  133 |
 
-Unterminated string constant
+Expression expected
 
-Import trace:
-  Server Component:
-    ./src/components/Footer.jsx
-    ./src/app/layout.jsx
-[02:44:24.470] Server  LOG      ✓ Compiled in 51ms
-[02:44:37.274] Server  LOG      ✓ Compiled in 24ms
-[02:44:52.525] Server  LOG      ✓ Compiled in 41ms
-[02:45:13.564] Server  LOG      ✓ Compiled in 22ms
-[02:45:15.139] Server  LOG      ✓ Compiled in 5ms
-[02:45:18.374] Server  LOG      ✓ Compiled in 23ms
-[02:45:37.538] Server  LOG      ✓ Compiled in 33ms
-[02:46:01.792] Server  LOG      ✓ Compiled in 28ms
-[02:46:04.368] Server  LOG      ✓ Compiled in 15ms
-[02:46:11.150] Server  LOG      ✓ Compiled in 28ms
-[02:47:07.587] Server  LOG      ✓ Compiled in 175ms
-[02:47:37.520] Server  LOG      ✓ Compiled in 101ms
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:00:31.291] Server  LOG      ✓ Compiled in 34ms

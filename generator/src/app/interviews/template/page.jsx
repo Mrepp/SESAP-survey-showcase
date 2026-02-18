@@ -1,6 +1,7 @@
 'use client'
 import {
     Accordion,
+    Badge,
     Box,
     Button,
     Carousel,
@@ -18,6 +19,7 @@ import {
 } from "@chakra-ui/react"
 import { useRouter } from "next/navigation"
 import { LuChevronLeft, LuChevronRight, LuClipboardList, LuCalendarDays, LuSquareCheck } from "react-icons/lu"
+import BubbleChart from "@/components/visualizations/BubbleChart"
 import Timeline from '@/components/visualizations/Timeline'
 
 export default function Template() {
@@ -34,11 +36,14 @@ export default function Template() {
             
             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
 
+                {/* Interview */}
                 <Container>
                     <Image src="/placeholder16x9.jpg" alt="placeholder" maxH="100%" maxW="100%" margin='10px' />
-                    <Text fontSize='2xl' fontWeight='bold' margin='10px'>{intervieweeName}</Text>
+                    <Text fontSize='2xl' fontWeight='bold' marginLeft='10px'>{intervieweeName}</Text>
+                    <Text marginLeft='10px'>{interviewDate}</Text>
                 </Container>
 
+                {/* Interview Data */}
                 <Container>
                     <Tabs.Root fitted lazyMount defaultValue="overview">
                         <Tabs.List>
@@ -78,13 +83,27 @@ export default function Template() {
                                 ))}
                             </Accordion.Root>
 
-                            <Heading>Quotes</Heading>
+                            <Heading>Notable Quotes</Heading>
                             <Carousel.RootProvider value={carousel}>
                                 <Carousel.ItemGroup>
                                     {quotes.map((item, index) => (
                                     <Carousel.Item key={index} index={index}>
-                                        <Box w="100%" h="200px">
-                                            {item.text}
+                                        <Box 
+                                            w="100%"
+                                            minH="150px"
+                                            h='fit-content'
+                                            p='15px'
+                                            borderRadius='25px'
+                                            bg='white'
+                                            display='flex'
+                                            flexDirection='column'
+                                            justifyContent='center'
+                                            alignItems='center'
+                                            textAlign='center'
+                                        >
+                                            <Text fontWeight='medium' fontSize='lg'>
+                                                "{item.text}"
+                                            </Text>
                                         </Box>
                                     </Carousel.Item>
                                     ))}
@@ -106,6 +125,10 @@ export default function Template() {
                                     </Carousel.NextTrigger>
                                 </Carousel.Control>
                             </Carousel.RootProvider>
+                            
+                            <Box bg='white' width='fit-content'>
+                                <BubbleChart data={themes} width={600} height={300}/>
+                            </Box>
                         </Tabs.Content>
 
                         {/* Timeline */}
@@ -157,6 +180,7 @@ export default function Template() {
 }
 
 const intervieweeName = "Firstname Lastname"
+const interviewDate = '2023-03-31'
 
 // overview
 const summaries = [
@@ -167,8 +191,8 @@ const summaries = [
 
 // quotes
 const quotes = [
-    { value: "0", text: "Some value 1..." },
-    { value: "1", text: "Some value 2..." },
+    { value: "0", text: "In a hole in the ground there lived a hobbit." },
+    { value: "1", text: "The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats—the hobbit was fond of visitors." },
     { value: "2", text: "Some value 2..." },
 ]
 
@@ -186,5 +210,12 @@ const data = [{year: 2000, event: 'In a hole in the ground there lived a hobbit.
 const improvements = [
     { value: "high", title: "Highest Priority", text: ["item 1", "item 2", "item 3"] },
     { value: "more", title: "More Improvements", text: ["item 1", "item 2", "item 3"] },
+]
+
+const themes = [
+    {"title": "Language Barriers", "impactScore": 10, "category": "cat1",},
+    {"title": "Support Networks", "impactScore": 5, "category": "cat2",},
+    {"title": "Career Preparation", "impactScore": 7, "category": "cat1",},
+    {"title": "Identity & Discrimination", "impactScore": 7, "category": "cat2",},
 ]
 

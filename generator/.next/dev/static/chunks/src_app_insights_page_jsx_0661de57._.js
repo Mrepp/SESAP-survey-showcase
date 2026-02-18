@@ -4,8 +4,8 @@
   "static/chunks/node_modules_chart_js_dist_9b14f3e1._.js",
   "static/chunks/node_modules_@observablehq_plot_src_e5594b9e._.js",
   "static/chunks/node_modules_d3-geo_src_83c98546._.js",
-  "static/chunks/node_modules_5b075c8c._.js",
-  "static/chunks/src_2ed0e03d._.js"
+  "static/chunks/node_modules_55b6f8a8._.js",
+  "static/chunks/src_c06ea31e._.js"
 ],
     source: "dynamic"
 });

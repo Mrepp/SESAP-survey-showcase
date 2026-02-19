@@ -20,7 +20,6 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter @sesap/types build && pnpm --filter @sesap/shared build
       - name: Generate wrangler.toml from template
         working-directory: workers/${{ matrix.worker }}
         run: |
@@ -29,6 +28,10 @@ jobs:
           sed -i 's|<YOUR_KV_PREVIEW_ID>|${{ secrets.KV_PREVIEW_ID }}|g' wrangler.toml
           sed -i 's|<YOUR_R2_BUCKET_NAME>|${{ secrets.R2_BUCKET_NAME }}|g' wrangler.toml
           sed -i 's|ENVIRONMENT = "development"|ENVIRONMENT = "production"|g' wrangler.toml
+      - name: Build showcase UI
+        if: matrix.worker == 'showcase'
+        working-directory: workers/showcase
+        run: pnpm build:ui
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}

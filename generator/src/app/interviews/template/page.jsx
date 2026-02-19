@@ -55,6 +55,10 @@ export default function Template() {
                                 <LuCalendarDays />
                                 Timeline
                             </Tabs.Trigger>
+                            <Tabs.Trigger value="themes">
+                                <LuCalendarDays />
+                                Themes
+                            </Tabs.Trigger>
                             <Tabs.Trigger value="improvements">
                                 <LuSquareCheck />
                                 Improvements
@@ -126,19 +130,32 @@ export default function Template() {
                                 </Carousel.Control>
                             </Carousel.RootProvider>
                             
-                            <Box bg='white' width='fit-content'>
-                                <BubbleChart data={themes} width={600} height={300}/>
-                            </Box>
+                            
                         </Tabs.Content>
 
                         {/* Timeline */}
                         <Tabs.Content value="timeline">
-                            <Timeline data={data}/>
+                            <Timeline data={timelineData}/>
                             
                             <List.Root ps='5' >
-                                {data.map((item, index) => (
+                                {timelineData.map((item, index) => (
                                     <List.Item key={index}>
                                         <strong>{item.year}:</strong> {item.event}
+                                    </List.Item>
+                                ))}
+                            </List.Root>
+                        </Tabs.Content>
+
+                        {/* Themes */}
+                        <Tabs.Content value="themes">
+                            <Box bg='white' width='fit-content' borderRadius='50%'>
+                                <BubbleChart data={themes} width={400} />
+                            </Box>
+                            
+                            <List.Root ps='5' >
+                                {themes.map((item, index) => (
+                                    <List.Item key={index}>
+                                        <strong>{item.title}:</strong> {item.impactScore}
                                     </List.Item>
                                 ))}
                             </List.Root>
@@ -197,7 +214,7 @@ const quotes = [
 ]
 
 // timeline
-const data = [{year: 2000, event: 'In a hole in the ground there lived a hobbit.'}, 
+const timelineData = [{year: 2000, event: 'In a hole in the ground there lived a hobbit.'}, 
     {year: 2007, event: 'Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandyhole with nothing in it to sit down on or to eat: it was a hobbit-hole, and that means comfort.'},
     {year: 2009, event: 'It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle.'},
     {year: 2010, event: 'The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats—the hobbit was fond of visitors.'},
@@ -213,9 +230,19 @@ const improvements = [
 ]
 
 const themes = [
-    {"title": "Language Barriers", "impactScore": 10, "category": "cat1",},
-    {"title": "Support Networks", "impactScore": 5, "category": "cat2",},
+    {"title": "Academic Difficulty", "impactScore": 10, "category": "cat3",},
+    {"title": "Belonging", "impactScore": 5, "category": "cat2",},
     {"title": "Career Preparation", "impactScore": 7, "category": "cat1",},
-    {"title": "Identity & Discrimination", "impactScore": 7, "category": "cat2",},
+    {"title": "Cultural Representation", "impactScore": 8, "category": "cat2",},
+    {"title": "Faculty Support", "impactScore": 10, "category": "cat1",},
+    {"title": "Family Pressure", "impactScore": 5, "category": "cat2",},
+    {"title": "Financial Struggles", "impactScore": 7, "category": "cat1",},
+    {"title": "Identity & Discrimination", "impactScore": 1, "category": "cat2",},
+    {"title": "Mental Health", "impactScore": 10, "category": "cat1",},
+    {"title": "Language Barriers", "impactScore": 5, "category": "cat2",},
+    {"title": "Peer Relationships", "impactScore": 3, "category": "cat1",},
+    {"title": "Personal Growth", "impactScore": 7, "category": "cat2",},
+    {"title": "Support Networks", "impactScore": 2, "category": "cat1",},
+    {"title": "Work-Life Balance", "impactScore": 1, "category": "cat3",},
 ]
 

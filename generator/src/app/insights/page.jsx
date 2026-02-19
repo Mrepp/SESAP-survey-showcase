@@ -18,17 +18,19 @@ export default function Insights() {
             {/*<Box bg='white' w='fill' h='300px' marginTop='-30px' marginLeft='-30px' marginRight='-30px' >
                 <WordCloud/>
             </Box>*/}
-            <Stack direction={{ base: "column", md: "row" }}>
-                <Box bg='white' w='40%' minH='75vh' borderWidth="1px" borderRadius='25px'>
-                    <WordCloud/>
-                </Box>
+            <Stack direction={{ base: "column", md: "row" }} h='100vh' gap='20px'>
+                <Stack w='40%' h='100%' gap='20px'>
+                    <Box bg='white' w='100%'  borderWidth="1px" borderRadius='25px'>
+                        <WordCloud/>
+                    </Box>
 
-                <Box bg='white'  borderWidth="1px" borderRadius='25px'>
-                    <BubbleChart data={themes}/>
-                </Box>
-
-                <Stack>
-                    <Box w='100%' h='fit-content' bg='white' borderWidth="1px" borderRadius='25px' w='fit-content' paddingLeft='20px' paddingTop='20px' paddingBottom='20px'>
+                    <Box bg='white'   borderWidth="1px" borderRadius='25px' p='15px'>
+                        <BubbleChart  data={themes}/>
+                    </Box>
+                </Stack>
+                
+                <Stack h='100%' gap='20px'>
+                    <Box w='fit-content' h='fit-content' bg='white' borderWidth="1px" borderRadius='25px' paddingLeft='20px' paddingTop='20px' paddingBottom='20px'>
                         <Correlation/>
                     </Box>
 
@@ -42,8 +44,18 @@ export default function Insights() {
 }
 
 const themes = [
-    {"title": "Language Barriers", "impactScore": 10, "category": "cat1",},
-    {"title": "Support Networks", "impactScore": 5, "category": "cat2",},
+    {"title": "Academic Difficulty", "impactScore": 10, "category": "cat3",},
+    {"title": "Belonging", "impactScore": 5, "category": "cat2",},
     {"title": "Career Preparation", "impactScore": 7, "category": "cat1",},
-    {"title": "Identity & Discrimination", "impactScore": 7, "category": "cat2",},
+    {"title": "Cultural Representation", "impactScore": 8, "category": "cat2",},
+    {"title": "Faculty Support", "impactScore": 10, "category": "cat1",},
+    {"title": "Family Pressure", "impactScore": 5, "category": "cat2",},
+    {"title": "Financial Struggles", "impactScore": 7, "category": "cat1",},
+    {"title": "Identity & Discrimination", "impactScore": 1, "category": "cat2",},
+    {"title": "Mental Health", "impactScore": 10, "category": "cat1",},
+    {"title": "Language Barriers", "impactScore": 5, "category": "cat2",},
+    {"title": "Peer Relationships", "impactScore": 3, "category": "cat1",},
+    {"title": "Personal Growth", "impactScore": 7, "category": "cat2",},
+    {"title": "Support Networks", "impactScore": 2, "category": "cat1",},
+    {"title": "Work-Life Balance", "impactScore": 1, "category": "cat3",},
 ]

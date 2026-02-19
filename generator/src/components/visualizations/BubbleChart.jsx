@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react"
 
 export default function BubbleChart({
     data,
-    width = 928,
+    width = 800,
     height = width,
 }) {
     const svgRef = useRef(null)

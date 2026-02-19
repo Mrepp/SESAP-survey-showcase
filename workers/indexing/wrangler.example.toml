@@ -1,0 +1,23 @@
+name = "sesap-indexing"
+main = "src/index.ts"
+compatibility_date = "2024-12-18"
+
+[dev]
+port = 8789
+inspector_port = 9231
+persist_to = "../../.wrangler/state"
+
+[ai]
+binding = "AI"
+
+[[r2_buckets]]
+binding = "SESAP_BUCKET"
+bucket_name = "<YOUR_R2_BUCKET_NAME>"
+
+[[kv_namespaces]]
+binding = "SESAP_KV"
+id = "<YOUR_KV_NAMESPACE_ID>"
+preview_id = "<YOUR_KV_PREVIEW_ID>"
+
+[vars]
+ENVIRONMENT = "development"

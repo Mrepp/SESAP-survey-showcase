@@ -1,0 +1,27 @@
+{
+  "name": "sesap-showcase",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build:ui": "cd ui && pnpm install && pnpm build",
+    "build": "pnpm build:ui && wrangler deploy --dry-run --outdir=dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "test": "vitest run --passWithNoTests",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "hono": "^4.6.0",
+    "@sesap/types": "workspace:*",
+    "@sesap/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "wrangler": "^3.99.0",
+    "vitest": "^2.1.0",
+    "@cloudflare/vitest-pool-workers": "^0.5.0"
+  }
+}

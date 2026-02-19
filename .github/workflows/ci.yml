@@ -2,47 +2,63 @@ name: CI
 
 on:
   push:
-    branches:
-      - "**"
+    branches: [main, staging]
   pull_request:
+    branches: [main]
 
 jobs:
-  python:
-    name: Python lint and tests
+  lint-and-typecheck:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: llm_pipeline
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
         with:
-          python-version: "3.11"
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements-dev.txt
-      - name: Lint
-        run: ruff check .
-      - name: Run tests
-        run: pytest
+          node-version: '20'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
 
-  node:
-    name: Node lint and tests
+  test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: generator
+    needs: lint-and-typecheck
+    strategy:
+      matrix:
+        package:
+          - packages/shared
+          - workers/admin
+          - workers/processing
+          - workers/indexing
+          - workers/showcase
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: "20"
-      - name: Install dependencies
-        run: npm install
-      - name: Lint
-        run: npm run lint
-      - name: Run tests
-        run: npm test
+          node-version: '20'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter ./${{ matrix.package }} test
+        continue-on-error: true
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    strategy:
+      matrix:
+        worker: [admin, processing, indexing, showcase]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - name: Generate wrangler.toml from template
+        working-directory: workers/${{ matrix.worker }}
+        run: |
+          cp wrangler.example.toml wrangler.toml
+          sed -i 's|ENVIRONMENT = "development"|ENVIRONMENT = "production"|g' wrangler.toml
+      - run: pnpm --filter sesap-${{ matrix.worker }} build

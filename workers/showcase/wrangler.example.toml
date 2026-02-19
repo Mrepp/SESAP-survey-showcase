@@ -1,0 +1,15 @@
+name = "sesap-showcase"
+main = "src/index.ts"
+compatibility_date = "2024-12-18"
+
+[dev]
+port = 8790
+inspector_port = 9232
+persist_to = "../../.wrangler/state"
+
+[[r2_buckets]]
+binding = "SESAP_BUCKET"
+bucket_name = "<YOUR_R2_BUCKET_NAME>"
+
+[vars]
+ENVIRONMENT = "development"

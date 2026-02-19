@@ -1,0 +1,26 @@
+{
+  "name": "sesap-processing",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'Processing runs as auxiliary under admin — use: pnpm --filter sesap-admin dev'",
+    "build": "wrangler deploy --dry-run --outdir=dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "test": "vitest run",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "hono": "^4.6.0",
+    "@sesap/types": "workspace:*",
+    "@sesap/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "wrangler": "^3.99.0",
+    "vitest": "^2.1.0",
+    "@cloudflare/vitest-pool-workers": "^0.5.0"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "sesap-survey-showcase",
+  "private": true,
+  "packageManager": "pnpm@10.14.0",
+  "scripts": {
+    "typecheck": "turbo typecheck",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "build": "turbo build",
+    "dev": "turbo dev"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.0",
+    "typescript": "^5.7.0",
+    "prettier": "^3.4.0",
+    "eslint": "^9.17.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "@typescript-eslint/eslint-plugin": "^8.18.0"
+  }
+}

@@ -1,0 +1,37 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main, staging]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        worker: [admin, processing, indexing, showcase]
+    environment:
+      name: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @sesap/types build && pnpm --filter @sesap/shared build
+      - name: Generate wrangler.toml from template
+        working-directory: workers/${{ matrix.worker }}
+        run: |
+          cp wrangler.example.toml wrangler.toml
+          sed -i 's|<YOUR_KV_NAMESPACE_ID>|${{ secrets.KV_NAMESPACE_ID }}|g' wrangler.toml
+          sed -i 's|<YOUR_KV_PREVIEW_ID>|${{ secrets.KV_PREVIEW_ID }}|g' wrangler.toml
+          sed -i 's|<YOUR_R2_BUCKET_NAME>|${{ secrets.R2_BUCKET_NAME }}|g' wrangler.toml
+          sed -i 's|ENVIRONMENT = "development"|ENVIRONMENT = "production"|g' wrangler.toml
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: workers/${{ matrix.worker }}
+          command: deploy

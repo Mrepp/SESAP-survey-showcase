@@ -1,0 +1,31 @@
+name = "sesap-processing"
+main = "src/index.ts"
+compatibility_date = "2024-12-18"
+
+[dev]
+port = 8788
+inspector_port = 9230
+persist_to = "../../.wrangler/state"
+
+[ai]
+binding = "AI"
+
+[[r2_buckets]]
+binding = "SESAP_BUCKET"
+bucket_name = "<YOUR_R2_BUCKET_NAME>"
+
+[[kv_namespaces]]
+binding = "SESAP_KV"
+id = "<YOUR_KV_NAMESPACE_ID>"
+preview_id = "<YOUR_KV_PREVIEW_ID>"
+
+[vars]
+ENVIRONMENT = "development"
+
+# Queue consumer for interview processing
+[[queues.consumers]]
+queue = "interview-processing"
+max_batch_size = 1
+max_retries = 5
+dead_letter_queue = "interview-processing-dlq"
+retry_delay = 60

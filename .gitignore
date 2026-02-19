@@ -8,4 +8,5 @@ dist/
 .env.*
 .dev.vars
 wrangler.toml
+dry-run-output/
 workers/showcase/public/

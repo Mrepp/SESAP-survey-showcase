@@ -20,22 +20,6 @@ ChartJS.register(
   Legend
 )
 
-const interviewData = [{theme: 'Academic Difficulty', identities: {Disabled: 1, 'First-Generation': 2, Immigrant: 3, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-        {theme: 'Belonging', identities: {Disabled: 13, 'First-Generation': 2, Immigrant: 3, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-        {theme: 'Career Preparation', identities: {Disabled: 1, 'First-Generation': 2, Immigrant: 3, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-        {theme: 'Cultural Representation', identities: {Disabled: 1, 'First-Generation': 2, Immigrant: 3, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-        {theme: 'Faculty Support', identities: {Disabled: 1, 'First-Generation': 2, Immigrant: 3, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-        {theme: 'Family Pressure', identities: {Disabled: 1, 'First-Generation': 2, Immigrant: 3, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-        {theme: 'Financial Struggles', identities: {Disabled: 1, 'First-Generation': 2, Immigrant: 3, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-        {theme: 'Identity & Discrimination', identities: {Disabled: 1, 'First-Generation': 2, Immigrant: 3, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-        {theme: 'Mental Health', identities: {Disabled: 1, 'First-Generation': 2, Immigrant: 3, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-        {theme: 'Language Barriers', identities: {Disabled: 1, 'First-Generation': 2, Immigrant: 5, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-        {theme: 'Peer Relationships', identities: {Disabled: 1, 'First-Generation': 2, Immigrant: 3, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-        {theme: 'Personal Growth', identities: {Disabled: 1, 'First-Generation': 2, Immigrant: 3, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-        {theme: 'Support Networks', identities: {Disabled: 1, 'First-Generation': 2, Immigrant: 3, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-        {theme: 'Work-Life Balance', identities: {Disabled: 1, 'First-Generation': 2, Immigrant: 3, 'International Student': 4, 'LGBTQ+': 5, 'Low-Income': 6, 'Non-Traditional Age': 7, Parent: 8, Religious: 9, Rural: 10, 'STEM Minoritized': 11, 'Student of Color': 12, 'Transfer Student': 13, Veteran: 14, 'Working Student': 14}},
-]
-
 // Generate colors for each theme
 const generateColors = (count) => {
     const colors = [
@@ -57,8 +41,6 @@ const generateColors = (count) => {
     // Cycle through colors if we have more themes than colors
     return Array.from({ length: count }, (_, i) => colors[i % colors.length]);
 };
-
-const themeColors = generateColors(interviewData.length);
 
 const options = {
     indexAxis: 'y', // makes the bar chart horizontal
@@ -85,9 +67,11 @@ const options = {
 // Hardcoded labels as fallback in case identities.txt fails to load
 const fallbackLabels = ['Disabled', 'First-Generation', 'Immigrant', 'International Student', 'LGBTQ+', 'Low-Income', 'Non-Traditional Age', 'Parent', 'Religious', 'Rural', 'STEM Minoritized', 'Student of Color', 'Transfer Student', 'Veteran', 'Working Student'];
 
-export default function BarChart () {
+export default function BarChart ({interviewData}) {
     const [labels, setLabels] = useState(fallbackLabels);
     const [chartData, setChartData] = useState(null);
+
+    const themeColors = generateColors(interviewData.length);
 
     // Load identities from identities.txt
     useEffect(() => {

@@ -17,28 +17,7 @@ function corr(x, y) {
     return XY / Math.sqrt(XX * YY);
 }
 
-const correlations = [
-  {a: "culmen_length_mm", b: "culmen_length_mm", correlation: 1},
-  {a: "culmen_length_mm", b: "culmen_depth_mm", correlation: -0.2350528703555326},
-  {a: "culmen_length_mm", b: "flipper_length_mm", correlation: 0.6561813407464275},
-  {a: "culmen_length_mm", b: "body_mass_g", correlation: 0.5951098244376305},
-  {a: "culmen_depth_mm", b: "culmen_length_mm", correlation: -0.2350528703555326},
-  {a: "culmen_depth_mm", b: "culmen_depth_mm", correlation: 1},
-  {a: "culmen_depth_mm", b: "flipper_length_mm", correlation: -0.5838512164654125},
-  {a: "culmen_depth_mm", b: "body_mass_g", correlation: -0.4719156211860666},
-  {a: "flipper_length_mm", b: "culmen_length_mm", correlation: 0.6561813407464275},
-  {a: "flipper_length_mm", b: "culmen_depth_mm", correlation: -0.5838512164654125},
-  {a: "flipper_length_mm", b: "flipper_length_mm", correlation: 1},
-  {a: "flipper_length_mm", b: "body_mass_g", correlation: 0.8712017673060116},
-  {a: "body_mass_g", b: "culmen_length_mm", correlation: 0.5951098244376305},
-  {a: "body_mass_g", b: "culmen_depth_mm", correlation: -0.4719156211860666},
-  {a: "body_mass_g", b: "flipper_length_mm", correlation: 0.8712017673060116},
-  {a: "body_mass_g", b: "body_mass_g", correlation: 1},
-]
-
-
-
-export default function Correlation() {
+export default function Correlation({correlations}) {
 
     /*correlations = d3.cross(fields, fields).map(([a, b]) => ({
         a,
@@ -70,8 +49,5 @@ export default function Correlation() {
         return () => plot.remove()
     }, [correlations])
     
-
     return <div ref={chartRef} />
-
 }
-

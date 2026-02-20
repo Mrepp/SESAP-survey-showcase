@@ -1,186 +1,3529 @@
-[00:00:00.734] Server  LOG      ✓ Ready in 526ms
-[00:02:51.252] Server  LOG      ✓ Compiled in 128ms
-[00:03:06.861] Server  LOG      ✓ Compiled in 67ms
-[00:03:07.978] Server  LOG      ✓ Compiled in 37ms
-[00:03:22.219] Server  LOG      ✓ Compiled in 72ms
-[00:03:36.941] Server  LOG      ✓ Compiled in 71ms
-[00:03:38.394] Server  LOG      ✓ Compiled in 19ms
-[00:03:40.699] Server  LOG      ✓ Compiled in 33ms
-[00:03:48.950] Server  LOG      ✓ Compiled in 48ms
-[00:04:03.102] Server  LOG      ✓ Compiled in 34ms
-[00:04:07.878] Browser ERROR   ./src/app/insights/page.jsx:63:13
+[00:00:00.709] Server  LOG      ✓ Ready in 500ms
+[01:25:12.226] Server  LOG      ✓ Compiled in 191ms
+[01:25:18.215] Server  LOG      ✓ Compiled in 44ms
+[01:26:08.950] Server  LOG      ✓ Compiled in 37ms
+[01:29:13.836] Server  LOG      ✓ Compiled in 113ms
+[01:29:15.071] Server  ERROR    ⨯ ReferenceError: s is not defined
+[01:29:17.522] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: s
+[01:29:17.973] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:29:17.974] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/app/interviews/template/page.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[01:29:17.975] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:29:17.992] Server  LOG      ✓ Compiled in 13ms
+[01:29:18.335] Server  ERROR    ⨯ ReferenceError: sentiment is not defined
+[01:29:19.590] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: sentiment
+[01:29:21.071] Server  LOG      ✓ Compiled in 105ms
+[01:29:21.346] Browser ERROR   ./src/app/interviews/template/page.jsx:209:84
 Parsing ecmascript source code failed
-  61 | ]
-  62 |
-> 63 | const text = 
+  207 | // quotes
+  208 | const quotes = [
+> 209 |     { value: "0", text: "In a hole in the ground there lived a hobbit.", sentiment:},
+      |                                                                                    ^
+  210 |     { value: "1", text: "The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats—the hobbit was fond of visitors." },
+  211 |     { value: "2", text: "Some value 2..." },
+  212 | ]
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:29:23.009] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:29:23.009] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/app/interviews/template/page.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[01:29:23.009] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:29:23.027] Server  LOG      ✓ Compiled in 92ms
+[01:29:29.013] Server  LOG      ✓ Compiled in 51ms
+[01:29:40.792] Server  LOG      ✓ Compiled in 16ms
+[01:29:44.822] Server  LOG      ✓ Compiled in 46ms
+[01:29:53.943] Server  LOG      ✓ Compiled in 15ms
+[01:40:52.501] Server  LOG      ✓ Compiled in 425ms
+[01:40:53.081] Server  LOG      ✓ Compiled in 24ms
+[01:40:58.043] Server  LOG      ✓ Compiled in 63ms
+[01:41:24.663] Browser ERROR   ./src/app/interviews/template/page.jsx:26:1
+Parsing ecmascript source code failed
+  24 | import Sentiment
+  25 |
+> 26 | export default function Template() {
+     | ^^^^^^
+  27 |     const carousel = useCarousel({ slideCount: quotes.length })
+  28 |     const router = useRouter()
+  29 |
+
+Expected ',', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:41:24.665] Browser ERROR   ./src/app/interviews/template/page.jsx:26:1
+Parsing ecmascript source code failed
+  24 | import SentimentIndicator
+  25 |
+> 26 | export default function Template() {
+     | ^^^^^^
+  27 |     const carousel = useCarousel({ slideCount: quotes.length })
+  28 |     const router = useRouter()
+  29 |
+
+Expected ',', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:42:08.352] Server  LOG      ✓ Compiled in 83ms
+[01:42:22.761] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:22.763] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:22.768] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:22.783] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:22.794] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:22.797] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:22.799] Server  LOG      ✓ Compiled in 410ms
+[01:42:23.418] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:23.420] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:23.423] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:23.425] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:23.428] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:23.430] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:23.454] Server  LOG      ✓ Compiled in 32ms
+[01:42:25.557] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/components/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/components/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/components/' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:25.559] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/components/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/components/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/components/' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:25.562] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/components/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/components/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/components/' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:25.565] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/components/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/components/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/components/' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:25.569] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/components/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/components/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/components/' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:25.572] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/components/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/components/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/components/' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:42:25.589] Server  LOG      ✓ Compiled in 50ms
+[01:42:27.976] Server  LOG      ✓ Compiled in 178ms
+[01:42:31.521] Server  LOG      ✓ Compiled in 410ms
+[01:42:38.467] Server  LOG      ✓ Compiled in 37ms
+[01:42:47.082] Browser ERROR   ./src/app/interviews/template/page.jsx:27:1
+Parsing ecmascript source code failed
+  25 |
+  26 |
+> 27 | export default function Template() {
+     | ^^^^^^
+  28 |     const carousel = useCarousel({ slideCount: quotes.length })
+  29 |     const router = useRouter()
+  30 |
+
+Expected 'from', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:42:47.082] Browser ERROR   ./src/app/interviews/template/page.jsx:27:1
+Parsing ecmascript source code failed
+  25 |
+  26 |
+> 27 | export default function Template() {
+     | ^^^^^^
+  28 |     const carousel = useCarousel({ slideCount: quotes.length })
+  29 |     const router = useRouter()
+  30 |
+
+Expected ',', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:42:47.082] Browser ERROR   ./src/app/interviews/template/page.jsx:27:1
+Parsing ecmascript source code failed
+  25 |
+  26 |
+> 27 | export default function Template() {
+     | ^^^^^^
+  28 |     const carousel = useCarousel({ slideCount: quotes.length })
+  29 |     const router = useRouter()
+  30 |
+
+Expected ',', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:42:47.082] Browser ERROR   ./src/app/interviews/template/page.jsx:24:8
+Parsing ecmascript source code failed
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import <SentimentIndicator></SentimentIndicator>
+     |        ^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Expected 'from', got '<'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:42:47.082] Browser ERROR   ./src/app/interviews/template/page.jsx:27:1
+Parsing ecmascript source code failed
+  25 |
+  26 |
+> 27 | export default function Template() {
+     | ^^^^^^
+  28 |     const carousel = useCarousel({ slideCount: quotes.length })
+  29 |     const router = useRouter()
+  30 |
+
+Unexpected token `export`. Expected a string literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:42:47.082] Browser ERROR   ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:42:47.082] Browser ERROR   ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/' inside of [project]/
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:42:47.082] Browser ERROR   ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/components/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/components/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/components/' inside of [project]/
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:44:14.510] Server  LOG      ✓ Compiled in 48ms
+[01:44:14.767] Browser ERROR   ./src/app/interviews/template/page.jsx:111:45
+Parsing ecmascript source code failed
+  109 |                                         >
+  110 |                                             <
+> 111 |                                             <Text fontWeight='medium' fontSize='lg'>
+      |                                             ^
+  112 |                                                 "{item.text}"
+  113 |                                             </Text>
+  114 |                                         </Box>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:44:16.708] Browser ERROR   ./src/app/interviews/template/page.jsx:111:45
+Parsing ecmascript source code failed
+  109 |                                         >
+  110 |                                             <SentimentIndicator
+> 111 |                                             <Text fontWeight='medium' fontSize='lg'>
+      |                                             ^
+  112 |                                                 "{item.text}"
+  113 |                                             </Text>
+  114 |                                         </Box>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:44:18.124] Server  LOG      ✓ Compiled in 176ms
+[01:45:08.784] Server  LOG      ✓ Compiled in 26ms
+[01:45:17.631] Server  LOG      ✓ Compiled in 22ms
+[01:45:26.369] Server  LOG      ✓ Compiled in 22ms
+[01:45:31.363] Server  LOG      ✓ Compiled in 52ms
+[01:45:31.570] Browser ERROR   ./src/components/SentimentIndicator.jsx:13:16
+Parsing ecmascript source code failed
+  11 |         </Badge>
+  12 |         
+> 13 |         <Badge colorPalette="yellow">
+     |                ^^^^^^^^^^^^
+  14 |             <FaPlusMinus/>
+  15 |         </Badge>
+  16 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:45:38.824] Server  LOG      ✓ Compiled in 11ms
+[01:46:33.558] Browser ERROR   ./src/components/SentimentIndicator.jsx:12:16
+Parsing ecmascript source code failed
+  10 |             <FaPlusMinus/>
+  11 |         </Badge>
+> 12 |         <Badge colorPalette="yellow">
+     |                ^^^^^^^^^^^^
+  13 |             <FaPlusMinus/>
+  14 |         </Badge>
+  15 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:47:01.937] Server  LOG      ✓ Compiled in 30ms
+[01:47:09.441] Server  LOG      ✓ Compiled in 23ms
+[01:50:04.936] Server  LOG      ✓ Compiled in 194ms
+[01:51:40.354] Server  LOG      ✓ Compiled in 60ms
+[01:51:40.493] Browser ERROR   ./src/app/interviews/template/page.jsx:110:78
+Parsing ecmascript source code failed
+  108 |                                             textAlign='center'
+  109 |                                         >
+> 110 |                                             <SentimentIndicator sentiment={}/>
+      |                                                                              ^
+  111 |                                             <Text fontWeight='medium' fontSize='lg'>
+  112 |                                                 "{item.text}"
+  113 |                                             </Text>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:51:40.493] Browser ERROR   ./src/app/interviews/template/page.jsx:114:42
+Parsing ecmascript source code failed
+  112 |                                                 "{item.text}"
+  113 |                                             </Text>
+> 114 |                                         </Box>
+      |                                          ^^^^^
+  115 |                                     </Carousel.Item>
+  116 |                                     ))}
+  117 |                                 </Carousel.ItemGroup>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:51:52.836] Server  LOG      ✓ Compiled in 65ms
+[01:51:54.752] Server  LOG      ✓ Compiled in 17ms
+[01:54:52.926] Server  LOG      ✓ Compiled in 296ms
+[01:54:55.220] Server  LOG      ✓ Compiled in 11ms
+[01:55:08.607] Server  LOG      ✓ Compiled in 158ms
+[01:55:48.240] Server  LOG      ✓ Compiled in 56ms
+[01:55:48.389] Browser ERROR   ./src/components/SentimentIndicator.jsx:35:16
+Parsing ecmascript source code failed
+  33 |       </Portal>
+  34 |     </HoverCard.Root>
+> 35 |         <Badge colorPalette={colorPalette} variant="surface">
+     |                ^^^^^^^^^^^^
+  36 |             <Icon />
+  37 |         </Badge>
+  38 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:55:55.503] Browser ERROR   ./src/components/SentimentIndicator.jsx:35:16
+Parsing ecmascript source code failed
+  33 |             </Portal>
+  34 |             </HoverCard.Root>
+> 35 |         <Badge colorPalette={colorPalette} variant="surface">
+     |                ^^^^^^^^^^^^
+  36 |             <Icon />
+  37 |         </Badge>
+  38 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:55:57.605] Browser ERROR   ./src/components/SentimentIndicator.jsx:35:16
+Parsing ecmascript source code failed
+  33 |             </Portal>
+  34 |         </HoverCard.Root>
+> 35 |         <Badge colorPalette={colorPalette} variant="surface">
+     |                ^^^^^^^^^^^^
+  36 |             <Icon />
+  37 |         </Badge>
+  38 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:56:03.069] Server  LOG      ✓ Compiled in 389ms
+[01:56:09.045] Server  LOG      ✓ Compiled in 239ms
+[01:56:12.500] Server  LOG      ✓ Compiled in 27ms
+[01:56:18.522] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:56:18.556] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:56:18.666] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Link
+[01:56:18.667] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Strong
+[01:56:18.667] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Strong
+[01:56:19.275] Server  ERROR    ⨯ ReferenceError: Strong is not defined
+[01:56:20.044] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Strong
+[01:56:35.915] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:56:35.921] Server  LOG      ✓ Compiled in 28ms
+[01:56:36.369] Server  ERROR    ⨯ ReferenceError: Strong is not defined
+[01:56:38.007] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: Strong
+[01:56:44.959] Server  LOG      ✓ Compiled in 52ms
+[01:56:45.084] Browser ERROR   ./src/components/SentimentIndicator.jsx:30:40
+Parsing ecmascript source code failed
+  28 |                     <HoverCard.Arrow />
+  29 |                     <Box>
+> 30 |                         Chakra</Strong> is a Sanskrit word that means disk or
+     |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 31 |                         wheel, referring to energy centers in the body
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 32 |                     </Box>
+     | ^^^^^^^^^^^^^^^^^^^^^
+  33 |                 </HoverCard.Content>
+  34 |                 </HoverCard.Positioner>
+  35 |             </Portal>
+
+Expected '</', got 'jsx text ( is a Sanskrit word that means disk or
+                        wheel, referring to energy centers in the body
+                    )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:56:47.728] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:56:47.747] Server  LOG      ✓ Compiled in 69ms
+[01:57:06.143] Server  LOG      ✓ Compiled in 20ms
+[01:57:30.487] Server  LOG      ✓ Compiled in 33ms
+[01:57:30.708] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: senti
+[01:57:33.672] Server  LOG      ✓ Compiled in 9ms
+[01:57:37.704] Server  LOG      ✓ Compiled in 4ms
+[01:57:39.752] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:57:39.868] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:57:41.021] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <Head>
+        <__next_root_layout_boundary__>
+          <SegmentViewNode type="layout" pagePath="layout.jsx">
+            <SegmentTrieNode>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <RootLayout>
+              <html suppressHydrationWarning={true} lang="en">
+                <body>
+                  <Provider forcedTheme="light">
+                    <ChakraProvider value={{$$chakra:true, ...}}>
+                      <EmotionGlobal>
+                      <EmotionGlobal>
+                      <ColorModeProvider forcedTheme="light">
+                        <J attribute="class" disableTransitionOnChange={true} forcedTheme="light">
+                          <V attribute="class" disableTransitionOnChange={true} forcedTheme="light">
++                           <script
++                             suppressHydrationWarning={true}
++                             nonce=""
++                             dangerouslySetInnerHTML={{__html:"((e, i, s,..."}}
++                           >
+-                           <style data-emotion="css-global ad1llf" data-s="">
+                            ...
+        ...
+
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:209:84
+Parsing ecmascript source code failed
+  207 | // quotes
+  208 | const quotes = [
+> 209 |     { value: "0", text: "In a hole in the ground there lived a hobbit.", sentiment:},
+      |                                                                                    ^
+  210 |     { value: "1", text: "The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats—the hobbit was fond of visitors." },
+  211 |     { value: "2", text: "Some value 2..." },
+  212 | ]
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:26:1
+Parsing ecmascript source code failed
+  24 | import Sentiment
+  25 |
+> 26 | export default function Template() {
+     | ^^^^^^
+  27 |     const carousel = useCarousel({ slideCount: quotes.length })
+  28 |     const router = useRouter()
+  29 |
+
+Expected ',', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:26:1
+Parsing ecmascript source code failed
+  24 | import SentimentIndicator
+  25 |
+> 26 | export default function Template() {
+     | ^^^^^^
+  27 |     const carousel = useCarousel({ slideCount: quotes.length })
+  28 |     const router = useRouter()
+  29 |
+
+Expected ',', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:27:1
+Parsing ecmascript source code failed
+  25 |
+  26 |
+> 27 | export default function Template() {
+     | ^^^^^^
+  28 |     const carousel = useCarousel({ slideCount: quotes.length })
+  29 |     const router = useRouter()
+  30 |
+
+Expected 'from', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:27:1
+Parsing ecmascript source code failed
+  25 |
+  26 |
+> 27 | export default function Template() {
+     | ^^^^^^
+  28 |     const carousel = useCarousel({ slideCount: quotes.length })
+  29 |     const router = useRouter()
+  30 |
+
+Expected ',', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:27:1
+Parsing ecmascript source code failed
+  25 |
+  26 |
+> 27 | export default function Template() {
+     | ^^^^^^
+  28 |     const carousel = useCarousel({ slideCount: quotes.length })
+  29 |     const router = useRouter()
+  30 |
+
+Expected ',', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:24:8
+Parsing ecmascript source code failed
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import <SentimentIndicator></SentimentIndicator>
+     |        ^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Expected 'from', got '<'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:27:1
+Parsing ecmascript source code failed
+  25 |
+  26 |
+> 27 | export default function Template() {
+     | ^^^^^^
+  28 |     const carousel = useCarousel({ slideCount: quotes.length })
+  29 |     const router = useRouter()
+  30 |
+
+Unexpected token `export`. Expected a string literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/' inside of [project]/
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/components/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/components/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/components/' inside of [project]/
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:111:45
+Parsing ecmascript source code failed
+  109 |                                         >
+  110 |                                             <
+> 111 |                                             <Text fontWeight='medium' fontSize='lg'>
+      |                                             ^
+  112 |                                                 "{item.text}"
+  113 |                                             </Text>
+  114 |                                         </Box>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:111:45
+Parsing ecmascript source code failed
+  109 |                                         >
+  110 |                                             <SentimentIndicator
+> 111 |                                             <Text fontWeight='medium' fontSize='lg'>
+      |                                             ^
+  112 |                                                 "{item.text}"
+  113 |                                             </Text>
+  114 |                                         </Box>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/components/SentimentIndicator.jsx:13:16
+Parsing ecmascript source code failed
+  11 |         </Badge>
+  12 |         
+> 13 |         <Badge colorPalette="yellow">
+     |                ^^^^^^^^^^^^
+  14 |             <FaPlusMinus/>
+  15 |         </Badge>
+  16 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/components/SentimentIndicator.jsx:12:16
+Parsing ecmascript source code failed
+  10 |             <FaPlusMinus/>
+  11 |         </Badge>
+> 12 |         <Badge colorPalette="yellow">
+     |                ^^^^^^^^^^^^
+  13 |             <FaPlusMinus/>
+  14 |         </Badge>
+  15 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:110:78
+Parsing ecmascript source code failed
+  108 |                                             textAlign='center'
+  109 |                                         >
+> 110 |                                             <SentimentIndicator sentiment={}/>
+      |                                                                              ^
+  111 |                                             <Text fontWeight='medium' fontSize='lg'>
+  112 |                                                 "{item.text}"
+  113 |                                             </Text>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/app/interviews/template/page.jsx:114:42
+Parsing ecmascript source code failed
+  112 |                                                 "{item.text}"
+  113 |                                             </Text>
+> 114 |                                         </Box>
+      |                                          ^^^^^
+  115 |                                     </Carousel.Item>
+  116 |                                     ))}
+  117 |                                 </Carousel.ItemGroup>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/components/SentimentIndicator.jsx:35:16
+Parsing ecmascript source code failed
+  33 |       </Portal>
+  34 |     </HoverCard.Root>
+> 35 |         <Badge colorPalette={colorPalette} variant="surface">
+     |                ^^^^^^^^^^^^
+  36 |             <Icon />
+  37 |         </Badge>
+  38 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/components/SentimentIndicator.jsx:35:16
+Parsing ecmascript source code failed
+  33 |             </Portal>
+  34 |             </HoverCard.Root>
+> 35 |         <Badge colorPalette={colorPalette} variant="surface">
+     |                ^^^^^^^^^^^^
+  36 |             <Icon />
+  37 |         </Badge>
+  38 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/components/SentimentIndicator.jsx:35:16
+Parsing ecmascript source code failed
+  33 |             </Portal>
+  34 |         </HoverCard.Root>
+> 35 |         <Badge colorPalette={colorPalette} variant="surface">
+     |                ^^^^^^^^^^^^
+  36 |             <Icon />
+  37 |         </Badge>
+  38 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.796] Browser ERROR   ./src/components/SentimentIndicator.jsx:30:40
+Parsing ecmascript source code failed
+  28 |                     <HoverCard.Arrow />
+  29 |                     <Box>
+> 30 |                         Chakra</Strong> is a Sanskrit word that means disk or
+     |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 31 |                         wheel, referring to energy centers in the body
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 32 |                     </Box>
+     | ^^^^^^^^^^^^^^^^^^^^^
+  33 |                 </HoverCard.Content>
+  34 |                 </HoverCard.Positioner>
+  35 |             </Portal>
+
+Expected '</', got 'jsx text ( is a Sanskrit word that means disk or
+                        wheel, referring to energy centers in the body
+                    )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:209:84
+Parsing ecmascript source code failed
+  207 | // quotes
+  208 | const quotes = [
+> 209 |     { value: "0", text: "In a hole in the ground there lived a hobbit.", sentiment:},
+      |                                                                                    ^
+  210 |     { value: "1", text: "The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats—the hobbit was fond of visitors." },
+  211 |     { value: "2", text: "Some value 2..." },
+  212 | ]
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:26:1
+Parsing ecmascript source code failed
+  24 | import Sentiment
+  25 |
+> 26 | export default function Template() {
+     | ^^^^^^
+  27 |     const carousel = useCarousel({ slideCount: quotes.length })
+  28 |     const router = useRouter()
+  29 |
+
+Expected ',', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:26:1
+Parsing ecmascript source code failed
+  24 | import SentimentIndicator
+  25 |
+> 26 | export default function Template() {
+     | ^^^^^^
+  27 |     const carousel = useCarousel({ slideCount: quotes.length })
+  28 |     const router = useRouter()
+  29 |
+
+Expected ',', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:27:1
+Parsing ecmascript source code failed
+  25 |
+  26 |
+> 27 | export default function Template() {
+     | ^^^^^^
+  28 |     const carousel = useCarousel({ slideCount: quotes.length })
+  29 |     const router = useRouter()
+  30 |
+
+Expected 'from', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:27:1
+Parsing ecmascript source code failed
+  25 |
+  26 |
+> 27 | export default function Template() {
+     | ^^^^^^
+  28 |     const carousel = useCarousel({ slideCount: quotes.length })
+  29 |     const router = useRouter()
+  30 |
+
+Expected ',', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:27:1
+Parsing ecmascript source code failed
+  25 |
+  26 |
+> 27 | export default function Template() {
+     | ^^^^^^
+  28 |     const carousel = useCarousel({ slideCount: quotes.length })
+  29 |     const router = useRouter()
+  30 |
+
+Expected ',', got 'export'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:24:8
+Parsing ecmascript source code failed
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import <SentimentIndicator></SentimentIndicator>
+     |        ^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Expected 'from', got '<'
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:27:1
+Parsing ecmascript source code failed
+  25 |
+  26 |
+> 27 | export default function Template() {
+     | ^^^^^^
+  28 |     const carousel = useCarousel({ slideCount: quotes.length })
+  29 |     const router = useRouter()
+  30 |
+
+Unexpected token `export`. Expected a string literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/' inside of [project]/
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:24:1
+Module not found: Can't resolve '@/components/'
+  22 | import BubbleChart from "@/components/visualizations/BubbleChart"
+  23 | import Timeline from '@/components/visualizations/Timeline'
+> 24 | import SentimentIndicator from '@/components/'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  25 |
+  26 |
+  27 | export default function Template() {
+
+Import map: aliased to relative './src/components/' inside of [project]/
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:111:45
+Parsing ecmascript source code failed
+  109 |                                         >
+  110 |                                             <
+> 111 |                                             <Text fontWeight='medium' fontSize='lg'>
+      |                                             ^
+  112 |                                                 "{item.text}"
+  113 |                                             </Text>
+  114 |                                         </Box>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:111:45
+Parsing ecmascript source code failed
+  109 |                                         >
+  110 |                                             <SentimentIndicator
+> 111 |                                             <Text fontWeight='medium' fontSize='lg'>
+      |                                             ^
+  112 |                                                 "{item.text}"
+  113 |                                             </Text>
+  114 |                                         </Box>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/components/SentimentIndicator.jsx:13:16
+Parsing ecmascript source code failed
+  11 |         </Badge>
+  12 |         
+> 13 |         <Badge colorPalette="yellow">
+     |                ^^^^^^^^^^^^
+  14 |             <FaPlusMinus/>
+  15 |         </Badge>
+  16 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/components/SentimentIndicator.jsx:12:16
+Parsing ecmascript source code failed
+  10 |             <FaPlusMinus/>
+  11 |         </Badge>
+> 12 |         <Badge colorPalette="yellow">
+     |                ^^^^^^^^^^^^
+  13 |             <FaPlusMinus/>
+  14 |         </Badge>
+  15 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:110:78
+Parsing ecmascript source code failed
+  108 |                                             textAlign='center'
+  109 |                                         >
+> 110 |                                             <SentimentIndicator sentiment={}/>
+      |                                                                              ^
+  111 |                                             <Text fontWeight='medium' fontSize='lg'>
+  112 |                                                 "{item.text}"
+  113 |                                             </Text>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/app/interviews/template/page.jsx:114:42
+Parsing ecmascript source code failed
+  112 |                                                 "{item.text}"
+  113 |                                             </Text>
+> 114 |                                         </Box>
+      |                                          ^^^^^
+  115 |                                     </Carousel.Item>
+  116 |                                     ))}
+  117 |                                 </Carousel.ItemGroup>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/components/SentimentIndicator.jsx:35:16
+Parsing ecmascript source code failed
+  33 |       </Portal>
+  34 |     </HoverCard.Root>
+> 35 |         <Badge colorPalette={colorPalette} variant="surface">
+     |                ^^^^^^^^^^^^
+  36 |             <Icon />
+  37 |         </Badge>
+  38 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/components/SentimentIndicator.jsx:35:16
+Parsing ecmascript source code failed
+  33 |             </Portal>
+  34 |             </HoverCard.Root>
+> 35 |         <Badge colorPalette={colorPalette} variant="surface">
+     |                ^^^^^^^^^^^^
+  36 |             <Icon />
+  37 |         </Badge>
+  38 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/components/SentimentIndicator.jsx:35:16
+Parsing ecmascript source code failed
+  33 |             </Portal>
+  34 |         </HoverCard.Root>
+> 35 |         <Badge colorPalette={colorPalette} variant="surface">
+     |                ^^^^^^^^^^^^
+  36 |             <Icon />
+  37 |         </Badge>
+  38 |     )
+
+Expected ',', got 'colorPalette'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:57:41.827] Browser ERROR   ./src/components/SentimentIndicator.jsx:30:40
+Parsing ecmascript source code failed
+  28 |                     <HoverCard.Arrow />
+  29 |                     <Box>
+> 30 |                         Chakra</Strong> is a Sanskrit word that means disk or
+     |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 31 |                         wheel, referring to energy centers in the body
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 32 |                     </Box>
+     | ^^^^^^^^^^^^^^^^^^^^^
+  33 |                 </HoverCard.Content>
+  34 |                 </HoverCard.Positioner>
+  35 |             </Portal>
+
+Expected '</', got 'jsx text ( is a Sanskrit word that means disk or
+                        wheel, referring to energy centers in the body
+                    )'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:58:56.423] Server  LOG      ✓ Compiled in 40ms
+[01:58:56.628] Browser ERROR   ./src/components/SentimentIndicator.jsx:20:13
+Parsing ecmascript source code failed
+  18 |     return (
+  19 |         <HoverCard.Root size="sm" openDelay={1000} closeDelay={100} 
+> 20 |             <HoverCard.Trigger asChild>
      |             ^
+  21 |                 <Badge colorPalette={colorPalette} variant="surface">
+  22 |                     <Icon />
+  23 |                 </Badge>
 
 Expression expected
 
 Import traces:
   Client Component Browser:
-    ./src/app/insights/page.jsx [Client Component Browser]
-    ./src/app/insights/page.jsx [Server Component]
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
 
   Client Component SSR:
-    ./src/app/insights/page.jsx [Client Component SSR]
-    ./src/app/insights/page.jsx [Server Component]
-[00:04:07.878] Browser ERROR   ./src/components/visualizations/WordCloud.jsx:9:5
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:58:57.568] Server  LOG      ✓ Compiled in 12ms
+[01:59:00.728] Server  LOG      ✓ Compiled in 25ms
+[01:59:00.903] Browser ERROR   ./src/components/SentimentIndicator.jsx:34:14
 Parsing ecmascript source code failed
-   7 | export default function WordCloud({
-   8 |     text
->  9 |     size = group => group.length, // Given a grouping of words, returns the size factor for that word
-     |     ^^^^
-  10 |     word = d => d, // Given an item of the data array, returns the word
-  11 |     marginTop = 0, // top margin, in pixels
-  12 |     marginRight = 0, // right margin, in pixels
+  32 |                     </HoverCard.Content>
+  33 |                 </HoverCard.Positioner>
+> 34 |             </Portal>
+     |              ^^^^^^^^
+  35 |         </HoverCard.Root>
+  36 |     )
+  37 | }
 
-Expected ',', got 'size'
+Unterminated regexp literal
 
 Import traces:
   Client Component Browser:
-    ./src/components/visualizations/WordCloud.jsx [Client Component Browser]
-    ./src/app/insights/page.jsx [Client Component Browser]
-    ./src/app/insights/page.jsx [Server Component]
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
 
   Client Component SSR:
-    ./src/components/visualizations/WordCloud.jsx [Client Component SSR]
-    ./src/app/insights/page.jsx [Client Component SSR]
-    ./src/app/insights/page.jsx [Server Component]
-[00:04:09.757] Browser ERROR   ./src/app/insights/page.jsx:63:13
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[01:59:03.684] Server  LOG      ✓ Compiled in 19ms
+[01:59:13.716] Server  LOG      ✓ Compiled in 32ms
+[01:59:31.000] Server  LOG      ✓ Compiled in 11ms
+[01:59:48.972] Server  LOG      ✓ Compiled in 45ms
+[02:06:11.636] Server  LOG      ✓ Compiled in 123ms
+[02:21:21.535] Server  LOG      ✓ Compiled in 68ms
+[02:21:23.882] Server  LOG      ✓ Compiled in 66ms
+[02:21:28.827] Server  LOG      ✓ Compiled in 259ms
+[02:21:32.313] Server  LOG      ✓ Compiled in 46ms
+[02:21:40.714] Server  LOG      ✓ Compiled in 34ms
+[02:21:44.529] Server  LOG      ✓ Compiled in 29ms
+[02:21:50.275] Server  LOG      ✓ Compiled in 39ms
+[02:21:51.582] Server  LOG      ✓ Compiled in 9ms
+[02:21:53.067] Server  LOG      ✓ Compiled in 361ms
+[02:21:56.921] Server  LOG      ✓ Compiled in 12ms
+[02:21:57.662] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/components/SentimentIndicator.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[02:21:57.663] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./src/components/SentimentIndicator.jsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[02:33:39.885] Server  LOG      ✓ Compiled in 180ms
+[02:33:41.185] Server  LOG      ✓ Compiled in 75ms
+[02:33:45.513] Server  LOG      ✓ Compiled in 54ms
+[02:33:58.548] Server  LOG      ✓ Compiled in 112ms
+[02:33:58.845] Browser ERROR   ./src/app/interviews/template/page.jsx:112:50
 Parsing ecmascript source code failed
-  61 | ]
-  62 |
-> 63 | const text = 
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <<SentimentIndicator sentiment={item.sentiment}/>>
+      |                                                  ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:00.244] Server  LOG      ✓ Compiled in 63ms
+[02:34:04.035] Server  LOG      ✓ Compiled in 105ms
+[02:34:05.844] Server  LOG      ✓ Compiled in 472ms
+[02:34:08.447] Server  LOG      ✓ Compiled in 40ms
+[02:34:13.374] Server  LOG      ✓ Compiled in 35ms
+[02:34:15.279] Server  LOG      ✓ Compiled in 58ms
+[02:34:16.506] Server  LOG      ✓ Compiled in 74ms
+[02:34:17.056] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:112:71
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                       ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+
+
+./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+
+
+./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+
+[02:34:17.145] Browser ERROR   ./src/app/interviews/template/page.jsx:113:45
+Parsing ecmascript source code failed
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+  112 |                                                 <Badge
+> 113 |                                             </Box>
+      |                                             ^
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+  116 |                                             </Box>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:17.145] Browser ERROR   ./src/app/interviews/template/page.jsx:113:46
+Parsing ecmascript source code failed
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+  112 |                                                 <Badge
+> 113 |                                             </Box>
+      |                                              ^^^^^
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+  116 |                                             </Box>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:17.346] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:17.346] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:17.346] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:17.346] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:18.404] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:18.404] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:18.644] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:18.644] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:19.050] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:19.051] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:19.187] Server  ERROR    ⨯ ./src/app/interviews/template/page.jsx:112:71
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                       ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+
+
+./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+
+
+./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+
+[02:34:19.383] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:19.383] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:19.383] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:19.383] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:20.430] Browser ERROR   uncaughtError: Error: ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+
+[02:34:20.690] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:20.690] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:20.690] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:20.690] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:34:29.090] Server  LOG      ✓ Compiled in 52ms
+[02:34:39.092] Server  LOG      ✓ Compiled in 25ms
+[02:34:42.958] Server  LOG      ✓ Compiled in 44ms
+[02:34:54.823] Server  LOG      ✓ Compiled in 34ms
+[02:44:07.241] Server  LOG      ✓ Compiled in 390ms
+[02:44:18.313] Server  LOG      ✓ Compiled in 36ms
+[02:44:21.223] Server  LOG      ✓ Compiled in 81ms
+[02:44:22.620] Browser ERROR   ./src/app/interviews/template/page.jsx:116:49
+Parsing ecmascript source code failed
+  114 |                                                 <Badge colorPalette='green' variant='solid'>
+  115 |                                                     <RiProgress1Fill
+> 116 |                                                 </Badge>
+      |                                                 ^
+  117 |                                             </Box>
+  118 |                                             <Box position='absolute' top='15px' right='15px'>
+  119 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:22.621] Browser ERROR   ./src/app/interviews/template/page.jsx:116:50
+Parsing ecmascript source code failed
+  114 |                                                 <Badge colorPalette='green' variant='solid'>
+  115 |                                                     <RiProgress1Fill
+> 116 |                                                 </Badge>
+      |                                                  ^^^^^^^
+  117 |                                             </Box>
+  118 |                                             <Box position='absolute' top='15px' right='15px'>
+  119 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:23.412] Server  LOG      ✓ Compiled in 1047ms
+[02:44:38.173] Browser ERROR   ./src/components/SentimentIndicator.jsx:20:13
+Parsing ecmascript source code failed
+  18 |     return (
+  19 |         <HoverCard.Root size="sm" openDelay={1000} closeDelay={100} 
+> 20 |             <HoverCard.Trigger asChild>
      |             ^
+  21 |                 <Badge colorPalette={colorPalette} variant="surface">
+  22 |                     <Icon />
+  23 |                 </Badge>
 
 Expression expected
 
 Import traces:
   Client Component Browser:
-    ./src/app/insights/page.jsx [Client Component Browser]
-    ./src/app/insights/page.jsx [Server Component]
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
 
   Client Component SSR:
-    ./src/app/insights/page.jsx [Client Component SSR]
-    ./src/app/insights/page.jsx [Server Component]
-[00:04:09.786] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:04:09.829] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:04:09.889] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: text
-[00:04:09.889] Browser ERROR   ./src/components/visualizations/WordCloud.jsx:9:5
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/components/SentimentIndicator.jsx:34:14
 Parsing ecmascript source code failed
-   7 | export default function WordCloud({
-   8 |     text
->  9 |     size = group => group.length, // Given a grouping of words, returns the size factor for that word
-     |     ^^^^
-  10 |     word = d => d, // Given an item of the data array, returns the word
-  11 |     marginTop = 0, // top margin, in pixels
-  12 |     marginRight = 0, // right margin, in pixels
+  32 |                     </HoverCard.Content>
+  33 |                 </HoverCard.Positioner>
+> 34 |             </Portal>
+     |              ^^^^^^^^
+  35 |         </HoverCard.Root>
+  36 |     )
+  37 | }
 
-Expected ',', got 'size'
+Unterminated regexp literal
 
 Import traces:
   Client Component Browser:
-    ./src/components/visualizations/WordCloud.jsx [Client Component Browser]
-    ./src/app/insights/page.jsx [Client Component Browser]
-    ./src/app/insights/page.jsx [Server Component]
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
 
   Client Component SSR:
-    ./src/components/visualizations/WordCloud.jsx [Client Component SSR]
-    ./src/app/insights/page.jsx [Client Component SSR]
-    ./src/app/insights/page.jsx [Server Component]
-[00:04:09.889] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: size
-[00:04:09.907] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:04:10.130] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:11:10.731] Server  LOG      ✓ Compiled in 107ms
-[00:11:29.302] Server  LOG      ✓ Compiled in 76ms
-[00:11:34.557] Server  LOG      ✓ Compiled in 7ms
-[00:11:44.554] Server  LOG      ✓ Compiled in 89ms
-[00:11:47.429] Server  LOG      ✓ Compiled in 44ms
-[00:11:53.881] Server  LOG      ✓ Compiled in 32ms
-[00:12:01.681] Server  LOG      ✓ Compiled in 7ms
-[00:12:08.308] Browser ERROR   ./src/app/insights/page.jsx:34:54
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:50
 Parsing ecmascript source code failed
-  32 |                 <Stack h='100%' gap='20px'>
-  33 |                     <Box w='fit-content' h='fit-content' bg='white' borderWidth="1px" borderRadius='25px' paddingLeft='20px' paddingTop='20px' paddingBottom='20px'>
-> 34 |                         <Correlation correlations={}/>
-     |                                                      ^
-  35 |                     </Box>
-  36 |
-  37 |                     <Box minH='300px' h='fit-content' bg='white' padding='20px' borderWidth="1px" borderRadius='25px'>
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <<SentimentIndicator sentiment={item.sentiment}/>>
+      |                                                  ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
 
 Expression expected
 
 Import traces:
   Client Component Browser:
-    ./src/app/insights/page.jsx [Client Component Browser]
-    ./src/app/insights/page.jsx [Server Component]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
 
   Client Component SSR:
-    ./src/app/insights/page.jsx [Client Component SSR]
-    ./src/app/insights/page.jsx [Server Component]
-[00:12:12.025] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:12:12.214] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:12:12.381] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:12:12.536] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'values')
-[00:12:12.536] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'values')
-[00:12:12.536] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'values')
-[00:12:12.536] Browser ERROR   ./src/app/insights/page.jsx:34:54
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:113:45
 Parsing ecmascript source code failed
-  32 |                 <Stack h='100%' gap='20px'>
-  33 |                     <Box w='fit-content' h='fit-content' bg='white' borderWidth="1px" borderRadius='25px' paddingLeft='20px' paddingTop='20px' paddingBottom='20px'>
-> 34 |                         <Correlation correlations={}/>
-     |                                                      ^
-  35 |                     </Box>
-  36 |
-  37 |                     <Box minH='300px' h='fit-content' bg='white' padding='20px' borderWidth="1px" borderRadius='25px'>
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+  112 |                                                 <Badge
+> 113 |                                             </Box>
+      |                                             ^
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+  116 |                                             </Box>
 
 Expression expected
 
 Import traces:
   Client Component Browser:
-    ./src/app/insights/page.jsx [Client Component Browser]
-    ./src/app/insights/page.jsx [Server Component]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
 
   Client Component SSR:
-    ./src/app/insights/page.jsx [Client Component SSR]
-    ./src/app/insights/page.jsx [Server Component]
-[00:12:12.543] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:12:12.815] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:14:05.297] Server  LOG      ✓ Compiled in 41ms
-[00:14:19.063] Server  LOG      ✓ Compiled in 11ms
-[00:14:36.901] Server  LOG      ✓ Compiled in 9ms
-[00:14:52.815] Server  LOG      ✓ Compiled in 8ms
-[00:15:23.127] Server  LOG      ✓ Compiled in 25ms
-[00:15:29.817] Server  LOG      ✓ Compiled in 58ms
-[00:15:37.267] Server  LOG      ✓ Compiled in 17ms
-[00:15:51.503] Server  LOG      ✓ Compiled in 72ms
-[00:15:52.571] Server  LOG      ✓ Compiled in 29ms
-[00:15:54.126] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:15:54.167] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:15:54.205] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:15:54.395] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'interviewData.length')
-[00:15:54.395] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'interviewData.length')
-[00:15:54.395] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'interviewData.length')
-[00:15:54.395] Browser ERROR   ./src/app/insights/page.jsx:38:52
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:113:46
 Parsing ecmascript source code failed
-  36 |
-  37 |                     <Box minH='300px' h='fit-content' bg='white' padding='20px' borderWidth="1px" borderRadius='25px'>
-> 38 |                         <BarChart interviewData={}/>
-     |                                                    ^
-  39 |                     </Box>
-  40 |                 </Stack>
-  41 |             </Stack>
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+  112 |                                                 <Badge
+> 113 |                                             </Box>
+      |                                              ^^^^^
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+  116 |                                             </Box>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
 
 Expression expected
 
 Import traces:
   Client Component Browser:
-    ./src/app/insights/page.jsx [Client Component Browser]
-    ./src/app/insights/page.jsx [Server Component]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
 
   Client Component SSR:
-    ./src/app/insights/page.jsx [Client Component SSR]
-    ./src/app/insights/page.jsx [Server Component]
-[00:15:54.817] Browser WARN    Error loading stopwords: {}
-[00:15:54.817] Browser WARN    Error loading identities.txt: {}
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:116:49
+Parsing ecmascript source code failed
+  114 |                                                 <Badge colorPalette='green' variant='solid'>
+  115 |                                                     <RiProgress1Fill
+> 116 |                                                 </Badge>
+      |                                                 ^
+  117 |                                             </Box>
+  118 |                                             <Box position='absolute' top='15px' right='15px'>
+  119 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.173] Browser ERROR   ./src/app/interviews/template/page.jsx:116:50
+Parsing ecmascript source code failed
+  114 |                                                 <Badge colorPalette='green' variant='solid'>
+  115 |                                                     <RiProgress1Fill
+> 116 |                                                 </Badge>
+      |                                                  ^^^^^^^
+  117 |                                             </Box>
+  118 |                                             <Box position='absolute' top='15px' right='15px'>
+  119 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/components/SentimentIndicator.jsx:20:13
+Parsing ecmascript source code failed
+  18 |     return (
+  19 |         <HoverCard.Root size="sm" openDelay={1000} closeDelay={100} 
+> 20 |             <HoverCard.Trigger asChild>
+     |             ^
+  21 |                 <Badge colorPalette={colorPalette} variant="surface">
+  22 |                     <Icon />
+  23 |                 </Badge>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/components/SentimentIndicator.jsx:34:14
+Parsing ecmascript source code failed
+  32 |                     </HoverCard.Content>
+  33 |                 </HoverCard.Positioner>
+> 34 |             </Portal>
+     |              ^^^^^^^^
+  35 |         </HoverCard.Root>
+  36 |     )
+  37 | }
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SentimentIndicator.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SentimentIndicator.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:50
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <<SentimentIndicator sentiment={item.sentiment}/>>
+      |                                                  ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:113:45
+Parsing ecmascript source code failed
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+  112 |                                                 <Badge
+> 113 |                                             </Box>
+      |                                             ^
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+  116 |                                             </Box>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:113:46
+Parsing ecmascript source code failed
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+  112 |                                                 <Badge
+> 113 |                                             </Box>
+      |                                              ^^^^^
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+  116 |                                             </Box>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:73
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                         ^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:112:74
+Parsing ecmascript source code failed
+  110 |                                         >
+  111 |                                             <Box position='absolute' top='15px' left='15px'>
+> 112 |                                                 <Badge colorPalette={}>!</Badge>
+      |                                                                          ^^^^^^^
+  113 |                                             </Box>
+  114 |                                             <Box position='absolute' top='15px' right='15px'>
+  115 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:116:49
+Parsing ecmascript source code failed
+  114 |                                                 <Badge colorPalette='green' variant='solid'>
+  115 |                                                     <RiProgress1Fill
+> 116 |                                                 </Badge>
+      |                                                 ^
+  117 |                                             </Box>
+  118 |                                             <Box position='absolute' top='15px' right='15px'>
+  119 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:44:38.255] Browser ERROR   ./src/app/interviews/template/page.jsx:116:50
+Parsing ecmascript source code failed
+  114 |                                                 <Badge colorPalette='green' variant='solid'>
+  115 |                                                     <RiProgress1Fill
+> 116 |                                                 </Badge>
+      |                                                  ^^^^^^^
+  117 |                                             </Box>
+  118 |                                             <Box position='absolute' top='15px' right='15px'>
+  119 |                                                 <SentimentIndicator sentiment={item.sentiment}/>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./src/app/interviews/template/page.jsx [Client Component Browser]
+    ./src/app/interviews/template/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/interviews/template/page.jsx [Client Component SSR]
+    ./src/app/interviews/template/page.jsx [Server Component]
+[02:45:07.108] Server  LOG      ✓ Compiled in 162ms
+[02:45:07.225] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: RiProgress1Fill
+[02:45:16.182] Server  LOG      ✓ Compiled in 154ms
+[02:45:16.418] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[02:47:00.001] Server  LOG      ✓ Compiled in 84ms
+[02:47:06.529] Server  LOG      ✓ Compiled in 32ms
+[02:47:13.059] Server  LOG      ✓ Compiled in 145ms
+[02:50:52.318] Server  LOG      ✓ Compiled in 200ms
+[02:50:58.441] Server  LOG      ✓ Compiled in 127ms
+[02:51:39.393] Server  LOG      ✓ Compiled in 51ms

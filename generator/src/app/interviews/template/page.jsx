@@ -21,6 +21,8 @@ import { useRouter } from "next/navigation"
 import { LuChevronLeft, LuChevronRight, LuClipboardList, LuCalendarDays, LuSquareCheck } from "react-icons/lu"
 import BubbleChart from "@/components/visualizations/BubbleChart"
 import Timeline from '@/components/visualizations/Timeline'
+import SentimentIndicator from '@/components/SentimentIndicator'
+
 
 export default function Template() {
     const carousel = useCarousel({ slideCount: quotes.length })
@@ -67,11 +69,6 @@ export default function Template() {
 
                         {/* Overview */}
                         <Tabs.Content value="overview">
-                            Overview:
-                            Key summaries w/category badge pills
-                            quotes carousel
-                            theme cloud with bubble sizes representing impact scores (1-10 scale)
-
                             <Heading>Key Summaries</Heading>
                             <Accordion.Root multiple>
                                 {summaries.map((item, index) => (
@@ -99,12 +96,16 @@ export default function Template() {
                                             p='15px'
                                             borderRadius='25px'
                                             bg='white'
+                                            position='relative'
                                             display='flex'
                                             flexDirection='column'
                                             justifyContent='center'
                                             alignItems='center'
                                             textAlign='center'
                                         >
+                                            <Box position='absolute' top='15px' right='15px'>
+                                                <SentimentIndicator sentiment={item.sentiment}/>
+                                            </Box>
                                             <Text fontWeight='medium' fontSize='lg'>
                                                 "{item.text}"
                                             </Text>
@@ -186,9 +187,7 @@ export default function Template() {
                                     </Accordion.Item>
                                 ))}
                             </Accordion.Root>
-
                         </Tabs.Content>
-
                     </Tabs.Root>
                 </Container>
             </Stack>
@@ -201,16 +200,17 @@ const interviewDate = '2023-03-31'
 
 // overview
 const summaries = [
-    { value: "diversity", title: "Diversity & Inclusion", text: "Some value 1..." },
+    { value: "diversity", title: "Diversity", text: "Some value 1..." },
     { value: "campusLife", title: "Campus Life", text: "Some value 2..." },
-    { value: "keySummary", title: "Key Summary", text: "Some value 2..." },
+    { value: "career", title: "Career", text: "Some value 2..." },
 ]
 
 // quotes
 const quotes = [
-    { value: "0", text: "In a hole in the ground there lived a hobbit." },
-    { value: "1", text: "The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats—the hobbit was fond of visitors." },
-    { value: "2", text: "Some value 2..." },
+    { value: "0", text: "In a hole in the ground there lived a hobbit.", sentiment: 'positive'},
+    { value: "1", text: "The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats—the hobbit was fond of visitors.", sentiment: 'mixed' },
+    { value: "2", text: "Some value 2...", sentiment: 'negative' },
+    { value: "3", text: "Some value 2...", sentiment: 'neutral' },
 ]
 
 // timeline

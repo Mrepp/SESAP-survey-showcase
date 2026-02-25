@@ -28,15 +28,12 @@ def main():
 
     )
 
-    parser.add_argument("--llm",
-    action="store_true",
-    help="Enable LLM-based analysis"
-)
+    parser.add_argument("--llm",action="store_true", help="Enable LLM-based analysis")
+    parser.add_argument("--video", help="Path to vid/audio transcription")
     parser.add_argument("--file", "-f", help="Path to transcript text file")
     parser.add_argument("--text", "-t", help="Raw transcript text")
     parser.add_argument("--save", "-s", help="Where to save the resulting JSON")
     parser.add_argument("--pretty", action="store_true",
-                        help="Pretty-print the JSON output")
 
     args = parser.parse_args()
 
@@ -68,3 +65,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

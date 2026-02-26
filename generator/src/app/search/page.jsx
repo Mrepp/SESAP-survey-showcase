@@ -1,34 +1,29 @@
 'use client'
 import {
-    Accordion,
     Box,
     Button,
-    Checkmark,
     Container,
-    Grid,
     GridItem,
-    Listbox,
-    Span,
     Stack,
     StackSeparator,
     Text,
-    createListCollection,
-  useListboxItemContext,
 } from "@chakra-ui/react"
 import { useState } from "react"
-//import { colorPalettes } from "compositions/lib/color-palettes"
 import SearchBar from "@/components/SearchBar"
 import Result from '@/components/ResultsCard'
+import Filters from '@/components/Filters'
 
 export default function Search() {
     const [selectedThemes, setSelectedThemes] = useState([])
     const [selectedYears, setSelectedYears] = useState([])
     const [selectedSentiments, setSelectedSentiments] = useState([])
+    const [selectedCategories, setSelectedCategories] = useState([])
 
     const clearAllFilters = () => {
         setSelectedThemes([])
         setSelectedYears([])
         setSelectedSentiments([])
+        setSelectedCategories([])
     }
 
     return (
@@ -39,94 +34,17 @@ export default function Search() {
 
             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
 
-                {/* Filter Menu */}
-                <Container w='250px' p='0' paddingRight='10px'>
+                <Filters
+                    selectedThemes={selectedThemes}
+                    setSelectedThemes={setSelectedThemes}
+                    selectedYears={selectedYears}
+                    setSelectedYears={setSelectedYears}
+                    selectedSentiments={selectedSentiments}
+                    setSelectedSentiments={setSelectedSentiments}
+                    selectedCategories={selectedCategories}
+                    setSelectedCategories={setSelectedCategories}
+                />
 
-                    {/* Themes */}
-                    <Accordion.Root collapsible multiple defaultValue={["a", "b", "c"]} >
-                        <Accordion.Item value="a">
-                            <Accordion.ItemTrigger>
-                                <Span flex="1" color='beavOrange'>Themes</Span>
-                                <Accordion.ItemIndicator />
-                            </Accordion.ItemTrigger>
-                            <Accordion.ItemContent>
-                                <Accordion.ItemBody>
-                                    <Listbox.Root 
-                                        collection={themes} 
-                                        selectionMode="multiple"
-                                        value={selectedThemes}
-                                        onValueChange={(e) => setSelectedThemes(e.value)}
-                                    >
-                                        <Listbox.Content>
-                                            {themes.items.map((option) => (
-                                            <Listbox.Item item={option} key={option.value}>
-                                                <ListboxItemCheckmark />
-                                                <Listbox.ItemText>{option.label}</Listbox.ItemText>
-                                            </Listbox.Item>
-                                            ))}
-                                        </Listbox.Content>
-                                    </Listbox.Root>
-                                </Accordion.ItemBody>
-                            </Accordion.ItemContent>
-                        </Accordion.Item>
-
-                        {/* Year */}
-                        <Accordion.Item value="b">
-                            <Accordion.ItemTrigger>
-                                <Span flex="1" color='beavOrange'>Year</Span>
-                                <Accordion.ItemIndicator />
-                            </Accordion.ItemTrigger>
-                            <Accordion.ItemContent>
-                                <Accordion.ItemBody>
-                                    <Listbox.Root 
-                                        collection={years} 
-                                        selectionMode="multiple"
-                                        value={selectedYears}
-                                        onValueChange={(e) => setSelectedYears(e.value)}
-                                    >
-                                        <Listbox.Content>
-                                            {years.items.map((option) => (
-                                            <Listbox.Item item={option} key={option.value}>
-                                                <ListboxItemCheckmark />
-                                                <Listbox.ItemText>{option.label}</Listbox.ItemText>
-                                            </Listbox.Item>
-                                            ))}
-                                        </Listbox.Content>
-                                    </Listbox.Root>
-                                </Accordion.ItemBody>
-                            </Accordion.ItemContent>
-                        </Accordion.Item>
-
-                        {/* Sentiment */}
-                        <Accordion.Item value="c">
-                            <Accordion.ItemTrigger>
-                                <Span flex="1" color='beavOrange'>Sentiment</Span>
-                                <Accordion.ItemIndicator />
-                            </Accordion.ItemTrigger>
-                            <Accordion.ItemContent>
-                                <Accordion.ItemBody>
-                                    <Listbox.Root 
-                                        collection={sentiments} 
-                                        selectionMode="multiple"
-                                        value={selectedSentiments}
-                                        onValueChange={(e) => setSelectedSentiments(e.value)}
-                                    >
-                                        <Listbox.Content>
-                                            {sentiments.items.map((option) => (
-                                            <Listbox.Item item={option} key={option.value}>
-                                                <ListboxItemCheckmark />
-                                                <Listbox.ItemText>{option.label}</Listbox.ItemText>
-                                            </Listbox.Item>
-                                            ))}
-                                        </Listbox.Content>
-                                    </Listbox.Root>
-                                </Accordion.ItemBody>
-                            </Accordion.ItemContent>
-                        </Accordion.Item>
-                    </Accordion.Root>
-                </Container>
-                
-                
                 {/* Results */}
                 <Container paddingRight='0'>
 
@@ -155,59 +73,6 @@ export default function Search() {
         </>
     )
 }
-
-
-const ListboxItemCheckmark = () => {
-  const itemState = useListboxItemContext()
-  return (
-    <Checkmark
-      filled
-      size="sm"
-      checked={itemState.selected}
-      disabled={itemState.disabled}
-    />
-  )
-}
-
-// Filters
-const years = createListCollection({
-  items: [
-    { label: "2000-2004", value: "react" },
-    { label: "2005-2009", value: "vue" },
-    { label: "2010-2014", value: "angular" },
-    { label: "2015-2019", value: "svelte" },
-    { label: "2020-2024", value: "nextjs" },
-    { label: "2025-2029", value: "nuxtjs" },
-  ],
-})
-
-const sentiments = createListCollection({
-  items: [
-    { label: "Positive", value: "positive" },
-    { label: "Neutral", value: "neutral" },
-    { label: "Negative", value: "negative" },
-  ],
-})
-
-const themes = createListCollection({
-  items: [
-    { label: "Academic Difficulty", value: "academic difficulty" },
-    { label: "Faculty Support", value: "faculty support" },
-    { label: "Peer Relationships", value: "peer relationships" },
-    { label: "Belonging", value: "belonging" },
-    { label: "Cultural Representation", value: "cultural representation" },
-    { label: "Financial Struggles", value: "financial struggles" },
-    { label: "Mental Health", value: "mental health" },
-    { label: "Family Pressure", value: "family pressure" },
-    { label: "Work-Life Balance", value: "work-life balance" },
-    { label: "Identity & Discrimination", value: "identity & discrimination" },
-    { label: "Career Preparation", value: "career preparation" },
-    { label: "Language Barriers", value: "language barriers" },
-    { label: "Support Networks", value: "support networks" },
-    { label: "Personal Growth", value: "personal growth" },
-  ],
-})
-
 
 
 

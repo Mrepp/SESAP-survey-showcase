@@ -181,6 +181,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$scale$
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$hierarchy$2f$src$2f$pack$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__pack$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-hierarchy/src/pack/index.js [app-client] (ecmascript) <export default as pack>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$hierarchy$2f$src$2f$hierarchy$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__hierarchy$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-hierarchy/src/hierarchy/index.js [app-client] (ecmascript) <export default as hierarchy>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$selection$2f$src$2f$select$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__select$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-selection/src/select.js [app-client] (ecmascript) <export default as select>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$array$2f$src$2f$extent$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__extent$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-array/src/extent.js [app-client] (ecmascript) <export default as extent>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$scale$2f$src$2f$linear$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__scaleLinear$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-scale/src/linear.js [app-client] (ecmascript) <export default as scaleLinear>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
@@ -228,10 +230,24 @@ function BubbleChart({ data, width = 800, height = width }) {
                 -margin,
                 width,
                 height
-            ]).attr("style", "max-width: 100%; height: auto; font: 30px sans-serif;").attr("text-anchor", "middle");
+            ]).attr("style", "max-width: 100%; height: auto; font-family: sans-serif;").attr("text-anchor", "middle");
+            const leaves = root.leaves();
+            const rExtent = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$array$2f$src$2f$extent$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__extent$3e$__["extent"](leaves, {
+                "BubbleChart.useEffect.rExtent": (d)=>d.r
+            }["BubbleChart.useEffect.rExtent"]);
+            const fontSize = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$scale$2f$src$2f$linear$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__scaleLinear$3e$__["scaleLinear"]().domain([
+                rExtent[0],
+                rExtent[1]
+            ]).range([
+                10,
+                40
+            ]).clamp(true);
             // Place each (leaf) node according to the layout's x and y values.
-            const node = svg.append("g").selectAll().data(root.leaves()).join("g").attr("transform", {
+            // Set font-size on the group so label and value inherit (scaled by bubble radius).
+            const node = svg.append("g").selectAll().data(leaves).join("g").attr("transform", {
                 "BubbleChart.useEffect.node": (d)=>`translate(${d.x},${d.y})`
+            }["BubbleChart.useEffect.node"]).style("font-size", {
+                "BubbleChart.useEffect.node": (d)=>`${Math.round(fontSize(d.r))}px`
             }["BubbleChart.useEffect.node"]);
             // Add a title.
             node.append("title").text({
@@ -243,7 +259,7 @@ function BubbleChart({ data, width = 800, height = width }) {
             }["BubbleChart.useEffect"]).attr("r", {
                 "BubbleChart.useEffect": (d)=>d.r
             }["BubbleChart.useEffect"]);
-            // Add a label.
+            // Add a label (font size scales with bubble radius; inherited from group).
             const text = node.append("text").attr("clip-path", {
                 "BubbleChart.useEffect.text": (d)=>`circle(${d.r})`
             }["BubbleChart.useEffect.text"]);
@@ -275,7 +291,7 @@ function BubbleChart({ data, width = 800, height = width }) {
         }
     }, void 0, false, {
         fileName: "[project]/src/components/visualizations/BubbleChart.jsx",
-        lineNumber: 86,
+        lineNumber: 95,
         columnNumber: 12
     }, this);
 }

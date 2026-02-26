@@ -1072,6 +1072,10 @@ const improvements = [
             "item 1",
             "item 2",
             "item 3"
+        ],
+        stakeholders: [
+            'stakeholder 1',
+            'stakeholder 2'
         ]
     },
     {
@@ -1081,6 +1085,10 @@ const improvements = [
             "item 1",
             "item 2",
             "item 3"
+        ],
+        stakeholders: [
+            'stakeholder 1',
+            'stakeholder 2'
         ]
     }
 ];

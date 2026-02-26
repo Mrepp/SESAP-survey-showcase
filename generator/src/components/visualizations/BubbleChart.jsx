@@ -42,15 +42,24 @@ export default function BubbleChart({
         svg.attr("width", width)
             .attr("height", height)
             .attr("viewBox", [-margin, -margin, width, height])
-            .attr("style", "max-width: 100%; height: auto; font: 30px sans-serif;")
+            .attr("style", "max-width: 100%; height: auto; font-family: sans-serif;")
             .attr("text-anchor", "middle")
 
+        const leaves = root.leaves()
+        const rExtent = d3.extent(leaves, d => d.r)
+        const fontSize = d3.scaleLinear()
+            .domain([rExtent[0], rExtent[1]])
+            .range([10, 40])
+            .clamp(true)
+
         // Place each (leaf) node according to the layout's x and y values.
+        // Set font-size on the group so label and value inherit (scaled by bubble radius).
         const node = svg.append("g")
             .selectAll()
-            .data(root.leaves())
+            .data(leaves)
             .join("g")
             .attr("transform", d => `translate(${d.x},${d.y})`)
+            .style("font-size", d => `${Math.round(fontSize(d.r))}px`)
 
         // Add a title.
         node.append("title")
@@ -62,7 +71,7 @@ export default function BubbleChart({
             .attr("fill", d => color(category(d.data)))
             .attr("r", d => d.r);
 
-        // Add a label.
+        // Add a label (font size scales with bubble radius; inherited from group).
         const text = node.append("text")
             .attr("clip-path", d => `circle(${d.r})`)
 

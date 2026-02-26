@@ -17,16 +17,99 @@ import {
     Text,
     useCarousel
 } from "@chakra-ui/react"
+import { use, useEffect, useState } from 'react'
 import { useRouter } from "next/navigation"
 import { LuChevronLeft, LuChevronRight, LuClipboardList, LuCalendarDays, LuSquareCheck } from "react-icons/lu"
 import BubbleChart from "@/components/visualizations/BubbleChart"
 import Timeline from '@/components/visualizations/Timeline'
 import SentimentIndicator from '@/components/SentimentIndicator'
 
+function mapToUI(json) {
+    // Date formatting options
+    const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    }
 
-export default function Template() {
-    const carousel = useCarousel({ slideCount: quotes.length })
+    // Overview data
+    const intervieweeName = json.intervieweeName || ''
+    const interviewDate = json.interviewDate
+        ? new Date(json.interviewDate).toLocaleDateString(undefined, options)
+        : ''
+
+    // Analysis
+    const a = json?.analysis || {}
+    const summaries = (a.summaries || []).map((s, i) => ({
+        value: s.id || String(i),
+        title: (s.category || 'Summary').replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+        text: s.summaryText || ''
+    }))
+    const quotes = (a.quotes || []).map((q, i) => ({
+        value: q.id || String(i),
+        text: q.quoteText || '',
+        sentiment: (q.sentiment || 'neutral').toLowerCase()
+    }))
+    const timelineData = (a.timeline || []).map((t, i) => ({
+        year: 2019 + i,
+        event: t.event || '',
+        period: t.period
+            .split(" ")
+            .map(([ firstLetter, ...otherLetters ]) => `${firstLetter.toUpperCase()}${otherLetters.join("")}`)
+            .join(" ")
+    }))
+    const themes = (a.themes || []).map((t) => ({
+        title: t.title || '',
+        impactScore: t.frequency ?? 0,
+        category: t.category || 'other'
+    }))
+    const improvements = (a.areasForImprovement || []).map((area, i) => ({
+        value: area.id || String(i),
+        title: area.area || '',
+        text: area.description ? [area.description] : [],
+        stakeholders: []
+    }))
+    
+    return { intervieweeName, interviewDate, summaries, quotes, timelineData, themes, improvements }
+}
+
+export default function Template({ params }) {
+    const { interviewId } = use(params)
+    const [data, setData] = useState(null)
+    const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        let cancelled = false
+        async function load() {
+            try {
+                setLoading(true)
+                setError(null)
+                const res = await fetch(`/api/interviews/${encodeURIComponent(interviewId)}`)
+                if (!res.ok) {
+                    const err = await res.json().catch(() => ({}))
+                    throw new Error(err.error || `Failed to load interview: ${res.status}`)
+                }
+                const json = await res.json()
+                if (!cancelled) setData(mapToUI(json))
+            } catch (e) {
+                if (!cancelled) setError(e.message)
+            } finally {
+                if (!cancelled) setLoading(false)
+            }
+        }
+        load()
+        return () => { cancelled = true }
+    }, [interviewId])
+
+    const carousel = useCarousel({ slideCount: data?.quotes?.length ?? 1, loop: true }) // I don't know why the carousel needs a hook and nothing else does
     const router = useRouter()
+
+    if (loading) return <Text>Loading interview…</Text>
+    if (error) return <Text color="red">Error: {error}</Text>
+    if (!data) return null
+
+    const { intervieweeName, interviewDate, summaries, quotes, timelineData, themes, improvements } = data
 
     return (
         <>
@@ -39,14 +122,14 @@ export default function Template() {
             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
 
                 {/* Interview */}
-                <Container>
+                <Container w='50%'>
                     <Image src="/placeholder16x9.jpg" alt="placeholder" maxH="100%" maxW="100%" margin='10px' />
                     <Text fontSize='2xl' fontWeight='bold' marginLeft='10px'>{intervieweeName}</Text>
-                    <Text marginLeft='10px'>{interviewDate}</Text>
+                    <Text marginLeft='10px'>{interviewDate || '—'}</Text>
                 </Container>
 
                 {/* Interview Data */}
-                <Container>
+                <Container w='50%'>
                     <Tabs.Root fitted lazyMount defaultValue="overview">
                         <Tabs.List>
                             <Tabs.Trigger value="overview">
@@ -85,7 +168,7 @@ export default function Template() {
                             </Accordion.Root>
 
                             <Heading>Notable Quotes</Heading>
-                            <Carousel.RootProvider value={carousel}>
+                            <Carousel.RootProvider value={carousel} >
                                 <Carousel.ItemGroup>
                                     {quotes.map((item, index) => (
                                     <Carousel.Item key={index} index={index}>
@@ -141,7 +224,7 @@ export default function Template() {
                             <List.Root ps='5' >
                                 {timelineData.map((item, index) => (
                                     <List.Item key={index}>
-                                        <strong>{item.year}:</strong> {item.event}
+                                        <strong>{item.period}:</strong> {item.event}
                                     </List.Item>
                                 ))}
                             </List.Root>
@@ -194,55 +277,3 @@ export default function Template() {
         </>
     )
 }
-
-const intervieweeName = "Firstname Lastname"
-const interviewDate = '2023-03-31'
-
-// overview
-const summaries = [
-    { value: "diversity", title: "Diversity", text: "Some value 1..." },
-    { value: "campusLife", title: "Campus Life", text: "Some value 2..." },
-    { value: "career", title: "Career", text: "Some value 2..." },
-]
-
-// quotes
-const quotes = [
-    { value: "0", text: "In a hole in the ground there lived a hobbit.", sentiment: 'positive'},
-    { value: "1", text: "The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats—the hobbit was fond of visitors.", sentiment: 'mixed' },
-    { value: "2", text: "Some value 2...", sentiment: 'negative' },
-    { value: "3", text: "Some value 2...", sentiment: 'neutral' },
-]
-
-// timeline
-const timelineData = [{year: 2000, event: 'In a hole in the ground there lived a hobbit.'}, 
-    {year: 2007, event: 'Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandyhole with nothing in it to sit down on or to eat: it was a hobbit-hole, and that means comfort.'},
-    {year: 2009, event: 'It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle.'},
-    {year: 2010, event: 'The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats—the hobbit was fond of visitors.'},
-    {year: 2015, event: 'The tunnel wound on and on, going fairly but not quite straight into the side of the hill—The Hill, as all the people for many miles round called it—and many little round doors opened out of it, first on one side and then on another.'},
-    {year: 2020, event: 'No going upstairs for the hobbit: bedrooms, bathrooms, cellars, pantries (lots of these), wardrobes (he had whole rooms devoted to clothes), kitchens, dining-rooms, all were on the same floor, and indeed on the same passage.'},
-    {year: 2023, event: 'The best rooms were all on the left-hand side (going in), for these were the only ones to have windows, deep-set round windows looking over his garden, and meadows beyond, sloping down to the river.'},
-]
-
-//improvements
-const improvements = [
-    { value: "high", title: "Highest Priority", text: ["item 1", "item 2", "item 3"] },
-    { value: "more", title: "More Improvements", text: ["item 1", "item 2", "item 3"] },
-]
-
-const themes = [
-    {"title": "Academic Difficulty", "impactScore": 10, "category": "cat3",},
-    {"title": "Belonging", "impactScore": 5, "category": "cat2",},
-    {"title": "Career Preparation", "impactScore": 7, "category": "cat1",},
-    {"title": "Cultural Representation", "impactScore": 8, "category": "cat2",},
-    {"title": "Faculty Support", "impactScore": 10, "category": "cat1",},
-    {"title": "Family Pressure", "impactScore": 5, "category": "cat2",},
-    {"title": "Financial Struggles", "impactScore": 7, "category": "cat1",},
-    {"title": "Identity & Discrimination", "impactScore": 1, "category": "cat2",},
-    {"title": "Mental Health", "impactScore": 10, "category": "cat1",},
-    {"title": "Language Barriers", "impactScore": 5, "category": "cat2",},
-    {"title": "Peer Relationships", "impactScore": 3, "category": "cat1",},
-    {"title": "Personal Growth", "impactScore": 7, "category": "cat2",},
-    {"title": "Support Networks", "impactScore": 2, "category": "cat1",},
-    {"title": "Work-Life Balance", "impactScore": 1, "category": "cat3",},
-]
-

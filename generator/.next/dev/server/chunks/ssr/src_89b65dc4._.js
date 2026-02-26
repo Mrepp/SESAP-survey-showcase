@@ -160,6 +160,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$scale$
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$hierarchy$2f$src$2f$pack$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__pack$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-hierarchy/src/pack/index.js [app-ssr] (ecmascript) <export default as pack>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$hierarchy$2f$src$2f$hierarchy$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__hierarchy$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-hierarchy/src/hierarchy/index.js [app-ssr] (ecmascript) <export default as hierarchy>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$selection$2f$src$2f$select$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__select$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-selection/src/select.js [app-ssr] (ecmascript) <export default as select>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$array$2f$src$2f$extent$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__extent$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-array/src/extent.js [app-ssr] (ecmascript) <export default as extent>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$scale$2f$src$2f$linear$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__scaleLinear$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-scale/src/linear.js [app-ssr] (ecmascript) <export default as scaleLinear>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 'use client';
 ;
@@ -196,14 +198,24 @@ function BubbleChart({ data, width = 800, height = width }) {
             -margin,
             width,
             height
-        ]).attr("style", "max-width: 100%; height: auto; font: 30px sans-serif;").attr("text-anchor", "middle");
+        ]).attr("style", "max-width: 100%; height: auto; font-family: sans-serif;").attr("text-anchor", "middle");
+        const leaves = root.leaves();
+        const rExtent = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$array$2f$src$2f$extent$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__extent$3e$__["extent"](leaves, (d)=>d.r);
+        const fontSize = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$scale$2f$src$2f$linear$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__scaleLinear$3e$__["scaleLinear"]().domain([
+            rExtent[0],
+            rExtent[1]
+        ]).range([
+            10,
+            40
+        ]).clamp(true);
         // Place each (leaf) node according to the layout's x and y values.
-        const node = svg.append("g").selectAll().data(root.leaves()).join("g").attr("transform", (d)=>`translate(${d.x},${d.y})`);
+        // Set font-size on the group so label and value inherit (scaled by bubble radius).
+        const node = svg.append("g").selectAll().data(leaves).join("g").attr("transform", (d)=>`translate(${d.x},${d.y})`).style("font-size", (d)=>`${Math.round(fontSize(d.r))}px`);
         // Add a title.
         node.append("title").text((d)=>`${d.data.title}\n${format(d.value)}`);
         // Add a filled circle.
         node.append("circle").attr("fill-opacity", 0.7).attr("fill", (d)=>color(category(d.data))).attr("r", (d)=>d.r);
-        // Add a label.
+        // Add a label (font size scales with bubble radius; inherited from group).
         const text = node.append("text").attr("clip-path", (d)=>`circle(${d.r})`);
         // Add a tspan for each word in the title.
         text.selectAll().data((d)=>names(d.data)).join("tspan").attr("x", 0).attr("y", (d, i, nodes)=>`${i - nodes.length / 2 + 0.35}em`).text((d)=>d);
@@ -222,7 +234,7 @@ function BubbleChart({ data, width = 800, height = width }) {
         }
     }, void 0, false, {
         fileName: "[project]/src/components/visualizations/BubbleChart.jsx",
-        lineNumber: 86,
+        lineNumber: 95,
         columnNumber: 12
     }, this);
 }

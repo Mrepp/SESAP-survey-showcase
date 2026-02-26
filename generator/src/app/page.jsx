@@ -1,9 +1,10 @@
 'use client'
+import { useEffect, useState } from 'react'
 import {
     Box,
-    Container,
     Flex,
     Heading,
+    Link,
     Separator,
     ScrollArea,
     Stack,
@@ -11,32 +12,64 @@ import {
 } from "@chakra-ui/react"
 import Interview from '@/components/Interview'
 
+async function getInterviewCount() {
+    const res = await fetch('/api/interviews/count')
+    if (!res.ok) return 0
+    const { count } = await res.json()
+    return count
+}
+
 export default function Home() {
+    const [numInterviews, setNumInterviews] = useState(null)
+
+    useEffect(() => {
+        getInterviewCount().then(setNumInterviews)
+    }, [])
+
+    const recents = [
+        {videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+        {videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2023-03-31', description: ""},
+        {videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2023-03-31', description: ""},
+        {videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
+        {videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2023-03-31', description: ""},
+        {videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2023-03-31', description: ""},
+    ]
+
     return (
         <>
             <Stack w='100%' marginTop='75px' marginBottom='75px' direction={{ base: "column", md: "row" }} >
-                <Box flex='1' textAlign='center' display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
-                    <Heading m='0' size="6xl">{numInterviews}</Heading>
-                    <Text>
-                        interviews
-                    </Text>
+                <Box flex='1' display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
+                    <Box textAlign='left'>
+                        <Heading m='0' size="6xl">{numInterviews ?? '11'}</Heading>
+                        <Text fontSize='xl' fontWeight='medium'>
+                            interviews
+                        </Text>
+                    </Box>
                 </Box>
                 
                 <Separator orientation={{ base: "vertical", sm: "horizontal" }} size='lg'/>
-                <Box flex='1' textAlign='center' display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
-                    
-                    <Text>
-                        Since
-                    </Text>
-                    <Heading m='0' size="6xl">2023</Heading>
+                <Box flex='1' display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
+                    <Box textAlign='left'>
+                        <Text fontSize='xl' fontWeight='medium'>
+                            Since
+                        </Text>
+                        <Heading m='0' size="6xl">2023</Heading>
+                    </Box>
                 </Box>
                 
                 <Separator orientation={{ base: "vertical", sm: "horizontal" }}size='lg'/>
-                <Box flex='1' textAlign='center' display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
-                    <Text>
-                        think of something else to put here
-                    </Text>
-                    <Heading m='0' size="6xl">0000</Heading>
+                <Box flex='1' display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
+                    <Box textAlign='left'>
+                        <Text fontSize='xl' fontWeight='medium'>
+                            Exploring <Link fontWeight='bold' fontSize='xl' color='beavOrange' href='/themes'>themes →</Link>
+                        </Text>
+                        <Text fontSize='xl' fontWeight='medium'>
+                            in student <Link fontWeight='bold' fontSize='xl' color='beavOrange' href='/interviews'>narratives →</Link>
+                        </Text>
+                        <Text fontSize='xl' fontWeight='medium'>
+                            via data <Link fontWeight='bold' fontSize='xl' color='beavOrange' href='/insights'>visualization →</Link>
+                        </Text>
+                    </Box>
                 </Box>
 
                 <Separator orientation={{ base: "vertical", sm: "horizontal" }} size='lg' />
@@ -77,14 +110,3 @@ export default function Home() {
         </>
     )
 }
-
-const recents = [
-    {videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
-    {videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2023-03-31', description: ""},
-    {videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2023-03-31', description: ""},
-    {videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: 'Firstname Lastname', date: '2023-03-31', description: ""},
-    {videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '2Firstname Lastname', date: '2023-03-31', description: ""},
-    {videoUrl: '/placeholder16x9.jpg', videoAlt:'example', name: '3Firstname Lastname', date: '2023-03-31', description: ""},
-]
-
-const numInterviews = 20

@@ -16,6 +16,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$
 ;
 ;
 function Interview({ data }) {
+    // Date formatting options
+    const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$box$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Box"], {
         w: "300px",
         borderWidth: "1px",
@@ -29,7 +35,7 @@ function Interview({ data }) {
                 borderTopRadius: "25px"
             }, void 0, false, {
                 fileName: "[project]/src/components/Interview.jsx",
-                lineNumber: 14,
+                lineNumber: 21,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$box$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Box"], {
@@ -43,7 +49,7 @@ function Interview({ data }) {
                         children: data.name
                     }, void 0, false, {
                         fileName: "[project]/src/components/Interview.jsx",
-                        lineNumber: 17,
+                        lineNumber: 24,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$stack$2f$h$2d$stack$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HStack"], {
@@ -51,19 +57,19 @@ function Interview({ data }) {
                         children: data.date
                     }, void 0, false, {
                         fileName: "[project]/src/components/Interview.jsx",
-                        lineNumber: 20,
+                        lineNumber: 27,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Interview.jsx",
-                lineNumber: 16,
+                lineNumber: 23,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/Interview.jsx",
-        lineNumber: 13,
+        lineNumber: 20,
         columnNumber: 9
     }, this);
 }
@@ -360,8 +366,15 @@ function Interviews() {
                                     justifyContent: "center",
                                     alignItems: "center",
                                     padding: "30px",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Interview$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                        data: item
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$link$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Link"], {
+                                        href: `/interviews/${item.interviewId}`,
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Interview$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                            data: item
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/interviews/page.jsx",
+                                            lineNumber: 132,
+                                            columnNumber: 37
+                                        }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/interviews/page.jsx",
                                         lineNumber: 131,
@@ -396,17 +409,17 @@ function Interviews() {
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$button$2f$icon$2d$button$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IconButton"], {
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$hi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HiChevronLeft"], {}, void 0, false, {
                                             fileName: "[project]/src/app/interviews/page.jsx",
-                                            lineNumber: 147,
+                                            lineNumber: 149,
                                             columnNumber: 25
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/interviews/page.jsx",
-                                        lineNumber: 146,
+                                        lineNumber: 148,
                                         columnNumber: 25
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/interviews/page.jsx",
-                                    lineNumber: 145,
+                                    lineNumber: 147,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$pagination$2f$namespace$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Pagination$3e$__["Pagination"].Items, {
@@ -418,12 +431,12 @@ function Interviews() {
                                             children: page.value
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/interviews/page.jsx",
-                                            lineNumber: 153,
+                                            lineNumber: 155,
                                             columnNumber: 25
                                         }, void 0)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/interviews/page.jsx",
-                                    lineNumber: 151,
+                                    lineNumber: 153,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$pagination$2f$namespace$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Pagination$3e$__["Pagination"].NextTrigger, {
@@ -431,28 +444,28 @@ function Interviews() {
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$chakra$2d$ui$2f$react$2f$dist$2f$esm$2f$components$2f$button$2f$icon$2d$button$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IconButton"], {
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$hi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HiChevronRight"], {}, void 0, false, {
                                             fileName: "[project]/src/app/interviews/page.jsx",
-                                            lineNumber: 161,
+                                            lineNumber: 163,
                                             columnNumber: 25
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/interviews/page.jsx",
-                                        lineNumber: 160,
+                                        lineNumber: 162,
                                         columnNumber: 25
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/interviews/page.jsx",
-                                    lineNumber: 159,
+                                    lineNumber: 161,
                                     columnNumber: 21
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/interviews/page.jsx",
-                            lineNumber: 144,
+                            lineNumber: 146,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/interviews/page.jsx",
-                        lineNumber: 138,
+                        lineNumber: 140,
                         columnNumber: 17
                     }, this)
                 ]

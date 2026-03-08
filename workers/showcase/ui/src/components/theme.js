@@ -1,0 +1,27 @@
+import { createSystem, defaultConfig, defineRecipe } from "@chakra-ui/react"
+
+export const system = createSystem(defaultConfig, {
+    theme: {
+        tokens: {
+            colors: {
+                osuOffWhite: {value:' #f7f5f5'},
+                osuOffBlack: {value: '#212529'},
+                osuGray: {value: '#423e3c'},
+                osuNavGray: {value: '#e9e5e4'},
+                beavOrange: {value: '#D73F09'}
+            },
+        },
+    },
+    globalCss: {
+        "h1, h2, h3, h4, h5, h6": {
+            color: "beavOrange",
+            marginTop: '15px',
+            marginBottom: '15px',
+        },
+        'body': {
+            color: "osuGray",
+        },
+    }
+})
+
+// All colors sourced from OSU brand colors https://communications.oregonstate.edu/brand-guide/colors

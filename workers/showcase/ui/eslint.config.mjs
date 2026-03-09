@@ -12,7 +12,7 @@ export default [
     },
     rules: {
       'no-undef': 'off',
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^[A-Z]' }],
     },
   },
   {

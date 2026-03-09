@@ -61,4 +61,7 @@ jobs:
         run: |
           cp wrangler.example.toml wrangler.toml
           sed -i 's|ENVIRONMENT = "development"|ENVIRONMENT = "production"|g' wrangler.toml
+          sed -i 's|<YOUR_R2_BUCKET_NAME>|ci-placeholder-bucket|g' wrangler.toml
+          sed -i 's|<YOUR_KV_NAMESPACE_ID>|00000000000000000000000000000000|g' wrangler.toml
+          sed -i 's|<YOUR_KV_PREVIEW_ID>|00000000000000000000000000000001|g' wrangler.toml
       - run: pnpm --filter sesap-${{ matrix.worker }} build

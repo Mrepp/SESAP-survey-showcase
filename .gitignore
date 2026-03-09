@@ -12,3 +12,4 @@ dry-run-output/
 workers/showcase/public/
 workers/showcase/ui/out/
 .next/
+.pnpm-store/

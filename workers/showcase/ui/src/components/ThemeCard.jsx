@@ -3,10 +3,11 @@ import {
     Box,
     CloseButton,
     Drawer,
+    Link,
     Portal,
     Stack,
     Text,
-    VStack,  
+    VStack,
 } from "@chakra-ui/react"
 import Interview from "./Interview"
 
@@ -58,7 +59,9 @@ export default function ThemeCard ({data}) {
                         <Drawer.Body>
                             <Stack direction='column' alignItems="center" gap='5'>
                                 {data.interviews.map((interview, index) => (
-                                    <Interview key={index} data={interview} />
+                                    <Link key={index} href={`/interviews/view?id=${interview.interviewId}`}>
+                                        <Interview data={interview} />
+                                    </Link>
                                 ))}
                             </Stack>
                         </Drawer.Body>

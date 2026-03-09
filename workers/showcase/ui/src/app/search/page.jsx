@@ -24,6 +24,53 @@ function formatDate(value) {
     return Number.isNaN(d.getTime()) ? '' : d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
+function buildThemeOptions(interviews) {
+    if (!Array.isArray(interviews)) return null
+    const titles = new Set()
+    for (const iv of interviews) {
+        const themes = iv.analysis?.themes
+        if (!Array.isArray(themes)) continue
+        for (const t of themes) {
+            if (t.title) titles.add(t.title)
+        }
+    }
+    if (titles.size === 0) return null
+    return Array.from(titles).sort().map((t) => ({ label: t, value: t.toLowerCase() }))
+}
+
+function buildYearOptions(interviews) {
+    if (!Array.isArray(interviews)) return null
+    const years = new Set()
+    for (const iv of interviews) {
+        const gy = iv.demographics?.graduationYear ?? iv.demographics?.year
+        const num = Number(gy)
+        if (num && num >= 1900 && num <= 2100) years.add(num)
+    }
+    if (years.size === 0) return null
+    const sorted = Array.from(years).sort((a, b) => a - b)
+    const minYear = Math.floor(sorted[0] / 5) * 5
+    const maxYear = Math.ceil((sorted[sorted.length - 1] + 1) / 5) * 5
+    const ranges = []
+    for (let start = minYear; start < maxYear; start += 5) {
+        const end = start + 4
+        const label = `${start}-${end}`
+        ranges.push({ label, value: label })
+    }
+    return ranges.length > 0 ? ranges : null
+}
+
+function yearInRange(year, rangeStr) {
+    const [startStr, endStr] = rangeStr.split('-')
+    const start = Number(startStr)
+    const end = Number(endStr)
+    return year >= start && year <= end
+}
+
+function getInterviewForResult(resultCard, data) {
+    if (!Array.isArray(data?.interviews)) return null
+    return data.interviews.find((iv) => (iv.interviewId ?? iv.id) === resultCard.interviewId) ?? null
+}
+
 function mapSearchResultToCard(result, data) {
     const doc = data?.searchIndex?.documents?.find((d) => d.id === result.id) ?? null
     const interviewId = doc?.interviewId ?? result.id
@@ -61,7 +108,7 @@ export default function Search() {
 
     const [modelProgress, setModelProgress] = useState({ pct: 0, text: '' });
 
-    const { isModelLoaded, search: semanticSearch } = useSemanticSearch({
+    const { isModelLoaded, loadError: semanticLoadError, search: semanticSearch } = useSemanticSearch({
         vectorIndices: data.vectorIndices,
         onProgress: (p) => {
         if (p.status === 'progress' && p.progress != null) {
@@ -126,6 +173,47 @@ export default function Search() {
         return results.items.map((r) => mapSearchResultToCard(r, data))
     }, [results?.items, data])
 
+    // Build dynamic filter options from interview data
+    const themeOptions = useMemo(() => buildThemeOptions(data?.interviews), [data?.interviews])
+    const yearOptions = useMemo(() => buildYearOptions(data?.interviews), [data?.interviews])
+
+    // Apply filters to result cards
+    const filteredCards = useMemo(() => {
+        const hasThemes = selectedThemes.length > 0
+        const hasYears = selectedYears.length > 0
+        const hasSentiments = selectedSentiments.length > 0
+        const hasCategories = selectedCategories.length > 0
+        if (!hasThemes && !hasYears && !hasSentiments && !hasCategories) return resultCards
+
+        return resultCards.filter((card) => {
+            const iv = getInterviewForResult(card, data)
+            if (!iv) return true // keep results we can't resolve
+
+            if (hasThemes) {
+                const ivThemes = (iv.analysis?.themes ?? []).map((t) => (t.title ?? '').toLowerCase())
+                if (!selectedThemes.some((st) => ivThemes.includes(st))) return false
+            }
+
+            if (hasYears) {
+                const gy = Number(iv.demographics?.graduationYear ?? iv.demographics?.year)
+                if (!gy || !selectedYears.some((range) => yearInRange(gy, range))) return false
+            }
+
+            if (hasSentiments) {
+                const ivSentiments = new Set((iv.analysis?.quotes ?? []).map((q) => (q.sentiment ?? '').toLowerCase()))
+                if (!selectedSentiments.some((s) => ivSentiments.has(s))) return false
+            }
+
+            if (hasCategories) {
+                const doc = data?.searchIndex?.documents?.find((d) => d.interviewId === card.interviewId)
+                const cat = (doc?.category ?? '').toLowerCase().replace(/\s+/g, '-')
+                if (!selectedCategories.includes(cat)) return false
+            }
+
+            return true
+        })
+    }, [resultCards, selectedThemes, selectedYears, selectedSentiments, selectedCategories, data])
+
     if (showLoading) {
         return (
             <VStack gap={3} textAlign="center" p={12}>
@@ -179,6 +267,11 @@ export default function Search() {
                     isSearching={isSearching}
                     placeholder="Search interviews..."
                 />
+                {semanticLoadError && (
+                    <Box bg="yellow.50" border="1px solid" borderColor="yellow.200" p={3} borderRadius="md" fontSize="sm" mt={3}>
+                        Semantic search unavailable. Using keyword search instead.
+                    </Box>
+                )}
             </Box>
 
             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
@@ -191,6 +284,8 @@ export default function Search() {
                     setSelectedSentiments={setSelectedSentiments}
                     selectedCategories={selectedCategories}
                     setSelectedCategories={setSelectedCategories}
+                    themeOptions={themeOptions}
+                    yearOptions={yearOptions}
                 />
 
                 <Container paddingRight="0">
@@ -198,7 +293,7 @@ export default function Search() {
                         <Text>
                             {results == null
                                 ? 'Enter a query and click Search to see results.'
-                                : `${resultCards.length} result${resultCards.length !== 1 ? 's' : ''}${query.trim() ? ` for "${query.trim()}"` : ''}`}
+                                : `${filteredCards.length} result${filteredCards.length !== 1 ? 's' : ''}${query.trim() ? ` for "${query.trim()}"` : ''}${filteredCards.length < resultCards.length ? ` (filtered from ${resultCards.length})` : ''}`}
                         </Text>
                         <Button variant="surface" onClick={clearAllFilters}>
                             Clear Filter
@@ -220,12 +315,12 @@ export default function Search() {
                         </Box>
                     )}
 
-                    {results != null && resultCards.length === 0 && !results.error && (
+                    {results != null && filteredCards.length === 0 && !results.error && (
                         <Text color="fg.muted">No results found.</Text>
                     )}
 
                     <Box>
-                        {resultCards.map((item, index) => (
+                        {filteredCards.map((item, index) => (
                             <GridItem
                                 key={item.interviewId + '-' + index}
                                 display="flex"
@@ -233,7 +328,7 @@ export default function Search() {
                                 alignItems="center"
                                 paddingBottom="15px"
                             >
-                                <Link href={`/interviews/${item.interviewId}`} _hover={{ textDecoration: 'none' }}>
+                                <Link href={`/interviews/view?id=${item.interviewId}`} _hover={{ textDecoration: 'none' }}>
                                     <Result data={item} />
                                 </Link>
                             </GridItem>

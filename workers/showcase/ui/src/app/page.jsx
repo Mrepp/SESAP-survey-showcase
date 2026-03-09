@@ -103,7 +103,7 @@ export default function Home() {
                         <ScrollArea.Content py="4">
                             <Flex gap="4" flexWrap="nowrap">
                                 {recents.map((item) => (
-                                    <Link href={`/interviews/${item.interviewId}`}>
+                                    <Link href={`/interviews/view?id=${item.interviewId}`}>
                                         <Interview key={item.interviewId} data={item}/>
                                     </Link>
                                 ))}

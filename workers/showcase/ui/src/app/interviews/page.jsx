@@ -145,7 +145,7 @@ export default function Interviews() {
                             justifyContent="center" 
                             alignItems="center" 
                             padding='30px'>
-                                <Link href={`/interviews/${item.interviewId}`}>
+                                <Link href={`/interviews/view?id=${item.interviewId}`}>
                                     <Interview data={item} />
                                 </Link>
                             </GridItem>

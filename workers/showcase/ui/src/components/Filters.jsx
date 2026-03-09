@@ -22,43 +22,37 @@ const ListboxItemCheckmark = () => {
   )
 }
 
-const years = createListCollection({
-  items: [
-    { label: "2000-2004", value: "react" },
-    { label: "2005-2009", value: "vue" },
-    { label: "2010-2014", value: "angular" },
-    { label: "2015-2019", value: "svelte" },
-    { label: "2020-2024", value: "nextjs" },
-    { label: "2025-2029", value: "nuxtjs" },
-  ],
-})
+const DEFAULT_YEARS = [
+  { label: "2000-2004", value: "2000-2004" },
+  { label: "2005-2009", value: "2005-2009" },
+  { label: "2010-2014", value: "2010-2014" },
+  { label: "2015-2019", value: "2015-2019" },
+  { label: "2020-2024", value: "2020-2024" },
+  { label: "2025-2029", value: "2025-2029" },
+]
 
-const sentiments = createListCollection({
-  items: [
-    { label: "Positive", value: "positive" },
-    { label: "Neutral", value: "neutral" },
-    { label: "Negative", value: "negative" },
-  ],
-})
+const DEFAULT_SENTIMENTS = [
+  { label: "Positive", value: "positive" },
+  { label: "Neutral", value: "neutral" },
+  { label: "Negative", value: "negative" },
+]
 
-const themes = createListCollection({
-  items: [
-    { label: "Academic Difficulty", value: "academic difficulty" },
-    { label: "Faculty Support", value: "faculty support" },
-    { label: "Peer Relationships", value: "peer relationships" },
-    { label: "Belonging", value: "belonging" },
-    { label: "Cultural Representation", value: "cultural representation" },
-    { label: "Financial Struggles", value: "financial struggles" },
-    { label: "Mental Health", value: "mental health" },
-    { label: "Family Pressure", value: "family pressure" },
-    { label: "Work-Life Balance", value: "work-life balance" },
-    { label: "Identity & Discrimination", value: "identity & discrimination" },
-    { label: "Career Preparation", value: "career preparation" },
-    { label: "Language Barriers", value: "language barriers" },
-    { label: "Support Networks", value: "support networks" },
-    { label: "Personal Growth", value: "personal growth" },
-  ],
-})
+const DEFAULT_THEMES = [
+  { label: "Academic Difficulty", value: "academic difficulty" },
+  { label: "Faculty Support", value: "faculty support" },
+  { label: "Peer Relationships", value: "peer relationships" },
+  { label: "Belonging", value: "belonging" },
+  { label: "Cultural Representation", value: "cultural representation" },
+  { label: "Financial Struggles", value: "financial struggles" },
+  { label: "Mental Health", value: "mental health" },
+  { label: "Family Pressure", value: "family pressure" },
+  { label: "Work-Life Balance", value: "work-life balance" },
+  { label: "Identity & Discrimination", value: "identity & discrimination" },
+  { label: "Career Preparation", value: "career preparation" },
+  { label: "Language Barriers", value: "language barriers" },
+  { label: "Support Networks", value: "support networks" },
+  { label: "Personal Growth", value: "personal growth" },
+]
 
 const DEFAULT_CATEGORIES = [
   "Academic",
@@ -87,6 +81,8 @@ export default function Filters({
   setSelectedSentiments,
   selectedCategories = [],
   setSelectedCategories,
+  themeOptions,
+  yearOptions,
 }) {
   const [categoryItems, setCategoryItems] = useState(() =>
     DEFAULT_CATEGORIES.map((label) => ({ label, value: label.toLowerCase().replace(/\s+/g, "-") }))
@@ -118,6 +114,21 @@ export default function Filters({
     [categoryItems]
   )
 
+  const themesCollection = useMemo(
+    () => createListCollection({ items: themeOptions ?? DEFAULT_THEMES }),
+    [themeOptions]
+  )
+
+  const yearsCollection = useMemo(
+    () => createListCollection({ items: yearOptions ?? DEFAULT_YEARS }),
+    [yearOptions]
+  )
+
+  const sentimentsCollection = useMemo(
+    () => createListCollection({ items: DEFAULT_SENTIMENTS }),
+    []
+  )
+
   const defaultOpenValues = visibleFilters.map((key) => ACCORDION_VALUES[key]).filter(Boolean)
 
   return (
@@ -136,13 +147,13 @@ export default function Filters({
           <Accordion.ItemContent>
             <Accordion.ItemBody>
               <Listbox.Root
-                collection={themes}
+                collection={themesCollection}
                 selectionMode="multiple"
                 value={selectedThemes}
                 onValueChange={(e) => setSelectedThemes(e.value)}
               >
                 <Listbox.Content>
-                  {themes.items.map((option) => (
+                  {themesCollection.items.map((option) => (
                     <Listbox.Item item={option} key={option.value}>
                       <ListboxItemCheckmark />
                       <Listbox.ItemText>{option.label}</Listbox.ItemText>
@@ -167,13 +178,13 @@ export default function Filters({
           <Accordion.ItemContent>
             <Accordion.ItemBody>
               <Listbox.Root
-                collection={years}
+                collection={yearsCollection}
                 selectionMode="multiple"
                 value={selectedYears}
                 onValueChange={(e) => setSelectedYears(e.value)}
               >
                 <Listbox.Content>
-                  {years.items.map((option) => (
+                  {yearsCollection.items.map((option) => (
                     <Listbox.Item item={option} key={option.value}>
                       <ListboxItemCheckmark />
                       <Listbox.ItemText>{option.label}</Listbox.ItemText>
@@ -198,13 +209,13 @@ export default function Filters({
           <Accordion.ItemContent>
             <Accordion.ItemBody>
               <Listbox.Root
-                collection={sentiments}
+                collection={sentimentsCollection}
                 selectionMode="multiple"
                 value={selectedSentiments}
                 onValueChange={(e) => setSelectedSentiments(e.value)}
               >
                 <Listbox.Content>
-                  {sentiments.items.map((option) => (
+                  {sentimentsCollection.items.map((option) => (
                     <Listbox.Item item={option} key={option.value}>
                       <ListboxItemCheckmark />
                       <Listbox.ItemText>{option.label}</Listbox.ItemText>

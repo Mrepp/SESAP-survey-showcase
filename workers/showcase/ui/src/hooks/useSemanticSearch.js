@@ -15,6 +15,7 @@ function cosineSimilarity(a, b) {
 
 export function useSemanticSearch({ vectorIndices, onProgress }) {
   const [isModelLoaded, setIsModelLoaded] = useState(false);
+  const [loadError, setLoadError] = useState(null);
   const pipelineRef = useRef(null);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export function useSemanticSearch({ vectorIndices, onProgress }) {
       try {
         const { pipeline, env: transformersEnv } = await import(
           /* @vite-ignore */
-          'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2'
+          'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3'
         );
         transformersEnv.allowLocalModels = false;
 
@@ -40,6 +41,7 @@ export function useSemanticSearch({ vectorIndices, onProgress }) {
         }
       } catch (err) {
         console.warn('Transformers.js model failed to load:', err);
+        if (!cancelled) setLoadError(err.message);
       }
     }
 
@@ -78,5 +80,5 @@ export function useSemanticSearch({ vectorIndices, onProgress }) {
     [vectorIndices],
   );
 
-  return { isModelLoaded, search };
+  return { isModelLoaded, loadError, search };
 }

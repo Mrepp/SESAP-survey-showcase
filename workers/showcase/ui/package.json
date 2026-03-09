@@ -7,8 +7,8 @@
     "dev": "next dev",
     "build": "next build && rm -rf ../public && cp -r out ../public && cp -r public/. ../public/",
     "start": "next start",
-    "lint": "eslint src tests --ext .js",
-    "lint:fix": "eslint --fix",
+    "lint": "eslint \"src/**/*.js\" \"tests/**/*.js\"",
+    "lint:fix": "eslint --fix \"src/**/*.js\" \"tests/**/*.js\"",
     "test": "node tests/index.test.js"
   },
   "devDependencies": {

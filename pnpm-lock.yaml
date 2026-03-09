@@ -215,6 +215,9 @@ importers:
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
+      '@sesap/shared':
+        specifier: workspace:*
+        version: link:../../../packages/shared
       '@observablehq/plot':
         specifier: ^0.6.17
         version: 0.6.17

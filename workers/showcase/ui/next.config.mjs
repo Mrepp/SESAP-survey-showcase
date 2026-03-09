@@ -5,6 +5,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default {
   output: 'export',
+  trailingSlash: true,
+  transpilePackages: ['@sesap/shared'],
   experimental: {
     optimizePackageImports: ['@chakra-ui/react'],
   },

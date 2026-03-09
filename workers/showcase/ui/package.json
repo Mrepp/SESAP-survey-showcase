@@ -16,6 +16,7 @@
     "eslint": "^8.57.1"
   },
   "dependencies": {
+    "@sesap/shared": "workspace:*",
     "@chakra-ui/react": "^3.29.0",
     "@emotion/react": "^11.14.0",
     "@observablehq/plot": "^0.6.17",

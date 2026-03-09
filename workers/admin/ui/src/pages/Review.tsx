@@ -9,6 +9,7 @@ import {
   Input,
   Textarea,
 } from '@chakra-ui/react';
+import { isThemeTitle } from '@sesap/shared';
 import type { InterviewRecord, Analysis, Demographics, InterviewMetadata } from '@sesap/types';
 import { api } from '../api/interviews';
 import { StatusBadge } from '../components/StatusBadge';
@@ -135,6 +136,13 @@ export function Review() {
 
   async function handleSave() {
     if (!id || !interview) return;
+
+    if (analysis && analysis.themes.some((theme) => !isThemeTitle(theme.title))) {
+      setActiveTab('themes');
+      showAlert('error', 'One or more theme titles are invalid. Select a canonical theme before saving.');
+      return;
+    }
+
     setSaving(true);
     try {
       const demoDirty = JSON.stringify(interview.demographics) !== originalDemographics;

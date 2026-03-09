@@ -16,7 +16,8 @@ import {
   ProcessingError,
   AuthenticationError,
 } from '../src/errors';
-import { DemographicsSchema, InterviewMetadataSchema } from '../src/validation';
+import { DemographicsSchema, InterviewMetadataSchema, ThemeSchema } from '../src/validation';
+import { THEME_TITLES, isThemeTitle } from '../src/theme-enum';
 
 describe('vector-math', () => {
   it('cosineSimilarity returns 1 for identical vectors', () => {
@@ -117,5 +118,34 @@ describe('validation schemas', () => {
       interviewer: 'Jane Doe',
     });
     expect(result.success).toBe(true);
+  });
+
+  it('ThemeSchema accepts canonical theme titles', () => {
+    const result = ThemeSchema.safeParse({
+      id: 'th1',
+      title: THEME_TITLES[0],
+      description: 'Desc',
+      category: 'academic',
+      frequency: 2,
+      relatedQuoteIds: [],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('ThemeSchema rejects invalid theme titles', () => {
+    const result = ThemeSchema.safeParse({
+      id: 'th1',
+      title: 'Invalid Theme',
+      description: 'Desc',
+      category: 'academic',
+      frequency: 2,
+      relatedQuoteIds: [],
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('isThemeTitle matches canonical list', () => {
+    expect(isThemeTitle('Belonging')).toBe(true);
+    expect(isThemeTitle('Academic Growth')).toBe(false);
   });
 });

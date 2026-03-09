@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ThemeTitleSchema } from './theme-enum';
 
 // ---- Interview schemas ----
 
@@ -69,7 +70,7 @@ export const TimelinePointSchema = z.object({
 
 export const ThemeSchema = z.object({
   id: z.string(),
-  title: z.string(),
+  title: ThemeTitleSchema,
   description: z.string(),
   category: z.string(),
   frequency: z.number(),

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import lunr from 'lunr';
 
-async function fetchJSON(url) {
-  const res = await fetch(url);
+async function fetchJSON(url, init) {
+  const res = await fetch(url, init);
   if (!res.ok) throw new Error('Failed to fetch ' + url + ' (' + res.status + ')');
   return res.json();
 }
@@ -42,26 +42,36 @@ export function useDataLoader() {
       setStatusText(text);
     }
 
-    // Cache-bust param for reloads
-    const cacheBust = loadCount > 0 ? `?t=${Date.now()}` : '';
+    // Force metadata refresh when manually reloading so a new buildId can be discovered quickly.
+    const metadataCacheBust = loadCount > 0 ? `?t=${Date.now()}` : '';
 
     async function init() {
       try {
         // Step 1: fetch metadata
         update(5, 'Fetching build metadata...');
         try {
-          dataRef.current.metadata = await fetchJSON('/assets/build/metadata.json' + cacheBust);
+          dataRef.current.metadata = await fetchJSON(
+            '/assets/build/metadata.json' + metadataCacheBust,
+            loadCount > 0 ? { cache: 'no-store' } : undefined
+          );
         } catch {
           dataRef.current.metadata = null;
         }
 
+        const buildId = dataRef.current.metadata?.buildId;
+        const versionQuery = typeof buildId === 'string' && buildId.length > 0
+          ? `?v=${encodeURIComponent(buildId)}`
+          : '';
+        const fallbackQuery = !versionQuery && loadCount > 0 ? metadataCacheBust : '';
+        const artifactQuery = versionQuery || fallbackQuery;
+
         // Step 2: fetch data artifacts in parallel
-        update(15, 'Loading search data...');
+        update(15, versionQuery ? `Loading search data for ${buildId}...` : 'Loading search data...');
         const [vecRes, searchRes, clustersRes, interviewsRes] = await Promise.allSettled([
-          fetchJSON('/assets/build/vector-indices.json' + cacheBust),
-          fetchJSON('/assets/build/search-index.json' + cacheBust),
-          fetchJSON('/assets/build/clusters.json' + cacheBust),
-          fetchJSON('/assets/build/interviews.json' + cacheBust),
+          fetchJSON('/assets/build/vector-indices.json' + artifactQuery),
+          fetchJSON('/assets/build/search-index.json' + artifactQuery),
+          fetchJSON('/assets/build/clusters.json' + artifactQuery),
+          fetchJSON('/assets/build/interviews.json' + artifactQuery),
         ]);
 
         dataRef.current.vectorIndices = vecRes.status === 'fulfilled' ? vecRes.value : null;

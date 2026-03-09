@@ -1,4 +1,5 @@
 import { Box, Flex, Text, Input, Textarea, Button, Switch } from '@chakra-ui/react';
+import { THEME_TITLES, isThemeTitle } from '@sesap/shared';
 import type { Theme } from '@sesap/types';
 import { ArrayItemCard } from './ArrayItemCard';
 import { TagInput } from './TagInput';
@@ -23,7 +24,7 @@ export function ThemesEditor({ themes, onChange }: Props) {
     onChange([
       ...themes,
       {
-        id: `temp_${Date.now()}`, title: '', description: '', category: 'other',
+        id: `temp_${Date.now()}`, title: THEME_TITLES[0], description: '', category: 'other',
         frequency: 1, relatedQuoteIds: [],
       },
     ]);
@@ -45,92 +46,107 @@ export function ThemesEditor({ themes, onChange }: Props) {
       </Flex>
 
       <Flex direction="column" gap={3}>
-        {themes.map((theme, i) => (
-          <ArrayItemCard
-            key={theme.id}
-            title={theme.title || 'New theme'}
-            subtitle={`${theme.category} · freq: ${theme.frequency}`}
-            accentColor="#0d9488"
-            index={i}
-            onRemove={() => remove(i)}
-            defaultExpanded={theme.id.startsWith('temp_')}
-          >
-            <Flex direction="column" gap={3}>
-              <Flex gap={3}>
-                <Box flex={2}>
-                  <Text fontSize="xs" fontWeight="600" color="gray.500" mb={1}>Title</Text>
-                  <Input
-                    size="sm"
-                    value={theme.title}
-                    onChange={(e) => update(i, { title: e.target.value })}
-                    bg="surface.input" border="1px solid" borderColor="gray.200"
-                  />
-                </Box>
-                <Box flex={1}>
-                  <Text fontSize="xs" fontWeight="600" color="gray.500" mb={1}>Category</Text>
-                  <NativeSelect value={theme.category} onChange={(v) => update(i, { category: v })}>
-                    {CATEGORIES.map((c) => (
-                      <option key={c} value={c}>{c.replace(/_/g, ' ')}</option>
-                    ))}
-                  </NativeSelect>
-                </Box>
-              </Flex>
-
-              <Box>
-                <Text fontSize="xs" fontWeight="600" color="gray.500" mb={1}>Description</Text>
-                <Textarea
-                  size="sm"
-                  value={theme.description}
-                  onChange={(e) => update(i, { description: e.target.value })}
-                  bg="surface.input" border="1px solid" borderColor="gray.200"
-                  rows={2}
-                />
-              </Box>
-
-              <Flex gap={3}>
-                <Box flex={1}>
-                  <Text fontSize="xs" fontWeight="600" color="gray.500" mb={1}>Frequency</Text>
-                  <Input
-                    size="sm" type="number" min={0}
-                    value={theme.frequency}
-                    onChange={(e) => update(i, { frequency: Number(e.target.value) })}
-                    bg="surface.input" border="1px solid" borderColor="gray.200"
-                  />
-                </Box>
-                <Box flex={1}>
-                  <Text fontSize="xs" fontWeight="600" color="gray.500" mb={1}>Impact Score (0-10)</Text>
-                  <Input
-                    size="sm" type="number" min={0} max={10}
-                    value={theme.impactScore ?? ''}
-                    onChange={(e) => update(i, { impactScore: e.target.value ? Number(e.target.value) : undefined })}
-                    bg="surface.input" border="1px solid" borderColor="gray.200"
-                  />
-                </Box>
-                <Flex flex={1} alignItems="flex-end" gap={2} pb={1}>
-                  <Switch.Root
-                    checked={theme.actionable ?? false}
-                    onCheckedChange={(e) => update(i, { actionable: e.checked })}
-                  >
-                    <Switch.HiddenInput />
-                    <Switch.Control>
-                      <Switch.Thumb />
-                    </Switch.Control>
-                  </Switch.Root>
-                  <Text fontSize="xs" fontWeight="600" color="gray.500">Actionable</Text>
+        {themes.map((theme, i) => {
+          const titleIsValid = isThemeTitle(theme.title);
+          return (
+            <ArrayItemCard
+              key={theme.id}
+              title={theme.title || 'New theme'}
+              subtitle={`${theme.category} · freq: ${theme.frequency}`}
+              accentColor="#0d9488"
+              index={i}
+              onRemove={() => remove(i)}
+              defaultExpanded={theme.id.startsWith('temp_')}
+            >
+              <Flex direction="column" gap={3}>
+                <Flex gap={3}>
+                  <Box flex={2}>
+                    <Text fontSize="xs" fontWeight="600" color="gray.500" mb={1}>Title</Text>
+                    <NativeSelect
+                      value={titleIsValid ? theme.title : ''}
+                      onChange={(v) => update(i, { title: v })}
+                    >
+                      {!titleIsValid && (
+                        <option value="">Select a valid theme title...</option>
+                      )}
+                      {THEME_TITLES.map((title) => (
+                        <option key={title} value={title}>
+                          {title}
+                        </option>
+                      ))}
+                    </NativeSelect>
+                    {!titleIsValid && (
+                      <Text mt={1} fontSize="xs" color="red.600">
+                        Invalid legacy title{theme.title ? `: "${theme.title}"` : ''}. Select one of the canonical themes.
+                      </Text>
+                    )}
+                  </Box>
+                  <Box flex={1}>
+                    <Text fontSize="xs" fontWeight="600" color="gray.500" mb={1}>Category</Text>
+                    <NativeSelect value={theme.category} onChange={(v) => update(i, { category: v })}>
+                      {CATEGORIES.map((c) => (
+                        <option key={c} value={c}>{c.replace(/_/g, ' ')}</option>
+                      ))}
+                    </NativeSelect>
+                  </Box>
                 </Flex>
-              </Flex>
 
-              <Box>
-                <Text fontSize="xs" fontWeight="600" color="gray.500" mb={1}>Related Quote IDs</Text>
-                <TagInput
-                  value={theme.relatedQuoteIds}
-                  onChange={(ids) => update(i, { relatedQuoteIds: ids })}
-                  placeholder="Add quote ID..."
-                />
-              </Box>
-            </Flex>
-          </ArrayItemCard>
-        ))}
+                <Box>
+                  <Text fontSize="xs" fontWeight="600" color="gray.500" mb={1}>Description</Text>
+                  <Textarea
+                    size="sm"
+                    value={theme.description}
+                    onChange={(e) => update(i, { description: e.target.value })}
+                    bg="surface.input" border="1px solid" borderColor="gray.200"
+                    rows={2}
+                  />
+                </Box>
+
+                <Flex gap={3}>
+                  <Box flex={1}>
+                    <Text fontSize="xs" fontWeight="600" color="gray.500" mb={1}>Frequency</Text>
+                    <Input
+                      size="sm" type="number" min={0}
+                      value={theme.frequency}
+                      onChange={(e) => update(i, { frequency: Number(e.target.value) })}
+                      bg="surface.input" border="1px solid" borderColor="gray.200"
+                    />
+                  </Box>
+                  <Box flex={1}>
+                    <Text fontSize="xs" fontWeight="600" color="gray.500" mb={1}>Impact Score (0-10)</Text>
+                    <Input
+                      size="sm" type="number" min={0} max={10}
+                      value={theme.impactScore ?? ''}
+                      onChange={(e) => update(i, { impactScore: e.target.value ? Number(e.target.value) : undefined })}
+                      bg="surface.input" border="1px solid" borderColor="gray.200"
+                    />
+                  </Box>
+                  <Flex flex={1} alignItems="flex-end" gap={2} pb={1}>
+                    <Switch.Root
+                      checked={theme.actionable ?? false}
+                      onCheckedChange={(e) => update(i, { actionable: e.checked })}
+                    >
+                      <Switch.HiddenInput />
+                      <Switch.Control>
+                        <Switch.Thumb />
+                      </Switch.Control>
+                    </Switch.Root>
+                    <Text fontSize="xs" fontWeight="600" color="gray.500">Actionable</Text>
+                  </Flex>
+                </Flex>
+
+                <Box>
+                  <Text fontSize="xs" fontWeight="600" color="gray.500" mb={1}>Related Quote IDs</Text>
+                  <TagInput
+                    value={theme.relatedQuoteIds}
+                    onChange={(ids) => update(i, { relatedQuoteIds: ids })}
+                    placeholder="Add quote ID..."
+                  />
+                </Box>
+              </Flex>
+            </ArrayItemCard>
+          );
+        })}
       </Flex>
     </Box>
   );

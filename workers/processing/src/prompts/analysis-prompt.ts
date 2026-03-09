@@ -1,3 +1,8 @@
+import { THEME_TITLES } from '@sesap/shared';
+
+const themePipeList = THEME_TITLES.join(' | ');
+const themeCommaList = THEME_TITLES.join(', ');
+
 export function buildAnalysisPrompt(transcript: string): string {
   return `You are an expert qualitative researcher analyzing a student interview transcript from the SESAP (Student Experience Survey & Analysis Project). Analyze the following transcript and produce a structured JSON response.
 
@@ -20,7 +25,7 @@ Your response MUST be valid JSON matching this exact structure:
   ],
   "themes": [
     {
-      "title": "Must be one of: Academic Difficulty | Belonging | Career Preparation | Cultural Representation | Faculty Support | Family Pressure | Financial Struggles | Identity & Discrimination | Mental Health | Language Barriers | Peer Relationships | Personal Growth | Support Networks | Work-Life Balance",
+      "title": "Must be one of: ${themePipeList}",
       "description": "Detailed description of the theme",
       "category": "academic | social | personal | career | financial | campus_life | mental_health | diversity | extracurricular | other",
       "frequency": 1 to 10 (how often this theme appears),
@@ -50,7 +55,7 @@ Guidelines:
 - Extract 3-6 summaries covering the main topics discussed
 - Identify 3-8 timeline points in chronological order
 - Identify 3-7 recurring themes with meaningful descriptions
-- Theme titles MUST be selected exactly from this list: Academic Difficulty, Belonging, Career Preparation, Cultural Representation, Faculty Support, Family Pressure, Financial Struggles, Identity & Discrimination, Mental Health, Language Barriers, Peer Relationships, Personal Growth, Support Networks, Work-Life Balance
+- Theme titles MUST be selected exactly from this list: ${themeCommaList}
 - Do NOT invent new theme titles or modify the provided ones
 - Select only themes that are actually present in the interview
 - Extract 5-15 significant direct quotes that illustrate key points

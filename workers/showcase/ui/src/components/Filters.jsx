@@ -9,6 +9,7 @@ import {
   useListboxItemContext,
 } from "@chakra-ui/react"
 import { useState, useEffect, useMemo } from "react"
+import { THEME_TITLES } from "@sesap/shared"
 
 const ListboxItemCheckmark = () => {
   const itemState = useListboxItemContext()
@@ -37,22 +38,10 @@ const DEFAULT_SENTIMENTS = [
   { label: "Negative", value: "negative" },
 ]
 
-const DEFAULT_THEMES = [
-  { label: "Academic Difficulty", value: "academic difficulty" },
-  { label: "Faculty Support", value: "faculty support" },
-  { label: "Peer Relationships", value: "peer relationships" },
-  { label: "Belonging", value: "belonging" },
-  { label: "Cultural Representation", value: "cultural representation" },
-  { label: "Financial Struggles", value: "financial struggles" },
-  { label: "Mental Health", value: "mental health" },
-  { label: "Family Pressure", value: "family pressure" },
-  { label: "Work-Life Balance", value: "work-life balance" },
-  { label: "Identity & Discrimination", value: "identity & discrimination" },
-  { label: "Career Preparation", value: "career preparation" },
-  { label: "Language Barriers", value: "language barriers" },
-  { label: "Support Networks", value: "support networks" },
-  { label: "Personal Growth", value: "personal growth" },
-]
+const DEFAULT_THEMES = THEME_TITLES.map((title) => ({
+  label: title,
+  value: title.toLowerCase(),
+}))
 
 const DEFAULT_CATEGORIES = [
   "Academic",

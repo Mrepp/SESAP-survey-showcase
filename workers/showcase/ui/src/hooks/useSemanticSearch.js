@@ -25,11 +25,17 @@ export function useSemanticSearch({ vectorIndices, onProgress }) {
       try {
         const { pipeline, env: transformersEnv } = await import(
           /* @vite-ignore */
-          'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3'
+          'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.6.2'
         );
         transformersEnv.allowLocalModels = false;
+        transformersEnv.backends = transformersEnv.backends || {};
+        if (transformersEnv.backends.onnx) {
+          transformersEnv.backends.onnx.wasm = transformersEnv.backends.onnx.wasm || {};
+          transformersEnv.backends.onnx.wasm.numThreads = 1;
+        }
 
         const pipe = await pipeline('feature-extraction', 'Xenova/bge-small-en-v1.5', {
+          dtype: 'fp32',
           progress_callback: (progress) => {
             if (!cancelled) onProgress?.(progress);
           },

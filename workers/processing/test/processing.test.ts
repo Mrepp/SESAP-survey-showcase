@@ -2,8 +2,10 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { generateAnalysis } from '../src/services/llm-service';
 import { generateEmbeddings } from '../src/services/embedding-service';
 import { extractChunksFromAnalysis, parseTranscript } from '../src/services/transcript-parser';
+import { buildAnalysisPrompt } from '../src/prompts/analysis-prompt';
 import type { Env } from '../src/bindings';
 import type { Analysis } from '@sesap/types';
+import { THEME_TITLES } from '@sesap/shared';
 
 // -- Mock factories --
 
@@ -57,8 +59,8 @@ const MOCK_LLM_RESPONSE = {
     { event: 'Joined study group', period: 'sophomore year', significance: 'Improved academic performance' },
   ],
   themes: [
-    { title: 'Academic Growth', description: 'Progressive improvement in studies', category: 'academic', frequency: 5, relatedQuoteIds: [] },
-    { title: 'Community', description: 'Sense of belonging on campus', category: 'social', frequency: 3, relatedQuoteIds: [] },
+    { title: 'Academic Difficulty', description: 'Progressive improvement in studies', category: 'academic', frequency: 5, relatedQuoteIds: [] },
+    { title: 'Belonging', description: 'Sense of belonging on campus', category: 'social', frequency: 3, relatedQuoteIds: [] },
   ],
   quotes: [
     { quoteText: 'College changed my life', context: 'Reflecting on overall experience', sentiment: 'positive', tags: ['academic', 'personal'], themeIds: [] },
@@ -122,6 +124,14 @@ function createMockEnvWithEmbeddings(): Env {
 
 // -- Tests --
 
+describe('analysis-prompt', () => {
+  it('should include canonical theme titles from shared enum', () => {
+    const prompt = buildAnalysisPrompt('Sample transcript');
+    expect(prompt).toContain(`Must be one of: ${THEME_TITLES.join(' | ')}`);
+    expect(prompt).toContain(`Theme titles MUST be selected exactly from this list: ${THEME_TITLES.join(', ')}`);
+  });
+});
+
 describe('transcript-parser', () => {
   describe('parseTranscript', () => {
     it('should split transcript into paragraph chunks', () => {
@@ -155,7 +165,7 @@ This is the fourth paragraph about career goals and internships completed during
         modelConfig: { model: 'test', temperature: 0.3, maxTokens: 4096 },
         summaries: [{ id: 's1', summaryText: 'Summary text', category: 'academic', confidence: 0.9 }],
         timeline: [{ id: 't1', event: 'Event', period: 'year 1', significance: 'Important' }],
-        themes: [{ id: 'th1', title: 'Theme', description: 'Desc', category: 'social', frequency: 3, relatedQuoteIds: [] }],
+        themes: [{ id: 'th1', title: 'Belonging', description: 'Desc', category: 'social', frequency: 3, relatedQuoteIds: [] }],
         quotes: [{ id: 'q1', quoteText: 'A quote', context: 'Context', sentiment: 'positive', tags: [], themeIds: [] }],
         areasForImprovement: [{ id: 'a1', area: 'Area', description: 'Desc', category: 'academic', priority: 'high' }],
         generatedAt: new Date().toISOString(),

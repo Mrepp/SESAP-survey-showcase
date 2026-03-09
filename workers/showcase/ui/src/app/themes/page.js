@@ -25,6 +25,13 @@ function formatDate(value) {
     return Number.isNaN(d.getTime()) ? '' : d.toLocaleDateString(undefined, dateOptions)
 }
 
+function splitThemeTitle(title) {
+    return title
+        .split(/\s*&\s*|\s+and\s+/i)
+        .map(t => t.replace(/\d+$/, '').trim())
+        .filter(Boolean)
+}
+
 function buildThemesFromInterviews(interviews) {
     if (!Array.isArray(interviews)) return []
     const themeMap = new Map()
@@ -34,23 +41,25 @@ function buildThemesFromInterviews(interviews) {
         if (!Array.isArray(themes)) continue
 
         for (const t of themes) {
-            const title = t.title
-            if (!title) continue
+            if (!t.title) continue
+            const titles = splitThemeTitle(t.title)
 
-            if (!themeMap.has(title)) {
-                themeMap.set(title, { frequencies: [], category: t.category, interviews: [] })
+            for (const title of titles) {
+                if (!themeMap.has(title)) {
+                    themeMap.set(title, { frequencies: [], category: t.category, interviews: [] })
+                }
+                const entry = themeMap.get(title)
+                entry.frequencies.push(Number(t.frequency ?? 0) || 0)
+                if (t.category) entry.category = t.category
+                entry.interviews.push({
+                    interviewId: iv.id,
+                    videoUrl: iv.videoUrl ?? '/placeholder16x9.jpg',
+                    videoAlt: `${iv.title ?? iv.id} interview`,
+                    name: iv.title ?? 'Interviewee Name',
+                    date: formatDate(iv.metadata?.interviewDate),
+                    description: '',
+                })
             }
-            const entry = themeMap.get(title)
-            entry.frequencies.push(Number(t.frequency ?? 0) || 0)
-            if (t.category) entry.category = t.category
-            entry.interviews.push({
-                interviewId: iv.id,
-                videoUrl: iv.videoUrl ?? '/placeholder16x9.jpg',
-                videoAlt: `${iv.title ?? iv.id} interview`,
-                name: iv.title ?? 'Interviewee Name',
-                date: formatDate(iv.metadata?.interviewDate),
-                description: '',
-            })
         }
     }
 

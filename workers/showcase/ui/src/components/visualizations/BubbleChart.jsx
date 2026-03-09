@@ -17,7 +17,7 @@ export default function BubbleChart({
         const margin = 1; // to avoid clipping the root circle stroke
         const name = d => d.title
         const category = d => d.category
-        const names = d => name(d).split(/(?=[A-Z][a-z])|\s+/g); // e.g. ["Identity", "&", "Discrimination"]
+        const names = d => name(d).replace(/\d+$/, '').split(/(?=[A-Z][a-z])|\s+/g).filter(Boolean); // e.g. ["Identity", "&", "Discrimination"]
 
         // Specify the number format for values.
         const format = d3.format(",d")

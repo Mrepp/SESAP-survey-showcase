@@ -12,6 +12,13 @@ import BubbleChart from "@/components/visualizations/BubbleChart"
 import Correlation from '@/components/visualizations/CorrelationHeatMap'
 import WordCloud from "@/components/visualizations/WordCloud"
 
+function splitThemeTitle(title) {
+    return title
+        .split(/\s*&\s*|\s+and\s+/i)
+        .map(t => t.replace(/\d+$/, '').trim())
+        .filter(Boolean)
+}
+
 // Aggregate themes across all interviews for BubbleChart
 function buildBubbleData(interviews) {
     if (!Array.isArray(interviews)) return []
@@ -19,12 +26,15 @@ function buildBubbleData(interviews) {
     for (const iv of interviews) {
         for (const t of (iv.analysis?.themes ?? [])) {
             if (!t.title) continue
-            if (!themeMap.has(t.title)) {
-                themeMap.set(t.title, { title: t.title, totalFreq: 0, count: 0, category: t.category ?? 'other' })
+            const titles = splitThemeTitle(t.title)
+            for (const title of titles) {
+                if (!themeMap.has(title)) {
+                    themeMap.set(title, { title, totalFreq: 0, count: 0, category: t.category ?? 'other' })
+                }
+                const entry = themeMap.get(title)
+                entry.totalFreq += (Number(t.frequency) || 1)
+                entry.count += 1
             }
-            const entry = themeMap.get(t.title)
-            entry.totalFreq += (Number(t.frequency) || 1)
-            entry.count += 1
         }
     }
     return Array.from(themeMap.values()).map(e => ({

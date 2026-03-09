@@ -14,7 +14,7 @@ export default function Navbar () {
                 <Link color='black' href='/interviews'>Interviews</Link>
                 <Link color='black' href='/insights'>Insights</Link>
                 <Link color='black' href='/themes'>Themes</Link>
-                <Link color='black' href='/timeline'>Timeline</Link>
+                {/* <Link color='black' href='/timeline'>Timeline</Link> */}
                 <Link color='black' href='/improvements'>Improvements</Link>
                 <Link color='black' href='/search'>Search</Link>
                 <Link color='black' href='/about'>About</Link>

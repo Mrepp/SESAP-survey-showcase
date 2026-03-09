@@ -55,10 +55,11 @@ function mapToUI(json) {
 
     const a = json.analysis ?? {}
     const summaries = (Array.isArray(a.summaries) ? a.summaries : []).map((s, i) => ({
-        value: s.id ?? String(i),
+        value: s.id,
         title: String(s.title ?? 'Summary').replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
         text: String(s.summaryText ?? ''),
-        category: String(s.category ?? ''),
+        category: String(s.category ?? '').replace(/_-/g, ' '),
+        confidence: s.confidence
     }))
     const timelineData = (Array.isArray(a.timeline) ? a.timeline : []).map((t, i) => {
         const periodRaw = t.period ?? ''
@@ -126,6 +127,24 @@ export default function InterviewPageClient({ params }) {
     }, [data?.interviews, interviewId])
 
     const dataForUI = useMemo(() => (interview ? mapToUI(interview) : null), [interview])
+
+    const improvementsByPriority = useMemo(() => {
+        if (!dataForUI?.improvements?.length) return []
+        const level = ['high', 'medium', 'low']
+        const grouped = new Map()
+        for (const p of level) grouped.set(p, [])
+        grouped.set('_other', [])
+        for (const item of dataForUI.improvements) {
+            const p = (item.priority || 'medium').toLowerCase()
+            if (grouped.has(p)) grouped.get(p).push(item)
+            else grouped.get('_other').push(item)
+        }
+        return level
+            .concat('_other')
+            .map((p) => ({ priority: p === '_other' ? 'other' : p, items: grouped.get(p) || [] }))
+            .filter((g) => g.items.length > 0)
+    }, [dataForUI?.improvements])
+    console.log(improvementsByPriority)
     const carousel = useCarousel({ slideCount: dataForUI?.quotes?.length ?? 1, loop: true })
     const router = useRouter()
 
@@ -193,13 +212,14 @@ export default function InterviewPageClient({ params }) {
                             </Tabs.Trigger>
                         </Tabs.List>
 
+                        {/* Overview */}
                         <Tabs.Content value="overview">
                             <Heading>Key Summaries</Heading>
                             <Accordion.Root multiple>
                                 {summaries.map((item, index) => (
                                     <Accordion.Item key={index} value={item.value}>
-                                        <Accordion.ItemTrigger>
-                                            <Span flex="1">{item.title}</Span>
+                                        <Accordion.ItemTrigger >
+                                            <Span flex="1" textTransform="capitalize">{item.category}</Span>
                                             <Accordion.ItemIndicator />
                                         </Accordion.ItemTrigger>
                                         <Accordion.ItemContent>
@@ -257,6 +277,7 @@ export default function InterviewPageClient({ params }) {
                             </Carousel.RootProvider>
                         </Tabs.Content>
 
+                        {/* Timeline */}
                         <Tabs.Content value="timeline">
                             <Timeline data={timelineData}/>
                             <List.Root ps='5' >
@@ -267,7 +288,8 @@ export default function InterviewPageClient({ params }) {
                                 ))}
                             </List.Root>
                         </Tabs.Content>
-
+                        
+                        {/* Themes */}
                         <Tabs.Content value="themes">
                             <Box bg='white' width='fit-content' borderRadius='50%'>
                                 <BubbleChart data={themes} width={400} />
@@ -280,22 +302,22 @@ export default function InterviewPageClient({ params }) {
                                 ))}
                             </List.Root>
                         </Tabs.Content>
-
+                        
+                        {/* Improvements */}
                         <Tabs.Content value="improvements">
-                            stakeholder tags on improvement areas
                             <Accordion.Root multiple defaultValue={["high"]}>
-                                {improvements.map((item, index) => (
-                                    <Accordion.Item key={index} value={item.value}>
+                                {improvementsByPriority.map(({ priority, items }) => (
+                                    <Accordion.Item key={priority} value={priority}>
                                         <Accordion.ItemTrigger>
-                                            <Span flex="1">{item.title}</Span>
+                                            <Span flex="1" textTransform="capitalize">{priority}</Span>
                                             <Accordion.ItemIndicator />
                                         </Accordion.ItemTrigger>
                                         <Accordion.ItemContent>
                                             <Accordion.ItemBody>
-                                                <List.Root ps='5' >
-                                                    {item.text.map((item, index) => (
-                                                        <List.Item key={index}>
-                                                            {item}
+                                                <List.Root ps="5">
+                                                    {items.map((item, index) => (
+                                                        <List.Item key={item.id ?? index}>
+                                                            <Text as="span"><Text as="strong" fontWeight="bold">{item.area}</Text>: {item.description || '—'}</Text>
                                                         </List.Item>
                                                     ))}
                                                 </List.Root>

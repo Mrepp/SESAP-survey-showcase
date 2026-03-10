@@ -10,8 +10,10 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const res = await fetch(url, options);
   if (!res.ok) {
     if (res.status === 401 || res.status === 403) {
-      window.location.reload();
-      throw new Error('Authentication required');
+      const body = await res.json().catch(() => ({}));
+      const message = (body as ApiResponse<unknown>).error?.message ?? 'Authentication required';
+      window.location.href = `/auth-error?message=${encodeURIComponent(message)}`;
+      throw new Error(message);
     }
     const body = await res.json().catch(() => ({}));
     throw new Error(

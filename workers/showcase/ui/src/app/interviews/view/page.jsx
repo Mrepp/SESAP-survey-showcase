@@ -57,7 +57,7 @@ function mapToUI(json) {
         value: s.id,
         title: String(s.title ?? 'Summary').replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
         text: String(s.summaryText ?? ''),
-        category: String(s.category ?? '').replace(/_-/g, ' '),
+        category: String(s.category ?? '').replace(/[_-]/g, ' '),
         confidence: s.confidence
     }))
     const timelineData = (Array.isArray(a.timeline) ? a.timeline : []).map((t) => {

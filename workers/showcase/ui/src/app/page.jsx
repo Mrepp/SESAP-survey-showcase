@@ -22,10 +22,7 @@ function formatDate(value) {
 export default function Home() {
     const { isReady, data } = useDataLoader()
 
-    const numInterviews = useMemo(() => {
-        const list = data?.interviews
-        return Array.isArray(list) ? list.length : null
-    }, [isReady, data?.interviews])
+    const numInterviews = data?.metadata?.interviewCount
 
     const recents = useMemo(() => {
         const list = data?.interviews

@@ -10,12 +10,6 @@ export default {
   experimental: {
     optimizePackageImports: ['@chakra-ui/react'],
   },
-  // Rewrites only apply in next dev (not with output: 'export'); keep for local dev proxy
-  async rewrites() {
-    return [
-      { source: '/assets/build/:path*', destination: 'http://localhost:8790/assets/build/:path*' },
-    ];
-  },
   turbopack: {
     resolveAlias: {
       '@': path.resolve(__dirname, 'src'),

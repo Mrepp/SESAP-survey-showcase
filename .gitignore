@@ -11,5 +11,6 @@ wrangler.toml
 dry-run-output/
 workers/showcase/public/
 workers/showcase/ui/out/
+workers/showcase/ui/public/assets/build/
 .next/
 .pnpm-store/

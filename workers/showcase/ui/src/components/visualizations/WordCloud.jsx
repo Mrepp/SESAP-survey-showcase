@@ -4,6 +4,12 @@ import * as d3 from "d3"
 import d3Cloud from "d3-cloud"
 import { useEffect, useRef, useState } from "react"
 
+export const wordCloudMeta = {
+    title: "Word Cloud",
+    description:
+        "Frequent terms from interview quotes and summaries. Larger words appear more often; common stopwords (e.g. articles, pronouns, conjunctions, etc.) are filtered out.",
+}
+
 export default function WordCloud({
     text,
     size = group => group.length, // Given a grouping of words, returns the size factor for that word

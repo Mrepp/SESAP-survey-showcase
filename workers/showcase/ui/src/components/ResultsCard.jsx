@@ -6,9 +6,10 @@ import {
     Stack,
     Text,
 } from "@chakra-ui/react"
-import { HiStar } from "react-icons/hi"
+import Highlighter from "react-highlight-words"
 
-export default function Result ({data}) {
+
+export default function Result({ data, highlightQuery }) {
     return (
         <Box w="stretch" h='150px' borderRadius='5px' bg='white' shadow="md" overflow="hidden">
             <Stack direction="row">
@@ -21,7 +22,11 @@ export default function Result ({data}) {
                     <HStack color="fg.muted">
                         {data.date}
                     </HStack>
-                    <Text>{data.description}</Text>
+                    <Highlighter
+                        searchWords={[highlightQuery]}
+                        autoEscape={true}
+                        textToHighlight={data.description}
+                    />
                 </Box>
             </Stack>
         </Box>

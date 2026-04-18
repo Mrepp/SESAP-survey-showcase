@@ -61,6 +61,8 @@ best
 better
 between
 big
+bigger
+biggest
 both
 but
 by
@@ -93,6 +95,7 @@ e
 each
 early
 either
+else
 end
 ended
 ending
@@ -153,6 +156,7 @@ has
 have
 having
 he
+held
 her
 here
 herself
@@ -162,6 +166,7 @@ highest
 him
 himself
 his
+hold
 how
 however
 i
@@ -202,6 +207,7 @@ likely
 long
 longer
 longest
+lot
 m
 made
 make
@@ -271,6 +277,7 @@ others
 our
 out
 over
+overall
 p
 part
 parted

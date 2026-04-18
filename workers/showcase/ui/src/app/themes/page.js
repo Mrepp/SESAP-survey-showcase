@@ -32,6 +32,17 @@ function splitThemeTitle(title) {
         .filter(Boolean)
 }
 
+/** Match theme.analysis.category to Filters category listbox values (lowercase, spaces → hyphens). */
+function normalizeCategorySlug(c) {
+    const s = String(c ?? 'other')
+        .toLowerCase()
+        .replace(/_/g, '-')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '')
+    return s || 'other'
+}
+
 function buildThemesFromInterviews(interviews) {
     if (!Array.isArray(interviews)) return []
     const themeMap = new Map()
@@ -80,9 +91,18 @@ export default function Themes() {
 
     const themes = useMemo(() => buildThemesFromInterviews(data?.interviews), [data?.interviews])
 
+    // Filter states
+    const [selectedCategories, setSelectedCategories] = useState([])
+
+    const filteredThemes = useMemo(() => {
+        if (!selectedCategories.length) return themes
+        const selected = new Set(selectedCategories)
+        return themes.filter((t) => selected.has(normalizeCategorySlug(t.category)))
+    }, [themes, selectedCategories])
+
     // Sort data based on selected option
     const sortedThemes = useMemo(() => {
-        const sorted = [...themes]
+        const sorted = [...filteredThemes]
         if (sortBy === 'impact-desc') {
             sorted.sort((a, b) => parseInt(b.impactScore) - parseInt(a.impactScore))
         } else if (sortBy === 'impact-asc') {
@@ -97,14 +117,7 @@ export default function Themes() {
             sorted.sort((a, b) => b.theme.localeCompare(a.theme))
         }
         return sorted
-    }, [sortBy, themes])
-
-    // Filter states
-    const [selectedCategories, setSelectedCategories] = useState([])
-
-    const clearAllFilters = () => {
-        setSelectedCategories([])
-    }
+    }, [sortBy, filteredThemes])
 
     if (!isReady) {
         return (

@@ -12,5 +12,6 @@ dry-run-output/
 workers/showcase/public/
 workers/showcase/ui/out/
 workers/showcase/ui/public/assets/build/
+workers/showcase/ui/public/assets/interview_repository/
 .next/
 .pnpm-store/

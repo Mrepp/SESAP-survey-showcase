@@ -4,25 +4,27 @@ import {
     Box,
     Button,
     Carousel,
+    Collapsible,
     Container,
     Heading,
     IconButton,
-    Image,
     List,
     Span,
     Stack,
     StackSeparator,
     Tabs,
     Text,
-    useCarousel
+    useCarousel,
+    useCollapsibleContext,
 } from "@chakra-ui/react"
 import { Suspense, useMemo } from 'react'
 import { useSearchParams, useRouter } from "next/navigation"
 import { useDataLoader } from '@/hooks/useDataLoader'
-import { LuChevronLeft, LuChevronRight, LuClipboardList, LuCalendarDays, LuSquareCheck } from "react-icons/lu"
+import { LuChevronLeft, LuChevronRight, LuClipboardList, LuCalendarDays, LuComponent, LuSquareCheck } from "react-icons/lu"
 import BubbleChart from "@/components/visualizations/BubbleChart"
-import Timeline from '@/components/visualizations/Timeline'
+import Timeline from '@/components/visualizations/TimelineInterview'
 import SentimentIndicator from '@/components/SentimentIndicator'
+
 
 const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' }
 
@@ -37,6 +39,7 @@ function mapToUI(json) {
         return {
             intervieweeName: '',
             interviewDate: '',
+            major: '',
             videoUrl: '/placeholder16x9.jpg',
             videoAlt: 'Interview',
             summaries: [],
@@ -49,7 +52,8 @@ function mapToUI(json) {
 
     const intervieweeName = json.title ?? 'Interviewee Name'
     const interviewDate = formatDate(json.metadata.interviewDate || '0')
-    const videoUrl = json.videoUrl ?? '/placeholder16x9.jpg'
+    const major = json.demographics.major || ''
+    const videoUrl = `/assets/interview_repository/${json?.id}.mp4`
     const videoAlt = `${intervieweeName} interview` || 'Interview'
 
     const a = json.analysis ?? {}
@@ -85,14 +89,26 @@ function mapToUI(json) {
         category: String(t.category ?? 'other'),
         relatedQuoteIds: Array.isArray(t.relatedQuoteIds) ? t.relatedQuoteIds : [],
     }))
-    const quotes = (Array.isArray(a.quotes) ? a.quotes : []).map((q, i) => ({
-        id: q.id ?? String(i),
-        text: String(q.quoteText ?? ''),
-        context: String(q.context ?? ''),
-        sentiment: String(q.sentiment ?? 'neutral'),
-        tags: Array.isArray(q.tags) ? q.tags : [],
-        themeIds: Array.isArray(q.themeIds) ? q.themeIds : [],
-    }))
+    const quotes = (Array.isArray(a.quotes) ? a.quotes : []).map((q, i) => {
+        const themeIds = (Array.isArray(q.themeIds) ? q.themeIds : []).filter(
+            (id) => id != null && String(id).trim() !== ''
+        )
+        const themeTitles = themeIds
+            .map((tid) => {
+                const th = themes.find((t) => String(t.id) === String(tid))
+                return th?.title ? th.title : String(tid)
+            })
+            .filter((label) => label.trim() !== '')
+        return {
+            id: q.id ?? String(i),
+            text: String(q.quoteText ?? ''),
+            context: String(q.context ?? ''),
+            sentiment: String(q.sentiment ?? 'neutral'),
+            tags: Array.isArray(q.tags) ? q.tags : [],
+            themeIds,
+            themeTitles,
+        }
+    })
     const improvements = (Array.isArray(a.areasForImprovement) ? a.areasForImprovement : []).map((improvement) => ({
         id: improvement.id,
         area: String(improvement.area ?? ''),
@@ -105,6 +121,7 @@ function mapToUI(json) {
     return {
         intervieweeName,
         interviewDate,
+        major,
         videoUrl,
         videoAlt,
         summaries,
@@ -113,6 +130,22 @@ function mapToUI(json) {
         quotes,
         improvements,
     }
+}
+
+// allows long quotes to be expanded and collapsed
+function QuotePreviewText({ children, ...props }) {
+    const { open } = useCollapsibleContext()
+    return (
+        <Text
+            fontWeight="medium"
+            fontSize="lg"
+            textAlign="center"
+            {...props}
+            lineClamp={open ? undefined : 3}
+        >
+            {children}
+        </Text>
+    )
 }
 
 function InterviewViewInner() {
@@ -174,7 +207,7 @@ function InterviewViewInner() {
     }
     if (!dataForUI) return null
 
-    const { intervieweeName, interviewDate, videoUrl, videoAlt, summaries, timelineData, themes, quotes, improvements } = dataForUI
+    const { intervieweeName, interviewDate, major, videoUrl, videoAlt, summaries, timelineData, themes, quotes, improvements } = dataForUI
 
     return (
         <>
@@ -187,9 +220,20 @@ function InterviewViewInner() {
             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
 
                 <Container w='50%'>
-                    <Image src={videoUrl} alt={videoAlt} maxH="100%" maxW="100%" margin='10px' />
+                        <Box
+                            as="video"
+                            src={videoUrl}
+                            type="video/mp4"
+                            controls
+                            poster='/thumbnail.png'
+                            preload="metadata"
+                            width="100%"
+                            maxH="100%"
+                            maxW="100%"
+                            margin="10px"
+                        />
                     <Text fontSize='2xl' fontWeight='bold' marginLeft='10px'>{intervieweeName || '—'}</Text>
-                    <Text marginLeft='10px'>{interviewDate || '—'}</Text>
+                    <Text marginLeft='10px'>{interviewDate || '—'}{major ? ` | ${major}` : ''}</Text>
                 </Container>
 
                 <Container w='50%'>
@@ -204,7 +248,7 @@ function InterviewViewInner() {
                                 Timeline
                             </Tabs.Trigger>
                             <Tabs.Trigger value="themes">
-                                <LuCalendarDays />
+                                <LuComponent />
                                 Themes
                             </Tabs.Trigger>
                             <Tabs.Trigger value="improvements">
@@ -216,7 +260,7 @@ function InterviewViewInner() {
                         {/* Overview */}
                         <Tabs.Content value="overview">
                             <Heading>Key Summaries</Heading>
-                            <Accordion.Root multiple>
+                            <Accordion.Root multiple >
                                 {summaries.map((item, index) => (
                                     <Accordion.Item key={index} value={item.value}>
                                         <Accordion.ItemTrigger>
@@ -232,33 +276,73 @@ function InterviewViewInner() {
 
                             <Heading>Notable Quotes</Heading>
                             <Carousel.RootProvider value={carousel}>
-                                <Carousel.ItemGroup>
-                                    {quotes.map((item, index) => (
-                                    <Carousel.Item key={index} index={index}>
-                                        <Box
-                                            w="100%"
-                                            minH="150px"
-                                            h='fit-content'
-                                            p='15px'
-                                            borderRadius='25px'
-                                            bg='white'
-                                            position='relative'
-                                            display='flex'
-                                            flexDirection='column'
-                                            justifyContent='center'
-                                            alignItems='center'
-                                            textAlign='center'
-                                        >
-                                            <Box position='absolute' top='15px' right='15px'>
-                                                <SentimentIndicator sentiment={item.sentiment}/>
-                                            </Box>
-                                            <Text fontWeight='medium' fontSize='lg'>
-                                                "{item.text}"
-                                            </Text>
-                                        </Box>
-                                    </Carousel.Item>
-                                    ))}
-                                </Carousel.ItemGroup>
+                                <Collapsible.Root collapsedHeight="150px">
+                                    <Collapsible.Trigger asChild mt="4">
+                                            <Collapsible.Indicator transition="transform 0.2s">
+                                                <Collapsible.Content  borderRadius='25px'>
+                                                    <Carousel.ItemGroup>
+                                                        {quotes.map((item, index) => (
+                                                            <Carousel.Item key={index} index={index}>
+                                                                <Box
+                                                                    w="100%"
+                                                                    minH="150px"
+                                                                    h='fit-content'
+                                                                    borderRadius='25px'
+                                                                    bg='white'
+                                                                    display='flex'
+                                                                    flexDirection='column'
+                                                                    cursor='pointer'
+                                                                >
+                                                                    <Box
+                                                                        minH='150px'
+                                                                        display='flex'
+                                                                        flexDirection='column'
+                                                                    >
+                                                                        <Box
+                                                                            flexShrink={0}
+                                                                            display='flex'
+                                                                            justifyContent='flex-end'
+                                                                            alignItems='center'
+                                                                            px='15px'
+                                                                            pt='12px'
+                                                                            pb='4px'
+                                                                        >
+                                                                            <SentimentIndicator sentiment={item.sentiment}/>
+                                                                        </Box>
+                                                                        <Box px='15px' pb='15px'>
+                                                                            <QuotePreviewText w='100%'>
+                                                                                "{item.text}"
+                                                                            </QuotePreviewText>
+                                                                        </Box>
+                                                                    </Box>
+                                                                    <Box p='15px' paddingTop='0'>
+                                                                        <List.Root ps='5'>
+                                                                            <List.Item>
+                                                                                <strong>Context:</strong> {item.context}
+                                                                            </List.Item>
+                                                                            <List.Item>
+                                                                                <strong>Sentiment:</strong> {item.sentiment}
+                                                                            </List.Item>
+                                                                            {item.themeTitles.length > 0 ? (
+                                                                                <List.Item>
+                                                                                    <strong>Themes:</strong>{' '}
+                                                                                    {item.themeTitles.join(', ')}
+                                                                                </List.Item>
+                                                                            ) : null}
+                                                                            <List.Item>
+                                                                                <strong>Tags:</strong>{' '}
+                                                                                {item.tags.length ? item.tags.join(', ') : ''}
+                                                                            </List.Item>
+                                                                        </List.Root>
+                                                                    </Box>
+                                                                </Box>
+                                                            </Carousel.Item>
+                                                        ))}
+                                                    </Carousel.ItemGroup>
+                                                </Collapsible.Content>
+                                            </Collapsible.Indicator>
+                                    </Collapsible.Trigger>
+                                </Collapsible.Root>
 
                                 <Carousel.Control justifyContent="center" gap="4">
                                     <Carousel.PrevTrigger asChild>
@@ -281,27 +365,52 @@ function InterviewViewInner() {
                         {/* Timeline */}
                         <Tabs.Content value="timeline">
                             <Timeline data={timelineData}/>
-                            <List.Root ps='5'>
-                                {timelineData.map((item, index) => (
-                                    <List.Item key={index}>
-                                        <strong>{item.period}:</strong> {item.event}
-                                    </List.Item>
-                                ))}
-                            </List.Root>
+                            <Accordion.Root collapsible variant='enclosed'>
+                                <Accordion.Item>
+                                    <Accordion.ItemTrigger>
+                                        <Span flex="1">Events</Span>
+                                        <Accordion.ItemIndicator />
+                                    </Accordion.ItemTrigger>
+                                    <Accordion.ItemContent>
+                                        <Accordion.ItemBody>
+                                            <List.Root ps='5'>
+                                                {timelineData.map((item, index) => (
+                                                    <List.Item key={index}>
+                                                        <strong>{item.period}:</strong> {item.event}
+                                                    </List.Item>
+                                                ))}
+                                            </List.Root>
+                                        </Accordion.ItemBody>
+                                    </Accordion.ItemContent>
+                                </Accordion.Item>
+                            </Accordion.Root>
+                            
                         </Tabs.Content>
 
                         {/* Themes */}
                         <Tabs.Content value="themes">
-                            <Box bg='white' width='fit-content' borderRadius='50%'>
-                                <BubbleChart data={themes} width={400} />
+                            <Box width='100%' >
+                                <BubbleChart data={themes} width='600' height='400' />
                             </Box>
-                            <List.Root ps='5'>
-                                {themes.map((item, index) => (
-                                    <List.Item key={index}>
-                                        <strong>{item.title}:</strong> {item.impactScore}
-                                    </List.Item>
-                                ))}
-                            </List.Root>
+                            <Accordion.Root collapsible variant='enclosed'>
+                                <Accordion.Item>
+                                    <Accordion.ItemTrigger>
+                                        <Span flex="1">Themes</Span>
+                                        <Accordion.ItemIndicator />
+                                    </Accordion.ItemTrigger>
+                                    <Accordion.ItemContent>
+                                        <Accordion.ItemBody>
+                                            <List.Root ps='5'>
+                                                {themes.map((item, index) => (
+                                                    <List.Item key={index}>
+                                                        <strong>{item.title}:</strong> {item.frequency}
+                                                    </List.Item>
+                                                ))}
+                                            </List.Root>
+                                        </Accordion.ItemBody>
+                                    </Accordion.ItemContent>
+                                </Accordion.Item>
+                            </Accordion.Root>
                         </Tabs.Content>
 
                         {/* Improvements */}
@@ -310,7 +419,7 @@ function InterviewViewInner() {
                                 {improvementsByPriority.map(({ priority, items }) => (
                                     <Accordion.Item key={priority} value={priority}>
                                         <Accordion.ItemTrigger>
-                                            <Span flex="1" textTransform="capitalize">{priority}</Span>
+                                            <Span flex="1" textTransform="capitalize"><Heading m='0'>{priority}</Heading></Span>
                                             <Accordion.ItemIndicator />
                                         </Accordion.ItemTrigger>
                                         <Accordion.ItemContent>

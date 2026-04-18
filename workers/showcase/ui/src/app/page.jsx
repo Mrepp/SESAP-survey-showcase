@@ -34,7 +34,7 @@ export default function Home() {
         })
         return sorted.slice(0, 6).map((iv) => ({
             interviewId: iv.id,
-            videoUrl: iv.videoUrl ?? '/placeholder16x9.jpg',
+            videoUrl: '/thumbnail.png',
             videoAlt: `${iv.title ?? ''} interview`,
             name: iv.title ?? 'Interviewee Name',
             date: formatDate(iv.metadata?.interviewDate),

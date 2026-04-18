@@ -34,7 +34,7 @@ export default function ImprovementContainer ({priority, color, improvements}) {
             >
                 {improvements.map((item, index) => (
                     <GridItem key={index} padding='10px' w='fit-content' >
-                        <Link href={`/interviews/${item.interviewId}`}>
+                        <Link href={`/interviews/view/?id=${item.interviewId}`}>
                             <ImprovementCard area={item.area} description={item.description} />
                         </Link>
                     </GridItem>

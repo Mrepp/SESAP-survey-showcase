@@ -1,16 +1,19 @@
 'use client'
 import {
     Box,
+    CloseButton,
+    Dialog,
+    Grid,
     Heading,
-    Stack,
+    Portal,
     Text,
 } from "@chakra-ui/react"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { useDataLoader } from '@/hooks/useDataLoader'
-import BarChart from '@/components/visualizations/BarChart'
-import BubbleChart from "@/components/visualizations/BubbleChart"
-import Correlation from '@/components/visualizations/CorrelationHeatMap'
-import WordCloud from "@/components/visualizations/WordCloud"
+import BarChart, { barChartMeta } from '@/components/visualizations/BarChart'
+import BubbleChart, { bubbleChartMeta } from "@/components/visualizations/BubbleChart"
+import Correlation, { correlationHeatMapMeta } from '@/components/visualizations/CorrelationHeatMap'
+import WordCloud, { wordCloudMeta } from "@/components/visualizations/WordCloud"
 
 function splitThemeTitle(title) {
     return title
@@ -138,13 +141,44 @@ function buildBarChartData(interviews) {
     }))
 }
 
+const INSIGHT_KEYS = {
+    wordCloud: 'wordCloud',
+    correlation: 'correlation',
+    bubble: 'bubble',
+    bar: 'bar',
+}
+
+function insightCardProps(enabled, insightKey, setDialogKey) {
+    if (!enabled) return {}
+    return {
+        role: 'button',
+        tabIndex: 0,
+        cursor: 'pointer',
+        onClick: () => setDialogKey(insightKey),
+        onKeyDown: (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                setDialogKey(insightKey)
+            }
+        },
+    }
+}
+
 export default function Insights() {
     const { isReady, data, error, statusText } = useDataLoader()
+    const [dialogKey, setDialogKey] = useState(null)
 
     const themes = useMemo(() => buildBubbleData(data?.interviews), [data?.interviews])
     const text = useMemo(() => buildWordCloudText(data?.interviews), [data?.interviews])
     const correlations = useMemo(() => buildCorrelations(data?.interviews), [data?.interviews])
     const interviewData = useMemo(() => buildBarChartData(data?.interviews), [data?.interviews])
+
+    const dialogMeta =
+        dialogKey === INSIGHT_KEYS.wordCloud ? wordCloudMeta
+        : dialogKey === INSIGHT_KEYS.correlation ? correlationHeatMapMeta
+        : dialogKey === INSIGHT_KEYS.bubble ? bubbleChartMeta
+        : dialogKey === INSIGHT_KEYS.bar ? barChartMeta
+        : null
 
     if (!isReady) {
         return (
@@ -167,7 +201,8 @@ export default function Insights() {
     return (
         <>
             <Heading mb={4}>Insights</Heading>
-            <Stack direction={{ base: "column", md: "row" }} h='100vh' gap='20px'>
+            <Text marginBottom='15px'>Click a data visualization for an expanded version and short description.</Text>
+            {/* <Stack direction={{ base: "column", md: "row" }} h='100vh' gap='20px'>
                 <Stack w='40%' h='100%' gap='20px'>
                     <Box bg='white' w='100%' borderWidth="1px" borderRadius='25px'>
                         {text ? <WordCloud text={text} /> : <Text p={4} color="fg.muted">No interview text available.</Text>}
@@ -193,7 +228,112 @@ export default function Insights() {
                         }
                     </Box>
                 </Stack>
-            </Stack>
+            </Stack> */}
+            <Grid
+                templateColumns={{ base: "1fr", md: "1fr 1fr" }}
+                templateRows={{ base: "repeat(4, 1fr)", md: "1fr 1fr" }}
+                gap={5}
+                h={{ base: "auto", md: "calc(100vh - 100px)" }}
+                minH={{ base: "800px", md: "500px" }}
+            >
+                <Box
+                    bg="white"
+                    borderWidth="1px"
+                    borderRadius="25px"
+                    minH={0}
+                    overflow="hidden"
+                    p={4}
+                    {...insightCardProps(!!text, INSIGHT_KEYS.wordCloud, setDialogKey)}
+                >
+                    {text ? <WordCloud text={text} /> : <Text color="fg.muted">No interview text available.</Text>}
+                </Box>
+                <Box
+                    bg="white"
+                    borderWidth="1px"
+                    borderRadius="25px"
+                    minH={0}
+                    overflow="hidden"
+                    p={4}
+                    {...insightCardProps(correlations.length > 0, INSIGHT_KEYS.correlation, setDialogKey)}
+                >
+                    {correlations.length > 0
+                        ? <Correlation correlations={correlations} />
+                        : <Text color="fg.muted">Not enough interview data for correlations (need at least 3).</Text>
+                    }
+                </Box>
+                <Box
+                    bg="white"
+                    borderWidth="1px"
+                    borderRadius="25px"
+                    minH={0}
+                    overflow="hidden"
+                    p={4}
+                    {...insightCardProps(themes.length > 0, INSIGHT_KEYS.bubble, setDialogKey)}
+                >
+                    {themes.length > 0 ? <BubbleChart data={themes} /> : <Text color="fg.muted">No theme data available.</Text>}
+                </Box>
+                <Box
+                    bg="white"
+                    borderWidth="1px"
+                    borderRadius="25px"
+                    minH={0}
+                    overflow="hidden"
+                    p={4}
+                    {...insightCardProps(interviewData.length > 0, INSIGHT_KEYS.bar, setDialogKey)}
+                >
+                    {interviewData.length > 0
+                        ? <BarChart interviewData={interviewData} />
+                        : <Text color="fg.muted">No demographic data available.</Text>
+                    }
+                </Box>
+            </Grid>
+
+            <Dialog.Root
+                open={dialogKey != null}
+                onOpenChange={(e) => {
+                    if (!e.open) setDialogKey(null)
+                }}
+                size="cover"
+            >
+                <Portal>
+                    <Dialog.Backdrop />
+                    <Dialog.Positioner>
+                        <Dialog.Content maxW="min(96vw, 1100px)" w="full">
+                            <Dialog.Header paddingBottom='0'>
+                                <Dialog.Title>{dialogMeta?.title}</Dialog.Title>
+                                <Dialog.CloseTrigger asChild>
+                                    <CloseButton size="sm" />
+                                </Dialog.CloseTrigger>
+                            </Dialog.Header>
+                            <Dialog.Body>
+                                {dialogMeta && (
+                                    <Text mb={4} fontSize="md">
+                                        {dialogMeta.description}
+                                    </Text>
+                                )}
+                                <Box w="full" minH={{ base: "320px", md: "420px" }} maxH="75vh" overflow="auto">
+                                    {dialogKey === INSIGHT_KEYS.wordCloud && text ? (
+                                        <WordCloud text={text} width={960} height={540} />
+                                    ) : null}
+                                    {dialogKey === INSIGHT_KEYS.correlation && correlations.length > 0 ? (
+                                        <Correlation correlations={correlations} plotWidth={960} />
+                                    ) : null}
+                                    {dialogKey === INSIGHT_KEYS.bubble && themes.length > 0 ? (
+                                        <Box display="flex" justifyContent="center" alignItems="center" minH="min(70vh, 900px)">
+                                            <BubbleChart data={themes} width={880} height={880} />
+                                        </Box>
+                                    ) : null}
+                                    {dialogKey === INSIGHT_KEYS.bar && interviewData.length > 0 ? (
+                                        <Box w="100%" h="min(68vh, 720px)" minH="380px">
+                                            <BarChart interviewData={interviewData} showLegend />
+                                        </Box>
+                                    ) : null}
+                                </Box>
+                            </Dialog.Body>
+                        </Dialog.Content>
+                    </Dialog.Positioner>
+                </Portal>
+            </Dialog.Root>
         </>
     )
 }

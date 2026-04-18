@@ -2,10 +2,10 @@
 import * as d3 from "d3"
 import { useEffect, useRef, useState } from "react"
 
-export const timelineMeta = {
-    title: "Timeline",
+export const timelineInterviewMeta = {
+    title: "Interview Class-Standing Timeline",
     description:
-        "Events on a horizontal axis by calendar year. Hover markers to read each event.",
+        "Timeline of interview events across class years (freshman–senior). Hover markers for the event and its significance.",
 }
 
 export default function Timeline ({
@@ -22,7 +22,7 @@ export default function Timeline ({
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
     
     // Convert years to Date objects and extract extent
-    const years = data.map(d => new Date(d.year, 0, 1));
+    const years = ['freshman', 'sophomore', 'junior', 'senior']
     const yearExtent = d3.extent(years);
     
     // Create time scale for x-axis
@@ -31,13 +31,64 @@ export default function Timeline ({
     // Calculate y positions - alternate above and below axis
     const axisY = height - marginBottom;
     const eventOffset = 60; // Distance from axis for events
-    
-    useEffect(() => {
-        if (axisRef.current) {
-            const xAxis = d3.axisBottom(x);
-            d3.select(axisRef.current).call(xAxis);
-        }
-    }, [x]);
+
+    // Chevron axis: segment layout and colors
+    const axisColors = ['#FAAB8E', '#F88A62', '#F76A36', '#D73F09'];
+    const axisHeight = 50;
+    const axisNotch = 10;
+    const axisGap = 2;
+    const axisInnerWidth = width - marginRight - marginLeft;
+    const segmentCount = years.length;
+    const segmentWidth = (axisInnerWidth - (segmentCount - 1) * axisGap) / segmentCount;
+
+    const chevronSegments = years.map((label, i) => {
+        const left = marginLeft + i * (segmentWidth + axisGap);
+        const right = left + segmentWidth;
+        const top = axisY - axisHeight / 2;
+        const bottom = axisY + axisHeight / 2;
+        const color = axisColors[i % axisColors.length];
+        const pathD = [
+            `M ${left} ${top}`,
+            `L ${left + axisNotch} ${axisY}`,
+            `L ${left} ${bottom}`,
+            `L ${right - axisNotch} ${bottom}`,
+            `L ${right} ${axisY}`,
+            `L ${right - axisNotch} ${top}`,
+            'Z'
+        ].join(' ');
+        return { pathD, color, label, cx: (left + right) / 2, cy: axisY, left, right };
+    });
+
+    // Map period string to segment index (Freshman=0, Sophomore=1, Junior=2, Senior=3)
+    const getPeriodIndex = (periodStr) => {
+        const p = String(periodStr).toLowerCase();
+        if (p.includes('freshman')) return 0;
+        if (p.includes('sophomore')) return 1;
+        if (p.includes('junior')) return 2;
+        if (p.includes('senior')) return 3;
+        return 0;
+    };
+
+    // Assign each event an x position evenly spaced within its segment
+    const eventPositions = (() => {
+        const bySegment = [...Array(segmentCount)].map(() => []);
+        data.forEach((d, i) => {
+            const segIdx = getPeriodIndex(d.period);
+            bySegment[segIdx].push(i);
+        });
+        const positions = [];
+        bySegment.forEach((indices, segIdx) => {
+            const seg = chevronSegments[segIdx];
+            const n = indices.length;
+            indices.forEach((dataIndex, j) => {
+                const xPos = n <= 1
+                    ? seg.cx
+                    : seg.left + (seg.right - seg.left) * (j + 0.5) / n;
+                positions[dataIndex] = xPos;
+            });
+        });
+        return positions;
+    })();
 
     const handleMouseEnter = (e, i) => {
         setHoveredIndex(i);
@@ -57,19 +108,9 @@ export default function Timeline ({
     return (
         <>
         <svg width={width} height={height}>
-            {/* Main horizontal timeline axis line */}
-            <line
-                x1={marginLeft}
-                y1={axisY}
-                x2={width - marginRight}
-                y2={axisY}
-                stroke="#333"
-                strokeWidth="2"
-            />
-            
             {/* Vertical lines and circles for each event */}
             {data.map((d, i) => {
-                const xPos = x(new Date(d.year, 0, 1));
+                const xPos = eventPositions[i] ?? chevronSegments[getPeriodIndex(d.period)].cx;
                 // Alternate: even indices below, odd indices above
                 const yPos = axisY + (i % 2 === 0 ? eventOffset : -eventOffset);
                 
@@ -100,7 +141,30 @@ export default function Timeline ({
                     </g>
                 );
             })}
-            
+
+            {/* Chevron-style timeline axis: interlocking segments with labels */}
+            <g aria-label="Timeline axis">
+                {chevronSegments.map((seg, i) => (
+                    <g key={i}>
+                        <path
+                            d={seg.pathD}
+                            fill={seg.color}
+                        />
+                        <text
+                            x={seg.cx}
+                            y={seg.cy}
+                            textAnchor="middle"
+                            dominantBaseline="central"
+                            fill="black"
+                            fontSize="12"
+                            fontWeight="600"
+                        >
+                            {seg.label.charAt(0).toUpperCase() + seg.label.slice(1)}
+                        </text>
+                    </g>
+                ))}
+            </g>
+
             {/* X-axis with labels */}
             <g ref={axisRef} transform={`translate(0, ${axisY})`} />
         </svg>

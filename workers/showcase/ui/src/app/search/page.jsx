@@ -329,7 +329,7 @@ export default function Search() {
                                 paddingBottom="15px"
                             >
                                 <Link href={`/interviews/view?id=${item.interviewId}`} _hover={{ textDecoration: 'none' }}>
-                                    <Result data={item} />
+                                    <Result data={item} highlightQuery={query} />
                                 </Link>
                             </GridItem>
                         ))}

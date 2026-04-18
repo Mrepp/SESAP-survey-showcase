@@ -5,7 +5,7 @@ import {
     Image,
     Text,
 } from "@chakra-ui/react"
-import { HiStar } from "react-icons/hi"
+
 
 export default function Interview ({data}) {
     // Date formatting options
@@ -19,7 +19,7 @@ export default function Interview ({data}) {
         <Box w="300px" borderWidth="1px" shadow="md" borderRadius='25px' overflow="hidden">
             <Image src={data.videoUrl} alt={data.videoAlt} borderTopRadius='25px' />
             
-            <Box p="4" spaceY="2" bg='white'>
+            <Box p="4" spaceY="2" bg='white' borderTopWidth="1px">
                 <Text fontWeight="medium" color="fg">
                     {data.name}
                 </Text>

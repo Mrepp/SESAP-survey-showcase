@@ -9,7 +9,7 @@ import {
   Legend,
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 ChartJS.register(
   CategoryScale,
@@ -19,6 +19,12 @@ ChartJS.register(
   Tooltip,
   Legend
 )
+
+export const barChartMeta = {
+    title: "Theme Frequency by Identity",
+    description:
+        "Stacked horizontal bars for each theme, split by demographic identity labels collected on interviews.",
+}
 
 // Generate colors for each theme
 const generateColors = (count) => {
@@ -42,7 +48,7 @@ const generateColors = (count) => {
     return Array.from({ length: count }, (_, i) => colors[i % colors.length]);
 };
 
-const options = {
+const baseOptions = {
     indexAxis: 'y', // makes the bar chart horizontal
     plugins: {
         title: {
@@ -50,7 +56,7 @@ const options = {
             text: 'Theme Frequency by Identity',
         },
         legend: {
-            position: 'right'
+            position: 'bottom',
         },
     },
     responsive: true,
@@ -67,9 +73,24 @@ const options = {
 // Hardcoded labels as fallback in case identities.txt fails to load
 const fallbackLabels = ['Disabled', 'First-Generation', 'Immigrant', 'International Student', 'LGBTQ+', 'Low-Income', 'Non-Traditional Age', 'Parent', 'Religious', 'Rural', 'STEM Minoritized', 'Student of Color', 'Transfer Student', 'Veteran', 'Working Student'];
 
-export default function BarChart ({interviewData}) {
+export default function BarChart ({ interviewData, showLegend = false }) {
     const [labels, setLabels] = useState(fallbackLabels);
     const [chartData, setChartData] = useState(null);
+
+    // allows legend to only be shown in dialog popup
+    const options = useMemo(
+        () => ({
+            ...baseOptions,
+            plugins: {
+                ...baseOptions.plugins,
+                legend: {
+                    ...baseOptions.plugins.legend,
+                    display: showLegend,
+                },
+            },
+        }),
+        [showLegend]
+    );
 
     const themeColors = generateColors(interviewData.length);
 

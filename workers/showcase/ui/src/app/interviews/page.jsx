@@ -30,7 +30,7 @@ function formatDate(value) {
 export default function Interviews() {
     const { progress, statusText, error, isReady, data, reload } = useDataLoader()
     const [page, setPage] = useState(1)
-    const [sortBy, setSortBy] = useState('name-asc')
+    const [sortBy, setSortBy] = useState('date-desc')
 
     // Map R2 interviews (from useDataLoader) to the shape expected by Interview component
     const dataList = useMemo(() => {
@@ -38,7 +38,7 @@ export default function Interviews() {
         if (!Array.isArray(raw)) return []
         return raw.map((iv) => ({
             interviewId: iv.id,
-            videoUrl: '/placeholder16x9.jpg',
+            videoUrl: '/thumbnail.png',
             videoAlt: `${iv.title ?? iv.id} interview`,
             name: iv.title ?? 'Interviewee Name',
             date: formatDate(iv.metadata.interviewDate),

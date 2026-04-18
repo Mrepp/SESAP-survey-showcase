@@ -4,33 +4,20 @@ import * as d3 from "d3"
 import * as Plot from "@observablehq/plot";
 import { useEffect, useRef } from "react"
 
-// https://en.wikipedia.org/wiki/Correlation#Sample_correlation_coefficient
-function corr(x, y) {
-    const n = x.length;
-    if (y.length !== n)
-        throw new Error("The two columns must have the same length.");
-    const x_ = d3.mean(x);
-    const y_ = d3.mean(y);
-    const XY = d3.sum(x, (_, i) => (x[i] - x_) * (y[i] - y_));
-    const XX = d3.sum(x, (d) => (d - x_) ** 2);
-    const YY = d3.sum(y, (d) => (d - y_) ** 2);
-    return XY / Math.sqrt(XX * YY);
+export const correlationHeatMapMeta = {
+    title: "Correlation Heat Map",
+    description:
+        "Shows correlations between themes and identities. Blue and red show negative and positive relationships.",
 }
 
-export default function Correlation({correlations}) {
-
-    /*correlations = d3.cross(fields, fields).map(([a, b]) => ({
-        a,
-        b,
-        correlation: corr(Plot.valueof(data, a), Plot.valueof(data, b))
-    }))*/
+export default function Correlation({ correlations, plotWidth = 800 }) {
 
    const chartRef = useRef(null)
 
     useEffect(() => {
         const plot = Plot.plot({
             marginLeft: 150,
-            width: 800,
+            width: plotWidth,
             label: null,
             color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation", width: '400', marginLeft: '15' },
             marks: [
@@ -47,7 +34,7 @@ export default function Correlation({correlations}) {
 
         chartRef.current.append(plot)
         return () => plot.remove()
-    }, [correlations])
+    }, [correlations, plotWidth])
     
     return <div ref={chartRef} />
 }

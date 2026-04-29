@@ -11,14 +11,14 @@ def extract_audio(video_path: str) -> Path:
         [
             "ffmpeg", "-y",
             "-i", str(video),
+            "-vn",   
+            "-acodec", "pcm_s16le", 
             "-ac", "1",
             "-ar", "16000",
             str(audio),
         ],
 
         check = True,
-        stdout = subprocess.DEVNULL,
-        stderr = subprocess.DEVNULL,
 
     )
 

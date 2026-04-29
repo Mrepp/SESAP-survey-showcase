@@ -1,7 +1,10 @@
+'use client';
+
 import { useEffect, useState, useMemo, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   Box,
+  Button,
   Flex,
   Text,
   Spinner,
@@ -10,8 +13,8 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 import { isThemeTitle } from '@sesap/shared';
-import type { InterviewRecord, Analysis, Demographics, InterviewMetadata } from '@sesap/types';
-import { api } from '../api/interviews';
+import type { InterviewRecord, Analysis, Demographics, InterviewMetadata, BuildMetadata } from '@sesap/types';
+import { api, type InterviewRecordWithStale } from '../api/interviews';
 import { StatusBadge } from '../components/StatusBadge';
 import { DemographicsEditor } from '../components/DemographicsEditor';
 import { TranscriptViewer } from '../components/TranscriptViewer';
@@ -20,10 +23,12 @@ import { TimelineEditor } from '../components/TimelineEditor';
 import { ThemesEditor } from '../components/ThemesEditor';
 import { QuotesEditor } from '../components/QuotesEditor';
 import { AreasEditor } from '../components/AreasEditor';
+import { IdentitiesEditor } from '../components/IdentitiesEditor';
 import { AnalysisJsonView } from '../components/AnalysisJsonView';
 import { ReviewFooterBar } from '../components/ReviewFooterBar';
+import { backfillTimeline } from '../lib/timelineInference';
 
-type Tab = 'overview' | 'demographics' | 'transcript' | 'summaries' | 'timeline' | 'themes' | 'quotes' | 'areas' | 'json';
+type Tab = 'overview' | 'demographics' | 'transcript' | 'summaries' | 'timeline' | 'themes' | 'quotes' | 'areas' | 'identities' | 'json';
 
 const tabs: { key: Tab; label: string; icon: string }[] = [
   { key: 'overview', label: 'Overview', icon: '◉' },
@@ -34,11 +39,12 @@ const tabs: { key: Tab; label: string; icon: string }[] = [
   { key: 'themes', label: 'Themes', icon: '◆' },
   { key: 'quotes', label: 'Quotes', icon: '❝' },
   { key: 'areas', label: 'Improvement', icon: '▲' },
+  { key: 'identities', label: 'Identities', icon: '◈' },
   { key: 'json', label: 'Raw JSON', icon: '{ }' },
 ];
 
 // Tabs that show the transcript side-by-side for comparison
-const sideBySideTabs: Tab[] = ['summaries', 'timeline', 'themes', 'quotes', 'areas'];
+const sideBySideTabs: Tab[] = ['summaries', 'timeline', 'themes', 'quotes', 'areas', 'identities'];
 
 const accentMap: Partial<Record<Tab, string>> = {
   summaries: '#3b82f6',
@@ -46,13 +52,15 @@ const accentMap: Partial<Record<Tab, string>> = {
   themes: '#0d9488',
   quotes: '#d97706',
   areas: '#e11d48',
+  identities: '#0d9488',
 };
 
 export function Review() {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+  const searchParams = useSearchParams();
+  const id = searchParams?.get('id') ?? undefined;
+  const router = useRouter();
 
-  const [interview, setInterview] = useState<InterviewRecord | null>(null);
+  const [interview, setInterview] = useState<InterviewRecordWithStale | null>(null);
   const [analysis, setAnalysis] = useState<Analysis | null>(null);
   const [transcript, setTranscript] = useState('');
   const [loading, setLoading] = useState(true);
@@ -62,6 +70,7 @@ export function Review() {
   const [alert, setAlert] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [rejectModalOpen, setRejectModalOpen] = useState(false);
   const [rejectReason, setRejectReason] = useState('');
+  const [buildManifest, setBuildManifest] = useState<BuildMetadata | null>(null);
 
   // Snapshot originals for dirty tracking
   const [originalAnalysis, setOriginalAnalysis] = useState<string>('');
@@ -76,6 +85,23 @@ export function Review() {
     return metaDirty || demoDirty || analysisDirty;
   }, [analysis, interview, originalAnalysis, originalDemographics, originalMetadata]);
 
+  function isTabDirty(key: Tab): boolean {
+    if (!interview) return false;
+    if (key === 'overview') return JSON.stringify(interview.metadata) !== originalMetadata;
+    if (key === 'demographics') return JSON.stringify(interview.demographics) !== originalDemographics;
+    if (!analysis) return false;
+    const orig = JSON.parse(originalAnalysis || '{}');
+    switch (key) {
+      case 'summaries': return JSON.stringify(analysis.summaries) !== JSON.stringify(orig.summaries);
+      case 'timeline': return JSON.stringify(analysis.timeline) !== JSON.stringify(orig.timeline);
+      case 'themes': return JSON.stringify(analysis.themes) !== JSON.stringify(orig.themes);
+      case 'quotes': return JSON.stringify(analysis.quotes) !== JSON.stringify(orig.quotes);
+      case 'areas': return JSON.stringify(analysis.areasForImprovement) !== JSON.stringify(orig.areasForImprovement);
+      case 'identities': return JSON.stringify(analysis.identities ?? []) !== JSON.stringify(orig.identities ?? []);
+      default: return false;
+    }
+  }
+
   const canApprove = interview
     ? interview.processing.status === 'completed' && interview.approval.status === 'pending_review'
     : false;
@@ -85,6 +111,10 @@ export function Review() {
     if (!id) return;
     setLoading(true);
     setError('');
+
+    api.getBuildStatus()
+      .then((s) => setBuildManifest(s.manifest))
+      .catch(() => setBuildManifest(null));
 
     Promise.all([
       api.getInterview(id),
@@ -99,8 +129,16 @@ export function Review() {
         if (rec.processing.status === 'completed') {
           try {
             const a = await api.getAnalysis(id);
-            setAnalysis(a);
-            setOriginalAnalysis(JSON.stringify(a));
+            // Backfill `term` / `position` on legacy timeline points by
+            // inferring from existing period/event/significance text, so the
+            // editor reflects sensible defaults instead of "Pre College" for
+            // every event. The inferred values are baked into the original
+            // snapshot too, so just opening the page doesn't mark it dirty —
+            // saving still persists them.
+            const { timeline: filledTimeline } = backfillTimeline(a.timeline);
+            const enriched = { ...a, timeline: filledTimeline };
+            setAnalysis(enriched);
+            setOriginalAnalysis(JSON.stringify(enriched));
           } catch {
             // Analysis not ready yet
           }
@@ -178,7 +216,7 @@ export function Review() {
     setSaving(true);
     try {
       const rec = await api.approveInterview(id);
-      setInterview(rec);
+      setInterview({ ...rec, stale: interview?.stale ?? false, staleReasons: interview?.staleReasons ?? [] });
       showAlert('success', 'Interview approved!');
     } catch (err) {
       showAlert('error', err instanceof Error ? err.message : 'Approval failed');
@@ -192,7 +230,7 @@ export function Review() {
     setSaving(true);
     try {
       const rec = await api.rejectInterview(id, rejectReason.trim());
-      setInterview(rec);
+      setInterview({ ...rec, stale: interview?.stale ?? false, staleReasons: interview?.staleReasons ?? [] });
       setRejectModalOpen(false);
       setRejectReason('');
       showAlert('success', 'Interview rejected.');
@@ -209,7 +247,7 @@ export function Review() {
     try {
       await api.deleteInterview(id);
       showAlert('success', 'Interview deleted.');
-      setTimeout(() => navigate('/'), 1500);
+      setTimeout(() => router.push('/'), 1500);
     } catch (err) {
       showAlert('error', err instanceof Error ? err.message : 'Delete failed');
     } finally {
@@ -261,22 +299,7 @@ export function Review() {
         {tabs.map((tab) => {
           const isActive = activeTab === tab.key;
           const accent = accentMap[tab.key];
-          const sectionDirty =
-            tab.key === 'overview'
-              ? JSON.stringify(interview.metadata) !== originalMetadata
-              : tab.key === 'demographics'
-              ? JSON.stringify(interview.demographics) !== originalDemographics
-              : tab.key === 'summaries' && analysis
-                ? JSON.stringify(analysis.summaries) !== JSON.stringify(JSON.parse(originalAnalysis || '{}').summaries)
-                : tab.key === 'timeline' && analysis
-                  ? JSON.stringify(analysis.timeline) !== JSON.stringify(JSON.parse(originalAnalysis || '{}').timeline)
-                  : tab.key === 'themes' && analysis
-                    ? JSON.stringify(analysis.themes) !== JSON.stringify(JSON.parse(originalAnalysis || '{}').themes)
-                    : tab.key === 'quotes' && analysis
-                      ? JSON.stringify(analysis.quotes) !== JSON.stringify(JSON.parse(originalAnalysis || '{}').quotes)
-                      : tab.key === 'areas' && analysis
-                        ? JSON.stringify(analysis.areasForImprovement) !== JSON.stringify(JSON.parse(originalAnalysis || '{}').areasForImprovement)
-                        : false;
+          const sectionDirty = isTabDirty(tab.key);
 
           return (
             <button
@@ -447,6 +470,8 @@ export function Review() {
                 <TimelineEditor
                   timeline={analysis.timeline}
                   onChange={(timeline) => setAnalysis({ ...analysis, timeline })}
+                  quotes={analysis.quotes}
+                  onQuotesChange={(quotes) => setAnalysis({ ...analysis, quotes })}
                 />
               )}
 
@@ -468,6 +493,13 @@ export function Review() {
                 <AreasEditor
                   areas={analysis.areasForImprovement}
                   onChange={(areasForImprovement) => setAnalysis({ ...analysis, areasForImprovement })}
+                />
+              )}
+
+              {activeTab === 'identities' && analysis && (
+                <IdentitiesEditor
+                  identities={analysis.identities ?? []}
+                  onChange={(identities) => setAnalysis({ ...analysis, identities })}
                 />
               )}
 
@@ -493,7 +525,83 @@ export function Review() {
                   {(interview.processing.status === 'completed' || interview.processing.status === 'failed') && (
                     <StatusBadge status={interview.approval.status} />
                   )}
+                  {interview.approval.status === 'approved' &&
+                    (buildManifest === null || Array.isArray(buildManifest.interviewIds)) &&
+                    !(buildManifest?.interviewIds ?? []).includes(interview.id) && (
+                      <StatusBadge status="not_published" />
+                    )}
+                  {interview.stale && <StatusBadge status="out_of_sync" />}
                 </Flex>
+
+                {interview.stale && (
+                  <Box
+                    bg="yellow.50"
+                    border="1px solid"
+                    borderColor="yellow.300"
+                    color="yellow.900"
+                    p={4}
+                    borderRadius="md"
+                    mb={4}
+                  >
+                    <Flex justifyContent="space-between" alignItems="flex-start" gap={4} wrap="wrap">
+                      <Box flex={1} minW="240px">
+                        <Text fontSize="sm" fontWeight={600} mb={1}>
+                          Out of sync with current prompt / schema
+                        </Text>
+                        <Text fontSize="xs" color="yellow.800">
+                          This analysis was generated under an older version
+                          {interview.staleReasons.length > 0
+                            ? ` (${interview.staleReasons.join(', ')})`
+                            : ''}
+                          . Reprocess to regenerate with the current prompt, or accept the current
+                          stamp if you've manually verified the existing analysis is still good.
+                        </Text>
+                      </Box>
+                      <Flex gap={2} flexShrink={0}>
+                        <Button
+                          size="sm"
+                          colorPalette="yellow"
+                          variant="outline"
+                          disabled={saving}
+                          onClick={async () => {
+                            if (!id || !confirm('Mark this interview as up-to-date without reprocessing?')) return;
+                            setSaving(true);
+                            try {
+                              const rec = await api.acceptCurrentStamp(id);
+                              setInterview({ ...rec, stale: false, staleReasons: [] });
+                              showAlert('success', 'Stamp accepted as current.');
+                            } catch (err) {
+                              showAlert('error', err instanceof Error ? err.message : 'Failed to accept stamp');
+                            } finally {
+                              setSaving(false);
+                            }
+                          }}
+                        >
+                          Accept current
+                        </Button>
+                        <Button
+                          size="sm"
+                          colorPalette="yellow"
+                          disabled={saving}
+                          onClick={async () => {
+                            if (!id || !confirm('Reprocess this interview with the current prompt and schema?')) return;
+                            setSaving(true);
+                            try {
+                              await api.reprocessInterview(id);
+                              showAlert('success', 'Reprocessing queued. Refresh in a moment.');
+                            } catch (err) {
+                              showAlert('error', err instanceof Error ? err.message : 'Failed to reprocess');
+                            } finally {
+                              setSaving(false);
+                            }
+                          }}
+                        >
+                          Reprocess
+                        </Button>
+                      </Flex>
+                    </Flex>
+                  </Box>
+                )}
 
                 {interview.processing.error && (
                   <Box bg="red.50" color="red.700" p={3} borderRadius="md" fontSize="sm" mb={4} border="1px solid" borderColor="red.200">
@@ -650,7 +758,7 @@ export function Review() {
           onApprove={handleApprove}
           onReject={() => setRejectModalOpen(true)}
           onDelete={handleDelete}
-          onBack={() => navigate('/')}
+          onBack={() => router.push('/')}
         />
       </Box>
     </Flex>

@@ -9,5 +9,6 @@ export interface Env {
   INDEXING_WORKER: Fetcher;
   ENVIRONMENT: string;
   SHOWCASE_URL: string;
+  NEXT_DEV_URL?: string;
   GITHUB_ALLOWED_USERS?: string;
 }

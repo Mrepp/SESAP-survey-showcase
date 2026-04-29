@@ -1,5 +1,10 @@
 import type { InterviewRecord, Analysis, Demographics, InterviewMetadata, BuildDirtyState, BuildMetadata } from '@sesap/types';
 
+export type InterviewRecordWithStale = InterviewRecord & {
+  stale: boolean;
+  staleReasons: string[];
+};
+
 interface ApiResponse<T> {
   success: boolean;
   data?: T;
@@ -28,12 +33,20 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
 }
 
 export const api = {
-  listInterviews(): Promise<InterviewRecord[]> {
+  listInterviews(): Promise<InterviewRecordWithStale[]> {
     return request('/api/interviews');
   },
 
-  getInterview(id: string): Promise<InterviewRecord> {
+  getInterview(id: string): Promise<InterviewRecordWithStale> {
     return request(`/api/interviews/${id}`);
+  },
+
+  acceptCurrentStamp(id: string): Promise<InterviewRecord> {
+    return request(`/api/interviews/${id}/accept-current-stamp`, { method: 'POST' });
+  },
+
+  reprocessInterview(id: string): Promise<InterviewRecord> {
+    return request(`/api/interviews/${id}/reprocess`, { method: 'POST' });
   },
 
   async getTranscript(id: string): Promise<string> {
@@ -93,7 +106,13 @@ export const api = {
     return request(`/api/interviews/${id}`, { method: 'DELETE' });
   },
 
-  triggerBuild(): Promise<unknown> {
+  triggerBuild(): Promise<{
+    buildId: string;
+    timestamp: string;
+    interviewCount: number;
+    includedIds?: string[];
+    drops?: { id: string; reason: string }[];
+  }> {
     return request('/api/build', { method: 'POST' });
   },
 

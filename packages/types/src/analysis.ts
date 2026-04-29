@@ -11,11 +11,40 @@ export interface Summary {
   confidence: number;
 }
 
+export type Term =
+  | 'pre_college'
+  | 'freshman_fall'
+  | 'freshman_winter'
+  | 'freshman_spring'
+  | 'freshman_summer'
+  | 'sophomore_fall'
+  | 'sophomore_winter'
+  | 'sophomore_spring'
+  | 'sophomore_summer'
+  | 'junior_fall'
+  | 'junior_winter'
+  | 'junior_spring'
+  | 'junior_summer'
+  | 'senior_fall'
+  | 'senior_winter'
+  | 'senior_spring'
+  | 'senior_summer'
+  | 'post_college'
+  | 'unknown';
+
 export interface TimelinePoint {
   id: string;
   event: string;
   period: string;
   significance: string;
+  position?: number;
+  term?: Term;
+}
+
+export interface Identity {
+  label: string;
+  confidence: number;
+  evidence: string;
 }
 
 export interface Theme {
@@ -38,6 +67,7 @@ export interface Quote {
   themeIds: string[];
   timestamp?: string;
   significanceLevel?: 'high' | 'medium' | 'low';
+  timelineEventId?: string;
 }
 
 export interface AreaForImprovement {
@@ -59,5 +89,9 @@ export interface Analysis {
   themes: Theme[];
   quotes: Quote[];
   areasForImprovement: AreaForImprovement[];
+  identities?: Identity[];
   generatedAt: string;
+  promptVersion?: string;
+  promptHash?: string;
+  schemaVersion?: string;
 }

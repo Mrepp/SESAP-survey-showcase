@@ -1,13 +1,16 @@
+'use client';
+
 import { Box, Flex, Text, Link as ChakraLink } from '@chakra-ui/react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const navItems = [
   { path: '/', label: 'Dashboard' },
   { path: '/upload', label: 'Upload' },
 ];
 
-export function Layout() {
-  const location = useLocation();
+export function Layout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
 
   return (
     <Flex minH="100vh" direction="column">
@@ -29,20 +32,17 @@ export function Layout() {
         </Text>
         <Flex gap={3}>
           {navItems.map((item) => (
-            <ChakraLink
-              key={item.path}
-              asChild
-            >
+            <ChakraLink key={item.path} asChild>
               <Link
-                to={item.path}
+                href={item.path}
                 style={{
                   padding: '6px 16px',
                   borderRadius: '6px',
                   fontSize: '14px',
                   fontWeight: 500,
                   textDecoration: 'none',
-                  color: location.pathname === item.path ? '#f8fafc' : '#e2e8f0',
-                  background: location.pathname === item.path ? '#334155' : 'transparent',
+                  color: pathname === item.path ? '#f8fafc' : '#e2e8f0',
+                  background: pathname === item.path ? '#334155' : 'transparent',
                   transition: 'all 0.15s',
                 }}
               >
@@ -55,7 +55,7 @@ export function Layout() {
 
       {/* Content */}
       <Box flex={1} bg="surface.page" minH={0}>
-        <Outlet />
+        {children}
       </Box>
     </Flex>
   );

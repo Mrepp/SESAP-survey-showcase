@@ -15,14 +15,31 @@ const logger = new Logger({ service: 'aggregator-service' });
  * 4. Load embeddings from R2 (embeddings/{id}.json)
  * 5. Attach embeddings to interview objects
  */
-export async function loadApprovedInterviews(env: Env): Promise<Interview[]> {
+export type AggregatorDropReason =
+  | 'metadata_missing'
+  | 'interview_object_missing'
+  | 'embeddings_missing';
+
+export interface AggregatorDrop {
+  id: string;
+  reason: AggregatorDropReason;
+}
+
+export interface AggregatorResult {
+  interviews: Interview[];
+  drops: AggregatorDrop[];
+}
+
+export async function loadApprovedInterviews(env: Env): Promise<AggregatorResult> {
   logger.info('Loading approved interviews');
+
+  const drops: AggregatorDrop[] = [];
 
   // Step 1: Get the list of all interview IDs from KV
   const interviewListJson = await env.SESAP_KV.get(KV_KEYS.interviewsList);
   if (!interviewListJson) {
     logger.warn('No interview list found in KV');
-    return [];
+    return { interviews: [], drops };
   }
 
   const interviewIds: string[] = JSON.parse(interviewListJson);
@@ -34,6 +51,7 @@ export async function loadApprovedInterviews(env: Env): Promise<Interview[]> {
     const metaJson = await env.SESAP_KV.get(KV_KEYS.interview(id));
     if (!metaJson) {
       logger.warn('Interview metadata not found', { interviewId: id });
+      drops.push({ id, reason: 'metadata_missing' });
       continue;
     }
 
@@ -57,6 +75,7 @@ export async function loadApprovedInterviews(env: Env): Promise<Interview[]> {
       const interviewObj = await env.SESAP_BUCKET.get(R2_PATHS.interview(id));
       if (!interviewObj) {
         logger.warn('Interview not found in R2', { interviewId: id });
+        drops.push({ id, reason: 'interview_object_missing' });
         continue;
       }
 
@@ -66,6 +85,7 @@ export async function loadApprovedInterviews(env: Env): Promise<Interview[]> {
       const embeddingsObj = await env.SESAP_BUCKET.get(R2_PATHS.embeddings(id));
       if (!embeddingsObj) {
         logger.warn('Embeddings not found in R2', { interviewId: id });
+        drops.push({ id, reason: 'embeddings_missing' });
         continue;
       }
 
@@ -90,7 +110,8 @@ export async function loadApprovedInterviews(env: Env): Promise<Interview[]> {
 
   logger.info('Successfully loaded approved interviews', {
     count: interviews.length,
+    droppedCount: drops.length,
   });
 
-  return interviews;
+  return { interviews, drops };
 }

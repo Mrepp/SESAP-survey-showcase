@@ -9,6 +9,8 @@ const statusColors: Record<string, string> = {
   pending_review: 'orange',
   approved: 'green',
   rejected: 'red',
+  not_published: 'orange',
+  out_of_sync: 'yellow',
 };
 
 export function StatusBadge({ status }: { status: string }) {

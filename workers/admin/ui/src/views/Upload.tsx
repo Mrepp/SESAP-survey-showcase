@@ -1,5 +1,7 @@
+'use client';
+
 import { useState, type FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { Box, Flex, Text, Button, Input, Textarea } from '@chakra-ui/react';
 import { api } from '../api/interviews';
 
@@ -15,7 +17,7 @@ function Field({ label, required, children }: { label: string; required?: boolea
 }
 
 export function Upload() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
@@ -53,7 +55,7 @@ export function Upload() {
 
     try {
       await api.uploadInterview(metadata, transcriptFile);
-      navigate('/');
+      router.push('/');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed');
     } finally {
@@ -150,7 +152,7 @@ export function Upload() {
             <Button type="submit" colorPalette="blue" disabled={submitting}>
               {submitting ? 'Uploading...' : 'Upload Interview'}
             </Button>
-            <Button variant="outline" onClick={() => navigate('/')}>
+            <Button variant="outline" onClick={() => router.push('/')}>
               Cancel
             </Button>
           </Flex>

@@ -106,22 +106,20 @@ function buildCorrelations(interviews) {
     return correlations
 }
 
-// Build theme-by-demographic data for stacked bar chart
+// Build theme × identity counts for stacked bar chart.
+// For every (theme, identity) pair that co-occur on an interview, increment a counter.
+// Identity labels come from the LLM-extracted analysis.identities (canonical 15-label list).
 function buildBarChartData(interviews) {
     if (!Array.isArray(interviews)) return []
     const themeIdentities = new Map()
 
     for (const iv of interviews) {
-        const demographics = iv.demographics ?? {}
         const themes = iv.analysis?.themes ?? []
+        const identityLabels = (iv.analysis?.identities ?? [])
+            .map(i => i?.label)
+            .filter(Boolean)
 
-        // Collect non-empty demographic values as identity labels
-        const identityLabels = []
-        for (const [, value] of Object.entries(demographics)) {
-            if (value && typeof value === 'string') {
-                identityLabels.push(value)
-            }
-        }
+        if (identityLabels.length === 0) continue
 
         for (const t of themes) {
             if (!t.title) continue

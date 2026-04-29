@@ -34,14 +34,17 @@ app.post('/api/build', async (c) => {
   try {
     // Step 1: Load approved interviews with embeddings
     logger.info('Step 1: Loading approved interviews');
-    const interviews = await loadApprovedInterviews(c.env);
+    const { interviews, drops } = await loadApprovedInterviews(c.env);
 
     if (interviews.length === 0) {
       logger.warn('No approved interviews found');
-      return c.json({ error: 'No approved interviews to index' }, 400);
+      return c.json({ error: 'No approved interviews to index', drops }, 400);
     }
 
-    logger.info('Loaded approved interviews', { count: interviews.length });
+    logger.info('Loaded approved interviews', {
+      count: interviews.length,
+      droppedCount: drops.length,
+    });
 
     // Step 2: Generate category embeddings
     logger.info('Step 2: Generating category embeddings');
@@ -162,6 +165,8 @@ app.post('/api/build', async (c) => {
       buildId: manifest.buildId,
       timestamp: manifest.timestamp,
       interviewCount: manifest.interviewCount,
+      includedIds: interviews.map((i) => i.id),
+      drops,
       duration,
       artifacts: manifest.artifactPaths,
     });

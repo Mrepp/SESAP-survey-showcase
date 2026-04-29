@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { ThemeTitleSchema } from './theme-enum';
+import { IdentityLabelSchema } from './identity-enum';
 
 // ---- Interview schemas ----
 
@@ -61,11 +62,45 @@ export const SummarySchema = z.object({
   confidence: z.number(),
 });
 
+import type { Term } from '@sesap/types';
+
+const TERM_VALUES = [
+  'pre_college',
+  'freshman_fall',
+  'freshman_winter',
+  'freshman_spring',
+  'freshman_summer',
+  'sophomore_fall',
+  'sophomore_winter',
+  'sophomore_spring',
+  'sophomore_summer',
+  'junior_fall',
+  'junior_winter',
+  'junior_spring',
+  'junior_summer',
+  'senior_fall',
+  'senior_winter',
+  'senior_spring',
+  'senior_summer',
+  'post_college',
+  'unknown',
+] as const satisfies readonly Term[];
+
+export const TermSchema = z.enum(TERM_VALUES);
+
 export const TimelinePointSchema = z.object({
   id: z.string(),
   event: z.string(),
   period: z.string(),
   significance: z.string(),
+  position: z.number().min(-1).max(3).optional(),
+  term: TermSchema.optional(),
+});
+
+export const IdentitySchema = z.object({
+  label: IdentityLabelSchema,
+  confidence: z.number().min(0).max(1),
+  evidence: z.string(),
 });
 
 export const ThemeSchema = z.object({
@@ -88,6 +123,7 @@ export const QuoteSchema = z.object({
   themeIds: z.array(z.string()),
   timestamp: z.string().optional(),
   significanceLevel: z.enum(['high', 'medium', 'low']).optional(),
+  timelineEventId: z.string().optional(),
 });
 
 export const AreaForImprovementSchema = z.object({
@@ -109,7 +145,11 @@ export const AnalysisSchema = z.object({
   themes: z.array(ThemeSchema),
   quotes: z.array(QuoteSchema),
   areasForImprovement: z.array(AreaForImprovementSchema),
+  identities: z.array(IdentitySchema).default([]),
   generatedAt: z.string(),
+  promptVersion: z.string().optional(),
+  promptHash: z.string().optional(),
+  schemaVersion: z.string().optional(),
 });
 
 // ---- Embeddings schemas ----

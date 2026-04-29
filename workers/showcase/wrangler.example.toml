@@ -7,12 +7,11 @@ directory = "./public"
 binding = "ASSETS"
 not_found_handling = "404-page"
 html_handling = "auto-trailing-slash"
-run_worker_first = ["/assets/build/*", "/api/*"]
+run_worker_first = ["/*"]
 
 [dev]
 port = 8790
 inspector_port = 9232
-persist_to = "../../.wrangler/state"
 
 [[r2_buckets]]
 binding = "SESAP_BUCKET"
@@ -20,3 +19,6 @@ bucket_name = "<YOUR_R2_BUCKET_NAME>"
 
 [vars]
 ENVIRONMENT = "development"
+# In local dev, proxy non-API/non-build paths to the next dev server
+# (set to empty/removed in production so ASSETS serves the built next export).
+NEXT_DEV_URL = "http://127.0.0.1:3000"

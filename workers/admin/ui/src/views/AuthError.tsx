@@ -1,9 +1,11 @@
-import { useSearchParams } from 'react-router-dom';
+'use client';
+
+import { useSearchParams } from 'next/navigation';
 import { Box, Flex, Text, Button } from '@chakra-ui/react';
 
 export function AuthError() {
-  const [searchParams] = useSearchParams();
-  const message = searchParams.get('message') || 'Authentication required';
+  const searchParams = useSearchParams();
+  const message = searchParams?.get('message') || 'Authentication required';
 
   return (
     <Flex minH="60vh" align="center" justify="center">

@@ -3,7 +3,7 @@ import type { Env } from '../bindings';
 import type { ApiResponse, InterviewRecord, Analysis, AuthenticatedUser, Demographics, InterviewMetadata } from '@sesap/types';
 import { KV_KEYS } from '@sesap/types';
 import { CreateInterviewRequestSchema, AnalysisSchema, DemographicsSchema, InterviewMetadataSchema } from '@sesap/shared';
-import { ValidationError, generateItemId } from '@sesap/shared';
+import { ValidationError, generateItemId, currentPromptStamp, isAnalysisStale } from '@sesap/shared';
 import * as interviewService from '../services/interview-service';
 import * as storageService from '../services/storage-service';
 
@@ -12,6 +12,17 @@ type Variables = {
 };
 
 const interviews = new Hono<{ Bindings: Env; Variables: Variables }>();
+
+type InterviewRecordWithStale = InterviewRecord & { stale: boolean; staleReasons: string[] };
+
+function decorateStale(record: InterviewRecord): InterviewRecordWithStale {
+  // Only completed interviews can be considered stale (others have no analysis yet).
+  if (record.processing.status !== 'completed' || !record.artifacts.analysis) {
+    return { ...record, stale: false, staleReasons: [] };
+  }
+  const { stale, reasons } = isAnalysisStale(record.analysisStamp, currentPromptStamp);
+  return { ...record, stale, staleReasons: reasons };
+}
 
 // POST /api/interviews - multipart form upload
 interviews.post('/api/interviews', async (c) => {
@@ -56,9 +67,10 @@ interviews.post('/api/interviews', async (c) => {
 // GET /api/interviews - list all
 interviews.get('/api/interviews', async (c) => {
   const records = await interviewService.listInterviews(c.env);
-  const response: ApiResponse<InterviewRecord[]> = {
+  const decorated = records.map(decorateStale);
+  const response: ApiResponse<InterviewRecordWithStale[]> = {
     success: true,
-    data: records,
+    data: decorated,
   };
   return c.json(response);
 });
@@ -67,9 +79,9 @@ interviews.get('/api/interviews', async (c) => {
 interviews.get('/api/interviews/:id', async (c) => {
   const id = c.req.param('id');
   const record = await interviewService.getInterview(c.env, id);
-  const response: ApiResponse<InterviewRecord> = {
+  const response: ApiResponse<InterviewRecordWithStale> = {
     success: true,
-    data: record,
+    data: decorateStale(record),
   };
   return c.json(response);
 });
@@ -117,11 +129,17 @@ interviews.put('/api/interviews/:id/analysis', async (c) => {
   reassign(analysis.quotes, 'qt');
   reassign(analysis.areasForImprovement, 'afi');
 
+  // Stamp the manually-edited analysis as current so the staleness flag clears.
+  analysis.promptVersion = currentPromptStamp.promptVersion;
+  analysis.promptHash = currentPromptStamp.promptHash;
+  analysis.schemaVersion = currentPromptStamp.schemaVersion;
+
   await storageService.putAnalysis(c.env.SESAP_BUCKET, id, analysis as Analysis);
 
-  // Update KV record timestamp
+  // Update KV record timestamp + stamp
   const record = await interviewService.getInterview(c.env, id);
   record.updatedAt = new Date().toISOString();
+  record.analysisStamp = { ...currentPromptStamp };
   await c.env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
 
   // Mark indexes dirty if editing an approved interview
@@ -252,6 +270,66 @@ interviews.get('/api/build/status', async (c) => {
   const response: ApiResponse<typeof status & { showcaseUrl: string }> = {
     success: true,
     data: { ...status, showcaseUrl: c.env.SHOWCASE_URL },
+  };
+  return c.json(response);
+});
+
+// POST /api/interviews/:id/reprocess - re-run analysis for a completed/approved interview
+interviews.post('/api/interviews/:id/reprocess', async (c) => {
+  const id = c.req.param('id');
+  const record = await interviewService.getInterview(c.env, id);
+
+  const canReprocess =
+    record.processing.status === 'completed' || record.approval.status === 'approved';
+  if (!canReprocess) {
+    throw new ValidationError(
+      `Interview must be completed or approved before reprocessing. ` +
+        `Current processing status: ${record.processing.status}, approval: ${record.approval.status}`,
+    );
+  }
+
+  const now = new Date().toISOString();
+  record.processing.status = 'queued';
+  record.processing.queuedAt = now;
+  record.processing.error = undefined;
+  record.artifacts.analysis = false;
+  record.artifacts.embeddings = false;
+  record.reprocessRequestedAt = now;
+  record.updatedAt = now;
+  await c.env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
+
+  await c.env.PROCESSING_QUEUE.send({
+    interviewId: id,
+    queuedAt: now,
+    metadata: {
+      triggeredBy: c.get('user')?.email ?? 'unknown',
+      reason: 'reprocess_version_drift',
+    },
+  });
+
+  if (record.approval.status === 'approved') {
+    await interviewService.markBuildDirty(c.env, 'reprocess');
+  }
+
+  const response: ApiResponse<InterviewRecord> = {
+    success: true,
+    data: record,
+  };
+  return c.json(response);
+});
+
+// POST /api/interviews/:id/accept-current-stamp - mark a stale record as current without reprocessing
+interviews.post('/api/interviews/:id/accept-current-stamp', async (c) => {
+  const id = c.req.param('id');
+  const record = await interviewService.getInterview(c.env, id);
+
+  record.analysisStamp = { ...currentPromptStamp };
+  record.updatedAt = new Date().toISOString();
+  await c.env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
+
+  const response: ApiResponse<InterviewRecord> = {
+    success: true,
+    data: record,
   };
   return c.json(response);
 });

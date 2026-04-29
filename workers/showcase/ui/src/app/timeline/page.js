@@ -1,26 +1,131 @@
 'use client'
-import {
-    Box,
-    Container,
-    Heading,
-    Text
-} from "@chakra-ui/react"
-import Timeline from '@/components/visualizations/Timeline'
+import { Heading, Text } from "@chakra-ui/react"
+import { useMemo } from "react"
+import { useDataLoader } from '@/hooks/useDataLoader'
+import Timeline from '@/components/visualizations/TimelineInterview'
 
-const stuff = [{year: 2000, event: 'In a hole in the ground there lived a hobbit.'}, 
-    {year: 2007, event: 'Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandyhole with nothing in it to sit down on or to eat: it was a hobbit-hole, and that means comfort.'},
-    {year: 2009, event: 'It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle.'},
-    {year: 2010, event: 'The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats—the hobbit was fond of visitors.'},
-    {year: 2015, event: 'The tunnel wound on and on, going fairly but not quite straight into the side of the hill—The Hill, as all the people for many miles round called it—and many little round doors opened out of it, first on one side and then on another.'},
-    {year: 2020, event: 'No going upstairs for the hobbit: bedrooms, bathrooms, cellars, pantries (lots of these), wardrobes (he had whole rooms devoted to clothes), kitchens, dining-rooms, all were on the same floor, and indeed on the same passage.'},
-    {year: 2023, event: 'The best rooms were all on the left-hand side (going in), for these were the only ones to have windows, deep-set round windows looking over his garden, and meadows beyond, sloping down to the river.'},
-]
+const SIGNIFICANCE_RANK = { high: 3, medium: 2, low: 1 }
+const SENTIMENT_BY_PRIORITY = ['mixed', 'negative', 'positive', 'neutral']
+
+function aggregateSentiment(qs) {
+    if (!qs.length) return 'neutral'
+    const counts = qs.reduce((acc, q) => {
+        const s = q.sentiment || 'neutral'
+        acc[s] = (acc[s] ?? 0) + 1
+        return acc
+    }, {})
+    if (counts.positive && counts.negative) return 'mixed'
+    for (const s of SENTIMENT_BY_PRIORITY) if (counts[s]) return s
+    return 'neutral'
+}
+
+function maxSignificance(qs) {
+    let best = null
+    let bestRank = 0
+    for (const q of qs) {
+        const r = SIGNIFICANCE_RANK[q.significanceLevel] ?? 0
+        if (r > bestRank) { bestRank = r; best = q.significanceLevel }
+    }
+    return best
+}
+
+function formatPeriod(periodRaw) {
+    if (typeof periodRaw !== 'string') return String(periodRaw ?? '')
+    return periodRaw
+        .split(' ')
+        .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+        .join(' ')
+}
+
+// Aggregate timeline events across all interviews into a single TimelinePoint[]
+// (matches the per-interview Timeline data shape so we can reuse the same component).
+function buildAggregateTimeline(interviews) {
+    if (!Array.isArray(interviews)) return []
+    const out = []
+
+    for (const iv of interviews) {
+        const a = iv?.analysis ?? {}
+        const events = Array.isArray(a.timeline) ? a.timeline : []
+        const quotes = Array.isArray(a.quotes) ? a.quotes : []
+        const themes = Array.isArray(a.themes) ? a.themes : []
+        const intervieweeName = iv?.title ?? ''
+
+        for (const t of events) {
+            const linkedQuotes = quotes
+                .filter((q) => q.timelineEventId && String(q.timelineEventId) === String(t.id))
+                .map((q) => ({
+                    id: q.id,
+                    text: String(q.quoteText ?? ''),
+                    context: intervieweeName
+                        ? `${intervieweeName}${q.context ? ` · ${q.context}` : ''}`
+                        : String(q.context ?? ''),
+                    sentiment: String(q.sentiment ?? 'neutral'),
+                    significanceLevel: q.significanceLevel ? String(q.significanceLevel) : undefined,
+                    themeIds: Array.isArray(q.themeIds) ? q.themeIds.map(String) : [],
+                }))
+
+            const linkedThemeIds = new Set()
+            for (const lq of linkedQuotes) for (const tid of lq.themeIds) linkedThemeIds.add(tid)
+            const linkedThemes = Array.from(linkedThemeIds)
+                .map((tid) => themes.find((th) => String(th.id) === tid))
+                .filter(Boolean)
+                .map((th) => ({ id: th.id, title: String(th.title ?? '') }))
+
+            out.push({
+                id: `${iv?.id ?? 'iv'}::${t.id}`,
+                event: String(t.event ?? ''),
+                period: formatPeriod(t.period ?? ''),
+                significance: String(t.significance ?? ''),
+                position: typeof t.position === 'number' ? t.position : undefined,
+                term: t.term ? String(t.term) : undefined,
+                interviewId: iv?.id,
+                intervieweeName,
+                linkedQuotes,
+                linkedThemes,
+                sentiment: aggregateSentiment(linkedQuotes),
+                significanceLevel: maxSignificance(linkedQuotes),
+            })
+        }
+    }
+
+    return out
+}
 
 export default function TimelinePage() {
+    const { isReady, data, error, statusText } = useDataLoader()
+    const events = useMemo(() => buildAggregateTimeline(data?.interviews), [data?.interviews])
+
+    if (!isReady) {
+        return (
+            <>
+                <Heading>Timeline</Heading>
+                <Text>{statusText}</Text>
+                {error != null && <Text color="red">Error: {error}</Text>}
+            </>
+        )
+    }
+    if (error) {
+        return (
+            <>
+                <Heading>Timeline</Heading>
+                <Text color="red">Error: {error}</Text>
+            </>
+        )
+    }
+
     return (
         <>
-            <Heading>Timeline</Heading>
-            <Timeline data={stuff} />            
+            <Heading mb={2}>Timeline</Heading>
+            <Text marginBottom="15px">
+                Pivotal events drawn from every interview, plotted against the academic
+                timeline from pre-college through post-college. Marker rings encode
+                sentiment; size reflects the significance of the anchored quote.
+            </Text>
+            {events.length > 0 ? (
+                <Timeline data={events} />
+            ) : (
+                <Text color="fg.muted">No timeline events available.</Text>
+            )}
         </>
     )
 }

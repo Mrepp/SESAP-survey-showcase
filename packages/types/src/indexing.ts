@@ -58,12 +58,13 @@ export interface BuildMetadata {
   categories: string[];
   tags: string[];
   artifactPaths: Record<string, string>;
+  interviewIds?: string[];
 }
 
 export interface BuildDirtyState {
   isDirty: boolean;
   pendingChanges: number;
   lastChangeAt: string;
-  lastChangeType: 'approve' | 'delete' | 'edit';
+  lastChangeType: 'approve' | 'delete' | 'edit' | 'reprocess';
   lastBuildAt: string | null;
 }

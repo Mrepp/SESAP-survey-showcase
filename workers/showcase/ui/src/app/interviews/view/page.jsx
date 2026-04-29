@@ -47,6 +47,7 @@ function mapToUI(json) {
             timelineData: [],
             themes: [],
             improvements: [],
+            identities: [],
         }
     }
 
@@ -64,23 +65,6 @@ function mapToUI(json) {
         category: String(s.category ?? '').replace(/[_-]/g, ' '),
         confidence: s.confidence
     }))
-    const timelineData = (Array.isArray(a.timeline) ? a.timeline : []).map((t) => {
-        const periodRaw = t.period ?? ''
-        const period = typeof periodRaw === 'string'
-            ? periodRaw.split(' ').map((word) => {
-                if (!word) return word
-                const first = word[0]
-                const rest = word.slice(1)
-                return first.toUpperCase() + rest
-              }).join(' ')
-            : String(periodRaw)
-        return {
-            id: t.id,
-            event: String(t.event ?? ''),
-            period,
-            significance: String(t.significance ?? ''),
-        }
-    })
     const themes = (Array.isArray(a.themes) ? a.themes : []).map((t) => ({
         id: t.id,
         title: String(t.title ?? ''),
@@ -104,11 +88,70 @@ function mapToUI(json) {
             text: String(q.quoteText ?? ''),
             context: String(q.context ?? ''),
             sentiment: String(q.sentiment ?? 'neutral'),
+            significanceLevel: q.significanceLevel ? String(q.significanceLevel) : undefined,
+            timelineEventId: q.timelineEventId ? String(q.timelineEventId) : undefined,
             tags: Array.isArray(q.tags) ? q.tags : [],
             themeIds,
             themeTitles,
         }
     })
+
+    const SIGNIFICANCE_RANK = { high: 3, medium: 2, low: 1 }
+    const SENTIMENT_BY_PRIORITY = ['mixed', 'negative', 'positive', 'neutral']
+    function aggregateSentiment(qs) {
+        if (!qs.length) return 'neutral'
+        const counts = qs.reduce((acc, q) => {
+            const s = q.sentiment || 'neutral'
+            acc[s] = (acc[s] ?? 0) + 1
+            return acc
+        }, {})
+        if (counts.positive && counts.negative) return 'mixed'
+        for (const s of SENTIMENT_BY_PRIORITY) if (counts[s]) return s
+        return 'neutral'
+    }
+    function maxSignificance(qs) {
+        let best = null
+        let bestRank = 0
+        for (const q of qs) {
+            const r = SIGNIFICANCE_RANK[q.significanceLevel] ?? 0
+            if (r > bestRank) { bestRank = r; best = q.significanceLevel }
+        }
+        return best
+    }
+
+    const timelineData = (Array.isArray(a.timeline) ? a.timeline : []).map((t) => {
+        const periodRaw = t.period ?? ''
+        const period = typeof periodRaw === 'string'
+            ? periodRaw.split(' ').map((word) => {
+                if (!word) return word
+                return word[0].toUpperCase() + word.slice(1)
+              }).join(' ')
+            : String(periodRaw)
+        const linkedQuotes = quotes.filter((q) => q.timelineEventId && String(q.timelineEventId) === String(t.id))
+        const linkedThemeIds = new Set()
+        for (const lq of linkedQuotes) for (const tid of lq.themeIds) linkedThemeIds.add(String(tid))
+        const linkedThemes = Array.from(linkedThemeIds)
+            .map((tid) => themes.find((th) => String(th.id) === tid))
+            .filter(Boolean)
+        return {
+            id: t.id,
+            event: String(t.event ?? ''),
+            period,
+            significance: String(t.significance ?? ''),
+            position: typeof t.position === 'number' ? t.position : undefined,
+            term: t.term ? String(t.term) : undefined,
+            linkedQuotes,
+            linkedThemes,
+            sentiment: aggregateSentiment(linkedQuotes),
+            significanceLevel: maxSignificance(linkedQuotes),
+        }
+    })
+
+    const identities = (Array.isArray(a.identities) ? a.identities : []).map((id) => ({
+        label: String(id.label ?? ''),
+        confidence: Number(id.confidence ?? 0) || 0,
+        evidence: String(id.evidence ?? ''),
+    }))
     const improvements = (Array.isArray(a.areasForImprovement) ? a.areasForImprovement : []).map((improvement) => ({
         id: improvement.id,
         area: String(improvement.area ?? ''),
@@ -129,6 +172,7 @@ function mapToUI(json) {
         themes,
         quotes,
         improvements,
+        identities,
     }
 }
 
@@ -207,7 +251,7 @@ function InterviewViewInner() {
     }
     if (!dataForUI) return null
 
-    const { intervieweeName, interviewDate, major, videoUrl, videoAlt, summaries, timelineData, themes, quotes, improvements } = dataForUI
+    const { intervieweeName, interviewDate, major, videoUrl, videoAlt, summaries, timelineData, themes, quotes, improvements, identities } = dataForUI
 
     return (
         <>
@@ -360,11 +404,31 @@ function InterviewViewInner() {
                                     </Carousel.NextTrigger>
                                 </Carousel.Control>
                             </Carousel.RootProvider>
+
+                            {identities && identities.length > 0 ? (
+                                <>
+                                    <Heading>Associated Identities</Heading>
+                                    <Box display="flex" flexWrap="wrap" gap="2">
+                                        {identities.map((id, i) => (
+                                            <Box
+                                                key={`${id.label}-${i}`}
+                                                px="3"
+                                                py="1"
+                                                borderRadius="full"
+                                                bg="gray.100"
+                                                fontSize="sm"
+                                            >
+                                                {id.label.replace(/_/g, ' ')}
+                                            </Box>
+                                        ))}
+                                    </Box>
+                                </>
+                            ) : null}
                         </Tabs.Content>
 
                         {/* Timeline */}
                         <Tabs.Content value="timeline">
-                            <Timeline data={timelineData}/>
+                            <Timeline data={timelineData} showEventLabels={false}/>
                             <Accordion.Root collapsible variant='enclosed'>
                                 <Accordion.Item>
                                     <Accordion.ItemTrigger>

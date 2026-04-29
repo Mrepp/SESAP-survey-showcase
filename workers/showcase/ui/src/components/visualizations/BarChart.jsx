@@ -9,7 +9,8 @@ import {
   Legend,
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
-import { useState, useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
+import { IDENTITY_LABELS } from '@sesap/shared'
 
 ChartJS.register(
   CategoryScale,
@@ -70,14 +71,9 @@ const baseOptions = {
     },
 };
 
-// Hardcoded labels as fallback in case identities.txt fails to load
-const fallbackLabels = ['Disabled', 'First-Generation', 'Immigrant', 'International Student', 'LGBTQ+', 'Low-Income', 'Non-Traditional Age', 'Parent', 'Religious', 'Rural', 'STEM Minoritized', 'Student of Color', 'Transfer Student', 'Veteran', 'Working Student'];
-
 export default function BarChart ({ interviewData, showLegend = false }) {
-    const [labels, setLabels] = useState(fallbackLabels);
-    const [chartData, setChartData] = useState(null);
+    const labels = IDENTITY_LABELS;
 
-    // allows legend to only be shown in dialog popup
     const options = useMemo(
         () => ({
             ...baseOptions,
@@ -92,57 +88,17 @@ export default function BarChart ({ interviewData, showLegend = false }) {
         [showLegend]
     );
 
-    const themeColors = generateColors(interviewData.length);
-
-    // Load identities from identities.txt
-    useEffect(() => {
-        async function loadIdentities() {
-            try {
-                const response = await fetch('/identities.txt');
-                if (!response.ok) {
-                    console.warn('Failed to load identities.txt, using fallback labels');
-                    setLabels(fallbackLabels);
-                    return;
-                }
-                const text = await response.text();
-                // Parse identities: split by newline, trim whitespace, filter out empty lines and comments
-                const identities = text
-                    .split('\n')
-                    .map(line => line.trim())
-                    .filter(line => line && !line.startsWith('#'));
-                
-                if (identities.length > 0) {
-                    setLabels(identities);
-                } else {
-                    console.warn('identities.txt is empty, using fallback labels');
-                    setLabels(fallbackLabels);
-                }
-            } catch (error) {
-                console.warn('Error loading identities.txt:', error);
-                setLabels(fallbackLabels);
-            }
-        }
-        loadIdentities();
-    }, []);
-
-    // Update chart data when labels are loaded
-    useEffect(() => {
-        if (labels.length > 0) {
-            setChartData({
-                labels,
-                datasets: interviewData.map((item, index) => ({
-                    label: item.theme,
-                    // Map over labels to get values in the correct order
-                    data: labels.map(label => item.identities[label] || 0),
-                    backgroundColor: themeColors[index],
-                })),
-            });
-        }
-    }, [labels]);
-
-    if (!chartData) {
-        return <div>Loading chart...</div>;
-    }
+    const chartData = useMemo(() => {
+        const themeColors = generateColors(interviewData.length);
+        return {
+            labels,
+            datasets: interviewData.map((item, index) => ({
+                label: item.theme,
+                data: labels.map(label => item.identities[label] || 0),
+                backgroundColor: themeColors[index],
+            })),
+        };
+    }, [interviewData, labels]);
 
     return <Bar options={options} data={chartData} />
 }

@@ -31,6 +31,7 @@ export function buildManifest(interviews: Interview[], tags: string[]): BuildMet
     embeddingDimension: EMBEDDING_DIMENSION,
     categories,
     tags: tags.sort(),
+    interviewIds: interviews.map((i) => i.id),
     artifactPaths: {
       vectorIndices: R2_PATHS.buildArtifact('vector-indices.json'),
       clusters: R2_PATHS.buildArtifact('clusters.json'),

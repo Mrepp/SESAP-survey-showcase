@@ -8,7 +8,7 @@ import { interviews } from './routes/interviews';
 import auth from './routes/auth';
 import retry from './routes/retry';
 import monitoring from './routes/monitoring';
-import { pages } from './routes/pages';
+import { staticAssets } from './routes/static';
 
 type Variables = {
   user: AuthenticatedUser;
@@ -36,7 +36,8 @@ app.route('', interviews);
 app.route('', retry);
 app.route('', monitoring);
 
-// Admin UI pages — served at root
-app.route('', pages);
+// Admin UI — Next.js static export served by ASSETS binding (prod) or proxied
+// to `next dev` (local). Mount last so /api/* routes take precedence.
+app.route('', staticAssets);
 
 export default app;

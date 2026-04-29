@@ -28,6 +28,10 @@ jobs:
           sed -i 's|<YOUR_KV_PREVIEW_ID>|${{ secrets.KV_PREVIEW_ID }}|g' wrangler.toml
           sed -i 's|<YOUR_R2_BUCKET_NAME>|${{ secrets.R2_BUCKET_NAME }}|g' wrangler.toml
           sed -i 's|ENVIRONMENT = "development"|ENVIRONMENT = "production"|g' wrangler.toml
+      - name: Build admin UI
+        if: matrix.worker == 'admin'
+        working-directory: workers/admin
+        run: pnpm ui:build
       - name: Build showcase UI
         if: matrix.worker == 'showcase'
         working-directory: workers/showcase

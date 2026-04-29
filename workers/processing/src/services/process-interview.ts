@@ -1,7 +1,7 @@
 import type { Env } from '../bindings';
 import type { ProcessingQueueMessage, InterviewRecord } from '@sesap/types';
 import { R2_PATHS, KV_KEYS } from '@sesap/types';
-import { Logger, NotFoundError, ProcessingError } from '@sesap/shared';
+import { Logger, NotFoundError, ProcessingError, currentPromptStamp } from '@sesap/shared';
 import { generateAnalysis } from './llm-service';
 import { generateEmbeddings } from './embedding-service';
 import { extractChunksFromAnalysis } from './transcript-parser';
@@ -52,12 +52,18 @@ export async function processInterview(
     // 5. Generate analysis via LLM
     const analysis = await generateAnalysis(env, interviewId, transcript);
 
+    // Stamp analysis with current prompt + schema versions
+    analysis.promptVersion = currentPromptStamp.promptVersion;
+    analysis.promptHash = currentPromptStamp.promptHash;
+    analysis.schemaVersion = currentPromptStamp.schemaVersion;
+
     // 6. Store analysis to R2
     await env.SESAP_BUCKET.put(
       R2_PATHS.analysis(interviewId),
       JSON.stringify(analysis),
     );
     record.artifacts.analysis = true;
+    record.analysisStamp = { ...currentPromptStamp };
     log.info('Analysis stored');
 
     // 7. Extract embeddable chunks from analysis

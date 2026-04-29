@@ -1,0 +1,26 @@
+{
+  "name": "@sesap/e2e",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "pnpm test:indexing && pnpm test:admin && pnpm test:showcase",
+    "test:indexing": "vitest run --config ./vitest.config.indexing.ts",
+    "test:admin": "vitest run --config ./vitest.config.admin.ts",
+    "test:showcase": "vitest run --config ./vitest.config.showcase.ts"
+  },
+  "dependencies": {
+    "@sesap/types": "workspace:*",
+    "@sesap/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "0.5.41",
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "typescript": "^5.7.0",
+    "vitest": "2.0.5",
+    "@vitest/runner": "2.0.5",
+    "@vitest/snapshot": "2.0.5",
+    "@vitest/utils": "2.0.5",
+    "wrangler": "^3.99.0"
+  }
+}

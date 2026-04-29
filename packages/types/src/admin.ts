@@ -42,6 +42,14 @@ export interface InterviewRecord {
     embeddings: boolean;
   };
 
+  analysisStamp?: {
+    promptVersion: string;
+    promptHash: string;
+    schemaVersion: string;
+  };
+
+  reprocessRequestedAt?: string;
+
   createdAt: string;
   updatedAt: string;
 }
@@ -52,7 +60,7 @@ export interface ProcessingQueueMessage {
   priority?: 'high' | 'normal';
   metadata?: {
     triggeredBy: string;
-    reason: 'new_upload' | 'retry_admin' | 'retry_auto';
+    reason: 'new_upload' | 'retry_admin' | 'retry_auto' | 'reprocess_version_drift';
   };
 }
 

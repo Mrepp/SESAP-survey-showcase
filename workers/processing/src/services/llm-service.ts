@@ -20,6 +20,8 @@ function assignIds(interviewId: string, raw: Record<string, unknown>): Record<st
   const quotes = (raw.quotes as Array<Record<string, unknown>> | undefined) ?? [];
   const areasForImprovement =
     (raw.areasForImprovement as Array<Record<string, unknown>> | undefined) ?? [];
+  const identities =
+    (raw.identities as Array<Record<string, unknown>> | undefined) ?? [];
 
   const idSummaries = summaries.map((s, i) => ({
     ...s,
@@ -31,11 +33,20 @@ function assignIds(interviewId: string, raw: Record<string, unknown>): Record<st
     id: generateItemId(interviewId, 'timeline', i),
   }));
 
-  const idQuotes = quotes.map((q, i) => ({
-    ...q,
-    id: generateItemId(interviewId, 'quote', i),
-    themeIds: [] as string[],
-  }));
+  const idQuotes = quotes.map((q, i) => {
+    const rawIdx = (q as { timelineEventIndex?: unknown }).timelineEventIndex;
+    const idx =
+      typeof rawIdx === 'number' && Number.isInteger(rawIdx) && rawIdx >= 0 && rawIdx < idTimeline.length
+        ? rawIdx
+        : null;
+    const { timelineEventIndex: _drop, ...rest } = q as Record<string, unknown>;
+    return {
+      ...rest,
+      id: generateItemId(interviewId, 'quote', i),
+      themeIds: [] as string[],
+      ...(idx !== null ? { timelineEventId: idTimeline[idx].id as string } : {}),
+    };
+  });
 
   const idThemes = themes.map((th, i) => ({
     ...th,
@@ -73,6 +84,7 @@ function assignIds(interviewId: string, raw: Record<string, unknown>): Record<st
     themes: idThemes,
     quotes: idQuotes,
     areasForImprovement: idAreas,
+    identities,
     generatedAt: new Date().toISOString(),
   };
 }

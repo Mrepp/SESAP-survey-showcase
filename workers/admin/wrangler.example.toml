@@ -1,12 +1,17 @@
 name = "sesap-admin"
 main = "src/index.ts"
 compatibility_date = "2024-12-18"
-assets = { directory = "./public" }
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+not_found_handling = "404-page"
+html_handling = "auto-trailing-slash"
+run_worker_first = ["/*"]
 
 [dev]
 port = 8787
 inspector_port = 9229
-persist_to = "../../.wrangler/state"
 
 [[r2_buckets]]
 binding = "SESAP_BUCKET"
@@ -20,6 +25,9 @@ preview_id = "<YOUR_KV_PREVIEW_ID>"
 [vars]
 ENVIRONMENT = "development"
 SHOWCASE_URL = "http://localhost:8790"  # Update to production URL when deploying
+# In local dev, proxy non-API paths to the next dev server.
+# Leave unset/empty in production so ASSETS serves the built next export.
+NEXT_DEV_URL = "http://127.0.0.1:3001"
 
 # Service bindings to other workers
 [[services]]

@@ -1,5 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+'use client';
+
+import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   Box,
   Flex,
@@ -9,12 +12,12 @@ import {
   Link as ChakraLink,
 } from '@chakra-ui/react';
 import type { InterviewRecord, BuildDirtyState, BuildMetadata } from '@sesap/types';
-import { api } from '../api/interviews';
+import { api, type InterviewRecordWithStale } from '../api/interviews';
 import { StatusBadge } from '../components/StatusBadge';
 
 export function Dashboard() {
-  const location = useLocation();
-  const [interviews, setInterviews] = useState<InterviewRecord[]>([]);
+  const pathname = usePathname();
+  const [interviews, setInterviews] = useState<InterviewRecordWithStale[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -22,6 +25,10 @@ export function Dashboard() {
   const [buildStatus, setBuildStatus] = useState<{ dirty: BuildDirtyState | null; manifest: BuildMetadata | null; showcaseUrl: string } | null>(null);
   const [building, setBuilding] = useState(false);
   const [buildSuccess, setBuildSuccess] = useState(false);
+  const [buildWarning, setBuildWarning] = useState<{
+    missing: InterviewRecord[];
+    drops: { id: string; reason: string }[];
+  } | null>(null);
 
   async function load() {
     setLoading(true);
@@ -44,11 +51,33 @@ export function Dashboard() {
     if (!confirm('Rebuild all indexes? This may take a moment.')) return;
     setBuilding(true);
     setBuildSuccess(false);
+    setBuildWarning(null);
     try {
-      await api.triggerBuild();
-      const status = await api.getBuildStatus();
+      const result = await api.triggerBuild();
+      const [status, fresh] = await Promise.all([
+        api.getBuildStatus(),
+        api.listInterviews(),
+      ]);
       setBuildStatus(status);
-      setBuildSuccess(true);
+      setInterviews(fresh);
+
+      // A publish only counts as fully successful if every currently-approved
+      // interview made it into the new manifest. The indexing worker reports
+      // its own includedIds + drops, but we cross-check against the live
+      // approved list because new approvals can race with a slow build.
+      const includedIds = new Set(
+        result.includedIds ?? status.manifest?.interviewIds ?? [],
+      );
+      const missing = fresh.filter(
+        (i) => i.approval.status === 'approved' && !includedIds.has(i.id),
+      );
+      const drops = result.drops ?? [];
+
+      if (missing.length > 0 || drops.length > 0) {
+        setBuildWarning({ missing, drops });
+      } else {
+        setBuildSuccess(true);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Build failed');
     } finally {
@@ -56,8 +85,24 @@ export function Dashboard() {
     }
   }
 
-  // Re-fetch on every navigation to this route (location.key changes each time)
-  useEffect(() => { load(); }, [location.key]);
+  // Re-fetch on every navigation to this route
+  useEffect(() => { load(); }, [pathname]);
+
+  const manifest = buildStatus?.manifest ?? null;
+  const manifestInterviewIds = manifest?.interviewIds;
+  // We can flag "not published" in two cases:
+  //   (a) no manifest exists at all — nothing has ever been published, so every
+  //       approved interview is unpublished by definition.
+  //   (b) a manifest exists *and* carries an interviewIds list — we trust it
+  //       and flag any approved interview whose id isn't in it.
+  // The middle case (manifest exists but predates this feature so has no
+  // interviewIds field) is treated as unknown — don't false-flag.
+  const canEvaluatePublishState =
+    manifest === null || Array.isArray(manifestInterviewIds);
+  const publishedIds = useMemo(
+    () => new Set(manifestInterviewIds ?? []),
+    [manifestInterviewIds],
+  );
 
   const filtered = interviews.filter((i) => {
     if (statusFilter !== 'all' && i.processing.status !== statusFilter) return false;
@@ -148,6 +193,46 @@ export function Dashboard() {
         </Flex>
       )}
 
+      {/* Build partial-success / warning banner */}
+      {buildWarning && (
+        <Flex
+          direction="column"
+          gap={2}
+          bg="red.50"
+          px={4}
+          py={3}
+          mb={5}
+          borderRadius="md"
+          border="1px solid"
+          borderColor="red.200"
+        >
+          <Flex alignItems="center" gap={3}>
+            <Box w={2} h={2} borderRadius="full" bg="red.500" flexShrink={0} />
+            <Text fontSize="sm" color="red.700" fontWeight={600} flex={1}>
+              Publish completed but {buildWarning.missing.length} approved
+              interview{buildWarning.missing.length === 1 ? ' is' : 's are'} not in the showcase.
+            </Text>
+            <Button size="sm" variant="ghost" onClick={() => setBuildWarning(null)}>
+              Dismiss
+            </Button>
+          </Flex>
+          {buildWarning.missing.length > 0 && (
+            <Box pl={5} fontSize="xs" color="red.700">
+              <Text fontWeight={600} mb={1}>Missing from showcase:</Text>
+              {buildWarning.missing.map((i) => {
+                const drop = buildWarning.drops.find((d) => d.id === i.id);
+                return (
+                  <Text key={i.id}>
+                    • {i.title} ({i.id})
+                    {drop ? ` — ${drop.reason.replace(/_/g, ' ')}` : ''}
+                  </Text>
+                );
+              })}
+            </Box>
+          )}
+        </Flex>
+      )}
+
       {/* Build success banner */}
       {buildSuccess && buildStatus?.showcaseUrl && (
         <Flex
@@ -204,7 +289,7 @@ export function Dashboard() {
               asChild
               _hover={{ textDecoration: 'none' }}
             >
-              <Link to={`/interview/${interview.id}`}>
+              <Link href={`/interview?id=${interview.id}`}>
                 <Flex
                   bg="white"
                   border="1px solid"
@@ -231,6 +316,12 @@ export function Dashboard() {
                     <StatusBadge status={interview.processing.status} />
                     {(interview.processing.status === 'completed' || interview.processing.status === 'failed') && (
                       <StatusBadge status={interview.approval.status} />
+                    )}
+                    {interview.approval.status === 'approved' && canEvaluatePublishState && !publishedIds.has(interview.id) && (
+                      <StatusBadge status="not_published" />
+                    )}
+                    {interview.stale && (
+                      <StatusBadge status="out_of_sync" />
                     )}
                   </Flex>
                 </Flex>

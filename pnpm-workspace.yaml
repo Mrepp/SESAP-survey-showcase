@@ -1,4 +1,6 @@
 packages:
   - "packages/*"
   - "workers/*"
+  - "workers/admin/ui"
   - "workers/showcase/ui"
+  - "tests/e2e"

@@ -41,7 +41,10 @@ def main():
 
     if args.video:
         from .asr import transcribe_whisper
-        transcript = transcribe_whisper(args.video)
+        data = transcribe_whisper(args.video)
+
+        transcript = data["full_text"]
+        segments = data["segments"]
 
     else:
 
@@ -54,6 +57,9 @@ def main():
 
     # Run the actual LLM analysis → your repo will generate structured JSON
     result = analyze_transcript(transcript, llm_client=llm_client)
+
+    if args.video:
+        result["segments"] = segments
 
     # Prints JSON as the output
     if args.pretty:

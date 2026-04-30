@@ -19,6 +19,7 @@ bucket_name = "<YOUR_R2_BUCKET_NAME>"
 
 [vars]
 ENVIRONMENT = "development"
-# In local dev, proxy non-API/non-build paths to the next dev server
-# (set to empty/removed in production so ASSETS serves the built next export).
-NEXT_DEV_URL = "http://127.0.0.1:3000"
+# NEXT_DEV_URL is intentionally not set here. It is a local-dev-only variable
+# that proxies non-API/non-build paths to the next dev server. In production
+# the ASSETS binding serves the built next export. Add it to your local
+# (gitignored) wrangler.toml if you need the dev proxy.

@@ -14,4 +14,26 @@ def transcribe_whisper(video_path: str):
             file=f
         )
 
-    return transcript.text
+    return normalize(transcript)
+
+def normalize(raw):
+    """Produces a cleaner JSON output"""
+    segments = []
+
+    raw_segments = getattr(raw, "segments", None)
+
+    if raw_segments:
+        for i, seg in enumerate(raw_segments):
+            segments.append({
+                "id": i,
+                "speaker": "Speaker_1",
+                "start": getattr(seg, "start", None),
+                "end": getattr(seg, "end", None),
+                "text": getattr(seg, "text", "").strip(),
+                "embedding": []
+            })
+
+    return {
+        "full_text": " ".join(s["text"] for s in segments) if segments else getattr(raw, "text", ""),
+        "segments": segments
+    }

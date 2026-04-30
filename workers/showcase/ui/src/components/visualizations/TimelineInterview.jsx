@@ -100,7 +100,8 @@ export default function Timeline({ data, showEventLabels = true }) {
     const topBandHeight = showEventLabels ? 48 : 12  // mini-labels above axis (collapsed when labels are off)
     const tickBandHeight = 22  // quarter tick labels between top labels and axis
     const axisY = topBandHeight + tickBandHeight + axisHeight / 2
-    const totalHeight = topBandHeight + tickBandHeight + axisHeight + 18
+    const bottomLabelHeight = 18
+    const totalHeight = topBandHeight + tickBandHeight + axisHeight + bottomLabelHeight + 8
 
     const chevrons = visibleSegments.map((seg, i) => {
         const segStart = Math.max(seg.start, domainStart)
@@ -251,13 +252,13 @@ export default function Timeline({ data, showEventLabels = true }) {
                                 {seg.key !== 'pre_college' && seg.key !== 'post_college' ? (
                                     <text
                                         x={seg.cx}
-                                        y={seg.cy + 4}
+                                        y={axisY + axisHeight / 2 + 13}
                                         textAnchor="middle"
-                                        fill="#1A1A1A"
-                                        fontSize={9}
+                                        fill="#5A544F"
+                                        fontSize={10}
                                         fontFamily="var(--font-inter-tight), sans-serif"
                                         fontWeight={600}
-                                        style={{ letterSpacing: '0.02em', textTransform: 'uppercase' }}
+                                        style={{ letterSpacing: '0.08em', textTransform: 'uppercase' }}
                                     >
                                         {seg.label}
                                     </text>

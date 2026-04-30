@@ -609,9 +609,55 @@ export function Review() {
                   </Box>
                 )}
 
-                {interview.approval.rejectionReason && (
+                {interview.approval.status === 'rejected' && interview.approval.rejectionReason && (
                   <Box bg="red.50" color="red.700" p={3} borderRadius="md" fontSize="sm" mb={4} border="1px solid" borderColor="red.200">
-                    <strong>Rejection Reason:</strong> {interview.approval.rejectionReason}
+                    <Text mb={3}>
+                      <strong>Rejection Reason:</strong> {interview.approval.rejectionReason}
+                    </Text>
+                    <Flex gap={2}>
+                      <Button
+                        size="sm"
+                        colorPalette="yellow"
+                        variant="outline"
+                        disabled={saving}
+                        onClick={async () => {
+                          if (!id || !confirm('Re-run AI analysis on this rejected interview? It will return to pending review afterward.')) return;
+                          setSaving(true);
+                          try {
+                            await api.reprocessInterview(id);
+                            const rec = await api.getInterview(id);
+                            setInterview(rec);
+                            showAlert('success', 'Reprocessing queued. Refresh in a moment.');
+                          } catch (err) {
+                            showAlert('error', err instanceof Error ? err.message : 'Failed to reprocess');
+                          } finally {
+                            setSaving(false);
+                          }
+                        }}
+                      >
+                        Reprocess
+                      </Button>
+                      <Button
+                        size="sm"
+                        colorPalette="green"
+                        disabled={saving}
+                        onClick={async () => {
+                          if (!id || !confirm('Approve this previously-rejected interview using the current edits? This will mark indexes dirty for rebuild.')) return;
+                          setSaving(true);
+                          try {
+                            const rec = await api.approveInterview(id);
+                            setInterview({ ...rec, stale: interview?.stale ?? false, staleReasons: interview?.staleReasons ?? [] });
+                            showAlert('success', 'Interview approved with edits.');
+                          } catch (err) {
+                            showAlert('error', err instanceof Error ? err.message : 'Approval failed');
+                          } finally {
+                            setSaving(false);
+                          }
+                        }}
+                      >
+                        Approve with edits
+                      </Button>
+                    </Flex>
                   </Box>
                 )}
 

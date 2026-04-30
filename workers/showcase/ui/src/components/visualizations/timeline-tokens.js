@@ -19,7 +19,7 @@ export const TERM_MIDPOINTS = {
     senior_winter: 0.84375,
     senior_spring: 0.90625,
     senior_summer: 0.96875,
-    post_college: 1.25,
+    post_college: 1.125,
     unknown: 0.5,
 }
 
@@ -43,7 +43,7 @@ export const CHEVRON_PALETTE = [
     { key: 'sophomore',    label: 'Sophomore',    start: 0.25,  end: 0.5,  color: '#F88A62' },
     { key: 'junior',       label: 'Junior',       start: 0.5,   end: 0.75, color: '#F76A36' },
     { key: 'senior',       label: 'Senior',       start: 0.75,  end: 1.0,  color: '#D73F09' },
-    { key: 'post_college', label: 'Post-College', start: 1.0,   end: 1.5,  color: '#A12E08' },
+    { key: 'post_college', label: 'Post-College', start: 1.0,   end: 1.25, color: '#A12E08' },
 ]
 
 export const QUARTER_TICKS = [

@@ -21,8 +21,8 @@ const PERIOD_FALLBACK = {
     senior: 0.875,
     'pre-college': -0.125,
     precollege: -0.125,
-    'post-college': 1.25,
-    postcollege: 1.25,
+    'post-college': 1.125,
+    postcollege: 1.125,
 }
 
 function periodToPosition(periodStr) {
@@ -81,7 +81,7 @@ export default function Timeline({ data, showEventLabels = true }) {
     const minPos = positions.length ? Math.min(...positions) : 0
     const maxPos = positions.length ? Math.max(...positions) : 1
     const domainStart = Math.min(-0.25, Math.floor(minPos * 4) / 4)
-    const domainEnd = Math.max(1.5, Math.ceil(maxPos * 4) / 4)
+    const domainEnd = Math.max(1.25, Math.ceil(maxPos * 4) / 4)
 
     const visibleSegments = CHEVRON_PALETTE.filter(
         (s) => s.end > domainStart && s.start < domainEnd,
@@ -248,18 +248,20 @@ export default function Timeline({ data, showEventLabels = true }) {
                                 style={{ animationDelay: `${i * 90}ms` }}
                             >
                                 <path d={seg.pathD} fill={seg.color} />
-                                <text
-                                    x={seg.cx}
-                                    y={seg.cy + 4}
-                                    textAnchor="middle"
-                                    fill="#1A1A1A"
-                                    fontSize={11}
-                                    fontFamily="var(--font-inter-tight), sans-serif"
-                                    fontWeight={600}
-                                    style={{ letterSpacing: '0.18em', textTransform: 'uppercase' }}
-                                >
-                                    {seg.label}
-                                </text>
+                                {seg.key !== 'pre_college' && seg.key !== 'post_college' ? (
+                                    <text
+                                        x={seg.cx}
+                                        y={seg.cy + 4}
+                                        textAnchor="middle"
+                                        fill="#1A1A1A"
+                                        fontSize={9}
+                                        fontFamily="var(--font-inter-tight), sans-serif"
+                                        fontWeight={600}
+                                        style={{ letterSpacing: '0.02em', textTransform: 'uppercase' }}
+                                    >
+                                        {seg.label}
+                                    </text>
+                                ) : null}
                             </g>
                         ))}
                     </g>

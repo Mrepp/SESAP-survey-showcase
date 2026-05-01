@@ -24,12 +24,15 @@ const ListboxItemCheckmark = () => {
 }
 
 const DEFAULT_YEARS = [
-  { label: "2000-2004", value: "2000-2004" },
-  { label: "2005-2009", value: "2005-2009" },
-  { label: "2010-2014", value: "2010-2014" },
-  { label: "2015-2019", value: "2015-2019" },
-  { label: "2020-2024", value: "2020-2024" },
-  { label: "2025-2029", value: "2025-2029" },
+  { label: "2018", value: "2018" },
+  { label: "2019", value: "2019" },
+  { label: "2020", value: "2020" },
+  { label: "2021", value: "2021" },
+  { label: "2022", value: "2022" },
+  { label: "2023", value: "2023" },
+  { label: "2024", value: "2024" },
+  { label: "2025", value: "2025" },
+  { label: "2026", value: "2026" },
 ]
 
 const DEFAULT_SENTIMENTS = [
@@ -56,9 +59,19 @@ const DEFAULT_CATEGORIES = [
   "Other",
 ]
 
-export const FILTER_KEYS = ["themes", "year", "sentiment", "category"]
+const DEFAULT_MAJORS = ["Computer Science", "Electrical and Computer Engineering"].map(
+  (label) => ({ label, value: label.toLowerCase().replace(/\s+/g, "-") })
+)
 
-const ACCORDION_VALUES = { themes: "a", year: "b", sentiment: "c", category: "d" }
+export const FILTER_KEYS = ["themes", "year", "sentiment", "category", "major"]
+
+const ACCORDION_VALUES = {
+  themes: "a",
+  year: "b",
+  sentiment: "c",
+  category: "d",
+  major: "e",
+}
 
 export default function Filters({
   visibleFilters = FILTER_KEYS,
@@ -70,8 +83,11 @@ export default function Filters({
   setSelectedSentiments,
   selectedCategories = [],
   setSelectedCategories,
+  selectedMajors = [],
+  setSelectedMajors = () => {},
   themeOptions,
   yearOptions,
+  majorOptions,
 }) {
   const [categoryItems, setCategoryItems] = useState(() =>
     DEFAULT_CATEGORIES.map((label) => ({ label, value: label.toLowerCase().replace(/\s+/g, "-") }))
@@ -116,6 +132,11 @@ export default function Filters({
   const sentimentsCollection = useMemo(
     () => createListCollection({ items: DEFAULT_SENTIMENTS }),
     []
+  )
+
+  const majorsCollection = useMemo(
+    () => createListCollection({ items: majorOptions ?? DEFAULT_MAJORS }),
+    [majorOptions]
   )
 
   const defaultOpenValues = visibleFilters.map((key) => ACCORDION_VALUES[key]).filter(Boolean)
@@ -236,6 +257,37 @@ export default function Filters({
               >
                 <Listbox.Content>
                   {categoriesCollection.items.map((option) => (
+                    <Listbox.Item item={option} key={option.value}>
+                      <ListboxItemCheckmark />
+                      <Listbox.ItemText>{option.label}</Listbox.ItemText>
+                    </Listbox.Item>
+                  ))}
+                </Listbox.Content>
+              </Listbox.Root>
+            </Accordion.ItemBody>
+          </Accordion.ItemContent>
+        </Accordion.Item>
+        )}
+
+        {/* Major */}
+        {visibleFilters.includes("major") && (
+        <Accordion.Item value="e">
+          <Accordion.ItemTrigger>
+            <Span flex="1" color="beavOrange">
+              Major
+            </Span>
+            <Accordion.ItemIndicator />
+          </Accordion.ItemTrigger>
+          <Accordion.ItemContent>
+            <Accordion.ItemBody>
+              <Listbox.Root
+                collection={majorsCollection}
+                selectionMode="multiple"
+                value={selectedMajors}
+                onValueChange={(e) => setSelectedMajors(e.value)}
+              >
+                <Listbox.Content>
+                  {majorsCollection.items.map((option) => (
                     <Listbox.Item item={option} key={option.value}>
                       <ListboxItemCheckmark />
                       <Listbox.ItemText>{option.label}</Listbox.ItemText>

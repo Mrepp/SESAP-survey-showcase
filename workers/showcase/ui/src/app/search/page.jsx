@@ -24,6 +24,26 @@ function formatDate(value) {
     return Number.isNaN(d.getTime()) ? '' : d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
+function majorSlug(major) {
+    return String(major ?? '').trim().toLowerCase().replace(/\s+/g, '-')
+}
+
+function buildMajorOptions(interviews) {
+    if (!Array.isArray(interviews)) return null
+    const majors = new Set()
+    for (const iv of interviews) {
+        const major = iv.demographics?.major
+        if (major != null && String(major).trim()) {
+            majors.add(String(major).trim())
+        }
+    }
+    if (majors.size === 0) return null
+    return Array.from(majors).sort().map((label) => ({
+        label,
+        value: majorSlug(label),
+    }))
+}
+
 function buildThemeOptions(interviews) {
     if (!Array.isArray(interviews)) return null
     const titles = new Set()
@@ -95,12 +115,14 @@ export default function Search() {
     const [selectedYears, setSelectedYears] = useState([])
     const [selectedSentiments, setSelectedSentiments] = useState([])
     const [selectedCategories, setSelectedCategories] = useState([])
+    const [selectedMajors, setSelectedMajors] = useState([])
 
     const clearAllFilters = () => {
         setSelectedThemes([])
         setSelectedYears([])
         setSelectedSentiments([])
         setSelectedCategories([])
+        setSelectedMajors([])
     }
 
     // Data loading and search
@@ -176,6 +198,7 @@ export default function Search() {
     // Build dynamic filter options from interview data
     const themeOptions = useMemo(() => buildThemeOptions(data?.interviews), [data?.interviews])
     const yearOptions = useMemo(() => buildYearOptions(data?.interviews), [data?.interviews])
+    const majorOptions = useMemo(() => buildMajorOptions(data?.interviews), [data?.interviews])
 
     // Apply filters to result cards
     const filteredCards = useMemo(() => {
@@ -183,7 +206,8 @@ export default function Search() {
         const hasYears = selectedYears.length > 0
         const hasSentiments = selectedSentiments.length > 0
         const hasCategories = selectedCategories.length > 0
-        if (!hasThemes && !hasYears && !hasSentiments && !hasCategories) return resultCards
+        const hasMajors = selectedMajors.length > 0
+        if (!hasThemes && !hasYears && !hasSentiments && !hasCategories && !hasMajors) return resultCards
 
         return resultCards.filter((card) => {
             const iv = getInterviewForResult(card, data)
@@ -210,9 +234,14 @@ export default function Search() {
                 if (!selectedCategories.includes(cat)) return false
             }
 
+            if (hasMajors) {
+                const slug = majorSlug(iv.demographics?.major)
+                if (!slug || !selectedMajors.includes(slug)) return false
+            }
+
             return true
         })
-    }, [resultCards, selectedThemes, selectedYears, selectedSentiments, selectedCategories, data])
+    }, [resultCards, selectedThemes, selectedYears, selectedSentiments, selectedCategories, selectedMajors, data])
 
     if (showLoading) {
         return (
@@ -284,8 +313,11 @@ export default function Search() {
                     setSelectedSentiments={setSelectedSentiments}
                     selectedCategories={selectedCategories}
                     setSelectedCategories={setSelectedCategories}
+                    selectedMajors={selectedMajors}
+                    setSelectedMajors={setSelectedMajors}
                     themeOptions={themeOptions}
                     yearOptions={yearOptions}
+                    majorOptions={majorOptions}
                 />
 
                 <Container paddingRight="0">

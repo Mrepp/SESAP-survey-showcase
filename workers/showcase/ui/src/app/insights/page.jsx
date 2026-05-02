@@ -200,33 +200,6 @@ export default function Insights() {
         <>
             <Heading mb={4}>Insights</Heading>
             <Text marginBottom='15px'>Click a data visualization for an expanded version and short description.</Text>
-            {/* <Stack direction={{ base: "column", md: "row" }} h='100vh' gap='20px'>
-                <Stack w='40%' h='100%' gap='20px'>
-                    <Box bg='white' w='100%' borderWidth="1px" borderRadius='25px'>
-                        {text ? <WordCloud text={text} /> : <Text p={4} color="fg.muted">No interview text available.</Text>}
-                    </Box>
-
-                    <Box bg='white' borderWidth="1px" borderRadius='25px' p='15px'>
-                        {themes.length > 0 ? <BubbleChart data={themes}/> : <Text color="fg.muted">No theme data available.</Text>}
-                    </Box>
-                </Stack>
-
-                <Stack h='100%' gap='20px'>
-                    <Box w='fit-content' h='fit-content' bg='white' borderWidth="1px" borderRadius='25px' paddingLeft='20px' paddingTop='20px' paddingBottom='20px'>
-                        {correlations.length > 0
-                            ? <Correlation correlations={correlations}/>
-                            : <Text color="fg.muted" p={4}>Not enough interview data for correlations (need at least 3).</Text>
-                        }
-                    </Box>
-
-                    <Box minH='300px' h='fit-content' bg='white' padding='20px' borderWidth="1px" borderRadius='25px'>
-                        {interviewData.length > 0
-                            ? <BarChart interviewData={interviewData}/>
-                            : <Text color="fg.muted">No demographic data available.</Text>
-                        }
-                    </Box>
-                </Stack>
-            </Stack> */}
             <Grid
                 templateColumns={{ base: "1fr", md: "1fr 1fr" }}
                 templateRows={{ base: "repeat(4, 1fr)", md: "1fr 1fr" }}
@@ -243,7 +216,7 @@ export default function Insights() {
                     p={4}
                     {...insightCardProps(!!text, INSIGHT_KEYS.wordCloud, setDialogKey)}
                 >
-                    {text ? <WordCloud text={text} /> : <Text color="fg.muted">No interview text available.</Text>}
+                    {text ? <WordCloud text={text} interviews={data?.interviews} /> : <Text color="fg.muted">No interview text available.</Text>}
                 </Box>
                 <Box
                     bg="white"
@@ -311,7 +284,7 @@ export default function Insights() {
                                 )}
                                 <Box w="full" minH={{ base: "320px", md: "420px" }} maxH="75vh" overflow="auto">
                                     {dialogKey === INSIGHT_KEYS.wordCloud && text ? (
-                                        <WordCloud text={text} width={960} height={540} />
+                                        <WordCloud text={text} interviews={data?.interviews} width={960} height={540} />
                                     ) : null}
                                     {dialogKey === INSIGHT_KEYS.correlation && correlations.length > 0 ? (
                                         <Correlation correlations={correlations} plotWidth={960} />

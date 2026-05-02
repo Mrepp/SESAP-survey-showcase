@@ -2,7 +2,27 @@
 'use client'
 import * as d3 from "d3"
 import d3Cloud from "d3-cloud"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
+
+// Tokens from a name/title string, using the same splitting as the cloud body text.
+function tokensFromPersonField(s) {
+    if (!s || typeof s !== "string") return []
+    return s
+        .split(/\W+/g)
+        .map((t) => t.toLowerCase().trim())
+        .filter(Boolean)
+}
+
+// Lowercase tokens from each interview's title (interviewee) and metadata.interviewer.
+function buildPersonNameStopSet(interviews) {
+    const set = new Set()
+    if (!Array.isArray(interviews)) return set
+    for (const iv of interviews) {
+        for (const t of tokensFromPersonField(iv?.title)) set.add(t)
+        for (const t of tokensFromPersonField(iv?.metadata?.interviewer)) set.add(t)
+    }
+    return set
+}
 
 export const wordCloudMeta = {
     title: "Word Cloud",
@@ -12,6 +32,7 @@ export const wordCloudMeta = {
 
 export default function WordCloud({
     text,
+    interviews, // optional: used to drop interviewee (title) and interviewer name tokens from the cloud
     size = group => group.length, // Given a grouping of words, returns the size factor for that word
     word = d => d, // Given an item of the data array, returns the word
     marginTop = 0, // top margin, in pixels
@@ -32,6 +53,7 @@ export default function WordCloud({
     const containerRef = useRef(null)
     const [stopwords, setStopwords] = useState(new Set())
     const [dimensions, setDimensions] = useState({ width: width || 800, height: height || 350 })
+    const personNameStops = useMemo(() => buildPersonNameStopSet(interviews), [interviews])
 
     // Measure container and update dimensions
     useEffect(() => {
@@ -94,7 +116,7 @@ export default function WordCloud({
         // Filter out stopwords (if stopwords haven't loaded yet, this will just filter empty strings)
         const filteredWords = words
             .map(w => w.toLowerCase().trim())
-            .filter(w => w && !stopwords.has(w))
+            .filter(w => w && !stopwords.has(w) && !personNameStops.has(w))
     
         const data = d3.rollups(filteredWords, size, w => w)
             .sort(([, a], [, b]) => d3.descending(a, b))
@@ -135,7 +157,7 @@ export default function WordCloud({
 
         cloud.start();
         invalidation && invalidation.then(() => cloud.stop());
-    }, [text, dimensions, stopwords, size, word, maxWords, fontFamily, fontScale, padding, rotate, marginTop, marginRight, marginBottom, marginLeft, invalidation])
+    }, [text, dimensions, stopwords, personNameStops, size, word, maxWords, fontFamily, fontScale, padding, rotate, marginTop, marginRight, marginBottom, marginLeft, invalidation])
     
     return (
         <div ref={containerRef} style={{ width: '100%', height: '100%' }}>

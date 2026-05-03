@@ -13,6 +13,7 @@ import { useDataLoader } from '@/hooks/useDataLoader'
 import BarChart, { barChartMeta } from '@/components/visualizations/BarChart'
 import BubbleChart, { bubbleChartMeta } from "@/components/visualizations/BubbleChart"
 import Correlation, { correlationHeatMapMeta } from '@/components/visualizations/CorrelationHeatMap'
+import MajorDoughnutChart, { majorDoughnutChartMeta } from '@/components/visualizations/MajorDoughnutChart'
 import WordCloud, { wordCloudMeta } from "@/components/visualizations/WordCloud"
 
 function splitThemeTitle(title) {
@@ -144,6 +145,21 @@ const INSIGHT_KEYS = {
     correlation: 'correlation',
     bubble: 'bubble',
     bar: 'bar',
+    majorDoughnutChart: 'majorDoughnutChart',
+}
+
+function buildMajorDoughnutChartData(interviews) {
+    if (!Array.isArray(interviews)) return []
+    const majors = new Map()
+    for (const iv of interviews) {
+        const major = iv.demographics?.major
+        if (major != null && String(major).trim()) {
+            majors.set(major, (majors.get(major) || 0) + 1)
+        }
+    } return Array.from(majors.entries()).map(([major, count]) => ({
+        major,
+        count,
+    }))
 }
 
 function insightCardProps(enabled, insightKey, setDialogKey) {
@@ -170,12 +186,14 @@ export default function Insights() {
     const text = useMemo(() => buildWordCloudText(data?.interviews), [data?.interviews])
     const correlations = useMemo(() => buildCorrelations(data?.interviews), [data?.interviews])
     const interviewData = useMemo(() => buildBarChartData(data?.interviews), [data?.interviews])
+    const majorDoughnutChartData = useMemo(() => buildMajorDoughnutChartData(data?.interviews), [data?.interviews])
 
     const dialogMeta =
         dialogKey === INSIGHT_KEYS.wordCloud ? wordCloudMeta
         : dialogKey === INSIGHT_KEYS.correlation ? correlationHeatMapMeta
         : dialogKey === INSIGHT_KEYS.bubble ? bubbleChartMeta
         : dialogKey === INSIGHT_KEYS.bar ? barChartMeta
+        : dialogKey === INSIGHT_KEYS.majorDoughnutChart ? majorDoughnutChartMeta
         : null
 
     if (!isReady) {
@@ -202,15 +220,15 @@ export default function Insights() {
             <Text marginBottom='15px'>Click a data visualization for an expanded version and short description.</Text>
             <Grid
                 templateColumns={{ base: "1fr", md: "1fr 1fr" }}
-                templateRows={{ base: "repeat(4, 1fr)", md: "1fr 1fr" }}
+                templateRows={{ base: "repeat(4, 1fr)", md: "auto auto auto" }}
                 gap={5}
-                h={{ base: "auto", md: "calc(100vh - 100px)" }}
                 minH={{ base: "800px", md: "500px" }}
             >
                 <Box
                     bg="white"
                     borderWidth="1px"
                     borderRadius="25px"
+                    h='300px'
                     minH={0}
                     overflow="hidden"
                     p={4}
@@ -222,6 +240,7 @@ export default function Insights() {
                     bg="white"
                     borderWidth="1px"
                     borderRadius="25px"
+                    h='300px'
                     minH={0}
                     overflow="hidden"
                     p={4}
@@ -233,20 +252,49 @@ export default function Insights() {
                     }
                 </Box>
                 <Box
-                    bg="white"
-                    borderWidth="1px"
-                    borderRadius="25px"
+                    display="flex"
+                    flexDirection={{ base: "column", md: "row" }}
+                    gap={5}
                     minH={0}
-                    overflow="hidden"
-                    p={4}
-                    {...insightCardProps(themes.length > 0, INSIGHT_KEYS.bubble, setDialogKey)}
+                    minW={0}
+                    h={{ base: "auto", md: "300px" }}
                 >
-                    {themes.length > 0 ? <BubbleChart data={themes} /> : <Text color="fg.muted">No theme data available.</Text>}
+                    <Box
+                        flex={{ md: "1 1 0" }}
+                        minW={0}
+                        bg="white"
+                        borderWidth="1px"
+                        borderRadius="25px"
+                        h={{ base: "300px", md: "100%" }}
+                        minH={0}
+                        overflow="hidden"
+                        p={4}
+                        {...insightCardProps(themes.length > 0, INSIGHT_KEYS.bubble, setDialogKey)}
+                    >
+                        {themes.length > 0 ? <BubbleChart data={themes} /> : <Text color="fg.muted">No theme data available.</Text>}
+                    </Box>
+                    <Box
+                        flex={{ md: "1 1 0" }}
+                        display="flex"
+                        justifyContent="center"
+                        minW={0}
+                        bg="white"
+                        borderWidth="1px"
+                        borderRadius="25px"
+                        h={{ base: "300px", md: "100%" }}
+                        minH={0}
+                        overflow="hidden"
+                        p={4}
+                        {...insightCardProps(majorDoughnutChartData.length > 0, INSIGHT_KEYS.majorDoughnutChart, setDialogKey)}
+                    >
+                        {majorDoughnutChartData.length > 0 ? <MajorDoughnutChart majorData={majorDoughnutChartData} /> : <Text color="fg.muted">No major data available.</Text>}
+                    </Box>
                 </Box>
                 <Box
                     bg="white"
                     borderWidth="1px"
                     borderRadius="25px"
+                    h='300px'
                     minH={0}
                     overflow="hidden"
                     p={4}
@@ -292,6 +340,11 @@ export default function Insights() {
                                     {dialogKey === INSIGHT_KEYS.bubble && themes.length > 0 ? (
                                         <Box display="flex" justifyContent="center" alignItems="center" minH="min(70vh, 900px)">
                                             <BubbleChart data={themes} width={880} height={880} />
+                                        </Box>
+                                    ) : null}
+                                    {dialogKey === INSIGHT_KEYS.majorDoughnutChart && majorDoughnutChartData.length > 0 ? (
+                                        <Box display="flex" justifyContent="center" alignItems="center" minH="min(70vh, 900px)" >
+                                            <MajorDoughnutChart majorData={majorDoughnutChartData} width={700} height={500} showLegend />
                                         </Box>
                                     ) : null}
                                     {dialogKey === INSIGHT_KEYS.bar && interviewData.length > 0 ? (

@@ -16,22 +16,14 @@ import Correlation, { correlationHeatMapMeta } from '@/components/visualizations
 import MajorDoughnutChart, { majorDoughnutChartMeta } from '@/components/visualizations/MajorDoughnutChart'
 import WordCloud, { wordCloudMeta } from "@/components/visualizations/WordCloud"
 
-function splitThemeTitle(title) {
-    return title
-        .split(/\s*&\s*|\s+and\s+/i)
-        .map(t => t.replace(/\d+$/, '').trim())
-        .filter(Boolean)
-}
-
 // Aggregate themes across all interviews for BubbleChart
 function buildBubbleData(interviews) {
     if (!Array.isArray(interviews)) return []
     const themeMap = new Map()
     for (const iv of interviews) {
         for (const t of (iv.analysis?.themes ?? [])) {
-            if (!t.title) continue
-            const titles = splitThemeTitle(t.title)
-            for (const title of titles) {
+            const title = String(t.title ?? '').trim()
+            if (title) {
                 if (!themeMap.has(title)) {
                     themeMap.set(title, { title, totalFreq: 0, count: 0, category: t.category ?? 'other' })
                 }
@@ -91,8 +83,8 @@ function buildThemeCorrelations(interviews) {
     for (const iv of interviews) {
         const set = new Set()
         for (const t of (iv.analysis?.themes ?? [])) {
-            if (!t.title) continue
-            for (const title of splitThemeTitle(t.title)) {
+            const title = String(t.title ?? '').trim()
+            if (title){
                 set.add(title)
                 themeCounts.set(title, (themeCounts.get(title) || 0) + 1)
             }
@@ -360,7 +352,7 @@ export default function Insights() {
                                         </Box>
                                     ) : null}
                                     {dialogKey === INSIGHT_KEYS.bubble && themes.length > 0 ? (
-                                        <Box display="flex" justifyContent="center" alignItems="center" minH="min(70vh, 900px)" bg='purple.100' >
+                                        <Box display="flex" justifyContent="center" alignItems="center" minH="min(70vh, 900px)">
                                             <BubbleChart data={themes} width={880} height={880} />
                                         </Box>
                                     ) : null}

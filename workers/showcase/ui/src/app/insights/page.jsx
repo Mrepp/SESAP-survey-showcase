@@ -79,29 +79,49 @@ function pearsonCorrelation(x, y) {
     return denom === 0 ? 0 : xy / denom
 }
 
-// Compute correlations between per-interview analysis feature counts
-function buildCorrelations(interviews) {
-    if (!Array.isArray(interviews) || interviews.length < 3) return []
+// Pearson correlation of binary theme presence across interviews (phi coefficient).
+// Measures how often two themes appear together vs. separately.
+function buildThemeCorrelations(interviews) {
+    if (!Array.isArray(interviews) || interviews.length < 2) return []
 
-    const features = interviews.map(iv => {
-        const a = iv.analysis ?? {}
-        return {
-            Themes: (a.themes ?? []).length,
-            Quotes: (a.quotes ?? []).length,
-            Improvements: (a.areasForImprovement ?? []).length,
-            Summaries: (a.summaries ?? []).length,
-            Timeline: (a.timeline ?? []).length,
+    const TOP_THEMES = 15 // Top 15 themes by frequency so that chart doesn't get too crowded
+    const themeCounts = new Map()
+    const interviewThemeSets = []
+
+    for (const iv of interviews) {
+        const set = new Set()
+        for (const t of (iv.analysis?.themes ?? [])) {
+            if (!t.title) continue
+            for (const title of splitThemeTitle(t.title)) {
+                set.add(title)
+                themeCounts.set(title, (themeCounts.get(title) || 0) + 1)
+            }
         }
-    })
+        interviewThemeSets.push(set)
+    }
 
-    const fields = Object.keys(features[0])
+    const themesSorted = Array.from(themeCounts.entries())
+        .filter(([, count]) => count >= 1)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, TOP_THEMES)
+        .map(([title]) => title)
+        .sort((a, b) => a.localeCompare(b))
+
+    if (themesSorted.length < 2) return []
+
     const correlations = []
-
-    for (const a of fields) {
-        for (const b of fields) {
-            const xVals = features.map(f => f[a])
-            const yVals = features.map(f => f[b])
-            correlations.push({ a, b, correlation: pearsonCorrelation(xVals, yVals) })
+    for (const themeA of themesSorted) {
+        for (const themeB of themesSorted) {
+            let r
+            if (themeA === themeB) {
+                r = 1
+            } else {
+                const x = interviewThemeSets.map((s) => (s.has(themeA) ? 1 : 0))
+                const y = interviewThemeSets.map((s) => (s.has(themeB) ? 1 : 0))
+                r = pearsonCorrelation(x, y)
+                if (Number.isNaN(r)) r = 0
+            }
+            correlations.push({ a: themeA, b: themeB, correlation: r })
         }
     }
     return correlations
@@ -184,7 +204,7 @@ export default function Insights() {
 
     const themes = useMemo(() => buildBubbleData(data?.interviews), [data?.interviews])
     const text = useMemo(() => buildWordCloudText(data?.interviews), [data?.interviews])
-    const correlations = useMemo(() => buildCorrelations(data?.interviews), [data?.interviews])
+    const correlations = useMemo(() => buildThemeCorrelations(data?.interviews), [data?.interviews])
     const interviewData = useMemo(() => buildBarChartData(data?.interviews), [data?.interviews])
     const majorDoughnutChartData = useMemo(() => buildMajorDoughnutChartData(data?.interviews), [data?.interviews])
 
@@ -242,13 +262,13 @@ export default function Insights() {
                     borderRadius="25px"
                     h='300px'
                     minH={0}
-                    overflow="hidden"
+                    overflow="auto"
                     p={4}
                     {...insightCardProps(correlations.length > 0, INSIGHT_KEYS.correlation, setDialogKey)}
                 >
                     {correlations.length > 0
                         ? <Correlation correlations={correlations} />
-                        : <Text color="fg.muted">Not enough interview data for correlations (need at least 3).</Text>
+                        : <Text color="fg.muted">Not enough data for a correlation map (need at least two themes across interviews).</Text>
                     }
                 </Box>
                 <Box
@@ -317,28 +337,30 @@ export default function Insights() {
                 <Portal>
                     <Dialog.Backdrop />
                     <Dialog.Positioner>
-                        <Dialog.Content maxW="min(96vw, 1100px)" w="full">
+                        <Dialog.Content maxW="min(96vw, 1100px)" w="full" >
                             <Dialog.Header paddingBottom='0'>
                                 <Dialog.Title>{dialogMeta?.title}</Dialog.Title>
                                 <Dialog.CloseTrigger asChild>
                                     <CloseButton size="sm" />
                                 </Dialog.CloseTrigger>
                             </Dialog.Header>
-                            <Dialog.Body>
+                            <Dialog.Body h='100%' overflow='auto'>
                                 {dialogMeta && (
                                     <Text mb={4} fontSize="md">
                                         {dialogMeta.description}
                                     </Text>
                                 )}
-                                <Box w="full" minH={{ base: "320px", md: "420px" }} maxH="75vh" overflow="auto">
+                                <Box w="full" minH={{ base: "320px", md: "420px" }} maxH="75vh" >
                                     {dialogKey === INSIGHT_KEYS.wordCloud && text ? (
                                         <WordCloud text={text} interviews={data?.interviews} width={960} height={540} />
                                     ) : null}
                                     {dialogKey === INSIGHT_KEYS.correlation && correlations.length > 0 ? (
-                                        <Correlation correlations={correlations} plotWidth={960} />
+                                        <Box display="flex" justifyContent="center" alignItems="center" >
+                                            <Correlation correlations={correlations} plotWidth={960} />
+                                        </Box>
                                     ) : null}
                                     {dialogKey === INSIGHT_KEYS.bubble && themes.length > 0 ? (
-                                        <Box display="flex" justifyContent="center" alignItems="center" minH="min(70vh, 900px)">
+                                        <Box display="flex" justifyContent="center" alignItems="center" minH="min(70vh, 900px)" bg='purple.100' >
                                             <BubbleChart data={themes} width={880} height={880} />
                                         </Box>
                                     ) : null}

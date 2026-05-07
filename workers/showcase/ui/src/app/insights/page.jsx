@@ -76,7 +76,6 @@ function pearsonCorrelation(x, y) {
 function buildThemeCorrelations(interviews) {
     if (!Array.isArray(interviews) || interviews.length < 2) return []
 
-    const TOP_THEMES = 15 // Top 15 themes by frequency so that chart doesn't get too crowded
     const themeCounts = new Map()
     const interviewThemeSets = []
 
@@ -95,7 +94,6 @@ function buildThemeCorrelations(interviews) {
     const themesSorted = Array.from(themeCounts.entries())
         .filter(([, count]) => count >= 1)
         .sort((a, b) => b[1] - a[1])
-        .slice(0, TOP_THEMES)
         .map(([title]) => title)
         .sort((a, b) => a.localeCompare(b))
 

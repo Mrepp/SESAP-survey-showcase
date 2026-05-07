@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react"
 export const correlationHeatMapMeta = {
     title: "Theme Correlation Heat Map",
     description:
-        "Shows correlation among the top 15 themes by frequency across interviews (how often they appear together vs. apart). Blue indicates themes that tend to co-occur; red indicates themes that rarely appear on the same interview. The Pearson correlation coefficient is used to calculate the correlation.",
+        "Shows correlation among the themes appearing in interviews (how often they appear together vs. apart). Blue indicates themes that tend to co-occur; red indicates themes that rarely appear on the same interview. The Pearson correlation coefficient is used to calculate the correlation.",
 }
 
 export default function Correlation({ correlations, plotWidth = 800 }) {

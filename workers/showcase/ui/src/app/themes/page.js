@@ -25,13 +25,6 @@ function formatDate(value) {
     return Number.isNaN(d.getTime()) ? '' : d.toLocaleDateString(undefined, dateOptions)
 }
 
-function splitThemeTitle(title) {
-    return title
-        .split(/\s*&\s*|\s+and\s+/i)
-        .map(t => t.replace(/\d+$/, '').trim())
-        .filter(Boolean)
-}
-
 /** Match theme.analysis.category to Filters category listbox values (lowercase, spaces → hyphens). */
 function normalizeCategorySlug(c) {
     const s = String(c ?? 'other')
@@ -52,25 +45,23 @@ function buildThemesFromInterviews(interviews) {
         if (!Array.isArray(themes)) continue
 
         for (const t of themes) {
-            if (!t.title) continue
-            const titles = splitThemeTitle(t.title)
+            const title = String(t.title ?? '').trim()
+            if (!title) continue
 
-            for (const title of titles) {
-                if (!themeMap.has(title)) {
-                    themeMap.set(title, { frequencies: [], category: t.category, interviews: [] })
-                }
-                const entry = themeMap.get(title)
-                entry.frequencies.push(Number(t.frequency ?? 0) || 0)
-                if (t.category) entry.category = t.category
-                entry.interviews.push({
-                    interviewId: iv.id,
-                    videoUrl: iv.videoUrl ?? '/placeholder16x9.jpg',
-                    videoAlt: `${iv.title ?? iv.id} interview`,
-                    name: iv.title ?? 'Interviewee Name',
-                    date: formatDate(iv.metadata?.interviewDate),
-                    description: '',
-                })
+            if (!themeMap.has(title)) {
+                themeMap.set(title, { frequencies: [], category: t.category, interviews: [] })
             }
+            const entry = themeMap.get(title)
+            entry.frequencies.push(Number(t.frequency ?? 0) || 0)
+            if (t.category) entry.category = t.category
+            entry.interviews.push({
+                interviewId: iv.id,
+                videoUrl: iv.videoUrl ?? '/placeholder16x9.jpg',
+                videoAlt: `${iv.title ?? iv.id} interview`,
+                name: iv.title ?? 'Interviewee Name',
+                date: formatDate(iv.metadata?.interviewDate),
+                description: '',
+            })
         }
     }
 

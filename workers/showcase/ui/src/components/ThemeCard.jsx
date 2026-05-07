@@ -14,8 +14,6 @@ import Interview from "./Interview"
 
 export default function ThemeCard ({data}) {
     return(
-        
-        
         <Drawer.Root size="sm">
             <Drawer.Trigger asChild>
                 <Box

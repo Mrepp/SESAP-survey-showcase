@@ -17,11 +17,11 @@ export default function Correlation({ correlations, plotWidth = 800 }) {
 
         const labels = [...new Set(correlations.map((d) => d.a))]
         const n = labels.length
-        const maxLen = Math.max(8, ...labels.map((s) => s.length))
-        const marginLeft = Math.min(300, 48 + maxLen * 5.2)
-        const marginBottom = Math.min(280, 40 + maxLen * 3.2)
+        const maxLen = Math.max(...labels.map((s) => s.length)) + 5 // max length of label + a little extra padding so the beginning of the label doesn't get cut off
+        const marginLeft = 10 + maxLen * 6
+        const marginBottom = 80 + maxLen * 3.2
         const marginTop = 28
-        const marginRight = 50
+        const marginRight = 0
         const innerW = plotWidth - marginLeft - marginRight
         const cell = n > 0 ? Math.max(10, Math.min(22, innerW / n)) : 16
         const height = marginTop + marginBottom + n * cell
@@ -34,7 +34,7 @@ export default function Correlation({ correlations, plotWidth = 800 }) {
             marginRight,
             marginBottom,
             label: null,
-            x: { tickRotate: 50, tickSize: 0 },
+            x: { tickRotate: -50, tickSize: 0 },
             y: { tickSize: 0 },
             style: {
                 overflow: "visible",

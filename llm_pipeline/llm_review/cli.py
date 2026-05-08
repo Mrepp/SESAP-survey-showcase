@@ -6,7 +6,10 @@ from pathlib import Path
 from .analysis import analyze_transcript
 
  # command to run locally, will need to add ffmpeg to system environments
+ # reading .txt file
  # python -m llm_pipeline.llm_review.cli --file llm_pipeline\transcripts\interview1.txt --pretty
+ # reading video file
+ # python -m llm_pipeline.llm_review.cli --video llm_pipeline\video\IMG_0830.mov --llm --pretty
 
 def load_transcript(input_path: str | None, raw_text: str | None) -> str:
     """Load transcript from file OR raw text."""

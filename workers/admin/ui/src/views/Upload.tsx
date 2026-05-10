@@ -29,9 +29,17 @@ export function Upload() {
     const form = e.currentTarget;
     const fd = new FormData(form);
     const transcriptFile = fd.get('transcript') as File;
+    // add in for video uploads
+    const videoFile = fd.get('video') as File;
 
-    if (!transcriptFile || !transcriptFile.name) {
-      setError('Please select a transcript file');
+    const hasTranscript =
+      transcriptFile && transcriptFile.name;
+
+    const hasVideo =
+      videoFile && videoFile.name;
+
+    if (!hasTranscript && !hasVideo) {
+      setError('Please select a transcript or video file');
       setSubmitting(false);
       return;
     }
@@ -103,6 +111,15 @@ export function Upload() {
 
           <Field label="Video URL">
             <Input name="interviewURL" type="url" placeholder="https://youtube.com/..." {...inputStyles} />
+          </Field>
+
+          <Field label="Video File">
+              <Input name="video" type="file" accept="video/mp4,video/webm,video/quicktime" pt={1.5} {...inputStyles} 
+              />
+
+              <Text fontSize="xs" color="gray.500" mt={1}>
+                Accepts .mp4, .webm, .mov
+              </Text>
           </Field>
 
           <Text fontFamily="heading" fontSize="lg" fontWeight="600" color="gray.700" mt={6} mb={3}>

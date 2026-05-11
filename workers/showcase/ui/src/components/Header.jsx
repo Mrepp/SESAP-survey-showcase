@@ -31,8 +31,6 @@ export default function Header () {
                         </Text>
                     </Link>
                 </Box>
-                
-                
             </HStack>
         </Box>
     )

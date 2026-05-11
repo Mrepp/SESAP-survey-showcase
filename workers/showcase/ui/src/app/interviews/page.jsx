@@ -18,59 +18,15 @@ import {
 } from "@chakra-ui/react"
 import { useEffect, useMemo, useState } from "react"
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi"
-import Interview from '@/components/Interview'
 import { useDataLoader } from '@/hooks/useDataLoader'
+import { standardize, formatDate, interviewDateYearString, buildMajorOptions, buildYearOptions } from '@/app/buildFunctions'
 import Filters from '@/components/Filters'
+import Interview from '@/components/Interview'
+
 
 const pageSize = 9
 
-function formatDate(value) {
-    if (!value) return ''
-    const d = typeof value === 'string' ? new Date(value) : value
-    return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
-}
-
-function majorSlug(major) {
-    return String(major ?? '').trim().toLowerCase().replace(/\s+/g, '-')
-}
-
-function buildMajorOptions(interviews) {
-    if (!Array.isArray(interviews)) return null
-    const majors = new Set()
-    for (const iv of interviews) {
-        const major = iv.demographics?.major
-        if (major != null && String(major).trim()) {
-            majors.add(String(major).trim())
-        }
-    }
-    if (majors.size === 0) return null
-    return Array.from(majors).sort().map((label) => ({
-        label,
-        value: majorSlug(label),
-    }))
-}
-
-function interviewDateYearString(iv) {
-    const raw = iv.metadata?.interviewDate
-    if (raw == null || raw === '') return ''
-    const d = typeof raw === 'string' ? new Date(raw) : raw
-    const y = d.getFullYear()
-    if (!Number.isFinite(y) || y < 1900 || y > 2100) return ''
-    return String(y)
-}
-
-function buildYearOptions(interviews) {
-    if (!Array.isArray(interviews)) return null
-    const years = new Set()
-    for (const iv of interviews) {
-        const y = interviewDateYearString(iv)
-        if (y) years.add(y)
-    }
-    if (years.size === 0) return null
-    return Array.from(years)
-        .sort((a, b) => Number(a) - Number(b))
-        .map((label) => ({ label, value: label }))
-}
+const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' }
 
 export default function Interviews() {
     const { progress, statusText, error, isReady, data, reload } = useDataLoader()
@@ -79,7 +35,7 @@ export default function Interviews() {
     const [selectedMajors, setSelectedMajors] = useState([])
     const [selectedYears, setSelectedYears] = useState([])
 
-    // Map R2 interviews (from useDataLoader) to the shape expected by Interview component
+    // Map interviews (from useDataLoader) to the shape expected by Interview component
     const dataList = useMemo(() => {
         const raw = data?.interviews
         if (!Array.isArray(raw)) return []
@@ -88,8 +44,8 @@ export default function Interviews() {
             videoUrl: '/thumbnail.png',
             videoAlt: `${iv.title ?? iv.id} interview`,
             name: iv.title ?? 'Interviewee Name',
-            date: formatDate(iv.metadata.interviewDate),
-            major: majorSlug(iv.demographics?.major),
+            date: formatDate(iv.metadata.interviewDate, dateOptions),
+            major: standardize(iv.demographics?.major),
             year: interviewDateYearString(iv),
         }))
     }, [data?.interviews])

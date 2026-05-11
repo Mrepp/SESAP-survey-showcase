@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react"
 import { useState, useEffect, useMemo } from "react"
 import { THEME_TITLES } from "@sesap/shared"
+import { standardize } from "@/app/buildFunctions"
 
 const ListboxItemCheckmark = () => {
   const itemState = useListboxItemContext()
@@ -60,7 +61,7 @@ const DEFAULT_CATEGORIES = [
 ]
 
 const DEFAULT_MAJORS = ["Computer Science", "Electrical and Computer Engineering"].map(
-  (label) => ({ label, value: label.toLowerCase().replace(/\s+/g, "-") })
+  (label) => ({ label, value: standardize(label) })
 )
 
 export const FILTER_KEYS = ["themes", "year", "sentiment", "category", "major"]
@@ -90,7 +91,7 @@ export default function Filters({
   majorOptions,
 }) {
   const [categoryItems, setCategoryItems] = useState(() =>
-    DEFAULT_CATEGORIES.map((label) => ({ label, value: label.toLowerCase().replace(/\s+/g, "-") }))
+    DEFAULT_CATEGORIES.map((label) => ({ label, value: standardize(label) }))
   )
 
   // Load categories from categories.txt
@@ -106,7 +107,7 @@ export default function Filters({
           setCategoryItems(
             lines.map((label) => ({
               label,
-              value: label.toLowerCase().replace(/\s+/g, "-"),
+              value: standardize(label),
             }))
           )
         }

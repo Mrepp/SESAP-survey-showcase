@@ -21,18 +21,13 @@ import { Suspense, useMemo } from 'react'
 import { useSearchParams, useRouter } from "next/navigation"
 import { useDataLoader } from '@/hooks/useDataLoader'
 import { LuChevronLeft, LuChevronRight, LuClipboardList, LuCalendarDays, LuComponent, LuSquareCheck } from "react-icons/lu"
+import { formatDate } from '@/app/buildFunctions'
 import BubbleChart from "@/components/visualizations/BubbleChart"
 import Timeline from '@/components/visualizations/TimelineInterview'
 import SentimentIndicator from '@/components/SentimentIndicator'
 
 
 const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' }
-
-function formatDate(value) {
-    if (value == null) return ''
-    const d = typeof value === 'string' ? new Date(value) : value
-    return Number.isNaN(d.getTime()) ? '' : d.toLocaleDateString(undefined, dateOptions)
-}
 
 function mapToUI(json) {
     if (!json || typeof json !== 'object') {
@@ -52,7 +47,7 @@ function mapToUI(json) {
     }
 
     const intervieweeName = json.title ?? 'Interviewee Name'
-    const interviewDate = formatDate(json.metadata.interviewDate || '0')
+    const interviewDate = formatDate(json.metadata.interviewDate || '0', dateOptions)
     const major = json.demographics.major || ''
     const videoUrl = `/assets/interview_repository/${json?.id}.mp4`
     const videoAlt = `${intervieweeName} interview` || 'Interview'

@@ -31,8 +31,8 @@ export default function ThemeCard ({data}) {
                     justifyContent="center"
                     alignItems="center"
                     cursor='pointer'
-                    >
-                    <Text fontWeight="medium" color="beavOrange" textAlign="center">
+                >
+                    <Text fontWeight="medium" color="beavOrange" textAlign="center" lineClamp={3}>
                         {data.theme}
                     </Text>
                     <VStack color="fg.muted" justifyContent="center" gap='0'>

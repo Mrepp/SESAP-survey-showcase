@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react"
 import { useMemo, useState } from "react"
 import { useDataLoader } from '@/hooks/useDataLoader'
+import { standardize, buildMajorOptions, buildImprovementsFromInterviews } from '@/app/buildFunctions'
 import Filters from "@/components/Filters"
 import ImprovementContainer from "@/components/ImprovementContainer"
 
@@ -19,65 +20,17 @@ const PRIORITY_GROUPS = [
     { priority: 'Low', color: 'yellow.300', key: 'low' },
 ]
 
-// Normalize category to comparable label: lowercase, underscores and hyphens → spaces
-// (e.g. 'campus_life' or 'mental-health' → 'campus life' / 'mental health')
-function toCategoryLabel(value) {
-    return String(value ?? '').toLowerCase().replace(/[_-]/g, ' ')
-}
-
 function improvementMatchesCategories(improvement, selectedCategories) {
     if (!selectedCategories?.length) return true
-    const selectedLabels = selectedCategories.map(toCategoryLabel)
+    const selectedLabels = selectedCategories.map(standardize)
     const categories = improvement.categories
     const list = Array.isArray(categories) ? categories : categories != null ? [String(categories)] : []
-    return list.some((cat) => selectedLabels.includes(toCategoryLabel(cat)))
-}
-
-function majorSlug(major) {
-    return String(major ?? '').trim().toLowerCase().replace(/\s+/g, '-')
-}
-
-function buildMajorOptions(interviews) {
-    if (!Array.isArray(interviews)) return null
-    const majors = new Set()
-    for (const iv of interviews) {
-        const major = iv.demographics?.major
-        if (major != null && String(major).trim()) {
-            majors.add(String(major).trim())
-        }
-    }
-    if (majors.size === 0) return null
-    return Array.from(majors).sort().map((label) => ({
-        label,
-        value: majorSlug(label),
-    }))
+    return list.some((cat) => selectedLabels.includes(standardize(cat)))
 }
 
 function improvementMatchesMajors(improvement, selectedMajors) {
     if (!selectedMajors?.length) return true
     return Boolean(improvement.major) && selectedMajors.includes(improvement.major)
-}
-
-// Build improvements from useDataLoader interviews (analysis.areasForImprovement)
-function buildImprovementsFromInterviews(interviews) {
-    if (!Array.isArray(interviews)) return []
-    const list = []
-    for (const iv of interviews) {
-        const interviewId = iv.id
-        const areas = iv.analysis.areasForImprovement
-        if (!Array.isArray(areas)) continue
-        for (const a of areas) {
-            list.push({
-                interviewId,
-                major: majorSlug(iv.demographics?.major),
-                area: String(a.area ?? ''),
-                description: String(a.description ?? ''),
-                categories: toCategoryLabel(a.category ?? 'other'),
-                priority: String(a.priority ?? 'medium').toLowerCase(),
-            })
-        }
-    }
-    return list
 }
 
 // Group flat improvements by priority into the shape expected by ImprovementContainer

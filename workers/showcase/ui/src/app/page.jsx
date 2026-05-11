@@ -12,12 +12,10 @@ import {
 } from "@chakra-ui/react"
 import Interview from '@/components/Interview'
 import { useDataLoader } from '@/hooks/useDataLoader'
+import {formatDate} from '@/app/buildFunctions'
 
-function formatDate(value) {
-    if (!value) return ''
-    const d = typeof value === 'string' ? new Date(value) : value
-    return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
-}
+
+const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' }
 
 export default function Home() {
     const { isReady, data } = useDataLoader()
@@ -37,7 +35,7 @@ export default function Home() {
             videoUrl: '/thumbnail.png',
             videoAlt: `${iv.title ?? ''} interview`,
             name: iv.title ?? 'Interviewee Name',
-            date: formatDate(iv.metadata?.interviewDate),
+            date: formatDate(iv.metadata?.interviewDate, dateOptions),
             description: iv.description ?? '',
         }))
     }, [isReady, data?.interviews])

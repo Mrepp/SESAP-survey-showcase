@@ -10,145 +10,13 @@ import {
 } from "@chakra-ui/react"
 import { useMemo, useState } from "react"
 import { useDataLoader } from '@/hooks/useDataLoader'
+import { buildBubbleData, buildWordCloudText, buildThemeCorrelations, buildBarChartData, buildMajorDoughnutChartData } from '@/app/buildFunctions'
 import BarChart, { barChartMeta } from '@/components/visualizations/BarChart'
 import BubbleChart, { bubbleChartMeta } from "@/components/visualizations/BubbleChart"
 import Correlation, { correlationHeatMapMeta } from '@/components/visualizations/CorrelationHeatMap'
 import MajorDoughnutChart, { majorDoughnutChartMeta } from '@/components/visualizations/MajorDoughnutChart'
 import WordCloud, { wordCloudMeta } from "@/components/visualizations/WordCloud"
 
-// Aggregate themes across all interviews for BubbleChart
-function buildBubbleData(interviews) {
-    if (!Array.isArray(interviews)) return []
-    const themeMap = new Map()
-    for (const iv of interviews) {
-        for (const t of (iv.analysis?.themes ?? [])) {
-            const title = String(t.title ?? '').trim()
-            if (title) {
-                if (!themeMap.has(title)) {
-                    themeMap.set(title, { title, totalFreq: 0, count: 0, category: t.category ?? 'other' })
-                }
-                const entry = themeMap.get(title)
-                entry.totalFreq += (Number(t.frequency) || 1)
-                entry.count += 1
-            }
-        }
-    }
-    return Array.from(themeMap.values()).map(e => ({
-        title: e.title,
-        impactScore: Math.round(e.totalFreq / e.count),
-        category: e.category,
-    }))
-}
-
-// Build word cloud text from all quotes and summaries
-function buildWordCloudText(interviews) {
-    if (!Array.isArray(interviews)) return ''
-    const parts = []
-    for (const iv of interviews) {
-        for (const q of (iv.analysis?.quotes ?? [])) {
-            if (q.quoteText) parts.push(q.quoteText)
-        }
-        for (const s of (iv.analysis?.summaries ?? [])) {
-            if (s.summaryText) parts.push(s.summaryText)
-        }
-    }
-    return parts.join(' ')
-}
-
-// Compute Pearson correlation between two arrays
-function pearsonCorrelation(x, y) {
-    const n = x.length
-    if (n === 0) return 0
-    const mx = x.reduce((s, v) => s + v, 0) / n
-    const my = y.reduce((s, v) => s + v, 0) / n
-    let xy = 0, xx = 0, yy = 0
-    for (let i = 0; i < n; i++) {
-        xy += (x[i] - mx) * (y[i] - my)
-        xx += (x[i] - mx) ** 2
-        yy += (y[i] - my) ** 2
-    }
-    const denom = Math.sqrt(xx * yy)
-    return denom === 0 ? 0 : xy / denom
-}
-
-// Pearson correlation of binary theme presence across interviews (phi coefficient).
-// Measures how often two themes appear together vs. separately.
-function buildThemeCorrelations(interviews) {
-    if (!Array.isArray(interviews) || interviews.length < 2) return []
-
-    const themeCounts = new Map()
-    const interviewThemeSets = []
-
-    for (const iv of interviews) {
-        const set = new Set()
-        for (const t of (iv.analysis?.themes ?? [])) {
-            const title = String(t.title ?? '').trim()
-            if (title){
-                set.add(title)
-                themeCounts.set(title, (themeCounts.get(title) || 0) + 1)
-            }
-        }
-        interviewThemeSets.push(set)
-    }
-
-    const themesSorted = Array.from(themeCounts.entries())
-        .filter(([, count]) => count >= 1)
-        .sort((a, b) => b[1] - a[1])
-        .map(([title]) => title)
-        .sort((a, b) => a.localeCompare(b))
-
-    if (themesSorted.length < 2) return []
-
-    const correlations = []
-    for (const themeA of themesSorted) {
-        for (const themeB of themesSorted) {
-            let r
-            if (themeA === themeB) {
-                r = 1
-            } else {
-                const x = interviewThemeSets.map((s) => (s.has(themeA) ? 1 : 0))
-                const y = interviewThemeSets.map((s) => (s.has(themeB) ? 1 : 0))
-                r = pearsonCorrelation(x, y)
-                if (Number.isNaN(r)) r = 0
-            }
-            correlations.push({ a: themeA, b: themeB, correlation: r })
-        }
-    }
-    return correlations
-}
-
-// Build theme × identity counts for stacked bar chart.
-// For every (theme, identity) pair that co-occur on an interview, increment a counter.
-// Identity labels come from the LLM-extracted analysis.identities (canonical 15-label list).
-function buildBarChartData(interviews) {
-    if (!Array.isArray(interviews)) return []
-    const themeIdentities = new Map()
-
-    for (const iv of interviews) {
-        const themes = iv.analysis?.themes ?? []
-        const identityLabels = (iv.analysis?.identities ?? [])
-            .map(i => i?.label)
-            .filter(Boolean)
-
-        if (identityLabels.length === 0) continue
-
-        for (const t of themes) {
-            if (!t.title) continue
-            if (!themeIdentities.has(t.title)) {
-                themeIdentities.set(t.title, {})
-            }
-            const identities = themeIdentities.get(t.title)
-            for (const label of identityLabels) {
-                identities[label] = (identities[label] || 0) + 1
-            }
-        }
-    }
-
-    return Array.from(themeIdentities.entries()).map(([theme, identities]) => ({
-        theme,
-        identities,
-    }))
-}
 
 const INSIGHT_KEYS = {
     wordCloud: 'wordCloud',
@@ -156,20 +24,6 @@ const INSIGHT_KEYS = {
     bubble: 'bubble',
     bar: 'bar',
     majorDoughnutChart: 'majorDoughnutChart',
-}
-
-function buildMajorDoughnutChartData(interviews) {
-    if (!Array.isArray(interviews)) return []
-    const majors = new Map()
-    for (const iv of interviews) {
-        const major = iv.demographics?.major
-        if (major != null && String(major).trim()) {
-            majors.set(major, (majors.get(major) || 0) + 1)
-        }
-    } return Array.from(majors.entries()).map(([major, count]) => ({
-        major,
-        count,
-    }))
 }
 
 function insightCardProps(enabled, insightKey, setDialogKey) {

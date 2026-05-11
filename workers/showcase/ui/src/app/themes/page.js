@@ -14,67 +14,10 @@ import {
 } from "@chakra-ui/react"
 import { useState, useMemo } from "react"
 import { useDataLoader } from '@/hooks/useDataLoader'
+import { standardize, buildThemesFromInterviews } from '@/app/buildFunctions'
 import Filters from "@/components/Filters"
 import ThemeCard from "@/components/ThemeCard"
 
-const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' }
-
-function formatDate(value) {
-    if (!value) return ''
-    const d = typeof value === 'string' ? new Date(value) : value
-    return Number.isNaN(d.getTime()) ? '' : d.toLocaleDateString(undefined, dateOptions)
-}
-
-/** Match theme.analysis.category to Filters category listbox values (lowercase, spaces → hyphens). */
-function normalizeCategorySlug(c) {
-    const s = String(c ?? 'other')
-        .toLowerCase()
-        .replace(/_/g, '-')
-        .replace(/\s+/g, '-')
-        .replace(/-+/g, '-')
-        .replace(/^-|-$/g, '')
-    return s || 'other'
-}
-
-function buildThemesFromInterviews(interviews) {
-    if (!Array.isArray(interviews)) return []
-    const themeMap = new Map()
-
-    for (const iv of interviews) {
-        const themes = iv.analysis?.themes
-        if (!Array.isArray(themes)) continue
-
-        for (const t of themes) {
-            const title = String(t.title ?? '').trim()
-            if (!title) continue
-
-            if (!themeMap.has(title)) {
-                themeMap.set(title, { frequencies: [], category: t.category, interviews: [] })
-            }
-            const entry = themeMap.get(title)
-            entry.frequencies.push(Number(t.frequency ?? 0) || 0)
-            if (t.category) entry.category = t.category
-            entry.interviews.push({
-                interviewId: iv.id,
-                videoUrl: iv.videoUrl ?? '/placeholder16x9.jpg',
-                videoAlt: `${iv.title ?? iv.id} interview`,
-                name: iv.title ?? 'Interviewee Name',
-                date: formatDate(iv.metadata?.interviewDate),
-                description: '',
-            })
-        }
-    }
-
-    return Array.from(themeMap.entries()).map(([title, entry]) => ({
-        theme: title,
-        impactScore: entry.frequencies.length > 0
-            ? String(Math.round(entry.frequencies.reduce((a, b) => a + b, 0) / entry.frequencies.length))
-            : '0',
-        frequency: String(entry.interviews.length),
-        category: entry.category ?? 'other',
-        interviews: entry.interviews,
-    }))
-}
 
 export default function Themes() {
     const { isReady, data, error, statusText } = useDataLoader()
@@ -88,7 +31,7 @@ export default function Themes() {
     const filteredThemes = useMemo(() => {
         if (!selectedCategories.length) return themes
         const selected = new Set(selectedCategories)
-        return themes.filter((t) => selected.has(normalizeCategorySlug(t.category)))
+        return themes.filter((t) => selected.has(standardize(t.category) || 'other'))
     }, [themes, selectedCategories])
 
     // Sort data based on selected option
@@ -141,8 +84,6 @@ export default function Themes() {
                     selectedCategories={selectedCategories}
                     setSelectedCategories={setSelectedCategories}
                 />
-
-
 
                 {/* Sort Menu */}
                 <Container centerContent='true'>

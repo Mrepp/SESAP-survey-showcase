@@ -14,70 +14,13 @@ import { useState, useCallback, useMemo } from "react"
 import { useDataLoader } from '@/hooks/useDataLoader'
 import { useSemanticSearch } from '@/hooks/useSemanticSearch'
 import { useFulltextSearch } from '@/hooks/useFulltextSearch'
+import { standardize, formatDate, buildMajorOptions, buildThemeOptions, buildYearOptions } from '@/app/buildFunctions'
 import SearchBar from "@/components/SearchBar"
 import Result from '@/components/ResultsCard'
 import Filters from '@/components/Filters'
 
-function formatDate(value) {
-    if (value == null) return ''
-    const d = typeof value === 'string' ? new Date(value) : value
-    return Number.isNaN(d.getTime()) ? '' : d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
-}
 
-function majorSlug(major) {
-    return String(major ?? '').trim().toLowerCase().replace(/\s+/g, '-')
-}
-
-function buildMajorOptions(interviews) {
-    if (!Array.isArray(interviews)) return null
-    const majors = new Set()
-    for (const iv of interviews) {
-        const major = iv.demographics?.major
-        if (major != null && String(major).trim()) {
-            majors.add(String(major).trim())
-        }
-    }
-    if (majors.size === 0) return null
-    return Array.from(majors).sort().map((label) => ({
-        label,
-        value: majorSlug(label),
-    }))
-}
-
-function buildThemeOptions(interviews) {
-    if (!Array.isArray(interviews)) return null
-    const titles = new Set()
-    for (const iv of interviews) {
-        const themes = iv.analysis?.themes
-        if (!Array.isArray(themes)) continue
-        for (const t of themes) {
-            if (t.title) titles.add(t.title)
-        }
-    }
-    if (titles.size === 0) return null
-    return Array.from(titles).sort().map((t) => ({ label: t, value: t.toLowerCase() }))
-}
-
-function buildYearOptions(interviews) {
-    if (!Array.isArray(interviews)) return null
-    const years = new Set()
-    for (const iv of interviews) {
-        const gy = iv.demographics?.graduationYear ?? iv.demographics?.year
-        const num = Number(gy)
-        if (num && num >= 1900 && num <= 2100) years.add(num)
-    }
-    if (years.size === 0) return null
-    const sorted = Array.from(years).sort((a, b) => a - b)
-    const minYear = Math.floor(sorted[0] / 5) * 5
-    const maxYear = Math.ceil((sorted[sorted.length - 1] + 1) / 5) * 5
-    const ranges = []
-    for (let start = minYear; start < maxYear; start += 5) {
-        const end = start + 4
-        const label = `${start}-${end}`
-        ranges.push({ label, value: label })
-    }
-    return ranges.length > 0 ? ranges : null
-}
+const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' }
 
 function yearInRange(year, rangeStr) {
     const [startStr, endStr] = rangeStr.split('-')
@@ -103,7 +46,7 @@ function mapSearchResultToCard(result, data) {
         videoUrl: iv?.videoUrl ?? '/placeholder16x9.jpg',
         videoAlt: doc?.title || iv?.title || 'Interview',
         name: iv?.title ?? doc?.title ?? String(result.id),
-        date: formatDate(iv?.metadata?.interviewDate),
+        date: formatDate(iv?.metadata?.interviewDate, dateOptions),
         description: doc?.content ? (doc.content.substring(0, 200) + (doc.content.length > 200 ? '...' : '')) : (iv?.description ?? ''),
     }
 }
@@ -230,12 +173,12 @@ export default function Search() {
 
             if (hasCategories) {
                 const doc = data?.searchIndex?.documents?.find((d) => d.interviewId === card.interviewId)
-                const cat = (doc?.category ?? '').toLowerCase().replace(/\s+/g, '-')
+                const cat = standardize(doc?.category ?? '')
                 if (!selectedCategories.includes(cat)) return false
             }
 
             if (hasMajors) {
-                const slug = majorSlug(iv.demographics?.major)
+                const slug = standardize(iv.demographics?.major)
                 if (!slug || !selectedMajors.includes(slug)) return false
             }
 

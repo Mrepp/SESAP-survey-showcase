@@ -1,24 +1,6 @@
 // Functions used for building data/lists from across all interviews
 // Used for building filter options and data for visualizations
-
-
-// Normalize to a comparable hyphenated key: lowercase, trim, collapse whitespace
-// and underscores to single hyphens (e.g. 'Campus Life', 'campus_life' → 'campus-life')
-export function standardize(value) {
-    return String(value ?? '')
-        .trim()
-        .toLowerCase()
-        .replace(/[_\s]+/g, '-')
-        .replace(/-+/g, '-')
-        .replace(/^-|-$/g, '')
-}
-
-export function formatDate(value, options) {
-    if (!value) return ''
-    const d = typeof value === 'string' ? new Date(value) : value
-    return d.toLocaleDateString(undefined, options)
-}
-
+import { standardize, formatDate } from '@/app/formatFunctions'
 
 //-------------------Build functions for filter options-------------------
 export function buildMajorOptions(interviews) {

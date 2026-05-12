@@ -21,13 +21,13 @@ import { Suspense, useMemo } from 'react'
 import { useSearchParams, useRouter } from "next/navigation"
 import { useDataLoader } from '@/hooks/useDataLoader'
 import { LuChevronLeft, LuChevronRight, LuClipboardList, LuCalendarDays, LuComponent, LuSquareCheck } from "react-icons/lu"
-import { formatDate } from '@/app/buildFunctions'
+import { formatDate, capitalize } from '@/app/formatFunctions'
 import BubbleChart from "@/components/visualizations/BubbleChart"
 import Timeline from '@/components/visualizations/TimelineInterview'
 import SentimentIndicator from '@/components/SentimentIndicator'
 
 
-const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' }
+const DATE_OPTIONS = { year: 'numeric', month: 'long', day: 'numeric' }
 
 function mapToUI(json) {
     if (!json || typeof json !== 'object') {
@@ -47,7 +47,7 @@ function mapToUI(json) {
     }
 
     const intervieweeName = json.title ?? 'Interviewee Name'
-    const interviewDate = formatDate(json.metadata.interviewDate || '0', dateOptions)
+    const interviewDate = formatDate(json.metadata.interviewDate || '0', DATE_OPTIONS)
     const major = json.demographics.major || ''
     const videoUrl = `/assets/interview_repository/${json?.id}.mp4`
     const videoAlt = `${intervieweeName} interview` || 'Interview'
@@ -55,9 +55,8 @@ function mapToUI(json) {
     const a = json.analysis ?? {}
     const summaries = (Array.isArray(a.summaries) ? a.summaries : []).map((s) => ({
         value: s.id,
-        title: String(s.title ?? 'Summary').replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
         text: String(s.summaryText ?? ''),
-        category: String(s.category ?? '').replace(/[_-]/g, ' '),
+        category: capitalize(String(s.category ?? '')),
         confidence: s.confidence
     }))
     const themes = (Array.isArray(a.themes) ? a.themes : []).map((t) => ({
@@ -115,13 +114,7 @@ function mapToUI(json) {
     }
 
     const timelineData = (Array.isArray(a.timeline) ? a.timeline : []).map((t) => {
-        const periodRaw = t.period ?? ''
-        const period = typeof periodRaw === 'string'
-            ? periodRaw.split(' ').map((word) => {
-                if (!word) return word
-                return word[0].toUpperCase() + word.slice(1)
-              }).join(' ')
-            : String(periodRaw)
+        const period = capitalize(t.period ?? '')
         const linkedQuotes = quotes.filter((q) => q.timelineEventId && String(q.timelineEventId) === String(t.id))
         const linkedThemeIds = new Set()
         for (const lq of linkedQuotes) for (const tid of lq.themeIds) linkedThemeIds.add(String(tid))
@@ -443,7 +436,6 @@ function InterviewViewInner() {
                                     </Accordion.ItemContent>
                                 </Accordion.Item>
                             </Accordion.Root>
-                            
                         </Tabs.Content>
 
                         {/* Themes */}

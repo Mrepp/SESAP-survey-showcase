@@ -10,7 +10,8 @@ import {
 } from "@chakra-ui/react"
 import { useMemo, useState } from "react"
 import { useDataLoader } from '@/hooks/useDataLoader'
-import { standardize, buildMajorOptions, buildImprovementsFromInterviews } from '@/app/buildFunctions'
+import { standardize } from '@/app/formatFunctions'
+import { buildMajorOptions, buildImprovementsFromInterviews } from '@/app/buildFunctions'
 import Filters from "@/components/Filters"
 import ImprovementContainer from "@/components/ImprovementContainer"
 

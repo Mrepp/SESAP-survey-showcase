@@ -3,6 +3,7 @@
 import * as d3 from "d3"
 import { useEffect, useRef } from "react"
 import { useDataLoader } from '@/hooks/useDataLoader'
+import { capitalize } from '@/app/formatFunctions'
 
 export const bubbleChartMeta = {
     title: "Theme Bubble Chart",
@@ -122,18 +123,10 @@ export default function BubbleChart({
                 .join("text")
                 .attr("x", dotR * 2 + 6)
                 .attr("y", (_, i) => i * rowStep)
-                .text(d => // remove underscores and hyphens; capitalize each word
-                    d.replace(/[-_]+/g, " ")
-                    .trim()
-                    .split(/\s+/)
-                    .filter(Boolean)
-                    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
-                    .join(" ")
-                )
+                .text(d => capitalize(d))
                 .style("font-size", "12px")
                 .style("alignment-baseline", "middle")
         }
-
     }, [data, width, height, categories])
 
     return <svg ref={svgRef} style={{ width: '100%', height: '100%' }} />

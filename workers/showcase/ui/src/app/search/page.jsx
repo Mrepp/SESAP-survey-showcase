@@ -14,13 +14,14 @@ import { useState, useCallback, useMemo } from "react"
 import { useDataLoader } from '@/hooks/useDataLoader'
 import { useSemanticSearch } from '@/hooks/useSemanticSearch'
 import { useFulltextSearch } from '@/hooks/useFulltextSearch'
-import { standardize, formatDate, buildMajorOptions, buildThemeOptions, buildYearOptions } from '@/app/buildFunctions'
+import { standardize, formatDate } from '@/app/formatFunctions'
+import { buildMajorOptions, buildThemeOptions, buildYearOptions } from '@/app/buildFunctions'
 import SearchBar from "@/components/SearchBar"
 import Result from '@/components/ResultsCard'
 import Filters from '@/components/Filters'
 
 
-const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' }
+const DATE_OPTIONS = { year: 'numeric', month: 'long', day: 'numeric' }
 
 function yearInRange(year, rangeStr) {
     const [startStr, endStr] = rangeStr.split('-')
@@ -46,7 +47,7 @@ function mapSearchResultToCard(result, data) {
         videoUrl: iv?.videoUrl ?? '/placeholder16x9.jpg',
         videoAlt: doc?.title || iv?.title || 'Interview',
         name: iv?.title ?? doc?.title ?? String(result.id),
-        date: formatDate(iv?.metadata?.interviewDate, dateOptions),
+        date: formatDate(iv?.metadata?.interviewDate, DATE_OPTIONS),
         description: doc?.content ? (doc.content.substring(0, 200) + (doc.content.length > 200 ? '...' : '')) : (iv?.description ?? ''),
     }
 }

@@ -8,13 +8,6 @@ import {
 
 
 export default function Interview ({data}) {
-    // Date formatting options
-    const options = {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-    }
-    
     return (
         <Box w="300px" borderWidth="1px" shadow="md" borderRadius='25px' overflow="hidden">
             <Image src={data.videoUrl} alt={data.videoAlt} borderTopRadius='25px' />

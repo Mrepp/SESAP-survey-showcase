@@ -10,7 +10,8 @@ import {
 } from "@chakra-ui/react"
 import { useState, useEffect, useMemo } from "react"
 import { THEME_TITLES } from "@sesap/shared"
-import { standardize } from "@/app/buildFunctions"
+import { standardize, capitalize } from "@/app/formatFunctions"
+
 
 const ListboxItemCheckmark = () => {
   const itemState = useListboxItemContext()
@@ -94,19 +95,20 @@ export default function Filters({
     DEFAULT_CATEGORIES.map((label) => ({ label, value: standardize(label) }))
   )
 
-  // Load categories from categories.txt
+  // Load categories from build metadata
   useEffect(() => {
-    fetch("/categories.txt")
-      .then((res) => res.text())
-      .then((text) => {
-        const lines = text
-          .split("\n")
-          .map((line) => line.trim())
+    fetch("/assets/build/metadata.json")
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error("metadata"))))
+      .then((metadata) => {
+        const raw = metadata?.categories
+        if (!Array.isArray(raw) || raw.length === 0) return
+        const labels = raw
+          .map((c) => String(c).trim())
           .filter(Boolean)
-        if (lines.length > 0) {
+        if (labels.length > 0) {
           setCategoryItems(
-            lines.map((label) => ({
-              label,
+            labels.map((label) => ({
+              label: capitalize(label),
               value: standardize(label),
             }))
           )
@@ -239,7 +241,7 @@ export default function Filters({
         </Accordion.Item>
         )}
 
-        {/* Categories (from categories.txt) */}
+        {/* Categories (from metadata.json) */}
         {visibleFilters.includes("category") && (
         <Accordion.Item value="d">
           <Accordion.ItemTrigger>

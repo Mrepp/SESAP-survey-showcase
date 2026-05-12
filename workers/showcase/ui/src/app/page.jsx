@@ -12,10 +12,10 @@ import {
 } from "@chakra-ui/react"
 import Interview from '@/components/Interview'
 import { useDataLoader } from '@/hooks/useDataLoader'
-import {formatDate} from '@/app/buildFunctions'
+import { formatDate } from '@/app/formatFunctions'
 
 
-const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' }
+const DATE_OPTIONS = { year: 'numeric', month: 'long', day: 'numeric' }
 
 export default function Home() {
     const { isReady, data } = useDataLoader()
@@ -35,7 +35,7 @@ export default function Home() {
             videoUrl: '/thumbnail.png',
             videoAlt: `${iv.title ?? ''} interview`,
             name: iv.title ?? 'Interviewee Name',
-            date: formatDate(iv.metadata?.interviewDate, dateOptions),
+            date: formatDate(iv.metadata?.interviewDate, DATE_OPTIONS),
             description: iv.description ?? '',
         }))
     }, [isReady, data?.interviews])
@@ -108,12 +108,7 @@ export default function Home() {
                     <ScrollArea.Scrollbar orientation="horizontal" />
                     <ScrollArea.Corner />
                 </ScrollArea.Root>
-
-                {/*<Separator orientation={{ base: "vertical", sm: "horizontal" }} size='lg' />*/}
             </Stack>
-
-            
-
         </>
     )
 }

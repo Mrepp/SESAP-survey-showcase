@@ -14,7 +14,8 @@ import {
 } from "@chakra-ui/react"
 import { useState, useMemo } from "react"
 import { useDataLoader } from '@/hooks/useDataLoader'
-import { standardize, buildThemesFromInterviews } from '@/app/buildFunctions'
+import { standardize } from '@/app/formatFunctions'
+import { buildThemesFromInterviews } from '@/app/buildFunctions'
 import Filters from "@/components/Filters"
 import ThemeCard from "@/components/ThemeCard"
 

@@ -19,14 +19,15 @@ import {
 import { useEffect, useMemo, useState } from "react"
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi"
 import { useDataLoader } from '@/hooks/useDataLoader'
-import { standardize, formatDate, interviewDateYearString, buildMajorOptions, buildYearOptions } from '@/app/buildFunctions'
+import { standardize, formatDate } from '@/app/formatFunctions'
+import { interviewDateYearString, buildMajorOptions, buildYearOptions } from '@/app/buildFunctions'
 import Filters from '@/components/Filters'
 import Interview from '@/components/Interview'
 
 
 const pageSize = 9
 
-const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' }
+const DATE_OPTIONS = { year: 'numeric', month: 'long', day: 'numeric' }
 
 export default function Interviews() {
     const { progress, statusText, error, isReady, data, reload } = useDataLoader()
@@ -44,7 +45,7 @@ export default function Interviews() {
             videoUrl: '/thumbnail.png',
             videoAlt: `${iv.title ?? iv.id} interview`,
             name: iv.title ?? 'Interviewee Name',
-            date: formatDate(iv.metadata.interviewDate, dateOptions),
+            date: formatDate(iv.metadata.interviewDate, DATE_OPTIONS),
             major: standardize(iv.demographics?.major),
             year: interviewDateYearString(iv),
         }))

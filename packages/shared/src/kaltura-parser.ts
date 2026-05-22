@@ -1,4 +1,5 @@
 import { ValidationError } from './errors';
+import { URL } from 'node:url';
 
 export interface KalturaSource {
   entryId: string;

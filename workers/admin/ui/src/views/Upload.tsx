@@ -1,9 +1,13 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { Box, Flex, Text, Button, Input, Textarea } from '@chakra-ui/react';
 import { api } from '../api/interviews';
+import { extractAudio } from '../lib/extractAudio';
+import { previewKalturaSource } from '../lib/kalturaPreview';
+
+type Mode = 'url' | 'video' | 'transcript';
 
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
@@ -16,10 +20,114 @@ function Field({ label, required, children }: { label: string; required?: boolea
   );
 }
 
+function ModeRadio({
+  active,
+  onClick,
+  disabled = false,
+  label,
+  hint,
+}: {
+  active: boolean;
+  onClick: () => void;
+  disabled?: boolean;
+  label: string;
+  hint?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        width: '100%',
+        padding: '10px 12px',
+        border: '1px solid',
+        borderColor: active ? 'var(--chakra-colors-brand-500)' : 'var(--chakra-colors-gray-200)',
+        background: active ? 'var(--chakra-colors-brand-50)' : 'white',
+        borderRadius: '6px',
+        textAlign: 'left',
+        cursor: disabled ? 'not-allowed' : 'pointer',
+        opacity: disabled ? 0.65 : 1,
+      }}
+    >
+      <span
+        style={{
+          width: 14,
+          height: 14,
+          borderRadius: '50%',
+          border: '2px solid',
+          borderColor: active ? 'var(--chakra-colors-brand-500)' : 'var(--chakra-colors-gray-300)',
+          background: active ? 'var(--chakra-colors-brand-500)' : 'white',
+          flexShrink: 0,
+        }}
+      />
+      <Box flex={1}>
+        <Text fontSize="sm" fontWeight="600" color={active ? 'brand.700' : 'gray.800'}>
+          {label}
+        </Text>
+        {hint && (
+          <Text fontSize="xs" color="gray.500">
+            {hint}
+          </Text>
+        )}
+      </Box>
+    </button>
+  );
+}
+
 export function Upload() {
   const router = useRouter();
+  const [hydrated, setHydrated] = useState(false);
+  const [mode, setMode] = useState<Mode>('url');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+
+  const [videoUrl, setVideoUrl] = useState('');
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [audioFile, setAudioFile] = useState<File | null>(null);
+  const [extracting, setExtracting] = useState(false);
+  const [extractProgress, setExtractProgress] = useState(0);
+
+  const urlPreview = previewKalturaSource(videoUrl);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    setError('');
+  }, [mode]);
+
+  async function handleVideoChange(e: ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0] ?? null;
+    setVideoFile(file);
+    setAudioFile(null);
+    setExtractProgress(0);
+
+    if (!file) return;
+
+    setExtracting(true);
+    setError('');
+    try {
+      const audio = await extractAudio(file, {
+        onProgress: (ratio) => setExtractProgress(ratio),
+      });
+      setAudioFile(audio);
+      setExtractProgress(1);
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? `Audio extraction failed: ${err.message}`
+          : 'Audio extraction failed',
+      );
+      setVideoFile(null);
+    } finally {
+      setExtracting(false);
+    }
+  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -28,41 +136,41 @@ export function Upload() {
 
     const form = e.currentTarget;
     const fd = new FormData(form);
-    const transcriptFile = fd.get('transcript') as File;
-    // add in for video uploads
-    const videoFile = fd.get('video') as File;
-
-    const hasTranscript =
-      transcriptFile && transcriptFile.name;
-
-    const hasVideo =
-      videoFile && videoFile.name;
-
-    if (!hasTranscript && !hasVideo) {
-      setError('Please select a transcript or video file');
-      setSubmitting(false);
-      return;
-    }
+    const interviewUrlValue = fd.get('interviewURL');
+    const kalturaSource = typeof interviewUrlValue === 'string' ? interviewUrlValue.trim() : '';
 
     const metadata = {
       title: fd.get('title'),
-      demographics: {
-        college: fd.get('college'),
-        graduationYear: fd.get('graduationYear'),
-        major: fd.get('major'),
-        ...(fd.get('gender') ? { gender: fd.get('gender') } : {}),
-        ...(fd.get('ethnicity') ? { ethnicity: fd.get('ethnicity') } : {}),
-      },
+      demographics: {},
       metadata: {
         interviewDate: fd.get('interviewDate'),
-        interviewer: fd.get('interviewer'),
-        ...(fd.get('interviewURL') ? { interviewURL: fd.get('interviewURL') } : {}),
+        ...(fd.get('interviewer') ? { interviewer: fd.get('interviewer') } : {}),
+        ...(kalturaSource ? { interviewURL: kalturaSource } : {}),
         ...(fd.get('notes') ? { notes: fd.get('notes') } : {}),
       },
     };
 
     try {
-      await api.uploadInterview(metadata, transcriptFile);
+      if (mode === 'url') {
+        if (!kalturaSource) {
+          throw new Error('Paste a Kaltura URL or embed iframe');
+        }
+        await api.uploadInterview(metadata, {
+          source: 'kaltura',
+          kalturaSource,
+        });
+      } else if (mode === 'video') {
+        if (!audioFile) {
+          throw new Error('Audio is still being extracted from the video');
+        }
+        await api.uploadInterview(metadata, { source: 'audio', audioFile });
+      } else {
+        const transcriptFile = fd.get('transcript') as File | null;
+        if (!transcriptFile || !transcriptFile.name) {
+          throw new Error('Please choose a transcript file');
+        }
+        await api.uploadInterview(metadata, { source: 'transcript', transcriptFile });
+      }
       router.push('/');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed');
@@ -78,10 +186,19 @@ export function Upload() {
     _focus: { borderColor: 'brand.500', boxShadow: '0 0 0 1px var(--chakra-colors-brand-500)' },
   };
 
+  const submitDisabled =
+    !hydrated ||
+    submitting ||
+    (mode === 'video' && (extracting || !audioFile));
+
   return (
     <Box maxW="800px" mx="auto" p={6}>
       <Text fontFamily="heading" fontSize="2xl" fontWeight="700" color="gray.800" mb={6}>
         Upload New Interview
+      </Text>
+
+      <Text fontSize="sm" color="gray.500" mb={6}>
+        Demographics (college, major, etc.) are detected from the transcript automatically. You can review and edit them on the interview's review page.
       </Text>
 
       {error && (
@@ -93,81 +210,162 @@ export function Upload() {
       <Box bg="white" borderRadius="lg" border="1px solid" borderColor="gray.100" p={6}>
         <form onSubmit={handleSubmit}>
           <Field label="Interview Title" required>
-            <Input name="title" required placeholder="e.g., John Doe - CS 2024" {...inputStyles} />
+            <Input
+              name="title"
+              required
+              disabled={!hydrated || submitting}
+              placeholder="e.g., John Doe - CS 2024"
+              {...inputStyles}
+            />
           </Field>
 
           <Flex gap={4}>
             <Box flex={1}>
               <Field label="Interview Date" required>
-                <Input name="interviewDate" type="date" required {...inputStyles} />
+                <Input
+                  name="interviewDate"
+                  type="date"
+                  required
+                  disabled={!hydrated || submitting}
+                  {...inputStyles}
+                />
               </Field>
             </Box>
             <Box flex={1}>
-              <Field label="Interviewer" required>
-                <Input name="interviewer" required placeholder="e.g., Dr. Smith" {...inputStyles} />
+              <Field label="Interviewer">
+                <Input
+                  name="interviewer"
+                  disabled={!hydrated || submitting}
+                  placeholder="Leave blank for self-directed"
+                  {...inputStyles}
+                />
               </Field>
             </Box>
           </Flex>
 
           <Field label="Video URL">
-            <Input name="interviewURL" type="url" placeholder="https://youtube.com/..." {...inputStyles} />
+            <Textarea
+              name="interviewURL"
+              rows={4}
+              value={videoUrl}
+              disabled={!hydrated || submitting}
+              onChange={(e) => setVideoUrl(e.target.value)}
+              placeholder="Paste the Kaltura embed <iframe> or a media URL"
+              {...inputStyles}
+            />
+            <Text fontSize="xs" color="gray.500" mt={1}>
+              Tip: paste the Kaltura embed iframe for best results — bare URLs require a configured partner id.
+              {mode === 'url' && videoUrl.trim() && (
+                <>
+                  {' '}
+                  <Text
+                    as="span"
+                    color={urlPreview.ok ? 'green.600' : 'red.600'}
+                    fontWeight="500"
+                  >
+                    {urlPreview.ok
+                      ? `Detected entry ${urlPreview.entryId}`
+                      : 'No Kaltura entry id detected'}
+                  </Text>
+                </>
+              )}
+            </Text>
           </Field>
 
-          <Field label="Video File">
-              <Input name="video" type="file" accept="video/mp4,video/webm,video/quicktime" pt={1.5} {...inputStyles} 
+          <Box mb={4}>
+            <Text fontSize="sm" fontWeight="500" color="gray.600" mb={1.5}>
+              Or use a different source
+            </Text>
+            <Flex direction="column" gap={2}>
+              <ModeRadio
+                active={mode === 'url'}
+                onClick={() => setMode('url')}
+                disabled={!hydrated || submitting}
+                label="Use the URL above (Kaltura / embed)"
+                hint="Default. The processing worker fetches and transcribes via Whisper."
               />
+              <ModeRadio
+                active={mode === 'video'}
+                onClick={() => setMode('video')}
+                disabled={!hydrated || submitting}
+                label="Upload a video file"
+                hint="Audio is extracted in your browser; the video itself never uploads."
+              />
+              <ModeRadio
+                active={mode === 'transcript'}
+                onClick={() => setMode('transcript')}
+                disabled={!hydrated || submitting}
+                label="Upload a transcript file (.txt / .md)"
+                hint="Skip transcription and go straight to analysis."
+              />
+            </Flex>
+          </Box>
 
+          {mode === 'video' && (
+            <Field label="Video File" required>
+              <Input
+                name="video"
+                type="file"
+                accept="video/mp4,video/webm,video/quicktime"
+                onChange={handleVideoChange}
+                disabled={!hydrated || submitting}
+                pt={1.5}
+                {...inputStyles}
+              />
               <Text fontSize="xs" color="gray.500" mt={1}>
-                Accepts .mp4, .webm, .mov
+                Accepts .mp4, .webm, .mov.
               </Text>
-          </Field>
+              {videoFile && extracting && (
+                <Box mt={3}>
+                  <Text fontSize="xs" color="gray.600" mb={1}>
+                    Extracting audio… {Math.round(extractProgress * 100)}%
+                  </Text>
+                  <Box bg="gray.100" h="6px" borderRadius="full" overflow="hidden">
+                    <Box
+                      bg="brand.500"
+                      h="100%"
+                      width={`${Math.round(extractProgress * 100)}%`}
+                      transition="width 200ms"
+                    />
+                  </Box>
+                </Box>
+              )}
+              {audioFile && !extracting && (
+                <Text fontSize="xs" color="green.600" mt={2}>
+                  Audio ready ({(audioFile.size / 1024 / 1024).toFixed(2)} MB)
+                </Text>
+              )}
+            </Field>
+          )}
 
-          <Text fontFamily="heading" fontSize="lg" fontWeight="600" color="gray.700" mt={6} mb={3}>
-            Demographics
-          </Text>
-
-          <Flex gap={4}>
-            <Box flex={1}>
-              <Field label="College/Institution" required>
-                <Input name="college" required defaultValue="Oregon State University" {...inputStyles} />
-              </Field>
-            </Box>
-            <Box flex={1}>
-              <Field label="Graduation Year" required>
-                <Input name="graduationYear" required placeholder="2024" {...inputStyles} />
-              </Field>
-            </Box>
-          </Flex>
-
-          <Flex gap={4}>
-            <Box flex={1}>
-              <Field label="Major" required>
-                <Input name="major" required placeholder="Computer Science" {...inputStyles} />
-              </Field>
-            </Box>
-            <Box flex={1}>
-              <Field label="Gender">
-                <Input name="gender" placeholder="Optional" {...inputStyles} />
-              </Field>
-            </Box>
-          </Flex>
-
-          <Field label="Ethnicity">
-            <Input name="ethnicity" placeholder="Optional" {...inputStyles} />
-          </Field>
-
-          <Field label="Transcript File" required>
-            <Input name="transcript" type="file" accept=".txt,.md" required pt={1.5} {...inputStyles} />
-            <Text fontSize="xs" color="gray.500" mt={1}>Accepts .txt, .md</Text>
-          </Field>
+          {mode === 'transcript' && (
+            <Field label="Transcript File" required>
+              <Input
+                name="transcript"
+                type="file"
+                accept=".txt,.md"
+                required
+                disabled={!hydrated || submitting}
+                pt={1.5}
+                {...inputStyles}
+              />
+              <Text fontSize="xs" color="gray.500" mt={1}>Accepts .txt, .md</Text>
+            </Field>
+          )}
 
           <Field label="Notes">
-            <Textarea name="notes" placeholder="Additional notes..." rows={3} {...inputStyles} />
+            <Textarea
+              name="notes"
+              disabled={!hydrated || submitting}
+              placeholder="Additional notes..."
+              rows={3}
+              {...inputStyles}
+            />
           </Field>
 
           <Flex gap={3} mt={2}>
-            <Button type="submit" colorPalette="blue" disabled={submitting}>
-              {submitting ? 'Uploading...' : 'Upload Interview'}
+            <Button type="submit" colorPalette="blue" disabled={submitDisabled}>
+              {submitting ? 'Uploading...' : extracting ? 'Extracting audio…' : 'Upload Interview'}
             </Button>
             <Button variant="outline" onClick={() => router.push('/')}>
               Cancel

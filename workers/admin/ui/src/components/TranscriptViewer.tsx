@@ -9,6 +9,30 @@ interface Props {
 export function TranscriptViewer({ transcript, fillHeight }: Props) {
   const wordCount = transcript.split(/\s+/).filter(Boolean).length;
 
+  if (!transcript) {
+    return (
+      <Flex
+        direction="column"
+        h={fillHeight ? '100%' : 'auto'}
+        bg="gray.50"
+        border="1px dashed"
+        borderColor="gray.300"
+        borderRadius="md"
+        p={6}
+        alignItems="center"
+        justifyContent="center"
+        minH="200px"
+      >
+        <Text fontSize="sm" color="gray.600" fontWeight="600" mb={1}>
+          Transcript not yet available
+        </Text>
+        <Text fontSize="xs" color="gray.500" textAlign="center">
+          The audio is still being transcribed. This view will populate automatically once processing completes.
+        </Text>
+      </Flex>
+    );
+  }
+
   return (
     <Flex direction="column" h={fillHeight ? '100%' : 'auto'}>
       <Flex gap={4} mb={3} flexShrink={0}>

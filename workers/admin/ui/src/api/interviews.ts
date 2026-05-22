@@ -95,10 +95,23 @@ export const api = {
     });
   },
 
-  async uploadInterview(metadata: unknown, transcriptFile: File): Promise<InterviewRecord> {
+  async uploadInterview(
+    metadata: unknown,
+    payload:
+      | { source: 'transcript'; transcriptFile: File }
+      | { source: 'audio'; audioFile: File }
+      | { source: 'kaltura'; kalturaSource: string },
+  ): Promise<InterviewRecord> {
     const formData = new FormData();
-    formData.append('transcript', transcriptFile);
     formData.append('metadata', JSON.stringify(metadata));
+    formData.append('source', payload.source);
+    if (payload.source === 'transcript') {
+      formData.append('transcript', payload.transcriptFile);
+    } else if (payload.source === 'audio') {
+      formData.append('audio', payload.audioFile);
+    } else {
+      formData.append('kalturaSource', payload.kalturaSource);
+    }
     return request('/api/interviews', { method: 'POST', body: formData });
   },
 

@@ -4,13 +4,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "next dev --webpack -p 3001",
     "build": "next build && rm -rf ../public && cp -r out ../public && cp -r public/. ../public/ 2>/dev/null || true",
     "start": "next start"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.29.0",
     "@emotion/react": "^11.14.0",
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
     "@sesap/shared": "workspace:*",
     "@sesap/types": "workspace:*",
     "next": "^16.0.1",

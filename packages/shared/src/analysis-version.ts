@@ -1,8 +1,8 @@
 import { THEME_TITLES } from './theme-enum';
 import { IDENTITY_LABELS } from './identity-enum';
 
-export const ANALYSIS_PROMPT_VERSION = '2026-04-29.3';
-export const ANALYSIS_SCHEMA_VERSION = '2.1.0';
+export const ANALYSIS_PROMPT_VERSION = '2026-05-21.1';
+export const ANALYSIS_SCHEMA_VERSION = '2.2.0';
 
 const TRANSCRIPT_PLACEHOLDER = '__TRANSCRIPT_PLACEHOLDER__';
 
@@ -67,7 +67,14 @@ Your response MUST be valid JSON matching this exact structure:
       "confidence": 0.0 to 1.0,
       "evidence": "Short verbatim quote or paraphrase from the transcript justifying this identity"
     }
-  ]
+  ],
+  "demographics": {
+    "college": "string or null — institution explicitly named by the subject (e.g. 'Oregon State University'). Use the formal full name; never abbreviate.",
+    "graduationYear": "string or null — four-digit year if explicitly stated or strongly anchored (e.g. 'I graduated in 2024').",
+    "major": "string or null — academic program in its formal full name. Always 'Computer Science', never 'CS'; always 'Electrical Engineering', never 'EE'. Spell it out.",
+    "gender": "string or null — only when the subject self-identifies in the transcript.",
+    "ethnicity": "string or null — only when the subject self-identifies in the transcript."
+  }
 }
 
 Guidelines:
@@ -106,6 +113,13 @@ Identity extraction (REQUIRED — return [] if none can be supported):
 - "evidence" must be a brief verbatim quote or close paraphrase from the transcript that justifies the assignment.
 - "confidence" should reflect how unambiguous the textual evidence is (1.0 = explicit self-identification; 0.5 = strongly implied but not stated outright).
 - It is acceptable and expected for many interviews to have an empty identities array.
+
+Demographics extraction (REQUIRED — the object must be present, but every field may be null):
+- Return values only when the transcript supports them. Use null when unknown — do not guess.
+- "college" and "major": write the formal full name as it would appear on a transcript. Examples: "Computer Science" (never "CS"), "Electrical Engineering" (never "EE"), "Mechanical Engineering" (never "ME"), "Political Science" (never "Poli Sci"), "Oregon State University" (never "OSU"). Spell out every word.
+- "graduationYear": return only an explicit four-digit year ("2024"), not relative phrasing like "next year".
+- "gender" and "ethnicity": only when the subject self-identifies (mirror the identity rules above). Do not infer from name, accent, or others' descriptions.
+- If you are not sure about a field, return null rather than guessing.
 
 TRANSCRIPT:
 ${transcript}

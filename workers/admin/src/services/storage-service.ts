@@ -43,3 +43,20 @@ export async function storeInterview(bucket: R2Bucket, id: string, interview: In
     httpMetadata: { contentType: 'application/json' },
   });
 }
+
+export async function uploadAudio(
+  bucket: R2Bucket,
+  id: string,
+  ext: string,
+  body: ArrayBuffer,
+  contentType: string,
+): Promise<string> {
+  const key = R2_PATHS.audioTemp(id, ext);
+  await bucket.put(key, body, { httpMetadata: { contentType } });
+  return key;
+}
+
+export async function deleteAudioTemp(bucket: R2Bucket, id: string): Promise<void> {
+  const list = await bucket.list({ prefix: R2_PATHS.audioTempPrefix(id) });
+  await Promise.all(list.objects.map((object) => bucket.delete(object.key)));
+}

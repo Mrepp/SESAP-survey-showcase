@@ -116,15 +116,24 @@ export function Review() {
       .then((s) => setBuildManifest(s.manifest))
       .catch(() => setBuildManifest(null));
 
-    Promise.all([
-      api.getInterview(id),
-      api.getTranscript(id),
-    ])
-      .then(async ([rec, txt]) => {
+    api.getInterview(id)
+      .then(async (rec) => {
         setInterview(rec);
-        setTranscript(txt);
         setOriginalDemographics(JSON.stringify(rec.demographics));
         setOriginalMetadata(JSON.stringify(rec.metadata));
+
+        if (rec.artifacts.transcript) {
+          try {
+            const txt = await api.getTranscript(id);
+            setTranscript(txt);
+          } catch {
+            // Transcript not yet readable; leave empty so the in-progress
+            // banner shows instead of a hard failure.
+            setTranscript('');
+          }
+        } else {
+          setTranscript('');
+        }
 
         if (rec.processing.status === 'completed') {
           try {
@@ -694,7 +703,8 @@ export function Review() {
                       </Text>
                       <Input
                         size="sm"
-                        value={interview.metadata.interviewer}
+                        value={interview.metadata.interviewer ?? ''}
+                        placeholder="Self-directed"
                         onChange={(e) => updateMetadataField('interviewer', e.target.value)}
                         bg="white"
                         border="1px solid"
@@ -764,8 +774,11 @@ export function Review() {
 
             {activeTab === 'demographics' && (
               <Box>
-                <Text fontFamily="heading" fontSize="xl" fontWeight="600" color="gray.700" mb={4}>
+                <Text fontFamily="heading" fontSize="xl" fontWeight="600" color="gray.700" mb={1}>
                   Demographics
+                </Text>
+                <Text fontSize="xs" color="gray.500" mb={4}>
+                  Auto-detected from the transcript. Review and edit as needed — your edits are preserved on reprocess.
                 </Text>
                 <DemographicsEditor
                   demographics={interview.demographics}

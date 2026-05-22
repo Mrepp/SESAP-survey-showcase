@@ -1,6 +1,5 @@
-import { Upload } from '@/views/Upload';
+import { Dashboard } from '../../views/Dashboard';
 
 export default function Page() {
-  return <Upload />;
+  return <Dashboard />;
 }
-

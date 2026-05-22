@@ -9,6 +9,7 @@ const adminWorkerUrl = process.env.ADMIN_WORKER_URL ?? 'http://127.0.0.1:8787';
 export default {
   ...(isDev ? {} : { output: 'export' }),
   trailingSlash: true,
+  skipTrailingSlashRedirect: true,
   transpilePackages: ['@sesap/shared', '@sesap/types'],
   experimental: {
     optimizePackageImports: ['@chakra-ui/react'],

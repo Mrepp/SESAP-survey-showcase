@@ -4,3 +4,5 @@ packages:
   - "workers/admin/ui"
   - "workers/showcase/ui"
   - "tests/e2e"
+  - "tests/smoke"
+  - "tests/full-pipeline"

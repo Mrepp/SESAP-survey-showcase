@@ -24,14 +24,9 @@ function decorateStale(record: InterviewRecord): InterviewRecordWithStale {
   return { ...record, stale, staleReasons: reasons };
 }
 
-// POST /api/interviews - multipart form upload
+// POST /api/interviews - multipart form upload (transcript | audio | kaltura)
 interviews.post('/api/interviews', async (c) => {
   const formData = await c.req.formData();
-
-  const transcriptFile = formData.get('transcript');
-  if (!transcriptFile || typeof transcriptFile === 'string') {
-    throw new ValidationError('Missing transcript file');
-  }
 
   const metadataRaw = formData.get('metadata');
   if (!metadataRaw || typeof metadataRaw !== 'string') {
@@ -45,17 +40,56 @@ interviews.post('/api/interviews', async (c) => {
     throw new ValidationError('Invalid metadata JSON');
   }
 
-  const result = CreateInterviewRequestSchema.safeParse(parsedMetadata);
-  if (!result.success) {
-    throw new ValidationError('Invalid request data', result.error.flatten());
+  const metaResult = CreateInterviewRequestSchema.safeParse(parsedMetadata);
+  if (!metaResult.success) {
+    throw new ValidationError('Invalid request data', metaResult.error.flatten());
   }
 
-  const transcriptText = await (transcriptFile as File).text();
-  if (!transcriptText.trim()) {
-    throw new ValidationError('Transcript file is empty');
-  }
+  const sourceRaw = formData.get('source');
+  const source =
+    typeof sourceRaw === 'string' && sourceRaw.length > 0 ? sourceRaw : 'transcript';
 
-  const record = await interviewService.createInterview(c.env, result.data, transcriptText);
+  let record: InterviewRecord;
+  if (source === 'transcript') {
+    const transcriptFile = formData.get('transcript');
+    if (!transcriptFile || typeof transcriptFile === 'string') {
+      throw new ValidationError('Missing transcript file');
+    }
+    const transcriptText = await (transcriptFile as File).text();
+    if (!transcriptText.trim()) {
+      throw new ValidationError('Transcript file is empty');
+    }
+    record = await interviewService.createInterview(c.env, metaResult.data, transcriptText);
+  } else if (source === 'audio') {
+    const audioFile = formData.get('audio');
+    if (!audioFile || typeof audioFile === 'string') {
+      throw new ValidationError('Missing audio file');
+    }
+    const file = audioFile as File;
+    if (file.size === 0) {
+      throw new ValidationError('Audio file is empty');
+    }
+    const audioBytes = await file.arrayBuffer();
+    const contentType = file.type || 'application/octet-stream';
+    record = await interviewService.createInterviewFromAudio(
+      c.env,
+      metaResult.data,
+      audioBytes,
+      contentType,
+    );
+  } else if (source === 'kaltura') {
+    const kalturaSource = formData.get('kalturaSource');
+    if (typeof kalturaSource !== 'string' || !kalturaSource.trim()) {
+      throw new ValidationError('Missing Kaltura source');
+    }
+    record = await interviewService.createInterviewFromKaltura(
+      c.env,
+      metaResult.data,
+      kalturaSource,
+    );
+  } else {
+    throw new ValidationError(`Unknown source: ${source}`);
+  }
 
   const response: ApiResponse<InterviewRecord> = {
     success: true,

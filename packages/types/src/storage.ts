@@ -3,6 +3,8 @@ export const R2_PATHS = {
   analysis: (id: string) => `analysis/${id}.json`,
   embeddings: (id: string) => `embeddings/${id}.json`,
   interview: (id: string) => `interview_repository/${id}.json`,
+  audioTemp: (id: string, ext: string) => `audio/temp/${id}.${ext}`,
+  audioTempPrefix: (id: string) => `audio/temp/${id}.`,
   buildArtifact: (name: string) => `build/${name}`,
 } as const;
 

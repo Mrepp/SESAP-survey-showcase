@@ -90,6 +90,7 @@ export interface Analysis {
   quotes: Quote[];
   areasForImprovement: AreaForImprovement[];
   identities?: Identity[];
+  demographics?: Partial<import('./interview').Demographics>;
   generatedAt: string;
   promptVersion?: string;
   promptHash?: string;

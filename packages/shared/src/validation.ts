@@ -6,9 +6,9 @@ import { IdentityLabelSchema } from './identity-enum';
 
 export const DemographicsSchema = z
   .object({
-    college: z.string(),
-    graduationYear: z.string(),
-    major: z.string(),
+    college: z.string().optional(),
+    graduationYear: z.string().optional(),
+    major: z.string().optional(),
     gender: z.string().optional(),
     ethnicity: z.string().optional(),
     age: z.string().optional(),
@@ -30,7 +30,7 @@ export const TranscriptSchema = z.object({
 
 export const InterviewMetadataSchema = z.object({
   interviewDate: z.string(),
-  interviewer: z.string(),
+  interviewer: z.string().optional(),
   interviewURL: z.string().optional(),
   notes: z.string().optional(),
 });
@@ -137,6 +137,21 @@ export const AreaForImprovementSchema = z.object({
   actionItems: z.array(z.string()).optional(),
 });
 
+// Demographics inferred by the LLM may arrive with explicit nulls; allow them
+// and treat them as "unknown". Empty strings are similarly tolerated.
+const NullableString = z.union([z.string(), z.null()]).optional();
+export const LLMDemographicsSchema = z
+  .object({
+    college: NullableString,
+    graduationYear: NullableString,
+    major: NullableString,
+    gender: NullableString,
+    ethnicity: NullableString,
+    age: NullableString,
+    year: NullableString,
+  })
+  .partial();
+
 export const AnalysisSchema = z.object({
   interviewId: z.string(),
   modelConfig: LLMModelConfigSchema,
@@ -146,6 +161,7 @@ export const AnalysisSchema = z.object({
   quotes: z.array(QuoteSchema),
   areasForImprovement: z.array(AreaForImprovementSchema),
   identities: z.array(IdentitySchema).default([]),
+  demographics: LLMDemographicsSchema.optional(),
   generatedAt: z.string(),
   promptVersion: z.string().optional(),
   promptHash: z.string().optional(),
@@ -210,8 +226,17 @@ export const BuildMetadataSchema = z.object({
 
 // ---- Admin schemas ----
 
-export const ProcessingStatusSchema = z.enum(['pending', 'processing', 'completed', 'failed']);
+export const ProcessingStatusSchema = z.enum([
+  'pending',
+  'queued',
+  'transcribing',
+  'processing',
+  'completed',
+  'failed',
+]);
 export const ApprovalStatusSchema = z.enum(['pending_review', 'approved', 'rejected']);
+
+export const InterviewSourceSchema = z.enum(['transcript', 'audio', 'kaltura']);
 
 export const CreateInterviewRequestSchema = z.object({
   title: z.string(),

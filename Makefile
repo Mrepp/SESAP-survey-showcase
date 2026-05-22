@@ -1,4 +1,4 @@
-.PHONY: dev dev-ui ui-build deploy deploy-admin deploy-processing deploy-showcase deploy-indexing setup help
+.PHONY: dev dev-ui ui-build deploy deploy-admin deploy-processing deploy-showcase deploy-indexing setup test-pipeline-headed help
 
 help:
 	@echo "Available targets:"
@@ -11,6 +11,7 @@ help:
 	@echo "  make deploy-showcase     - Deploy showcase worker"
 	@echo "  make deploy-indexing     - Deploy indexing worker"
 	@echo "  make setup               - Create wrangler.toml files from templates"
+	@echo "  make test-pipeline-headed - Start the dev stack and run the full-pipeline e2e test with a visible browser"
 
 dev: ui-build
 	pnpm dev
@@ -45,3 +46,6 @@ deploy-indexing:
 
 setup:
 	@bash scripts/setup-wrangler.sh
+
+test-pipeline-headed:
+	@pnpm --filter @sesap/full-pipeline exec playwright test --headed

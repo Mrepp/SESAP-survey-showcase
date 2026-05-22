@@ -7,6 +7,8 @@
     "lint": "turbo lint",
     "test": "turbo test",
     "test:e2e": "pnpm --filter @sesap/e2e test",
+    "test:smoke": "pnpm --filter @sesap/smoke test",
+    "test:pipeline": "pnpm --filter @sesap/full-pipeline test",
     "build": "turbo build",
     "dev": "turbo dev"
   },

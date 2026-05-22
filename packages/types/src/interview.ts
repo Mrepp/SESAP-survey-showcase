@@ -1,7 +1,7 @@
 export interface Demographics {
-  college: string;
-  graduationYear: string;
-  major: string;
+  college?: string;
+  graduationYear?: string;
+  major?: string;
   gender?: string;
   ethnicity?: string;
   age?: string;
@@ -23,7 +23,7 @@ export interface Transcript {
 
 export interface InterviewMetadata {
   interviewDate: string;
-  interviewer: string;
+  interviewer?: string;
   interviewURL?: string;
   notes?: string;
 }

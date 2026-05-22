@@ -107,9 +107,14 @@ describe('validation schemas', () => {
     expect(result.success).toBe(true);
   });
 
-  it('DemographicsSchema rejects missing required fields', () => {
+  it('DemographicsSchema accepts an empty object (all fields optional)', () => {
+    const result = DemographicsSchema.safeParse({});
+    expect(result.success).toBe(true);
+  });
+
+  it('DemographicsSchema accepts a partial object', () => {
     const result = DemographicsSchema.safeParse({ college: 'MIT' });
-    expect(result.success).toBe(false);
+    expect(result.success).toBe(true);
   });
 
   it('InterviewMetadataSchema accepts valid data', () => {

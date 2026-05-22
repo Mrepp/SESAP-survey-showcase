@@ -6,3 +6,5 @@ export * from './logger';
 export * from './theme-enum';
 export * from './identity-enum';
 export * from './analysis-version';
+export * from './kaltura-parser';
+export * from './demographics-normalizer';

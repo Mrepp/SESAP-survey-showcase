@@ -77,7 +77,7 @@ function assignIds(interviewId: string, raw: Record<string, unknown>): Record<st
     modelConfig: {
       model: MODEL_NAME,
       temperature: 0.3,
-      maxTokens: 4096,
+      maxTokens: 8192,
     },
     summaries: idSummaries,
     timeline: idTimeline,
@@ -91,6 +91,33 @@ function assignIds(interviewId: string, raw: Record<string, unknown>): Record<st
 
 async function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Scan a string for the first balanced top-level JSON object and return it as a string,
+// or null if no balanced object is found. Used to recover JSON from reasoning-model output
+// when the structured `content` field is null.
+function extractFirstJsonObject(input: string): string | null {
+  const start = input.indexOf('{');
+  if (start < 0) return null;
+  let depth = 0;
+  let inString = false;
+  let escape = false;
+  for (let i = start; i < input.length; i++) {
+    const ch = input[i];
+    if (escape) { escape = false; continue; }
+    if (inString) {
+      if (ch === '\\') escape = true;
+      else if (ch === '"') inString = false;
+      continue;
+    }
+    if (ch === '"') { inString = true; continue; }
+    if (ch === '{') depth++;
+    else if (ch === '}') {
+      depth--;
+      if (depth === 0) return input.slice(start, i + 1);
+    }
+  }
+  return null;
 }
 
 export async function generateAnalysis(
@@ -157,16 +184,29 @@ export async function generateAnalysis(
           },
           { role: 'user', content: prompt },
         ],
-        max_tokens: 4096,
+        max_tokens: 8192,
         response_format: { type: 'json_object' },
-      })) as { response?: string; choices?: Array<{ message?: { content?: string | null } }> };
+      })) as {
+        response?: string;
+        choices?: Array<{
+          message?: { content?: string | null; reasoning_content?: string | null };
+        }>;
+      };
 
-      // OpenAI-compatible models return choices[].message.content
-      // Cloudflare native models return response directly
-      const text =
+      // OpenAI-compatible models return choices[].message.content; Cloudflare native models
+      // return `response` directly. Reasoning models (gpt-oss-*) sometimes spend their entire
+      // token budget on reasoning, leaving content null — when that happens the JSON object is
+      // embedded inside reasoning_content, so extract the first top-level JSON object as fallback.
+      const rawContent =
         response.response ??
         response.choices?.[0]?.message?.content ??
         '';
+      let text = rawContent;
+      if (!text) {
+        const reasoning = response.choices?.[0]?.message?.reasoning_content ?? '';
+        const extracted = extractFirstJsonObject(reasoning);
+        if (extracted) text = extracted;
+      }
 
       logger.info('LLM response received', {
         interviewId,

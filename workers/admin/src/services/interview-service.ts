@@ -6,11 +6,37 @@ import type {
   Analysis,
   BuildDirtyState,
   BuildMetadata,
+  KalturaRef,
 } from '@sesap/types';
 import { KV_KEYS, R2_PATHS } from '@sesap/types';
-import { generateInterviewId, NotFoundError, Logger, ProcessingError } from '@sesap/shared';
+import {
+  generateInterviewId,
+  NotFoundError,
+  Logger,
+  ProcessingError,
+  ValidationError,
+  parseKalturaSource,
+} from '@sesap/shared';
 import type { Env } from '../bindings';
 import * as storageService from './storage-service';
+
+function audioExtFromContentType(contentType: string): string {
+  const lc = contentType.toLowerCase();
+  if (lc.includes('mpeg') || lc.includes('mp3')) return 'mp3';
+  if (lc.includes('ogg')) return 'ogg';
+  if (lc.includes('webm')) return 'webm';
+  if (lc.includes('mp4') || lc.includes('m4a') || lc.includes('aac')) return 'm4a';
+  if (lc.includes('wav') || lc.includes('wave')) return 'wav';
+  if (lc.includes('flac')) return 'flac';
+  return 'bin';
+}
+
+async function appendToInterviewsList(env: Env, id: string): Promise<void> {
+  const listRaw = await env.SESAP_KV.get(KV_KEYS.interviewsList);
+  const list: string[] = listRaw ? JSON.parse(listRaw) : [];
+  list.push(id);
+  await env.SESAP_KV.put(KV_KEYS.interviewsList, JSON.stringify(list));
+}
 
 const logger = new Logger({ worker: 'sesap-admin', module: 'interview-service' });
 
@@ -39,6 +65,7 @@ export async function createInterview(
     title: request.title,
     demographics: request.demographics,
     metadata: request.metadata,
+    source: 'transcript',
     processing: { status: 'pending' },
     approval: { status: 'pending_review' },
     artifacts: { transcript: true, analysis: false, embeddings: false },
@@ -50,10 +77,7 @@ export async function createInterview(
   await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
 
   // 5. Update interviews list
-  const listRaw = await env.SESAP_KV.get(KV_KEYS.interviewsList);
-  const list: string[] = listRaw ? JSON.parse(listRaw) : [];
-  list.push(id);
-  await env.SESAP_KV.put(KV_KEYS.interviewsList, JSON.stringify(list));
+  await appendToInterviewsList(env, id);
 
   // 6. Send to queue (guaranteed delivery)
   await env.PROCESSING_QUEUE.send({
@@ -69,6 +93,132 @@ export async function createInterview(
   await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
 
   logger.info('Interview created and queued', { id });
+  return record;
+}
+
+export async function createInterviewFromAudio(
+  env: Env,
+  request: CreateInterviewRequest,
+  audioBytes: ArrayBuffer,
+  contentType: string,
+): Promise<InterviewRecord> {
+  const id = generateInterviewId();
+  const now = new Date().toISOString();
+  const ext = audioExtFromContentType(contentType);
+
+  logger.info('Creating interview from audio', {
+    id,
+    title: request.title,
+    sizeBytes: audioBytes.byteLength,
+    contentType,
+  });
+
+  // 1. Upload audio to R2 (temporary)
+  const key = await storageService.uploadAudio(env.SESAP_BUCKET, id, ext, audioBytes, contentType);
+
+  // 2. Verify upload
+  const verification = await env.SESAP_BUCKET.head(key);
+  if (!verification) {
+    throw new ProcessingError('Audio upload verification failed');
+  }
+
+  // 3. Create record
+  const record: InterviewRecord = {
+    id,
+    title: request.title,
+    demographics: request.demographics,
+    metadata: request.metadata,
+    source: 'audio',
+    audioRef: {
+      key,
+      contentType,
+      sizeBytes: audioBytes.byteLength,
+      uploadedAt: now,
+    },
+    processing: { status: 'pending' },
+    approval: { status: 'pending_review' },
+    artifacts: { transcript: false, analysis: false, embeddings: false },
+    createdAt: now,
+    updatedAt: now,
+  };
+
+  await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
+  await appendToInterviewsList(env, id);
+
+  await env.PROCESSING_QUEUE.send({
+    interviewId: id,
+    queuedAt: new Date().toISOString(),
+    metadata: { triggeredBy: 'admin', reason: 'new_upload_audio' },
+  });
+
+  record.processing.status = 'queued';
+  record.processing.queuedAt = new Date().toISOString();
+  record.updatedAt = new Date().toISOString();
+  await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
+
+  logger.info('Audio interview created and queued', { id });
+  return record;
+}
+
+export async function createInterviewFromKaltura(
+  env: Env,
+  request: CreateInterviewRequest,
+  rawSource: string,
+): Promise<InterviewRecord> {
+  const id = generateInterviewId();
+  const now = new Date().toISOString();
+
+  const parsed = parseKalturaSource(rawSource);
+  const partnerId = parsed.partnerId ?? env.KALTURA_PARTNER_ID;
+  if (!partnerId) {
+    throw new ValidationError(
+      'Could not determine the Kaltura partner id. Paste an embed iframe (which carries it) or set KALTURA_PARTNER_ID.',
+    );
+  }
+
+  const kalturaRef: KalturaRef = {
+    entryId: parsed.entryId,
+    partnerId,
+    widgetId: parsed.widgetId,
+    sourceInput: rawSource,
+  };
+
+  logger.info('Creating interview from Kaltura', {
+    id,
+    title: request.title,
+    entryId: kalturaRef.entryId,
+    partnerId: kalturaRef.partnerId,
+  });
+
+  const record: InterviewRecord = {
+    id,
+    title: request.title,
+    demographics: request.demographics,
+    metadata: request.metadata,
+    source: 'kaltura',
+    kalturaRef,
+    processing: { status: 'pending' },
+    approval: { status: 'pending_review' },
+    artifacts: { transcript: false, analysis: false, embeddings: false },
+    createdAt: now,
+    updatedAt: now,
+  };
+
+  await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
+  await appendToInterviewsList(env, id);
+
+  await env.PROCESSING_QUEUE.send({
+    interviewId: id,
+    queuedAt: new Date().toISOString(),
+    metadata: { triggeredBy: 'admin', reason: 'new_upload_kaltura' },
+  });
+
+  record.processing.status = 'queued';
+  record.processing.queuedAt = new Date().toISOString();
+  record.updatedAt = new Date().toISOString();
+  await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
+
+  logger.info('Kaltura interview created and queued', { id });
   return record;
 }
 
@@ -182,6 +332,7 @@ export async function deleteInterview(env: Env, id: string): Promise<void> {
     env.SESAP_BUCKET.delete(R2_PATHS.analysis(id)),
     env.SESAP_BUCKET.delete(R2_PATHS.embeddings(id)),
     env.SESAP_BUCKET.delete(R2_PATHS.interview(id)),
+    storageService.deleteAudioTemp(env.SESAP_BUCKET, id),
   ]);
 
   // 2. Delete KV record

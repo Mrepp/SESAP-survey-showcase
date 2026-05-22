@@ -25,6 +25,10 @@ preview_id = "<YOUR_KV_PREVIEW_ID>"
 [vars]
 ENVIRONMENT = "development"
 SHOWCASE_URL = "http://localhost:8790"  # Update to production URL when deploying
+# Default Kaltura partner id used when an admin pastes a media-page URL that
+# doesn't carry the partner id (iframe embeds do). Leave empty to require
+# the iframe form.
+KALTURA_PARTNER_ID = ""
 # NEXT_DEV_URL is intentionally not set here. It is a local-dev-only variable
 # that proxies non-API paths to the next dev server. In production the ASSETS
 # binding serves the built next export. Add it to your local (gitignored)

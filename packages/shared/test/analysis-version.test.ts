@@ -12,9 +12,9 @@ describe('analysis-version', () => {
   // schema is modified. If this test fails, update both the version constant
   // and this expected hash in the same change.
   it('prompt hash is pinned', () => {
-    expect(ANALYSIS_PROMPT_HASH).toBe('23ec1ea5');
-    expect(ANALYSIS_PROMPT_VERSION).toBe('2026-04-29.3');
-    expect(ANALYSIS_SCHEMA_VERSION).toBe('2.1.0');
+    expect(ANALYSIS_PROMPT_HASH).toBe('3839443c');
+    expect(ANALYSIS_PROMPT_VERSION).toBe('2026-05-21.1');
+    expect(ANALYSIS_SCHEMA_VERSION).toBe('2.2.0');
   });
 
   it('isAnalysisStale flags missing stamps', () => {

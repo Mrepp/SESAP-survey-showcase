@@ -1,12 +1,6 @@
-import { Dashboard } from '../../views/Dashboard';
-import VideoUpload from '@/components/VideoUpload';
+import { Upload } from '@/views/Upload';
 
 export default function Page() {
-  return (
-  <>
-    <Upload />
-    <VideoUpload />
-  </>
-);
+  return <Upload />;
 }
 

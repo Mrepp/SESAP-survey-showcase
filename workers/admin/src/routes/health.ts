@@ -18,15 +18,20 @@ health.get('/api/health', (c) => {
 
 // Debug endpoint to check Cloudflare Access headers
 health.get('/api/debug/headers', (c) => {
+  const allCfHeaders: Record<string, string> = {};
+
+  c.req.raw.headers.forEach((value, key) => {
+    if (key.toLowerCase().startsWith('cf-')) {
+      allCfHeaders[key] = value;
+    }
+  });
+
   const headers = {
     email: c.req.header('Cf-Access-Authenticated-User-Email'),
     username: c.req.header('Cf-Access-Authenticated-User-Login'),
-    allCfHeaders: Object.fromEntries(
-      Array.from(c.req.raw.headers.entries()).filter(([key]) =>
-        key.toLowerCase().startsWith('cf-')
-      )
-    ),
+    allCfHeaders,
   };
+
   return c.json({
     status: 'debug',
     headers,

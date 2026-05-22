@@ -50,16 +50,13 @@ export async function createInterview(
 
   logger.info('Creating interview', { id, title: request.title });
 
-  // 1. Upload to R2
   await storageService.uploadTranscript(env.SESAP_BUCKET, id, transcript);
 
-  // 2. Verify R2 upload (eliminates race condition)
   const verification = await env.SESAP_BUCKET.head(R2_PATHS.transcript(id));
   if (!verification) {
     throw new ProcessingError('Transcript upload verification failed');
   }
 
-  // 3. Create unified record
   const record: InterviewRecord = {
     id,
     title: request.title,
@@ -73,20 +70,16 @@ export async function createInterview(
     updatedAt: now,
   };
 
-  // 4. Store in KV
   await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
 
-  // 5. Update interviews list
   await appendToInterviewsList(env, id);
-
-  // 6. Send to queue (guaranteed delivery)
+  
   await env.PROCESSING_QUEUE.send({
     interviewId: id,
     queuedAt: new Date().toISOString(),
     metadata: { triggeredBy: 'admin', reason: 'new_upload' },
   });
 
-  // 7. Update status to 'queued'
   record.processing.status = 'queued';
   record.processing.queuedAt = new Date().toISOString();
   record.updatedAt = new Date().toISOString();
@@ -113,16 +106,14 @@ export async function createInterviewFromAudio(
     contentType,
   });
 
-  // 1. Upload audio to R2 (temporary)
+  //audio
   const key = await storageService.uploadAudio(env.SESAP_BUCKET, id, ext, audioBytes, contentType);
 
-  // 2. Verify upload
   const verification = await env.SESAP_BUCKET.head(key);
   if (!verification) {
     throw new ProcessingError('Audio upload verification failed');
   }
 
-  // 3. Create record
   const record: InterviewRecord = {
     id,
     title: request.title,
@@ -326,7 +317,6 @@ export async function deleteInterview(env: Env, id: string): Promise<void> {
 
   logger.info('Deleting interview', { id, approvalStatus: record.approval.status });
 
-  // 1. Delete all R2 artifacts for this interview
   await Promise.all([
     env.SESAP_BUCKET.delete(R2_PATHS.transcript(id)),
     env.SESAP_BUCKET.delete(R2_PATHS.analysis(id)),
@@ -335,10 +325,8 @@ export async function deleteInterview(env: Env, id: string): Promise<void> {
     storageService.deleteAudioTemp(env.SESAP_BUCKET, id),
   ]);
 
-  // 2. Delete KV record
   await env.SESAP_KV.delete(KV_KEYS.interview(id));
 
-  // 3. Remove from interviews list
   const listRaw = await env.SESAP_KV.get(KV_KEYS.interviewsList);
   if (listRaw) {
     const list: string[] = JSON.parse(listRaw);
@@ -346,7 +334,6 @@ export async function deleteInterview(env: Env, id: string): Promise<void> {
     await env.SESAP_KV.put(KV_KEYS.interviewsList, JSON.stringify(updated));
   }
 
-  // 4. If the interview was approved, mark build as dirty (stale indexes)
   if (record.approval.status === 'approved') {
     await markBuildDirty(env, 'delete');
   }

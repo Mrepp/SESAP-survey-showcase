@@ -152,7 +152,7 @@ export default function Filters({
         {visibleFilters.includes("themes") && (
         <Accordion.Item value="a">
           <Accordion.ItemTrigger>
-            <Span flex="1" color="beavOrange">
+            <Span flex="1" color="beavOrange" id="themes-filter">
               Themes
             </Span>
             <Accordion.ItemIndicator />
@@ -165,7 +165,7 @@ export default function Filters({
                 value={selectedThemes}
                 onValueChange={(e) => setSelectedThemes(e.value)}
               >
-                <Listbox.Content>
+                <Listbox.Content aria-labelledby="themes-filter">
                   {themesCollection.items.map((option) => (
                     <Listbox.Item item={option} key={option.value}>
                       <ListboxItemCheckmark />
@@ -183,7 +183,7 @@ export default function Filters({
         {visibleFilters.includes("year") && (
         <Accordion.Item value="b">
           <Accordion.ItemTrigger>
-            <Span flex="1" color="beavOrange">
+            <Span flex="1" color="beavOrange" id="year-filter">
               Year
             </Span>
             <Accordion.ItemIndicator />
@@ -196,7 +196,7 @@ export default function Filters({
                 value={selectedYears}
                 onValueChange={(e) => setSelectedYears(e.value)}
               >
-                <Listbox.Content>
+                <Listbox.Content aria-labelledby="year-filter">
                   {yearsCollection.items.map((option) => (
                     <Listbox.Item item={option} key={option.value}>
                       <ListboxItemCheckmark />
@@ -214,7 +214,7 @@ export default function Filters({
         {visibleFilters.includes("sentiment") && (
         <Accordion.Item value="c">
           <Accordion.ItemTrigger>
-            <Span flex="1" color="beavOrange">
+            <Span flex="1" color="beavOrange" id="sentiment-filter">
               Sentiment
             </Span>
             <Accordion.ItemIndicator />
@@ -227,7 +227,7 @@ export default function Filters({
                 value={selectedSentiments}
                 onValueChange={(e) => setSelectedSentiments(e.value)}
               >
-                <Listbox.Content>
+                <Listbox.Content aria-labelledby="sentiment-filter">
                   {sentimentsCollection.items.map((option) => (
                     <Listbox.Item item={option} key={option.value}>
                       <ListboxItemCheckmark />
@@ -245,7 +245,7 @@ export default function Filters({
         {visibleFilters.includes("category") && (
         <Accordion.Item value="d">
           <Accordion.ItemTrigger>
-            <Span flex="1" color="beavOrange">
+            <Span flex="1" color="beavOrange" id="category-filter">
               Category
             </Span>
             <Accordion.ItemIndicator />
@@ -258,7 +258,7 @@ export default function Filters({
                 value={selectedCategories}
                 onValueChange={(e) => setSelectedCategories(e.value)}
               >
-                <Listbox.Content>
+                <Listbox.Content aria-labelledby="category-filter">
                   {categoriesCollection.items.map((option) => (
                     <Listbox.Item item={option} key={option.value}>
                       <ListboxItemCheckmark />
@@ -276,7 +276,7 @@ export default function Filters({
         {visibleFilters.includes("major") && (
         <Accordion.Item value="e">
           <Accordion.ItemTrigger>
-            <Span flex="1" color="beavOrange">
+            <Span flex="1" color="beavOrange" id="major-filter">
               Major
             </Span>
             <Accordion.ItemIndicator />
@@ -289,7 +289,7 @@ export default function Filters({
                 value={selectedMajors}
                 onValueChange={(e) => setSelectedMajors(e.value)}
               >
-                <Listbox.Content>
+                <Listbox.Content aria-labelledby="major-filter">
                   {majorsCollection.items.map((option) => (
                     <Listbox.Item item={option} key={option.value}>
                       <ListboxItemCheckmark />

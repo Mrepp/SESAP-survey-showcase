@@ -66,6 +66,14 @@ export default function Correlation({ correlations, plotWidth = 800 }) {
         })
 
         chartRef.current.append(plot)
+
+        // Plot applies aria-label to SVG <g> nodes (e.g. "cell", "text", axis ticks), but
+        // aria-label is prohibited on <g> without an explicit role. The chart card already
+        // has an accessible name; strip these so Lighthouse/axe pass.
+        plot.querySelectorAll("g[aria-label]").forEach((el) => {
+            el.removeAttribute("aria-label")
+        })
+        
         return () => plot.remove()
     }, [correlations, plotWidth])
 

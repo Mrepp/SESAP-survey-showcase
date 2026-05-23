@@ -96,6 +96,7 @@ export default function Insights() {
                     minH={0}
                     overflow="hidden"
                     p={4}
+                    aria-label='Word Cloud'
                     {...insightCardProps(!!text, INSIGHT_KEYS.wordCloud, setDialogKey)}
                 >
                     {text ? <WordCloud text={text} interviews={data?.interviews} /> : <Text color="fg.muted">No interview text available.</Text>}
@@ -108,6 +109,7 @@ export default function Insights() {
                     minH={0}
                     overflow="auto"
                     p={4}
+                    aria-label='Theme Correlation Heat Map'
                     {...insightCardProps(correlations.length > 0, INSIGHT_KEYS.correlation, setDialogKey)}
                 >
                     {correlations.length > 0
@@ -132,6 +134,7 @@ export default function Insights() {
                         h={{ base: "300px", md: "100%" }}
                         minH={0}
                         overflow="hidden"
+                        aria-label='Theme Frequency Bubble Chart'
                         p={4}
                         {...insightCardProps(themes.length > 0, INSIGHT_KEYS.bubble, setDialogKey)}
                     >
@@ -149,6 +152,7 @@ export default function Insights() {
                         minH={0}
                         overflow="hidden"
                         p={4}
+                        aria-label='Major Doughnut Chart'
                         {...insightCardProps(majorDoughnutChartData.length > 0, INSIGHT_KEYS.majorDoughnutChart, setDialogKey)}
                     >
                         {majorDoughnutChartData.length > 0 ? <MajorDoughnutChart majorData={majorDoughnutChartData} /> : <Text color="fg.muted">No major data available.</Text>}
@@ -162,6 +166,7 @@ export default function Insights() {
                     minH={0}
                     overflow="hidden"
                     p={4}
+                    aria-label='Theme and Identity Correlation Bar Chart'
                     {...insightCardProps(interviewData.length > 0, INSIGHT_KEYS.bar, setDialogKey)}
                 >
                     {interviewData.length > 0

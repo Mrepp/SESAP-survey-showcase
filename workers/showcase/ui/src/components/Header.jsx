@@ -11,7 +11,7 @@ import {
 
 export default function Header () {
     return(
-        <Box bg='white' h="100px" maxW="100%">
+        <Box as='header' role='banner' bg='white' h="100px" maxW="100%">
             <HStack h='100%' separator={<StackSeparator />}>
                 <Box>
                     <Link href='https://oregonstate.edu'>

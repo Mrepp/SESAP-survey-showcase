@@ -6,7 +6,7 @@ import {
 
 export default function Main ({children}) {
     return(
-        <Box bg='osuOffWhite' flexGrow={1} p='30px'>
+        <Box as='main' role='main' bg='osuOffWhite' flexGrow={1} p='30px'>
             {children}
         </Box>
     )

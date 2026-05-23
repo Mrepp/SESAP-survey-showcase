@@ -23,7 +23,7 @@ const links = [
 ]
 export default function Navbar () {
     return (
-        <Box display='flex' gap='10' bg="osuNavGray" w="100%" h="100%" p={4} alignItems="center">
+        <Box as='nav' role='navigation' display='flex' gap='10' bg="osuNavGray" w="100%" h="100%" p={4} alignItems="center">
             {/* Drawer menu: visible on small screens only */}
             <Box display={{ base: 'block', lg: 'none' }}>
                 <Drawer.Root placement='start' >

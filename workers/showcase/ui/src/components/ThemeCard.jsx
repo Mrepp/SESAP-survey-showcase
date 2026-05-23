@@ -17,6 +17,8 @@ export default function ThemeCard ({data}) {
         <Drawer.Root size="sm">
             <Drawer.Trigger asChild>
                 <Box
+                    as="button"
+                    type="button"
                     width='150px' 
                     aspectRatio='1/1'
                     borderWidth="1px" 

@@ -15,6 +15,7 @@ import { buildMajorOptions, buildImprovementsFromInterviews } from '@/app/buildF
 import Filters from "@/components/Filters"
 import ImprovementContainer from "@/components/ImprovementContainer"
 
+
 const PRIORITY_GROUPS = [
     { priority: 'High', color: 'red.300', key: 'high' },
     { priority: 'Medium', color: 'orange.300', key: 'medium' },

@@ -17,7 +17,7 @@ import {
     useCarousel,
     useCollapsibleContext,
 } from "@chakra-ui/react"
-import { Suspense, useMemo } from 'react'
+import { Suspense, useEffect, useMemo } from 'react'
 import { useSearchParams, useRouter } from "next/navigation"
 import { useDataLoader } from '@/hooks/useDataLoader'
 import { LuChevronLeft, LuChevronRight, LuClipboardList, LuCalendarDays, LuComponent, LuSquareCheck } from "react-icons/lu"
@@ -194,6 +194,11 @@ function InterviewViewInner() {
 
     const dataForUI = useMemo(() => (interview ? mapToUI(interview) : null), [interview])
 
+    useEffect(() => {
+        if (!dataForUI?.intervieweeName) return
+        document.title = `${dataForUI.intervieweeName} Interview | SESAP`
+    }, [dataForUI?.intervieweeName])
+
     const improvementsByPriority = useMemo(() => {
         if (!dataForUI?.improvements?.length) return []
         const level = ['high', 'medium', 'low']
@@ -306,74 +311,84 @@ function InterviewViewInner() {
                                 ))}
                             </Accordion.Root>
 
-                            <Heading>Notable Quotes</Heading>
+                            {/* Quotes */}
                             <Carousel.RootProvider value={carousel}>
                                 <Collapsible.Root collapsedHeight="150px">
-                                    <Collapsible.Trigger asChild mt="4">
-                                            <Collapsible.Indicator transition="transform 0.2s">
-                                                <Collapsible.Content  borderRadius='25px'>
-                                                    <Carousel.ItemGroup>
-                                                        {quotes.map((item, index) => (
-                                                            <Carousel.Item key={index} index={index}>
-                                                                <Box
-                                                                    w="100%"
-                                                                    minH="150px"
-                                                                    h='fit-content'
-                                                                    borderRadius='25px'
-                                                                    bg='white'
-                                                                    display='flex'
-                                                                    flexDirection='column'
-                                                                    cursor='pointer'
-                                                                >
-                                                                    <Box
-                                                                        minH='150px'
-                                                                        display='flex'
-                                                                        flexDirection='column'
-                                                                    >
-                                                                        <Box
-                                                                            flexShrink={0}
-                                                                            display='flex'
-                                                                            justifyContent='flex-end'
-                                                                            alignItems='center'
-                                                                            px='15px'
-                                                                            pt='12px'
-                                                                            pb='4px'
-                                                                        >
-                                                                            <SentimentIndicator sentiment={item.sentiment}/>
-                                                                        </Box>
-                                                                        <Box px='15px' pb='15px'>
-                                                                            <QuotePreviewText w='100%'>
-                                                                                "{item.text}"
-                                                                            </QuotePreviewText>
-                                                                        </Box>
-                                                                    </Box>
-                                                                    <Box p='15px' paddingTop='0'>
-                                                                        <List.Root ps='5'>
-                                                                            <List.Item>
-                                                                                <strong>Context:</strong> {item.context}
-                                                                            </List.Item>
-                                                                            <List.Item>
-                                                                                <strong>Sentiment:</strong> {item.sentiment}
-                                                                            </List.Item>
-                                                                            {item.themeTitles.length > 0 ? (
-                                                                                <List.Item>
-                                                                                    <strong>Themes:</strong>{' '}
-                                                                                    {item.themeTitles.join(', ')}
-                                                                                </List.Item>
-                                                                            ) : null}
-                                                                            <List.Item>
-                                                                                <strong>Tags:</strong>{' '}
-                                                                                {item.tags.length ? item.tags.join(', ') : ''}
-                                                                            </List.Item>
-                                                                        </List.Root>
-                                                                    </Box>
-                                                                </Box>
-                                                            </Carousel.Item>
-                                                        ))}
-                                                    </Carousel.ItemGroup>
-                                                </Collapsible.Content>
-                                            </Collapsible.Indicator>
-                                    </Collapsible.Trigger>
+                                    <Stack direction="row" justifyContent="space-between" marginBottom='10px' marginTop='10px'>
+                                        <Heading>Notable Quotes</Heading>
+                                        <Collapsible.Trigger asChild mt="4">
+                                            <Button
+                                                variant="surface"
+                                                size="sm"
+                                                width="75px"
+                                                colorPalette='gray'
+                                                aria-label="Show full quote and details"
+                                            >
+                                                Expand
+                                            </Button>
+                                        </Collapsible.Trigger>
+                                    </Stack>
+                                    
+                                    <Collapsible.Content borderRadius='25px'>
+                                        <Carousel.ItemGroup>
+                                            {quotes.map((item, index) => (
+                                                <Carousel.Item key={index} index={index}>
+                                                    <Box
+                                                        w="100%"
+                                                        minH="150px"
+                                                        h='fit-content'
+                                                        borderRadius='25px'
+                                                        bg='white'
+                                                        display='flex'
+                                                        flexDirection='column'
+                                                    >
+                                                        <Box
+                                                            minH='150px'
+                                                            display='flex'
+                                                            flexDirection='column'
+                                                        >
+                                                            <Box
+                                                                flexShrink={0}
+                                                                display='flex'
+                                                                justifyContent='flex-end'
+                                                                alignItems='center'
+                                                                px='15px'
+                                                                pt='12px'
+                                                                pb='4px'
+                                                            >
+                                                                <SentimentIndicator sentiment={item.sentiment}/>
+                                                            </Box>
+                                                            <Box px='15px' pb='15px'>
+                                                                <QuotePreviewText w='100%'>
+                                                                    "{item.text}"
+                                                                </QuotePreviewText>
+                                                            </Box>
+                                                        </Box>
+                                                        <Box p='15px' paddingTop='0'>
+                                                            <List.Root ps='5'>
+                                                                <List.Item>
+                                                                    <strong>Context:</strong> {item.context}
+                                                                </List.Item>
+                                                                <List.Item>
+                                                                    <strong>Sentiment:</strong> {item.sentiment}
+                                                                </List.Item>
+                                                                {item.themeTitles.length > 0 ? (
+                                                                    <List.Item>
+                                                                        <strong>Themes:</strong>{' '}
+                                                                        {item.themeTitles.join(', ')}
+                                                                    </List.Item>
+                                                                ) : null}
+                                                                <List.Item>
+                                                                    <strong>Tags:</strong>{' '}
+                                                                    {item.tags.length ? item.tags.join(', ') : ''}
+                                                                </List.Item>
+                                                            </List.Root>
+                                                        </Box>
+                                                    </Box>
+                                                </Carousel.Item>
+                                            ))}
+                                        </Carousel.ItemGroup>
+                                    </Collapsible.Content>
                                 </Collapsible.Root>
 
                                 <Carousel.Control justifyContent="center" gap="4">
@@ -383,7 +398,11 @@ function InterviewViewInner() {
                                         </IconButton>
                                     </Carousel.PrevTrigger>
 
-                                    <Carousel.Indicators />
+                                    <Carousel.Indicators 
+                                        bg="gray.400" 
+                                        boxSize="3"
+                                        _current={{ width: "10", bg: "gray.600", opacity: 1 }}
+                                    />
 
                                     <Carousel.NextTrigger asChild>
                                         <IconButton size="xs" variant="ghost">

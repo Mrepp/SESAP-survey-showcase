@@ -4,6 +4,7 @@ import { useMemo } from "react"
 import { useDataLoader } from '@/hooks/useDataLoader'
 import Timeline from '@/components/visualizations/TimelineInterview'
 
+
 const SIGNIFICANCE_RANK = { high: 3, medium: 2, low: 1 }
 const SENTIMENT_BY_PRIORITY = ['mixed', 'negative', 'positive', 'neutral']
 

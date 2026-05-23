@@ -420,7 +420,7 @@ export default function Timeline({ data, showEventLabels = true }) {
                 </div>
             ) : null}
 
-            <div className="tl-nav" aria-hidden="true">
+            <div className="tl-nav" aria-hidden="false">
                 <button type="button" className="tl-nav-btn" onClick={() => step(-1)} aria-label="Previous event">←</button>
                 <span className="tl-nav-counter">
                     {events.length ? `${(orderIndexOf.get(selected) ?? 0) + 1} / ${events.length}` : '—'}

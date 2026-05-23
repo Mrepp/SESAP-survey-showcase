@@ -21,6 +21,13 @@ const interTight = Inter_Tight({
     display: 'swap',
 })
 
+export const metadata = {
+    title: {
+        default: 'Student Experience Story Archive Project',
+        template: '%s | SESAP',
+    },
+}
+
 export default function RootLayout({ children }) {
     return (
         <html suppressHydrationWarning lang="en" className={`${fraunces.variable} ${interTight.variable}`}>

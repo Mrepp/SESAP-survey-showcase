@@ -1,16 +1,14 @@
 'use client'
 import {
     Box,
-    Heading,
     Image,
     Link,
-    Text,  
 } from "@chakra-ui/react"
 
 
 export default function Footer () {
     return(
-        <Box bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%" display='flex' justifyContent='space-between'>
+        <Box as='footer' role='contentinfo' bg='osuOffBlack' borderTop="4px solid #D73F09" h='fit-content' minH="100px" maxW="100%" display='flex' justifyContent='space-between'>
             <Link href='/'>
                 <Image
                     src="/favicon_io_transparent/android-chrome-512x512.png"
@@ -25,7 +23,6 @@ export default function Footer () {
                     Special Collections and Archives Research Center
                 </Link>
             </Box>
-            
         </Box>
     )
 }

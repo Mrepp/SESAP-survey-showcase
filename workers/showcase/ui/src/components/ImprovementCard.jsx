@@ -25,13 +25,14 @@ export default function ImprovementCard ({area, description}) {
             <Box
                 w='100%'
                 h='25%'
-                p='10px'
+                paddingLeft='10px'
+                paddingRight='10px'
                 bg='orange.100'
                 display="flex"
                 flexDirection="column"
                 justifyContent="center"
             >
-                <Text fontWeight='semibold' >{area}</Text>
+                <Text fontWeight='semibold' lineClamp='2' >{area}</Text>
             </Box>
             
             <Box 
@@ -42,7 +43,7 @@ export default function ImprovementCard ({area, description}) {
                 borderColor='osuOffBlack'
                 borderTopWidth='1px'
             >
-                <Text>{description}</Text>
+                <Text lineClamp={7}>{description}</Text>
             </Box>
         </Box>
     )

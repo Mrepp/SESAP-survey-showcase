@@ -124,7 +124,7 @@ export function buildThemesFromInterviews(interviews) {
             if (t.category) entry.category = t.category
             entry.interviews.push({
                 interviewId: iv.id,
-                videoUrl: iv.videoUrl ?? '/placeholder16x9.jpg',
+                videoUrl: iv.videoUrl ?? '/thumbnail.png',
                 videoAlt: `${iv.title ?? iv.id} interview`,
                 name: iv.title ?? 'Interviewee Name',
                 date: formatDate(iv.metadata?.interviewDate, dateOptions),

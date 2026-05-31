@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react"
 import { Suspense, useEffect, useMemo } from 'react'
 import { useSearchParams, useRouter } from "next/navigation"
+import { parseVideoEmbed } from '@sesap/shared'
 import { useDataLoader } from '@/hooks/useDataLoader'
 import { LuChevronLeft, LuChevronRight, LuClipboardList, LuCalendarDays, LuComponent, LuSquareCheck } from "react-icons/lu"
 import { formatDate, capitalize } from '@/app/formatFunctions'
@@ -28,6 +29,19 @@ import SentimentIndicator from '@/components/SentimentIndicator'
 
 
 const DATE_OPTIONS = { year: 'numeric', month: 'long', day: 'numeric' }
+
+function resolveInterviewVideo(json) {
+    if (json?.video?.embedUrl) return json.video
+
+    const legacyUrl = json?.metadata?.interviewURL
+    if (typeof legacyUrl !== 'string' || !legacyUrl.trim()) return null
+
+    try {
+        return parseVideoEmbed(legacyUrl)
+    } catch {
+        return null
+    }
+}
 
 function mapToUI(json) {
     if (!json || typeof json !== 'object') {
@@ -49,7 +63,7 @@ function mapToUI(json) {
     const intervieweeName = json.title ?? 'Interviewee Name'
     const interviewDate = formatDate(json.metadata.interviewDate || '0', DATE_OPTIONS)
     const major = json.demographics.major || ''
-    const video = json.video?.embedUrl ? json.video : null
+    const video = resolveInterviewVideo(json)
     const videoAlt = `${intervieweeName} interview` || 'Interview'
 
     const a = json.analysis ?? {}

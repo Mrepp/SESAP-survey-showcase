@@ -8,6 +8,12 @@ export interface KalturaPreview {
   ok: boolean;
 }
 
+export interface VideoEmbedPreview {
+  provider?: 'kaltura' | 'youtube' | 'vimeo' | 'iframe';
+  entryId?: string;
+  ok: boolean;
+}
+
 const ENTRY_ID_PATTERN = /^\d+_[a-z0-9]+$/i;
 
 function htmlDecode(s: string): string {
@@ -78,4 +84,59 @@ export function previewKalturaSource(input: string): KalturaPreview {
   }
 
   return parseUrl(trimmed);
+}
+
+function extractHttpsUrl(input: string): URL | null {
+  const iframeSrc = extractIframeSrc(input);
+  const rawUrl = iframeSrc ?? input.trim();
+  try {
+    const url = new URL(rawUrl);
+    return url.protocol === 'https:' ? url : null;
+  } catch {
+    return null;
+  }
+}
+
+function previewYouTube(url: URL): VideoEmbedPreview | null {
+  if (url.hostname === 'youtu.be') {
+    const id = url.pathname.split('/').filter(Boolean)[0];
+    return id ? { ok: true, provider: 'youtube', entryId: id } : null;
+  }
+  if (url.hostname.endsWith('youtube.com') || url.hostname.endsWith('youtube-nocookie.com')) {
+    const segments = url.pathname.split('/').filter(Boolean);
+    const id = url.pathname === '/watch' ? url.searchParams.get('v') : segments[1];
+    if (id) return { ok: true, provider: 'youtube', entryId: id };
+  }
+  return null;
+}
+
+function previewVimeo(url: URL): VideoEmbedPreview | null {
+  if (!url.hostname.endsWith('vimeo.com')) return null;
+  const id = url.pathname.split('/').filter(Boolean).find((seg) => /^\d+$/.test(seg));
+  return id ? { ok: true, provider: 'vimeo', entryId: id } : null;
+}
+
+export function previewVideoEmbed(input: string): VideoEmbedPreview {
+  const kaltura = previewKalturaSource(input);
+  if (kaltura.ok) {
+    return {
+      ok: true,
+      provider: 'kaltura',
+      entryId: kaltura.entryId,
+    };
+  }
+
+  const url = extractHttpsUrl(input);
+  if (!url) return { ok: false };
+
+  const youtube = previewYouTube(url);
+  if (youtube) return youtube;
+  const vimeo = previewVimeo(url);
+  if (vimeo) return vimeo;
+
+  if (extractIframeSrc(input)) {
+    return { ok: true, provider: 'iframe' };
+  }
+
+  return { ok: false };
 }

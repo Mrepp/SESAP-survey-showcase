@@ -14,7 +14,7 @@ describe('analysis-version', () => {
   it('prompt hash is pinned', () => {
     expect(ANALYSIS_PROMPT_HASH).toBe('3839443c');
     expect(ANALYSIS_PROMPT_VERSION).toBe('2026-05-21.1');
-    expect(ANALYSIS_SCHEMA_VERSION).toBe('2.2.0');
+    expect(ANALYSIS_SCHEMA_VERSION).toBe('2.3.0');
   });
 
   it('isAnalysisStale flags missing stamps', () => {

@@ -35,9 +35,30 @@ function getInterviewForResult(resultCard, data) {
     return data.interviews.find((iv) => (iv.interviewId ?? iv.id) === resultCard.interviewId) ?? null
 }
 
+function getDocumentForResult(result, data) {
+    const documents = data?.searchIndex?.documents ?? []
+    const exact = documents.find((d) => d.id === result.id)
+    if (exact) return exact
+
+    const interviewId = result.interviewId ?? result.id
+    const typeForCategory = {
+        summary: 'interview',
+        collegeExperience: 'interview',
+        themes: 'theme',
+        quotes: 'quote',
+    }[result.category]
+
+    return (
+        documents.find((d) => d.interviewId === interviewId && d.type === typeForCategory) ??
+        documents.find((d) => d.id === `interview:${interviewId}`) ??
+        documents.find((d) => d.interviewId === interviewId) ??
+        null
+    )
+}
+
 function mapSearchResultToCard(result, data) {
-    const doc = data?.searchIndex?.documents?.find((d) => d.id === result.id) ?? null
-    const interviewId = doc?.interviewId ?? result.id
+    const doc = getDocumentForResult(result, data)
+    const interviewId = doc?.interviewId ?? result.interviewId ?? result.id
     const interview = Array.isArray(data?.interviews)
         ? data.interviews.find((iv) => (iv.interviewId ?? iv.id) === interviewId || iv.id === result.id)
         : null
@@ -77,14 +98,14 @@ export default function Search() {
     const { isModelLoaded, loadError: semanticLoadError, search: semanticSearch } = useSemanticSearch({
         vectorIndices: data.vectorIndices,
         onProgress: (p) => {
-        if (p.status === 'progress' && p.progress != null) {
+        if (p.status === 'progress') {
             setModelProgress({
-            pct: 55 + Math.round(p.progress * 0.4),
-            text: 'Loading model: ' + Math.round(p.progress) + '%',
+            pct: 80,
+            text: 'Preparing semantic search...',
             });
         }
         if (p.status === 'done') {
-            setModelProgress({ pct: 95, text: 'Model loaded.' });
+            setModelProgress({ pct: 95, text: 'Semantic search ready.' });
         }
         },
     });
@@ -107,8 +128,13 @@ export default function Search() {
         setIsSearching(true);
         try {
         if (effectiveMode === 'semantic') {
-            const r = await semanticSearch(query, category, 15);
-            setResults({ items: r, isSemantic: true });
+            try {
+                const r = await semanticSearch(query, category, 15);
+                setResults({ items: r, isSemantic: true });
+            } catch {
+                const r = fulltextSearch(query, 15);
+                setResults({ items: r, isSemantic: false });
+            }
         } else {
             const r = fulltextSearch(query, 15);
             setResults({ items: r, isSemantic: false });

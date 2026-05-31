@@ -35,7 +35,7 @@ function mapToUI(json) {
             intervieweeName: '',
             interviewDate: '',
             major: '',
-            videoUrl: '/placeholder16x9.jpg',
+            video: null,
             videoAlt: 'Interview',
             summaries: [],
             quotes: [],
@@ -49,7 +49,7 @@ function mapToUI(json) {
     const intervieweeName = json.title ?? 'Interviewee Name'
     const interviewDate = formatDate(json.metadata.interviewDate || '0', DATE_OPTIONS)
     const major = json.demographics.major || ''
-    const videoUrl = `/assets/interview_repository/${json?.id}.mp4`
+    const video = json.video?.embedUrl ? json.video : null
     const videoAlt = `${intervieweeName} interview` || 'Interview'
 
     const a = json.analysis ?? {}
@@ -153,7 +153,7 @@ function mapToUI(json) {
         intervieweeName,
         interviewDate,
         major,
-        videoUrl,
+        video,
         videoAlt,
         summaries,
         timelineData,
@@ -244,7 +244,7 @@ function InterviewViewInner() {
     }
     if (!dataForUI) return null
 
-    const { intervieweeName, interviewDate, major, videoUrl, videoAlt, summaries, timelineData, themes, quotes, improvements, identities } = dataForUI
+    const { intervieweeName, interviewDate, major, video, videoAlt, summaries, timelineData, themes, quotes, improvements, identities } = dataForUI
 
     return (
         <>
@@ -257,18 +257,31 @@ function InterviewViewInner() {
             <Stack direction="row" h="fit-content" separator={<StackSeparator />}>
 
                 <Container w='50%'>
+                    {video?.embedUrl ? (
                         <Box
-                            as="video"
-                            src={videoUrl}
-                            type="video/mp4"
-                            controls
-                            poster='/thumbnail.png'
-                            preload="metadata"
+                            as="iframe"
+                            src={video.embedUrl}
+                            title={videoAlt}
+                            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                            allowFullScreen
+                            referrerPolicy="strict-origin-when-cross-origin"
                             width="100%"
-                            maxH="100%"
+                            aspectRatio="16 / 9"
+                            margin="10px"
+                            border="0"
+                            borderRadius="md"
+                        />
+                    ) : (
+                        <Box
+                            as="img"
+                            src="/placeholder16x9.jpg"
+                            alt={videoAlt}
+                            width="100%"
                             maxW="100%"
                             margin="10px"
+                            borderRadius="md"
                         />
+                    )}
                     <Text fontSize='2xl' fontWeight='bold' marginLeft='10px'>{intervieweeName || '—'}</Text>
                     <Text marginLeft='10px'>{interviewDate || '—'}{major ? ` | ${major}` : ''}</Text>
                 </Container>

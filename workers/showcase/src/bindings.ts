@@ -1,4 +1,5 @@
 export interface Env {
+  AI: Ai;
   ASSETS: Fetcher;
   SESAP_BUCKET: R2Bucket;
   ENVIRONMENT: string;

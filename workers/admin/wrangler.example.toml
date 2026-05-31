@@ -29,6 +29,9 @@ SHOWCASE_URL = "http://localhost:8790"  # Update to production URL when deployin
 # doesn't carry the partner id (iframe embeds do). Leave empty to require
 # the iframe form.
 KALTURA_PARTNER_ID = ""
+# Optional Kaltura player UI config used when constructing public embeds from
+# a bare entry id or media URL. If omitted, the app uses its default player.
+KALTURA_UICONF_ID = ""
 # NEXT_DEV_URL is intentionally not set here. It is a local-dev-only variable
 # that proxies non-API paths to the next dev server. In production the ASSETS
 # binding serves the built next export. Add it to your local (gitignored)

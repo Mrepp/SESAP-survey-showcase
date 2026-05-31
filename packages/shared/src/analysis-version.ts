@@ -2,7 +2,7 @@ import { THEME_TITLES } from './theme-enum';
 import { IDENTITY_LABELS } from './identity-enum';
 
 export const ANALYSIS_PROMPT_VERSION = '2026-05-21.1';
-export const ANALYSIS_SCHEMA_VERSION = '2.2.0';
+export const ANALYSIS_SCHEMA_VERSION = '2.3.0';
 
 const TRANSCRIPT_PLACEHOLDER = '__TRANSCRIPT_PLACEHOLDER__';
 

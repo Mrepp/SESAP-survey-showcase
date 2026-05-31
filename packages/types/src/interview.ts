@@ -28,12 +28,25 @@ export interface InterviewMetadata {
   notes?: string;
 }
 
+export type VideoProvider = 'kaltura' | 'youtube' | 'vimeo' | 'iframe';
+
+export interface InterviewVideo {
+  provider: VideoProvider;
+  embedUrl: string;
+  sourceUrl?: string;
+  entryId?: string;
+  partnerId?: string;
+  widgetId?: string;
+  uiconfId?: string;
+}
+
 export interface Interview {
   id: string;
   title: string;
   demographics: Demographics;
   transcript: Transcript;
   metadata: InterviewMetadata;
+  video?: InterviewVideo;
   analysis?: import('./analysis').Analysis;
   embeddings?: import('./embeddings').InterviewEmbeddings;
   createdAt: string;

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Box, Flex, Text, Button, Input, Textarea } from '@chakra-ui/react';
 import { api } from '../api/interviews';
 import { extractAudio } from '../lib/extractAudio';
-import { previewKalturaSource } from '../lib/kalturaPreview';
+import { previewVideoEmbed } from '../lib/kalturaPreview';
 
 type Mode = 'url' | 'video' | 'transcript';
 
@@ -91,7 +91,7 @@ export function Upload() {
   const [extracting, setExtracting] = useState(false);
   const [extractProgress, setExtractProgress] = useState(0);
 
-  const urlPreview = previewKalturaSource(videoUrl);
+  const videoPreview = previewVideoEmbed(videoUrl);
 
   useEffect(() => {
     setHydrated(true);
@@ -137,7 +137,8 @@ export function Upload() {
     const form = e.currentTarget;
     const fd = new FormData(form);
     const interviewUrlValue = fd.get('interviewURL');
-    const kalturaSource = typeof interviewUrlValue === 'string' ? interviewUrlValue.trim() : '';
+    const videoEmbed = typeof interviewUrlValue === 'string' ? interviewUrlValue.trim() : '';
+    const isKalturaEmbed = videoEmbed ? previewVideoEmbed(videoEmbed).provider === 'kaltura' : false;
 
     const metadata = {
       title: fd.get('title'),
@@ -145,31 +146,34 @@ export function Upload() {
       metadata: {
         interviewDate: fd.get('interviewDate'),
         ...(fd.get('interviewer') ? { interviewer: fd.get('interviewer') } : {}),
-        ...(kalturaSource ? { interviewURL: kalturaSource } : {}),
+        ...(videoEmbed ? { interviewURL: videoEmbed } : {}),
         ...(fd.get('notes') ? { notes: fd.get('notes') } : {}),
       },
     };
 
     try {
       if (mode === 'url') {
-        if (!kalturaSource) {
+        if (!videoEmbed) {
           throw new Error('Paste a Kaltura URL or embed iframe');
+        }
+        if (!isKalturaEmbed) {
+          throw new Error('Only Kaltura links can be transcribed from URL mode. Use video or transcript mode to save this embed for playback.');
         }
         await api.uploadInterview(metadata, {
           source: 'kaltura',
-          kalturaSource,
+          kalturaSource: videoEmbed,
         });
       } else if (mode === 'video') {
         if (!audioFile) {
           throw new Error('Audio is still being extracted from the video');
         }
-        await api.uploadInterview(metadata, { source: 'audio', audioFile });
+        await api.uploadInterview(metadata, { source: 'audio', audioFile, videoEmbed });
       } else {
         const transcriptFile = fd.get('transcript') as File | null;
         if (!transcriptFile || !transcriptFile.name) {
           throw new Error('Please choose a transcript file');
         }
-        await api.uploadInterview(metadata, { source: 'transcript', transcriptFile });
+        await api.uploadInterview(metadata, { source: 'transcript', transcriptFile, videoEmbed });
       }
       router.push('/');
     } catch (err) {
@@ -243,29 +247,29 @@ export function Upload() {
             </Box>
           </Flex>
 
-          <Field label="Video URL">
+          <Field label="Video embed or URL">
             <Textarea
               name="interviewURL"
               rows={4}
               value={videoUrl}
               disabled={!hydrated || submitting}
               onChange={(e) => setVideoUrl(e.target.value)}
-              placeholder="Paste the Kaltura embed <iframe> or a media URL"
+              placeholder="Paste a Kaltura, YouTube, Vimeo, or HTTPS iframe embed"
               {...inputStyles}
             />
             <Text fontSize="xs" color="gray.500" mt={1}>
-              Tip: paste the Kaltura embed iframe for best results — bare URLs require a configured partner id.
+              Tip: URL-only transcription supports Kaltura. Other embeds can be saved with video or transcript uploads for playback.
               {mode === 'url' && videoUrl.trim() && (
                 <>
                   {' '}
                   <Text
                     as="span"
-                    color={urlPreview.ok ? 'green.600' : 'red.600'}
+                    color={videoPreview.ok ? 'green.600' : 'red.600'}
                     fontWeight="500"
                   >
-                    {urlPreview.ok
-                      ? `Detected entry ${urlPreview.entryId}`
-                      : 'No Kaltura entry id detected'}
+                    {videoPreview.ok
+                      ? `Detected ${videoPreview.provider}${videoPreview.entryId ? ` entry ${videoPreview.entryId}` : ''}`
+                      : 'No supported embed detected'}
                   </Text>
                 </>
               )}
@@ -281,7 +285,7 @@ export function Upload() {
                 active={mode === 'url'}
                 onClick={() => setMode('url')}
                 disabled={!hydrated || submitting}
-                label="Use the URL above (Kaltura / embed)"
+                label="Use a Kaltura URL for transcription"
                 hint="Default. The processing worker fetches and transcribes via Whisper."
               />
               <ModeRadio

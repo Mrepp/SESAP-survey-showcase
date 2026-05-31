@@ -20,6 +20,7 @@ export interface KalturaRef {
   entryId: string;
   partnerId: string;
   widgetId?: string;
+  uiconfId?: string;
   sourceInput: string;
 }
 
@@ -44,6 +45,7 @@ export interface InterviewRecord {
   source: InterviewSource;
   audioRef?: AudioRef;
   kalturaRef?: KalturaRef;
+  video?: import('./interview').InterviewVideo;
 
   processing: {
     status: ProcessingStatus;

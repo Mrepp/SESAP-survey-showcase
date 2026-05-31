@@ -17,6 +17,9 @@ inspector_port = 9232
 binding = "SESAP_BUCKET"
 bucket_name = "<YOUR_R2_BUCKET_NAME>"
 
+[ai]
+binding = "AI"
+
 [vars]
 ENVIRONMENT = "development"
 # NEXT_DEV_URL is intentionally not set here. It is a local-dev-only variable

@@ -129,6 +129,7 @@ app.post('/api/build', async (c) => {
             title: i.title,
             demographics: i.demographics,
             metadata: i.metadata,
+            video: i.video,
             analysis: i.analysis,
           }))
         ),

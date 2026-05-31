@@ -12,4 +12,5 @@ export interface Env {
   NEXT_DEV_URL?: string;
   GITHUB_ALLOWED_USERS?: string;
   KALTURA_PARTNER_ID?: string;
+  KALTURA_UICONF_ID?: string;
 }

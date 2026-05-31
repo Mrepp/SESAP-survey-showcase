@@ -98,8 +98,8 @@ export const api = {
   async uploadInterview(
     metadata: unknown,
     payload:
-      | { source: 'transcript'; transcriptFile: File }
-      | { source: 'audio'; audioFile: File }
+      | { source: 'transcript'; transcriptFile: File; videoEmbed?: string }
+      | { source: 'audio'; audioFile: File; videoEmbed?: string }
       | { source: 'kaltura'; kalturaSource: string },
   ): Promise<InterviewRecord> {
     const formData = new FormData();
@@ -107,8 +107,10 @@ export const api = {
     formData.append('source', payload.source);
     if (payload.source === 'transcript') {
       formData.append('transcript', payload.transcriptFile);
+      if (payload.videoEmbed) formData.append('videoEmbed', payload.videoEmbed);
     } else if (payload.source === 'audio') {
       formData.append('audio', payload.audioFile);
+      if (payload.videoEmbed) formData.append('videoEmbed', payload.videoEmbed);
     } else {
       formData.append('kalturaSource', payload.kalturaSource);
     }

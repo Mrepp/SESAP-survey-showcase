@@ -35,12 +35,23 @@ export const InterviewMetadataSchema = z.object({
   notes: z.string().optional(),
 });
 
+export const InterviewVideoSchema = z.object({
+  provider: z.enum(['kaltura', 'youtube', 'vimeo', 'iframe']),
+  embedUrl: z.string().url(),
+  sourceUrl: z.string().optional(),
+  entryId: z.string().optional(),
+  partnerId: z.string().optional(),
+  widgetId: z.string().optional(),
+  uiconfId: z.string().optional(),
+});
+
 export const InterviewSchema = z.object({
   id: z.string(),
   title: z.string(),
   demographics: DemographicsSchema,
   transcript: TranscriptSchema,
   metadata: InterviewMetadataSchema,
+  video: InterviewVideoSchema.optional(),
   analysis: z.lazy(() => AnalysisSchema).optional(),
   embeddings: z.lazy(() => InterviewEmbeddingsSchema).optional(),
   createdAt: z.string(),

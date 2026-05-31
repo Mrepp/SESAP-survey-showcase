@@ -3,7 +3,7 @@ import type { Env } from '../bindings';
 import type { ApiResponse, InterviewRecord, Analysis, AuthenticatedUser, Demographics, InterviewMetadata } from '@sesap/types';
 import { KV_KEYS } from '@sesap/types';
 import { CreateInterviewRequestSchema, AnalysisSchema, DemographicsSchema, InterviewMetadataSchema } from '@sesap/shared';
-import { ValidationError, generateItemId, currentPromptStamp, isAnalysisStale } from '@sesap/shared';
+import { ValidationError, generateItemId, currentPromptStamp, isAnalysisStale, parseVideoEmbed } from '@sesap/shared';
 import * as interviewService from '../services/interview-service';
 import * as storageService from '../services/storage-service';
 
@@ -48,6 +48,14 @@ interviews.post('/api/interviews', async (c) => {
   const sourceRaw = formData.get('source');
   const source =
     typeof sourceRaw === 'string' && sourceRaw.length > 0 ? sourceRaw : 'transcript';
+  const videoEmbedRaw = formData.get('videoEmbed');
+  const videoEmbed =
+    typeof videoEmbedRaw === 'string' && videoEmbedRaw.trim()
+      ? parseVideoEmbed(videoEmbedRaw, {
+          fallbackKalturaPartnerId: c.env.KALTURA_PARTNER_ID || undefined,
+          fallbackKalturaUiconfId: c.env.KALTURA_UICONF_ID || undefined,
+        })
+      : undefined;
 
   let record: InterviewRecord;
   if (source === 'transcript') {
@@ -59,7 +67,7 @@ interviews.post('/api/interviews', async (c) => {
     if (!transcriptText.trim()) {
       throw new ValidationError('Transcript file is empty');
     }
-    record = await interviewService.createInterview(c.env, metaResult.data, transcriptText);
+    record = await interviewService.createInterview(c.env, metaResult.data, transcriptText, videoEmbed);
   } else if (source === 'audio') {
     const audioFile = formData.get('audio');
     if (!audioFile || typeof audioFile === 'string') {
@@ -76,6 +84,7 @@ interviews.post('/api/interviews', async (c) => {
       metaResult.data,
       audioBytes,
       contentType,
+      videoEmbed,
     );
   } else if (source === 'kaltura') {
     const kalturaSource = formData.get('kalturaSource');

@@ -1,7 +1,15 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { createInterview, listInterviews, getInterview, rejectInterview } from '../src/services/interview-service';
+import {
+  approveInterview,
+  createInterview,
+  createInterviewFromKaltura,
+  listInterviews,
+  getInterview,
+  rejectInterview,
+} from '../src/services/interview-service';
 import type { Env } from '../src/bindings';
-import type { CreateInterviewRequest, ProcessingQueueMessage } from '@sesap/types';
+import type { Analysis, CreateInterviewRequest, ProcessingQueueMessage } from '@sesap/types';
+import { R2_PATHS } from '@sesap/types';
 
 // Mock R2 bucket
 function createMockR2Bucket(): R2Bucket {
@@ -57,8 +65,22 @@ function createMockEnv(): Env {
     INDEXING_WORKER: { fetch: vi.fn() } as unknown as Fetcher,
     ENVIRONMENT: 'development',
     SHOWCASE_URL: 'http://localhost:8790',
+    KALTURA_PARTNER_ID: '391241',
+    KALTURA_UICONF_ID: '55338833',
   };
 }
+
+const sampleAnalysis: Analysis = {
+  interviewId: 'test',
+  modelConfig: { model: 'test', temperature: 0, maxTokens: 1000 },
+  summaries: [],
+  timeline: [],
+  themes: [],
+  quotes: [],
+  areasForImprovement: [],
+  identities: [],
+  generatedAt: '2026-01-01T00:00:00.000Z',
+};
 
 describe('interview-service', () => {
   let env: Env;
@@ -116,6 +138,27 @@ describe('interview-service', () => {
     });
   });
 
+  describe('createInterviewFromKaltura', () => {
+    it('stores a normalized public video embed for Kaltura uploads', async () => {
+      const request: CreateInterviewRequest = {
+        title: 'Kaltura Test',
+        demographics: { college: 'Engineering', graduationYear: '2024', major: 'CS' },
+        metadata: { interviewDate: '2024-01-15' },
+      };
+
+      const record = await createInterviewFromKaltura(
+        env,
+        request,
+        '<iframe src="https://cdnapisec.kaltura.com/p/391241/embedPlaykitJs/uiconf_id/55338833?entry_id=1_oixah593"></iframe>',
+      );
+
+      expect(record.kalturaRef?.entryId).toBe('1_oixah593');
+      expect(record.video?.provider).toBe('kaltura');
+      expect(record.video?.embedUrl).toContain('/p/391241/embedPlaykitJs/uiconf_id/55338833');
+      expect(record.video?.embedUrl).toContain('entry_id=1_oixah593');
+    });
+  });
+
   describe('listInterviews', () => {
     it('should return empty array when no interviews exist', async () => {
       const records = await listInterviews(env);
@@ -170,6 +213,35 @@ describe('interview-service', () => {
 
       expect(rejected.approval.status).toBe('rejected');
       expect(rejected.approval.rejectionReason).toBe('Poor quality');
+    });
+  });
+
+  describe('approveInterview', () => {
+    it('preserves display video metadata in the approved interview repository object', async () => {
+      const request: CreateInterviewRequest = {
+        title: 'Video Approval',
+        demographics: { college: 'Engineering', graduationYear: '2024', major: 'CS' },
+        metadata: { interviewDate: '2024-01-15' },
+      };
+
+      const created = await createInterview(
+        env,
+        request,
+        'Q: Tell me about your experience? A: This transcript is long enough to approve.',
+        {
+          provider: 'youtube',
+          embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+          sourceUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        },
+      );
+      await env.SESAP_BUCKET.put(R2_PATHS.analysis(created.id), JSON.stringify(sampleAnalysis));
+
+      await approveInterview(env, created.id);
+
+      const stored = await env.SESAP_BUCKET.get(R2_PATHS.interview(created.id));
+      const interview = await stored!.json<{ video?: { provider: string; embedUrl: string } }>();
+      expect(interview.video?.provider).toBe('youtube');
+      expect(interview.video?.embedUrl).toBe('https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ');
     });
   });
 });

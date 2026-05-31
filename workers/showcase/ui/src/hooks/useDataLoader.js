@@ -7,6 +7,77 @@ async function fetchJSON(url, init) {
   return res.json();
 }
 
+function compactText(parts) {
+  return parts
+    .flat()
+    .filter((part) => part !== null && part !== undefined && String(part).trim() !== '')
+    .map((part) => String(part).trim())
+    .join(' ');
+}
+
+export function buildSearchDocumentsFromInterviews(interviews = []) {
+  if (!Array.isArray(interviews)) return [];
+
+  const documents = [];
+
+  for (const interview of interviews) {
+    const interviewId = interview.interviewId ?? interview.id;
+    if (!interviewId) continue;
+
+    const demographicsText = compactText([
+      interview.demographics?.college,
+      interview.demographics?.graduationYear,
+      interview.demographics?.year,
+      interview.demographics?.major,
+      interview.demographics?.gender,
+      interview.demographics?.ethnicity,
+    ]);
+    const summaryTexts = interview.analysis?.summaries?.map((s) => s.summaryText) ?? [];
+    const timelineTexts = interview.analysis?.timeline?.map((t) =>
+      compactText([t.period, t.event, t.significance]),
+    ) ?? [];
+    const improvementTexts = interview.analysis?.areasForImprovement?.map((a) =>
+      compactText([a.area, a.description, a.recommendation]),
+    ) ?? [];
+
+    documents.push({
+      id: `interview:${interviewId}`,
+      type: 'interview',
+      interviewId,
+      title: interview.title ?? 'Interview',
+      content: compactText([summaryTexts, timelineTexts, improvementTexts]),
+      demographics: demographicsText,
+      category: interview.analysis?.summaries?.[0]?.category ?? 'uncategorized',
+    });
+
+    for (const theme of interview.analysis?.themes ?? []) {
+      documents.push({
+        id: `theme:${theme.id ?? `${interviewId}:${documents.length}`}`,
+        type: 'theme',
+        interviewId,
+        title: theme.title ?? 'Theme',
+        content: compactText([theme.description, theme.category]),
+        category: theme.category,
+      });
+    }
+
+    for (const quote of interview.analysis?.quotes ?? []) {
+      const quoteText = quote.quoteText ?? '';
+      documents.push({
+        id: `quote:${quote.id ?? `${interviewId}:${documents.length}`}`,
+        type: 'quote',
+        interviewId,
+        title: quoteText ? quoteText.slice(0, 50) + '...' : 'Quote',
+        content: compactText([quoteText, quote.context]),
+        sentiment: quote.sentiment,
+        tags: quote.tags,
+      });
+    }
+  }
+
+  return documents;
+}
+
 export function useDataLoader() {
   const [progress, setProgress] = useState(0);
   const [statusText, setStatusText] = useState('Initializing...');
@@ -75,9 +146,18 @@ export function useDataLoader() {
         ]);
 
         dataRef.current.vectorIndices = vecRes.status === 'fulfilled' ? vecRes.value : null;
-        dataRef.current.searchIndex = searchRes.status === 'fulfilled' ? searchRes.value : null;
         dataRef.current.clusters = clustersRes.status === 'fulfilled' ? clustersRes.value : null;
         dataRef.current.interviews = interviewsRes.status === 'fulfilled' ? interviewsRes.value : null;
+        const fallbackDocuments = buildSearchDocumentsFromInterviews(dataRef.current.interviews);
+        const loadedSearchIndex = searchRes.status === 'fulfilled' ? searchRes.value : null;
+        dataRef.current.searchIndex = loadedSearchIndex
+          ? {
+              ...loadedSearchIndex,
+              documents: loadedSearchIndex.documents?.length
+                ? loadedSearchIndex.documents
+                : fallbackDocuments,
+            }
+          : { documents: fallbackDocuments };
 
         update(40, 'Data loaded. Initializing search engine...');
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 function cosineSimilarity(a, b) {
   let dot = 0,
@@ -14,55 +14,43 @@ function cosineSimilarity(a, b) {
 }
 
 export function useSemanticSearch({ vectorIndices, onProgress }) {
-  const [isModelLoaded, setIsModelLoaded] = useState(false);
   const [loadError, setLoadError] = useState(null);
-  const pipelineRef = useRef(null);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    async function loadModel() {
-      try {
-        const { pipeline, env: transformersEnv } = await import(
-          /* @vite-ignore */
-          'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.6.2'
-        );
-        transformersEnv.allowLocalModels = false;
-        transformersEnv.backends = transformersEnv.backends || {};
-        if (transformersEnv.backends.onnx) {
-          transformersEnv.backends.onnx.wasm = transformersEnv.backends.onnx.wasm || {};
-          transformersEnv.backends.onnx.wasm.numThreads = 1;
-        }
-
-        const pipe = await pipeline('feature-extraction', 'Xenova/bge-small-en-v1.5', {
-          dtype: 'fp32',
-          progress_callback: (progress) => {
-            if (!cancelled) onProgress?.(progress);
-          },
-        });
-
-        if (!cancelled) {
-          pipelineRef.current = pipe;
-          setIsModelLoaded(true);
-        }
-      } catch (err) {
-        console.warn('Transformers.js model failed to load:', err);
-        if (!cancelled) setLoadError(err.message);
-      }
-    }
-
-    loadModel();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const isModelLoaded = !!vectorIndices && !loadError;
 
   const search = useCallback(
     async (query, category, topK = 15) => {
-      if (!pipelineRef.current || !vectorIndices) return [];
+      if (!vectorIndices) return [];
 
-      const output = await pipelineRef.current(query, { pooling: 'mean', normalize: true });
-      const queryEmbedding = Array.from(output.data);
+      onProgress?.({ status: 'progress', progress: 25 });
+
+      const res = await fetch('/api/search/embed', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query }),
+      });
+
+      if (!res.ok) {
+        let message = `Semantic search failed (${res.status})`;
+        try {
+          const body = await res.json();
+          message = body.message || body.error || message;
+        } catch {
+          // Keep the status-derived message when the response is not JSON.
+        }
+        setLoadError(message);
+        throw new Error(message);
+      }
+
+      const body = await res.json();
+      const queryEmbedding = Array.isArray(body.embedding) ? body.embedding : [];
+      if (queryEmbedding.length === 0) {
+        const message = 'Semantic search returned an empty embedding';
+        setLoadError(message);
+        throw new Error(message);
+      }
+
+      setLoadError(null);
+      onProgress?.({ status: 'done' });
 
       const categoriesToSearch =
         category === 'all'
@@ -83,7 +71,7 @@ export function useSemanticSearch({ vectorIndices, onProgress }) {
       scored.sort((a, b) => b.score - a.score);
       return scored.slice(0, topK);
     },
-    [vectorIndices],
+    [vectorIndices, onProgress],
   );
 
   return { isModelLoaded, loadError, search };

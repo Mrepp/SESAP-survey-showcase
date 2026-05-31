@@ -7,6 +7,7 @@ import type {
   BuildDirtyState,
   BuildMetadata,
   KalturaRef,
+  InterviewVideo,
 } from '@sesap/types';
 import { KV_KEYS, R2_PATHS } from '@sesap/types';
 import {
@@ -16,6 +17,7 @@ import {
   ProcessingError,
   ValidationError,
   parseKalturaSource,
+  parseVideoEmbed,
 } from '@sesap/shared';
 import type { Env } from '../bindings';
 import * as storageService from './storage-service';
@@ -44,6 +46,7 @@ export async function createInterview(
   env: Env,
   request: CreateInterviewRequest,
   transcript: string,
+  video?: InterviewVideo,
 ): Promise<InterviewRecord> {
   const id = generateInterviewId();
   const now = new Date().toISOString();
@@ -63,6 +66,7 @@ export async function createInterview(
     demographics: request.demographics,
     metadata: request.metadata,
     source: 'transcript',
+    video,
     processing: { status: 'pending' },
     approval: { status: 'pending_review' },
     artifacts: { transcript: true, analysis: false, embeddings: false },
@@ -94,6 +98,7 @@ export async function createInterviewFromAudio(
   request: CreateInterviewRequest,
   audioBytes: ArrayBuffer,
   contentType: string,
+  video?: InterviewVideo,
 ): Promise<InterviewRecord> {
   const id = generateInterviewId();
   const now = new Date().toISOString();
@@ -126,6 +131,7 @@ export async function createInterviewFromAudio(
       sizeBytes: audioBytes.byteLength,
       uploadedAt: now,
     },
+    video,
     processing: { status: 'pending' },
     approval: { status: 'pending_review' },
     artifacts: { transcript: false, analysis: false, embeddings: false },
@@ -171,8 +177,13 @@ export async function createInterviewFromKaltura(
     entryId: parsed.entryId,
     partnerId,
     widgetId: parsed.widgetId,
+    uiconfId: parsed.uiconfId ?? (env.KALTURA_UICONF_ID || undefined),
     sourceInput: rawSource,
   };
+  const video = parseVideoEmbed(rawSource, {
+    fallbackKalturaPartnerId: partnerId,
+    fallbackKalturaUiconfId: env.KALTURA_UICONF_ID || undefined,
+  });
 
   logger.info('Creating interview from Kaltura', {
     id,
@@ -188,6 +199,7 @@ export async function createInterviewFromKaltura(
     metadata: request.metadata,
     source: 'kaltura',
     kalturaRef,
+    video,
     processing: { status: 'pending' },
     approval: { status: 'pending_review' },
     artifacts: { transcript: false, analysis: false, embeddings: false },
@@ -274,6 +286,7 @@ export async function approveInterview(env: Env, id: string): Promise<InterviewR
       },
     },
     metadata: record.metadata,
+    video: record.video,
     analysis,
     embeddings: embeddings ?? undefined,
     createdAt: record.createdAt,

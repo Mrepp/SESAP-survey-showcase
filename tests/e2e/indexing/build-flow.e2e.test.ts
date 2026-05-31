@@ -40,6 +40,11 @@ describe('build pipeline writes all expected artifacts', () => {
       title: 'Newly Added',
       tags: ['fresh_tag'],
     });
+    newcomer.video = {
+      provider: 'youtube',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      sourceUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    };
     await seedApprovedInterview(e2eEnv, newcomer);
 
     const res = await SELF.fetch('http://indexing/api/build', { method: 'POST' });
@@ -55,9 +60,14 @@ describe('build pipeline writes all expected artifacts', () => {
     }
 
     const interviewsObj = await e2eEnv.SESAP_BUCKET.get(R2_PATHS.buildArtifact('interviews.json'));
-    const interviews = (await interviewsObj!.json()) as { id: string; title: string }[];
+    const interviews = (await interviewsObj!.json()) as {
+      id: string;
+      title: string;
+      video?: { provider: string; embedUrl: string };
+    }[];
     expect(interviews.map((i) => i.id)).toContain(newcomer.id);
     expect(interviews.map((i) => i.id)).toContain(existing.id);
     expect(interviews.find((i) => i.id === newcomer.id)?.title).toBe('Newly Added');
+    expect(interviews.find((i) => i.id === newcomer.id)?.video?.provider).toBe('youtube');
   });
 });

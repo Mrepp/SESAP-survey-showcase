@@ -8,6 +8,7 @@ interface FrontendInterviewEntry {
   id: string;
   title: string;
   demographics: { major: string };
+  video?: { provider: string; embedUrl: string };
   analysis: { themes: { id: string; title: string }[]; quotes: { tags: string[] }[] };
 }
 
@@ -23,6 +24,10 @@ async function seedBuildArtifacts() {
       id: APPROVED_ID,
       title: APPROVED_TITLE,
       demographics: { major: 'Computer Science' },
+      video: {
+        provider: 'vimeo',
+        embedUrl: 'https://player.vimeo.com/video/123456789',
+      },
       analysis: {
         themes: [{ id: `${APPROVED_ID}_thm_0`, title: 'Mentorship' }],
         quotes: [{ tags: [APPROVED_TAG] }],
@@ -75,6 +80,7 @@ describe('admin-added interview surfaces on the frontend', () => {
     expect(ids).not.toContain(PENDING_ID);
     const entry = interviews.find((i) => i.id === APPROVED_ID)!;
     expect(entry.title).toBe(APPROVED_TITLE);
+    expect(entry.video?.embedUrl).toBe('https://player.vimeo.com/video/123456789');
     expect(entry.analysis.quotes[0].tags).toContain(APPROVED_TAG);
   });
 

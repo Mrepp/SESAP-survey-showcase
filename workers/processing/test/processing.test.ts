@@ -5,7 +5,7 @@ import { extractChunksFromAnalysis, parseTranscript } from '../src/services/tran
 import { buildAnalysisPrompt } from '../src/prompts/analysis-prompt';
 import type { Env } from '../src/bindings';
 import type { Analysis } from '@sesap/types';
-import { THEME_TITLES } from '@sesap/shared';
+import { AiBudgetExceededError, THEME_TITLES } from '@sesap/shared';
 
 // -- Mock factories --
 
@@ -47,6 +47,37 @@ function createMockKVNamespace(): KVNamespace {
     list: vi.fn(),
     getWithMetadata: vi.fn(),
   } as unknown as KVNamespace;
+}
+
+function createMockAiNeuronLimiter(options: { exhausted?: boolean } = {}): DurableObjectNamespace {
+  let counter = 0;
+  const fetch = vi.fn(async (input: RequestInfo | URL) => {
+    const path = new URL(input.toString()).pathname;
+    if (path === '/reserve' && options.exhausted) {
+      return new Response(JSON.stringify({
+        ok: false,
+        code: 'AI_BUDGET_EXCEEDED',
+        error: 'Workers AI daily neuron budget exhausted',
+        details: { remainingNeurons: 0 },
+      }), { status: 429, headers: { 'Content-Type': 'application/json' } });
+    }
+    if (path === '/reserve') {
+      counter += 1;
+      return new Response(JSON.stringify({
+        ok: true,
+        reservationId: `res-${counter}`,
+        estimatedNeurons: 1,
+      }), { headers: { 'Content-Type': 'application/json' } });
+    }
+    return new Response(JSON.stringify({ ok: true }), {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  });
+
+  return {
+    idFromName: vi.fn(() => ({})),
+    get: vi.fn(() => ({ fetch })),
+  } as unknown as DurableObjectNamespace;
 }
 
 const MOCK_LLM_RESPONSE = {
@@ -91,6 +122,7 @@ function createMockEnv(llmResponse?: unknown): Env {
         return {};
       }),
     } as unknown as Ai,
+    AI_NEURON_LIMITER: createMockAiNeuronLimiter(),
     SESAP_BUCKET: createMockR2Bucket(),
     SESAP_KV: createMockKVNamespace(),
     ENVIRONMENT: 'test',
@@ -116,6 +148,7 @@ function createMockEnvWithEmbeddings(): Env {
 
   return {
     AI: { run: aiRun } as unknown as Ai,
+    AI_NEURON_LIMITER: createMockAiNeuronLimiter(),
     SESAP_BUCKET: createMockR2Bucket(),
     SESAP_KV: createMockKVNamespace(),
     ENVIRONMENT: 'test',
@@ -237,6 +270,7 @@ describe('llm-service', () => {
           return { response: JSON.stringify(MOCK_LLM_RESPONSE) };
         }),
       } as unknown as Ai,
+      AI_NEURON_LIMITER: createMockAiNeuronLimiter(),
       SESAP_BUCKET: createMockR2Bucket(),
       SESAP_KV: createMockKVNamespace(),
       ENVIRONMENT: 'test',
@@ -254,6 +288,7 @@ describe('llm-service', () => {
           throw new Error('Persistent failure');
         }),
       } as unknown as Ai,
+      AI_NEURON_LIMITER: createMockAiNeuronLimiter(),
       SESAP_BUCKET: createMockR2Bucket(),
       SESAP_KV: createMockKVNamespace(),
       ENVIRONMENT: 'test',
@@ -312,5 +347,16 @@ describe('embedding-service', () => {
     expect(embeddings.vectors.length).toBe(75);
     // Should have been called twice: once for 50, once for 25
     expect(env.AI.run).toHaveBeenCalledTimes(2);
+  });
+
+  it('should not call Workers AI when the daily neuron budget is exhausted', async () => {
+    const env = createMockEnvWithEmbeddings();
+    env.AI_NEURON_LIMITER = createMockAiNeuronLimiter({ exhausted: true });
+
+    await expect(generateEmbeddings(env, 'int_budget', [
+      { id: 'item1', type: 'summary', text: 'Summary text about college' },
+    ])).rejects.toBeInstanceOf(AiBudgetExceededError);
+
+    expect(env.AI.run).not.toHaveBeenCalled();
   });
 });

@@ -6,6 +6,7 @@ import { healthRoutes } from './routes/health';
 import { processRoutes } from './routes/process';
 import { processInterview } from './services/process-interview';
 import { Logger } from '@sesap/shared';
+export { AiNeuronLimiter } from '@sesap/shared';
 
 const logger = new Logger({ worker: 'sesap-processing', module: 'index' });
 

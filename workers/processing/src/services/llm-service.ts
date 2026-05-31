@@ -1,9 +1,17 @@
 import type { Analysis } from '@sesap/types';
-import { AnalysisSchema, generateItemId, Logger, ProcessingError } from '@sesap/shared';
+import {
+  AiBudgetError,
+  AnalysisSchema,
+  generateItemId,
+  Logger,
+  ProcessingError,
+  runWithAiBudget,
+  WORKERS_AI_MODELS,
+} from '@sesap/shared';
 import type { Env } from '../bindings';
 import { buildAnalysisPrompt } from '../prompts/analysis-prompt';
 
-const MODEL_NAME = '@cf/openai/gpt-oss-120b';
+const MODEL_NAME = WORKERS_AI_MODELS.llm;
 const MAX_RETRIES = 3;
 const BASE_DELAY_MS = 1000;
 
@@ -176,7 +184,7 @@ export async function generateAnalysis(
     try {
       logger.info('Calling LLM', { interviewId, attempt, model: MODEL_NAME });
 
-      const response = (await env.AI.run(MODEL_NAME as Parameters<Ai['run']>[0], {
+      const input = {
         messages: [
           {
             role: 'system',
@@ -186,7 +194,22 @@ export async function generateAnalysis(
         ],
         max_tokens: 8192,
         response_format: { type: 'json_object' },
-      })) as {
+      };
+
+      const response = (await runWithAiBudget(
+        env,
+        {
+          model: MODEL_NAME,
+          estimate: {
+            kind: 'llm',
+            model: MODEL_NAME,
+            messages: input.messages,
+            maxTokens: input.max_tokens,
+          },
+          context: { worker: 'processing', operation: 'analysis', interviewId, attempt },
+        },
+        () => env.AI.run(MODEL_NAME as Parameters<Ai['run']>[0], input),
+      )) as {
         response?: string;
         choices?: Array<{
           message?: { content?: string | null; reasoning_content?: string | null };
@@ -259,6 +282,10 @@ export async function generateAnalysis(
 
       return validated;
     } catch (err) {
+      if (err instanceof AiBudgetError) {
+        throw err;
+      }
+
       lastError = err;
 
       // Extract detailed error information

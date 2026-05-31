@@ -9,6 +9,11 @@ inspector_port = 9231
 [ai]
 binding = "AI"
 
+[[durable_objects.bindings]]
+name = "AI_NEURON_LIMITER"
+class_name = "AiNeuronLimiter"
+script_name = "sesap-processing"
+
 [[r2_buckets]]
 binding = "SESAP_BUCKET"
 bucket_name = "<YOUR_R2_BUCKET_NAME>"

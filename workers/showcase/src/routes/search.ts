@@ -1,7 +1,8 @@
 import { Hono } from 'hono';
+import { AiBudgetConfigError, AiBudgetExceededError, runWithAiBudget, WORKERS_AI_MODELS } from '@sesap/shared';
 import type { Env } from '../bindings';
 
-const EMBEDDING_MODEL = '@cf/baai/bge-small-en-v1.5';
+const EMBEDDING_MODEL = WORKERS_AI_MODELS.embedding;
 const MAX_QUERY_LENGTH = 500;
 
 const search = new Hono<{ Bindings: Env }>();
@@ -31,9 +32,18 @@ search.post('/api/search/embed', async (c) => {
   }
 
   try {
-    const result = (await c.env.AI.run(EMBEDDING_MODEL as Parameters<Ai['run']>[0], {
+    const input = {
       text: [query],
-    })) as { data?: number[][] };
+    };
+    const result = (await runWithAiBudget(
+      c.env,
+      {
+        model: EMBEDDING_MODEL,
+        estimate: { kind: 'embedding', model: EMBEDDING_MODEL, text: [query] },
+        context: { worker: 'showcase', operation: 'search-embed' },
+      },
+      () => c.env.AI.run(EMBEDDING_MODEL as Parameters<Ai['run']>[0], input),
+    )) as { data?: number[][] };
 
     const embedding = result.data?.[0];
     if (!Array.isArray(embedding) || embedding.length === 0) {
@@ -42,6 +52,13 @@ search.post('/api/search/embed', async (c) => {
 
     return c.json({ embedding });
   } catch (err) {
+    if (err instanceof AiBudgetExceededError) {
+      return c.json({ error: 'Workers AI daily neuron budget exhausted' }, 429);
+    }
+    if (err instanceof AiBudgetConfigError) {
+      return c.json({ error: 'Workers AI budget is not configured' }, 503);
+    }
+
     return c.json(
       {
         error: 'Embedding generation failed',

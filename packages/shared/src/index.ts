@@ -8,3 +8,4 @@ export * from './identity-enum';
 export * from './analysis-version';
 export * from './kaltura-parser';
 export * from './demographics-normalizer';
+export * from './ai-budget';

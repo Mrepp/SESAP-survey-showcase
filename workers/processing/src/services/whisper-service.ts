@@ -1,7 +1,13 @@
-import { Logger, ProcessingError } from '@sesap/shared';
+import {
+  AiBudgetError,
+  Logger,
+  ProcessingError,
+  runWithAiBudget,
+  WORKERS_AI_MODELS,
+} from '@sesap/shared';
 import type { Env } from '../bindings';
 
-const MODEL_NAME = '@cf/openai/whisper-large-v3-turbo';
+const MODEL_NAME = WORKERS_AI_MODELS.whisper;
 const MAX_RETRIES = 3;
 const BASE_DELAY_MS = 1000;
 
@@ -50,10 +56,19 @@ export async function transcribeAudio(
   let lastError: unknown;
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const response = (await env.AI.run(MODEL_NAME as Parameters<Ai['run']>[0], {
+      const input = {
         audio,
         task: 'transcribe',
-      })) as WhisperResponse;
+      };
+      const response = (await runWithAiBudget(
+        env,
+        {
+          model: MODEL_NAME,
+          estimate: { kind: 'whisper', model: MODEL_NAME, audioByteLength: sizeBytes },
+          context: { worker: 'processing', operation: 'transcription', interviewId: context.interviewId, attempt },
+        },
+        () => env.AI.run(MODEL_NAME as Parameters<Ai['run']>[0], input),
+      )) as WhisperResponse;
 
       const text = (response.text ?? '').trim();
       if (!text) {
@@ -71,6 +86,10 @@ export async function transcribeAudio(
       });
       return text;
     } catch (err) {
+      if (err instanceof AiBudgetError) {
+        throw err;
+      }
+
       lastError = err;
       const message = err instanceof Error ? err.message : String(err);
       logger.error('Whisper attempt failed', {

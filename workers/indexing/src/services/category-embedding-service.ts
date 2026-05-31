@@ -1,8 +1,14 @@
 import type { Interview, CategoryEmbeddings } from '@sesap/types';
-import { Logger, ProcessingError } from '@sesap/shared';
+import {
+  AiBudgetError,
+  Logger,
+  ProcessingError,
+  runWithAiBudget,
+  WORKERS_AI_MODELS,
+} from '@sesap/shared';
 import type { Env } from '../bindings';
 
-const EMBEDDING_MODEL = '@cf/baai/bge-small-en-v1.5';
+const EMBEDDING_MODEL = WORKERS_AI_MODELS.embedding;
 const BATCH_SIZE = 50;
 const BATCH_DELAY_MS = 200;
 
@@ -20,9 +26,18 @@ async function generateEmbeddingBatch(
   texts: string[],
 ): Promise<number[][]> {
   try {
-    const result = (await env.AI.run(EMBEDDING_MODEL as Parameters<Ai['run']>[0], {
+    const input = {
       text: texts,
-    })) as { data: number[][] };
+    };
+    const result = (await runWithAiBudget(
+      env,
+      {
+        model: EMBEDDING_MODEL,
+        estimate: { kind: 'embedding', model: EMBEDDING_MODEL, text: texts },
+        context: { worker: 'indexing', operation: 'category-embedding' },
+      },
+      () => env.AI.run(EMBEDDING_MODEL as Parameters<Ai['run']>[0], input),
+    )) as { data: number[][] };
 
     if (!result.data || result.data.length !== texts.length) {
       throw new ProcessingError(
@@ -32,6 +47,7 @@ async function generateEmbeddingBatch(
 
     return result.data;
   } catch (err) {
+    if (err instanceof AiBudgetError) throw err;
     if (err instanceof ProcessingError) throw err;
     throw new ProcessingError('Embedding generation failed', {
       error: err instanceof Error ? err.message : String(err),

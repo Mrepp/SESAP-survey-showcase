@@ -1,9 +1,15 @@
 import type { InterviewEmbeddings, EmbeddingVector } from '@sesap/types';
-import { Logger, ProcessingError } from '@sesap/shared';
+import {
+  AiBudgetError,
+  Logger,
+  ProcessingError,
+  runWithAiBudget,
+  WORKERS_AI_MODELS,
+} from '@sesap/shared';
 import type { Env } from '../bindings';
 import type { EmbeddableChunk } from './transcript-parser';
 
-const EMBEDDING_MODEL = '@cf/baai/bge-small-en-v1.5';
+const EMBEDDING_MODEL = WORKERS_AI_MODELS.embedding;
 const EMBEDDING_DIMENSION = 384;
 const BATCH_SIZE = 50;
 const BATCH_DELAY_MS = 200;
@@ -28,9 +34,18 @@ export async function generateEmbeddings(
     const texts = batch.map((item) => item.text);
 
     try {
-      const result = (await env.AI.run(EMBEDDING_MODEL as Parameters<Ai['run']>[0], {
+      const input = {
         text: texts,
-      })) as { data: number[][] };
+      };
+      const result = (await runWithAiBudget(
+        env,
+        {
+          model: EMBEDDING_MODEL,
+          estimate: { kind: 'embedding', model: EMBEDDING_MODEL, text: texts },
+          context: { worker: 'processing', operation: 'embedding', interviewId, batchStart: i },
+        },
+        () => env.AI.run(EMBEDDING_MODEL as Parameters<Ai['run']>[0], input),
+      )) as { data: number[][] };
 
       if (!result.data || result.data.length !== batch.length) {
         throw new ProcessingError(
@@ -54,6 +69,7 @@ export async function generateEmbeddings(
         batchSize: batch.length,
       });
     } catch (err) {
+      if (err instanceof AiBudgetError) throw err;
       if (err instanceof ProcessingError) throw err;
       throw new ProcessingError(
         `Embedding generation failed at batch starting index ${i}`,

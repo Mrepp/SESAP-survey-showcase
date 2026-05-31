@@ -5,6 +5,7 @@ import {
   Logger,
   NotFoundError,
   ProcessingError,
+  AiBudgetError,
   currentPromptStamp,
   normalizeDemographics,
 } from '@sesap/shared';
@@ -185,7 +186,11 @@ export async function processInterview(
 
     // Build user-friendly error message
     let userMessage = errorMessage;
-    if (err instanceof ProcessingError && errorDetails) {
+    if (err instanceof AiBudgetError) {
+      userMessage = err.statusCode === 429
+        ? 'Workers AI daily neuron budget exhausted. Processing can resume after the daily reset at 00:00 UTC.'
+        : `Workers AI budget limiter is not configured: ${errorMessage}`;
+    } else if (err instanceof ProcessingError && errorDetails) {
       const details = errorDetails as Record<string, unknown>;
 
       if (details.transcriptLength && typeof details.transcriptLength === 'number') {
@@ -220,7 +225,7 @@ export async function processInterview(
     // Only re-throw transient errors so the queue retries them.
     // ProcessingError from the LLM service already exhausted its own retries,
     // so retrying at the queue level just flip-flops the status.
-    if (!(err instanceof ProcessingError)) {
+    if (!(err instanceof ProcessingError) && !(err instanceof AiBudgetError)) {
       throw err;
     }
   }

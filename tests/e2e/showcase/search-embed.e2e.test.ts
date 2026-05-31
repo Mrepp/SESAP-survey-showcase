@@ -1,11 +1,42 @@
 import { describe, expect, it } from 'vitest';
 import app from '../../../workers/showcase/src/index';
 
-function makeEnv(run: Ai['run']): import('../../../workers/showcase/src/bindings').Env {
+function createMockAiNeuronLimiter(options: { exhausted?: boolean } = {}): DurableObjectNamespace {
+  const fetch = async (input: RequestInfo | URL) => {
+    const path = new URL(input.toString()).pathname;
+    if (path === '/reserve' && options.exhausted) {
+      return new Response(JSON.stringify({
+        ok: false,
+        code: 'AI_BUDGET_EXCEEDED',
+        error: 'Workers AI daily neuron budget exhausted',
+      }), { status: 429, headers: { 'Content-Type': 'application/json' } });
+    }
+    if (path === '/reserve') {
+      return new Response(JSON.stringify({ ok: true, reservationId: 'res-1' }), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+    return new Response(JSON.stringify({ ok: true }), {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  };
+
+  return {
+    idFromName: () => ({}),
+    get: () => ({ fetch }),
+  } as unknown as DurableObjectNamespace;
+}
+
+function makeEnv(
+  run: Ai['run'],
+  options: { exhausted?: boolean } = {},
+): import('../../../workers/showcase/src/bindings').Env {
   return {
     AI: { run } as Ai,
+    AI_NEURON_LIMITER: createMockAiNeuronLimiter(options),
     ASSETS: { fetch: async () => new Response('not found', { status: 404 }) } as Fetcher,
     SESAP_BUCKET: {} as R2Bucket,
+    SESAP_KV: {} as KVNamespace,
     ENVIRONMENT: 'test',
   };
 }
@@ -65,6 +96,29 @@ describe('showcase semantic embedding endpoint', () => {
     await expect(res.json()).resolves.toEqual({
       error: 'Embedding generation failed',
       message: 'AI unavailable',
+    });
+  });
+
+  it('returns 429 without calling Workers AI when the neuron budget is exhausted', async () => {
+    let called = false;
+    const env = makeEnv(async () => {
+      called = true;
+      return { data: [[0.1]] };
+    }, { exhausted: true });
+
+    const res = await app.fetch(
+      new Request('http://showcase/api/search/embed', {
+        method: 'POST',
+        body: JSON.stringify({ query: 'research' }),
+        headers: { 'Content-Type': 'application/json' },
+      }),
+      env,
+    );
+
+    expect(res.status).toBe(429);
+    expect(called).toBe(false);
+    await expect(res.json()).resolves.toEqual({
+      error: 'Workers AI daily neuron budget exhausted',
     });
   });
 });

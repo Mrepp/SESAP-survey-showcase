@@ -13,4 +13,6 @@ export const KV_KEYS = {
   interviewsList: 'interviews:list',
   buildManifest: 'build:manifest',
   buildDirty: 'build:dirty',
+  aiNeuronsDailyMax: 'ai:neurons:daily:max',
+  aiNeuronsDailyUsage: (date: string) => `ai:neurons:daily:${date}`,
 } as const;

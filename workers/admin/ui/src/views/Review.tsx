@@ -76,18 +76,20 @@ export function Review() {
   const [originalAnalysis, setOriginalAnalysis] = useState<string>('');
   const [originalDemographics, setOriginalDemographics] = useState<string>('');
   const [originalMetadata, setOriginalMetadata] = useState<string>('');
+  const [originalTitle, setOriginalTitle] = useState<string>('');
 
   const isDirty = useMemo(() => {
     if (!interview) return false;
+    const titleDirty = interview.title !== originalTitle;
     const metaDirty = JSON.stringify(interview.metadata) !== originalMetadata;
     const demoDirty = JSON.stringify(interview.demographics) !== originalDemographics;
     const analysisDirty = analysis ? JSON.stringify(analysis) !== originalAnalysis : false;
-    return metaDirty || demoDirty || analysisDirty;
-  }, [analysis, interview, originalAnalysis, originalDemographics, originalMetadata]);
+    return titleDirty || metaDirty || demoDirty || analysisDirty;
+  }, [analysis, interview, originalAnalysis, originalDemographics, originalMetadata, originalTitle]);
 
   function isTabDirty(key: Tab): boolean {
     if (!interview) return false;
-    if (key === 'overview') return JSON.stringify(interview.metadata) !== originalMetadata;
+    if (key === 'overview') return interview.title !== originalTitle || JSON.stringify(interview.metadata) !== originalMetadata;
     if (key === 'demographics') return JSON.stringify(interview.demographics) !== originalDemographics;
     if (!analysis) return false;
     const orig = JSON.parse(originalAnalysis || '{}');
@@ -119,6 +121,7 @@ export function Review() {
     api.getInterview(id)
       .then(async (rec) => {
         setInterview(rec);
+        setOriginalTitle(rec.title);
         setOriginalDemographics(JSON.stringify(rec.demographics));
         setOriginalMetadata(JSON.stringify(rec.metadata));
 
@@ -192,10 +195,15 @@ export function Review() {
 
     setSaving(true);
     try {
+      const titleDirty = interview.title !== originalTitle;
       const demoDirty = JSON.stringify(interview.demographics) !== originalDemographics;
       const metaDirty = JSON.stringify(interview.metadata) !== originalMetadata;
       const analysisDirty = analysis ? JSON.stringify(analysis) !== originalAnalysis : false;
 
+      if (titleDirty) {
+        await api.saveTitle(id, interview.title);
+        setOriginalTitle(interview.title);
+      }
       if (demoDirty) {
         await api.saveDemographics(id, interview.demographics);
       }
@@ -524,9 +532,22 @@ export function Review() {
           <Box flex={1} p={6} maxW="1000px">
             {activeTab === 'overview' && (
               <Box>
-                <Text fontFamily="heading" fontSize="2xl" fontWeight="700" color="gray.800" mb={4}>
-                  {interview.title}
-                </Text>
+                <Input
+                  value={interview.title}
+                  onChange={(e) => setInterview({ ...interview, title: e.target.value })}
+                  fontFamily="heading"
+                  fontSize="2xl"
+                  fontWeight="700"
+                  color="gray.800"
+                  mb={4}
+                  bg="transparent"
+                  border="1px solid transparent"
+                  borderRadius="md"
+                  px={2}
+                  _hover={{ borderColor: 'gray.200' }}
+                  _focus={{ borderColor: 'brand.500', boxShadow: '0 0 0 1px var(--chakra-colors-brand-500)', bg: 'white' }}
+                  aria-label="Interview title"
+                />
 
                 {/* Status */}
                 <Flex gap={3} mb={6}>

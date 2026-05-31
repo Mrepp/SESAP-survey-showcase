@@ -75,6 +75,14 @@ export const api = {
     });
   },
 
+  saveTitle(id: string, title: string): Promise<InterviewRecord> {
+    return request(`/api/interviews/${id}/title`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title }),
+    });
+  },
+
   saveMetadata(id: string, metadata: InterviewMetadata): Promise<InterviewRecord> {
     return request(`/api/interviews/${id}/metadata`, {
       method: 'PUT',

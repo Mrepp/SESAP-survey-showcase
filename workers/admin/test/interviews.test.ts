@@ -8,8 +8,9 @@ import {
   rejectInterview,
 } from '../src/services/interview-service';
 import type { Env } from '../src/bindings';
-import type { Analysis, CreateInterviewRequest, ProcessingQueueMessage } from '@sesap/types';
-import { R2_PATHS } from '@sesap/types';
+import { interviews } from '../src/routes/interviews';
+import type { Analysis, CreateInterviewRequest, InterviewRecord, ProcessingQueueMessage } from '@sesap/types';
+import { KV_KEYS, R2_PATHS } from '@sesap/types';
 
 // Mock R2 bucket
 function createMockR2Bucket(): R2Bucket {
@@ -242,6 +243,187 @@ describe('interview-service', () => {
       const interview = await stored!.json<{ video?: { provider: string; embedUrl: string } }>();
       expect(interview.video?.provider).toBe('youtube');
       expect(interview.video?.embedUrl).toBe('https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ');
+    });
+  });
+
+  describe('title route', () => {
+    it('updates title on a pending interview and persists to KV', async () => {
+      const now = '2026-01-01T00:00:00.000Z';
+      const record: InterviewRecord = {
+        id: 'int_title001',
+        title: 'Original Title',
+        demographics: { college: 'Engineering', graduationYear: '2024', major: 'CS' },
+        metadata: { interviewDate: '2024-01-15', interviewer: 'Tester' },
+        source: 'transcript',
+        processing: { status: 'completed', completedAt: now },
+        approval: { status: 'pending_review' },
+        artifacts: { transcript: true, analysis: true, embeddings: false },
+        createdAt: now,
+        updatedAt: now,
+      };
+      await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+
+      const response = await interviews.request(
+        `/api/interviews/${record.id}/title`,
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: 'Updated Title' }),
+        },
+        env,
+      );
+
+      expect(response.status).toBe(200);
+      const body = await response.json<{ data: InterviewRecord }>();
+      expect(body.data.title).toBe('Updated Title');
+
+      const persistedRaw = await env.SESAP_KV.get(KV_KEYS.interview(record.id));
+      const persisted = JSON.parse(persistedRaw!) as InterviewRecord;
+      expect(persisted.title).toBe('Updated Title');
+
+      // Pending interview must NOT mark build dirty
+      const dirtyRaw = await env.SESAP_KV.get(KV_KEYS.buildDirty);
+      expect(dirtyRaw).toBeNull();
+    });
+
+    it('rejects blank titles', async () => {
+      const now = '2026-01-01T00:00:00.000Z';
+      const record: InterviewRecord = {
+        id: 'int_title002',
+        title: 'Some Title',
+        demographics: { college: 'Engineering', graduationYear: '2024', major: 'CS' },
+        metadata: { interviewDate: '2024-01-15' },
+        source: 'transcript',
+        processing: { status: 'completed', completedAt: now },
+        approval: { status: 'pending_review' },
+        artifacts: { transcript: true, analysis: false, embeddings: false },
+        createdAt: now,
+        updatedAt: now,
+      };
+      await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+
+      const response = await interviews.request(
+        `/api/interviews/${record.id}/title`,
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: '   ' }),
+        },
+        env,
+      );
+
+      // ValidationError is thrown — app error handler maps it to 400 in production,
+      // but testing through the sub-router directly yields 500.
+      expect(response.status).not.toBe(200);
+    });
+
+    it('updates title on an approved interview, patches R2 object, and marks build dirty', async () => {
+      const now = '2026-01-01T00:00:00.000Z';
+      const record: InterviewRecord = {
+        id: 'int_title003',
+        title: 'Approved Original',
+        demographics: { college: 'Engineering', graduationYear: '2024', major: 'CS' },
+        metadata: { interviewDate: '2024-01-15', interviewer: 'Tester' },
+        source: 'transcript',
+        processing: { status: 'completed', completedAt: now },
+        approval: { status: 'approved', reviewedAt: now, reviewedBy: 'reviewer@example.com' },
+        artifacts: { transcript: true, analysis: true, embeddings: true },
+        createdAt: now,
+        updatedAt: now,
+      };
+      await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+
+      // Seed a minimal R2 interview repository object
+      await env.SESAP_BUCKET.put(
+        R2_PATHS.interview(record.id),
+        JSON.stringify({ id: record.id, title: 'Approved Original', updatedAt: now }),
+      );
+      vi.clearAllMocks();
+
+      const response = await interviews.request(
+        `/api/interviews/${record.id}/title`,
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: 'Approved Updated' }),
+        },
+        env,
+      );
+
+      expect(response.status).toBe(200);
+
+      // KV record should have new title
+      const persistedRaw = await env.SESAP_KV.get(KV_KEYS.interview(record.id));
+      const persisted = JSON.parse(persistedRaw!) as InterviewRecord;
+      expect(persisted.title).toBe('Approved Updated');
+
+      // R2 interview repository object should have new title and a different updatedAt
+      const stored = await env.SESAP_BUCKET.get(R2_PATHS.interview(record.id));
+      const storedInterview = await stored!.json<{ title: string; updatedAt: string }>();
+      expect(storedInterview.title).toBe('Approved Updated');
+      expect(storedInterview.updatedAt).not.toBe(now);
+
+      // Build should be marked dirty
+      const dirtyRaw = await env.SESAP_KV.get(KV_KEYS.buildDirty);
+      expect(JSON.parse(dirtyRaw!)).toMatchObject({
+        isDirty: true,
+        lastChangeType: 'edit',
+      });
+    });
+  });
+
+  describe('reprocess route', () => {
+    it('moves an approved interview back to pending review before queueing reprocessing', async () => {
+      const now = '2026-01-01T00:00:00.000Z';
+      const record: InterviewRecord = {
+        id: 'int_reprocess001',
+        title: 'Needs Reprocessing',
+        demographics: { college: 'Engineering', graduationYear: '2024', major: 'CS' },
+        metadata: { interviewDate: '2024-01-15', interviewer: 'Tester' },
+        source: 'transcript',
+        processing: { status: 'completed', completedAt: now },
+        approval: {
+          status: 'approved',
+          reviewedAt: now,
+          reviewedBy: 'reviewer@example.com',
+        },
+        artifacts: { transcript: true, analysis: true, embeddings: true },
+        createdAt: now,
+        updatedAt: now,
+      };
+      await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+      vi.clearAllMocks();
+
+      const response = await interviews.request(
+        `/api/interviews/${record.id}/reprocess`,
+        { method: 'POST' },
+        env,
+      );
+
+      expect(response.status).toBe(200);
+      const body = await response.json<{ data: InterviewRecord }>();
+      expect(body.data.processing.status).toBe('queued');
+      expect(body.data.approval.status).toBe('pending_review');
+      expect(body.data.approval.reviewedAt).toBeUndefined();
+      expect(body.data.approval.reviewedBy).toBeUndefined();
+      expect(body.data.artifacts.analysis).toBe(false);
+      expect(body.data.artifacts.embeddings).toBe(false);
+
+      const persistedRaw = await env.SESAP_KV.get(KV_KEYS.interview(record.id));
+      const persisted = JSON.parse(persistedRaw!) as InterviewRecord;
+      expect(persisted.approval.status).toBe('pending_review');
+      expect(persisted.approval.reviewedAt).toBeUndefined();
+
+      expect(env.PROCESSING_QUEUE.send).toHaveBeenCalledWith(
+        expect.objectContaining({ interviewId: record.id }),
+      );
+
+      const dirtyRaw = await env.SESAP_KV.get(KV_KEYS.buildDirty);
+      expect(JSON.parse(dirtyRaw!)).toMatchObject({
+        isDirty: true,
+        pendingChanges: 1,
+        lastChangeType: 'reprocess',
+      });
     });
   });
 });

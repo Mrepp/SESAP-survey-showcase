@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import type { Env } from '../bindings';
-import type { ApiResponse, InterviewRecord, Analysis, AuthenticatedUser, Demographics, InterviewMetadata } from '@sesap/types';
-import { KV_KEYS } from '@sesap/types';
+import type { ApiResponse, InterviewRecord, Analysis, AuthenticatedUser, Demographics, InterviewMetadata, Interview } from '@sesap/types';
+import { KV_KEYS, R2_PATHS } from '@sesap/types';
 import { CreateInterviewRequestSchema, AnalysisSchema, DemographicsSchema, InterviewMetadataSchema } from '@sesap/shared';
 import { ValidationError, generateItemId, currentPromptStamp, isAnalysisStale, parseVideoEmbed } from '@sesap/shared';
 import * as interviewService from '../services/interview-service';
@@ -197,6 +197,40 @@ interviews.put('/api/interviews/:id/analysis', async (c) => {
   return c.json(response);
 });
 
+// PUT /api/interviews/:id/title - update interview title
+interviews.put('/api/interviews/:id/title', async (c) => {
+  const id = c.req.param('id');
+  const body = await c.req.json<{ title?: unknown }>();
+
+  const title = typeof body.title === 'string' ? body.title.trim() : '';
+  if (!title) {
+    throw new ValidationError('Title must be a non-empty string');
+  }
+
+  const record = await interviewService.getInterview(c.env, id);
+  const now = new Date().toISOString();
+  record.title = title;
+  record.updatedAt = now;
+  await c.env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
+
+  if (record.approval.status === 'approved') {
+    const storedObj = await c.env.SESAP_BUCKET.get(R2_PATHS.interview(id));
+    if (storedObj) {
+      const stored = await storedObj.json<Interview>();
+      stored.title = title;
+      stored.updatedAt = now;
+      await storageService.storeInterview(c.env.SESAP_BUCKET, id, stored);
+    }
+    await interviewService.markBuildDirty(c.env, 'edit');
+  }
+
+  const response: ApiResponse<InterviewRecord> = {
+    success: true,
+    data: record,
+  };
+  return c.json(response);
+});
+
 // PUT /api/interviews/:id/demographics - save corrected demographics
 interviews.put('/api/interviews/:id/demographics', async (c) => {
   const id = c.req.param('id');
@@ -332,9 +366,14 @@ interviews.post('/api/interviews/:id/reprocess', async (c) => {
   }
 
   const now = new Date().toISOString();
+  const wasApproved = record.approval.status === 'approved';
   record.processing.status = 'queued';
   record.processing.queuedAt = now;
   record.processing.error = undefined;
+  record.approval.status = 'pending_review';
+  record.approval.reviewedAt = undefined;
+  record.approval.reviewedBy = undefined;
+  record.approval.rejectionReason = undefined;
   record.artifacts.analysis = false;
   record.artifacts.embeddings = false;
   record.reprocessRequestedAt = now;
@@ -350,7 +389,7 @@ interviews.post('/api/interviews/:id/reprocess', async (c) => {
     },
   });
 
-  if (record.approval.status === 'approved') {
+  if (wasApproved) {
     await interviewService.markBuildDirty(c.env, 'reprocess');
   }
 

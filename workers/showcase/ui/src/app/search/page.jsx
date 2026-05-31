@@ -16,6 +16,7 @@ import { useSemanticSearch } from '@/hooks/useSemanticSearch'
 import { useFulltextSearch } from '@/hooks/useFulltextSearch'
 import { standardize, formatDate } from '@/app/formatFunctions'
 import { buildMajorOptions, buildThemeOptions, buildYearOptions } from '@/app/buildFunctions'
+import { resolveInterviewVideo } from '@/app/videoFunctions'
 import SearchBar from "@/components/SearchBar"
 import Result from '@/components/ResultsCard'
 import Filters from '@/components/Filters'
@@ -65,6 +66,7 @@ function mapSearchResultToCard(result, data) {
     const iv = interview ?? (doc ? data?.interviews?.find((i) => (i.interviewId ?? i.id) === doc.interviewId) : null) ?? null
     return {
         interviewId: iv?.id ?? doc?.interviewId ?? result.id,
+        video: resolveInterviewVideo(iv),
         videoUrl: iv?.videoUrl ?? '/placeholder16x9.jpg',
         videoAlt: doc?.title || iv?.title || 'Interview',
         name: iv?.title ?? doc?.title ?? String(result.id),

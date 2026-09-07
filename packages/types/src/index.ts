@@ -6,3 +6,5 @@ export * from './admin';
 export * from './storage';
 export * from './api';
 export * from './auth';
+export * from './intake';
+export * from './routes';

@@ -1,0 +1,29 @@
+{
+  "name": "sesap-intake",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'All five workers run in one wrangler session so the queues connect \u2014 use: pnpm dev (see docs/local-development.md)'",
+    "build:ui": "cd ui && pnpm build",
+    "build": "wrangler deploy --dry-run --outdir=dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "test": "vitest run",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@sesap/core": "workspace:*",
+    "@sesap/types": "workspace:*",
+    "@sesap/worker-runtime": "workspace:*",
+    "hono": "^4.13.5"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "catalog:",
+    "@sesap/test-utils": "workspace:*",
+    "typescript": "^5.7.0",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "wrangler": "catalog:"
+  }
+}

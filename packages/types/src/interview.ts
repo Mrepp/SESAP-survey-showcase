@@ -28,7 +28,8 @@ export interface InterviewMetadata {
   notes?: string;
 }
 
-export type VideoProvider = 'kaltura' | 'youtube' | 'vimeo' | 'iframe';
+/** `r2` means the media lives in our own bucket and streams from the showcase. */
+export type VideoProvider = 'kaltura' | 'youtube' | 'vimeo' | 'iframe' | 'r2';
 
 export interface InterviewVideo {
   provider: VideoProvider;

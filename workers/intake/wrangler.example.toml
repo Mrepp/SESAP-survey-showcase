@@ -1,0 +1,115 @@
+name = "sesap-intake"
+main = "src/index.ts"
+compatibility_date = "2024-12-18"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+not_found_handling = "404-page"
+html_handling = "auto-trailing-slash"
+run_worker_first = ["/*"]
+
+[dev]
+port = 8791
+inspector_port = 9233
+
+[[r2_buckets]]
+binding = "SESAP_BUCKET"
+bucket_name = "<YOUR_R2_BUCKET_NAME>"
+
+[[kv_namespaces]]
+binding = "SESAP_KV"
+id = "<YOUR_KV_NAMESPACE_ID>"
+preview_id = "<YOUR_KV_PREVIEW_ID>"
+
+# Per-address verification state (code hash, guess count). A Durable Object so
+# the attempt cap is enforced by one actor; the KV counter it replaced could be
+# raced by parallel guesses. Intake owns this class.
+[[durable_objects.bindings]]
+name = "INTAKE_VERIFY"
+class_name = "IntakeVerificationGuard"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["IntakeVerificationGuard"]
+
+# Cloudflare Rate Limiting. Counted at the edge, per 60-second window (the
+# binding's longest). `namespace_id` is any integer unique within the account.
+# Missing bindings are skipped in development only; a deploy without them
+# refuses verification requests with 503.
+[[ratelimits]]
+name = "RL_VERIFY_EMAIL"
+namespace_id = "1001"
+simple = { limit = 3, period = 60 }
+
+[[ratelimits]]
+name = "RL_VERIFY_IP"
+namespace_id = "1002"
+simple = { limit = 10, period = 60 }
+
+[[ratelimits]]
+name = "RL_CONFIRM_IP"
+namespace_id = "1003"
+simple = { limit = 15, period = 60 }
+
+[vars]
+ENVIRONMENT = "development"
+# Public origin of this worker. Review links in outbound email are built from
+# it, so it must be the address students actually reach — its own subdomain,
+# sharing a host with neither admin nor the showcase.
+#
+# `make setup` fills the placeholder with the local port; deploy.yml substitutes
+# the per-environment GitHub `vars.INTAKE_URL`, so a staging deploy can never
+# ship review links pointing at localhost.
+INTAKE_URL = "<YOUR_INTAKE_URL>"
+# Where the "your interview is published" mail sends the contributor. Intake has
+# no published-interview page of its own.
+SHOWCASE_URL = "<YOUR_SHOWCASE_URL>"
+ALLOWED_EMAIL_DOMAIN = "oregonstate.edu"
+# Substituted from `vars.EMAIL_FROM` at deploy time; the onboarded sending
+# domain differs between staging and production.
+EMAIL_FROM = "<YOUR_EMAIL_FROM>"
+# TODO(policy): provisional. Media is kept this long after publication.
+MEDIA_RETENTION_DAYS = "365"
+# NEXT_DEV_URL is intentionally not set here. It is a local-dev-only variable
+# that proxies non-API paths to the `next dev` server, honored only when
+# ENVIRONMENT is "development". It lives in .dev.vars, which `wrangler dev`
+# loads and no deploy ever reads — see workers/*/.dev.vars.example.
+
+# Build-time switch for the development-only AI providers in @sesap/worker-runtime.
+# Intake makes no AI calls, but the setting is kept uniform across workers.
+[define]
+SESAP_DEV_PROVIDERS = "false"
+
+# Producer for the existing processing pipeline.
+[[queues.producers]]
+binding = "PROCESSING_QUEUE"
+queue = "interview-processing"
+
+# Intake is the SOLE consumer of interview-notifications. Processing and admin
+# produce onto it; routing completion mail through a queue rather than a
+# service binding is what keeps intake -> processing -> intake from becoming a
+# dependency cycle.
+[[queues.consumers]]
+queue = "interview-notifications"
+max_batch_size = 5
+max_retries = 3
+dead_letter_queue = "interview-notifications-dlq"
+retry_delay = 60
+
+# Cloudflare Email Service (beta): outbound sending to arbitrary recipients
+# needs the Workers Paid plan and an onboarded sending domain. Locally the
+# mailer falls back to Mailpit or the log. In staging and production there is
+# no fallback: without this binding `verify/start` answers 503 rather than
+# claiming to have sent a code it only logged.
+# [[send_email]]
+# name = "EMAIL"
+
+# Secrets (set with `wrangler secret put`, never in this file):
+#   INTAKE_SESSION_SECRET  HMAC key for the session cookie signature
+#   TURNSTILE_SECRET_KEY   Turnstile secret. Skipped when unset in development
+#                          only; required in staging and production.
+#
+# Locally both live in workers/intake/.dev.vars, which `wrangler dev` loads and
+# no deploy ever sees. `make setup` creates it from .dev.vars.example and
+# generates a random session secret. See docs/local-development.md.

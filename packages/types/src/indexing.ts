@@ -53,10 +53,17 @@ export interface SearchIndex {
 export interface BuildMetadata {
   buildId: string;
   timestamp: string;
+  /** When the build started reading state; a dirty flag set after this is not covered by it. */
+  startedAt?: string;
   interviewCount: number;
   embeddingDimension: number;
   categories: string[];
   tags: string[];
+  /**
+   * R2 keys of this build's artifacts, under `build/<buildId>/`. Clients fetch
+   * what the manifest names rather than fixed paths, so a build is published
+   * atomically by the manifest write.
+   */
   artifactPaths: Record<string, string>;
   interviewIds?: string[];
 }
@@ -65,6 +72,6 @@ export interface BuildDirtyState {
   isDirty: boolean;
   pendingChanges: number;
   lastChangeAt: string;
-  lastChangeType: 'approve' | 'delete' | 'edit' | 'reprocess';
+  lastChangeType: 'approve' | 'reject' | 'delete' | 'edit' | 'reprocess';
   lastBuildAt: string | null;
 }

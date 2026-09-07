@@ -1,3 +1,10 @@
+/**
+ * Width of `@cf/baai/bge-small-en-v1.5`, the embedding model the pipeline
+ * uses. Every artifact that carries a vector — per-interview embeddings, the
+ * build's vector indices, fixture vectors — is this wide.
+ */
+export const EMBEDDING_DIMENSION = 384;
+
 export type EmbeddingType = 'summary' | 'theme' | 'quote' | 'timeline' | 'areaForImprovement';
 
 export interface EmbeddingVector {

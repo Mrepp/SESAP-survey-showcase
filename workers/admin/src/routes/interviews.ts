@@ -1,9 +1,16 @@
 import { Hono } from 'hono';
 import type { Env } from '../bindings';
-import type { ApiResponse, InterviewRecord, Analysis, AuthenticatedUser, Demographics, InterviewMetadata, Interview } from '@sesap/types';
-import { KV_KEYS, R2_PATHS } from '@sesap/types';
-import { CreateInterviewRequestSchema, AnalysisSchema, DemographicsSchema, InterviewMetadataSchema } from '@sesap/shared';
-import { ValidationError, generateItemId, currentPromptStamp, isAnalysisStale, parseVideoEmbed } from '@sesap/shared';
+import type {
+  ApiResponse,
+  InterviewRecord,
+  InterviewDraft,
+  Analysis,
+  AuthenticatedUser,
+} from '@sesap/types';
+import { KV_KEYS } from '@sesap/types';
+import { CreateInterviewRequestSchema, InterviewDraftSchema } from '@sesap/core';
+import { ValidationError, currentPromptStamp, isAnalysisStale, parseVideoEmbed } from '@sesap/core';
+import { applyInterviewDraft } from '@sesap/worker-runtime';
 import * as interviewService from '../services/interview-service';
 import * as storageService from '../services/storage-service';
 
@@ -147,140 +154,32 @@ interviews.get('/api/interviews/:id/analysis', async (c) => {
   return c.json(response);
 });
 
-// PUT /api/interviews/:id/analysis - save corrected analysis
-interviews.put('/api/interviews/:id/analysis', async (c) => {
+// PUT /api/interviews/:id/draft - save every editable slice of one interview
+// atomically. The same `applyInterviewDraft` the submitter's editor goes
+// through; only the persistence and the build bookkeeping are admin's.
+interviews.put('/api/interviews/:id/draft', async (c) => {
   const id = c.req.param('id');
   const body = await c.req.json();
 
-  const result = AnalysisSchema.safeParse(body);
+  const result = InterviewDraftSchema.safeParse(body);
   if (!result.success) {
-    throw new ValidationError('Invalid analysis data', result.error.flatten());
+    throw new ValidationError('Invalid draft data', result.error.flatten());
   }
+  const draft = result.data as InterviewDraft;
 
-  // Reassign temporary IDs with proper IDs
-  const analysis = result.data;
-  const reassign = (items: { id: string }[], type: string) => {
-    items.forEach((item, i) => {
-      if (item.id.startsWith('temp_')) {
-        item.id = generateItemId(id, type, i);
-      }
-    });
-  };
-  reassign(analysis.summaries, 'sum');
-  reassign(analysis.timeline, 'tl');
-  reassign(analysis.themes, 'thm');
-  reassign(analysis.quotes, 'qt');
-  reassign(analysis.areasForImprovement, 'afi');
-
-  // Stamp the manually-edited analysis as current so the staleness flag clears.
-  analysis.promptVersion = currentPromptStamp.promptVersion;
-  analysis.promptHash = currentPromptStamp.promptHash;
-  analysis.schemaVersion = currentPromptStamp.schemaVersion;
-
-  await storageService.putAnalysis(c.env.SESAP_BUCKET, id, analysis as Analysis);
-
-  // Update KV record timestamp + stamp
   const record = await interviewService.getInterview(c.env, id);
-  record.updatedAt = new Date().toISOString();
-  record.analysisStamp = { ...currentPromptStamp };
+  const { analysis: savedAnalysis } = await applyInterviewDraft(c.env.SESAP_BUCKET, record, draft);
   await c.env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
 
-  // Mark indexes dirty if editing an approved interview
+  // The public document is assembled from the record and its artifacts at
+  // build time, so any edit to a published interview is one rebuild away.
   if (record.approval.status === 'approved') {
     await interviewService.markBuildDirty(c.env, 'edit');
   }
 
-  const response: ApiResponse<Analysis> = {
+  const response: ApiResponse<{ record: InterviewRecord; analysis?: Analysis }> = {
     success: true,
-    data: analysis as Analysis,
-  };
-  return c.json(response);
-});
-
-// PUT /api/interviews/:id/title - update interview title
-interviews.put('/api/interviews/:id/title', async (c) => {
-  const id = c.req.param('id');
-  const body = await c.req.json<{ title?: unknown }>();
-
-  const title = typeof body.title === 'string' ? body.title.trim() : '';
-  if (!title) {
-    throw new ValidationError('Title must be a non-empty string');
-  }
-
-  const record = await interviewService.getInterview(c.env, id);
-  const now = new Date().toISOString();
-  record.title = title;
-  record.updatedAt = now;
-  await c.env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
-
-  if (record.approval.status === 'approved') {
-    const storedObj = await c.env.SESAP_BUCKET.get(R2_PATHS.interview(id));
-    if (storedObj) {
-      const stored = await storedObj.json<Interview>();
-      stored.title = title;
-      stored.updatedAt = now;
-      await storageService.storeInterview(c.env.SESAP_BUCKET, id, stored);
-    }
-    await interviewService.markBuildDirty(c.env, 'edit');
-  }
-
-  const response: ApiResponse<InterviewRecord> = {
-    success: true,
-    data: record,
-  };
-  return c.json(response);
-});
-
-// PUT /api/interviews/:id/demographics - save corrected demographics
-interviews.put('/api/interviews/:id/demographics', async (c) => {
-  const id = c.req.param('id');
-  const body = await c.req.json();
-
-  const result = DemographicsSchema.safeParse(body);
-  if (!result.success) {
-    throw new ValidationError('Invalid demographics data', result.error.flatten());
-  }
-
-  const record = await interviewService.getInterview(c.env, id);
-  record.demographics = result.data as Demographics;
-  record.updatedAt = new Date().toISOString();
-  await c.env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
-
-  // Mark indexes dirty if editing an approved interview
-  if (record.approval.status === 'approved') {
-    await interviewService.markBuildDirty(c.env, 'edit');
-  }
-
-  const response: ApiResponse<InterviewRecord> = {
-    success: true,
-    data: record,
-  };
-  return c.json(response);
-});
-
-// PUT /api/interviews/:id/metadata - save corrected interview metadata
-interviews.put('/api/interviews/:id/metadata', async (c) => {
-  const id = c.req.param('id');
-  const body = await c.req.json();
-
-  const result = InterviewMetadataSchema.safeParse(body);
-  if (!result.success) {
-    throw new ValidationError('Invalid metadata', result.error.flatten());
-  }
-
-  const record = await interviewService.getInterview(c.env, id);
-  record.metadata = result.data as InterviewMetadata;
-  record.updatedAt = new Date().toISOString();
-  await c.env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
-
-  // Mark indexes dirty if editing an approved interview
-  if (record.approval.status === 'approved') {
-    await interviewService.markBuildDirty(c.env, 'edit');
-  }
-
-  const response: ApiResponse<InterviewRecord> = {
-    success: true,
-    data: record,
+    data: { record, analysis: savedAnalysis },
   };
   return c.json(response);
 });
@@ -312,7 +211,7 @@ interviews.post('/api/interviews/:id/reject', async (c) => {
 // DELETE /api/interviews/:id - delete interview and all artifacts
 interviews.delete('/api/interviews/:id', async (c) => {
   const id = c.req.param('id');
-  await interviewService.deleteInterview(c.env, id);
+  await interviewService.deleteInterview(c.env, id, c.get('user')?.email);
   const response: ApiResponse<{ deleted: string }> = {
     success: true,
     data: { deleted: id },
@@ -334,9 +233,8 @@ interviews.post('/api/build', async (c) => {
     return c.json({ success: false, error: { code: 'BUILD_FAILED', message: body } }, 500);
   }
 
-  // Clear dirty flag on successful build
-  await interviewService.clearBuildDirty(c.env);
-
+  // Indexing settles the dirty flag itself: it is the only party that knows
+  // whether an approval landed after it started reading.
   const result = await buildResponse.json();
   return c.json({ success: true, data: result });
 });
@@ -370,10 +268,20 @@ interviews.post('/api/interviews/:id/reprocess', async (c) => {
   record.processing.status = 'queued';
   record.processing.queuedAt = now;
   record.processing.error = undefined;
+  // A reprocess is an admin matter: the result lands in the admin queue, and
+  // any review link the submitter still holds stops working. Intake also
+  // ignores the `processed` notification for this reason.
   record.approval.status = 'pending_review';
   record.approval.reviewedAt = undefined;
   record.approval.reviewedBy = undefined;
   record.approval.rejectionReason = undefined;
+  if (record.submitterReview) {
+    record.submitterReview = {
+      ...record.submitterReview,
+      tokenHash: undefined,
+      tokenExpiresAt: undefined,
+    };
+  }
   record.artifacts.analysis = false;
   record.artifacts.embeddings = false;
   record.reprocessRequestedAt = now;

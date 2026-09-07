@@ -1,0 +1,24 @@
+# Local-only variables for `wrangler dev`. Copied to .dev.vars by `make setup`.
+# .dev.vars is gitignored and never read by `wrangler deploy`.
+
+# Proxy non-API paths to the intake `next dev` server instead of the built
+# static export, so UI edits hot-reload. Comment out to serve ./public.
+NEXT_DEV_URL = "http://127.0.0.1:3002"
+
+# HMAC key for the session cookie signature. In staging and production this is
+# a secret (`wrangler secret put INTAKE_SESSION_SECRET`); locally `make setup`
+# replaces the placeholder below with `openssl rand -hex 32`. WebCrypto rejects
+# a zero-length key, so an unset secret breaks the wizard at the verify step.
+INTAKE_SESSION_SECRET = "<GENERATE_ME>"
+
+# Cloudflare Turnstile secret. Left unset locally, which skips the challenge —
+# in development only. Staging and production refuse verification requests
+# with 503 until it is set (`wrangler secret put TURNSTILE_SECRET_KEY`).
+# TURNSTILE_SECRET_KEY = ""
+
+# Deliver mail to a local Mailpit inbox instead of logging it. Read only when
+# ENVIRONMENT = "development" and the `EMAIL` binding is absent. Without it the
+# development mailer logs the message (including the verification code); that
+# fallback exists in development only.
+#   docker compose -f docker-compose.dev.yml up -d mailpit   # then :8025
+DEV_MAIL_URL = "http://127.0.0.1:8025/api/v1/send"

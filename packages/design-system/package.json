@@ -1,0 +1,23 @@
+{
+  "name": "@sesap/design-system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/"
+  },
+  "peerDependencies": {
+    "@chakra-ui/react": "^3.29.0"
+  },
+  "devDependencies": {
+    "@chakra-ui/react": "^3.29.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,74 +1,43 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import {
+  createMockEnv,
+  createMockFetcher,
+  createMockQueue,
+} from '@sesap/test-utils';
+import {
   approveInterview,
   createInterview,
   createInterviewFromKaltura,
+  deleteInterview,
   listInterviews,
   getInterview,
   rejectInterview,
+  MAX_REVISION_ROUNDS,
 } from '../src/services/interview-service';
 import type { Env } from '../src/bindings';
 import { interviews } from '../src/routes/interviews';
-import type { Analysis, CreateInterviewRequest, InterviewRecord, ProcessingQueueMessage } from '@sesap/types';
+import retry from '../src/routes/retry';
+import type {
+  Analysis,
+  CreateInterviewRequest,
+  InterviewRecord,
+  NotificationMessage,
+  ProcessingQueueMessage,
+} from '@sesap/types';
 import { KV_KEYS, R2_PATHS } from '@sesap/types';
 
-// Mock R2 bucket
-function createMockR2Bucket(): R2Bucket {
-  const store = new Map<string, string>();
-  return {
-    put: vi.fn(async (key: string, value: string | ReadableStream | ArrayBuffer | Blob | null) => {
-      store.set(key, typeof value === 'string' ? value : '');
-      return {} as R2Object;
-    }),
-    get: vi.fn(async (key: string) => {
-      const val = store.get(key);
-      if (!val) return null;
-      return {
-        text: async () => val,
-        json: async () => JSON.parse(val),
-        body: null,
-        bodyUsed: false,
-        arrayBuffer: async () => new ArrayBuffer(0),
-        blob: async () => new Blob(),
-      } as unknown as R2ObjectBody;
-    }),
-    head: vi.fn(async (key: string) => {
-      return store.has(key) ? ({} as R2Object) : null;
-    }),
-    delete: vi.fn(),
-    list: vi.fn(),
-    createMultipartUpload: vi.fn(),
-    resumeMultipartUpload: vi.fn(),
-  } as unknown as R2Bucket;
-}
-
-// Mock KV namespace
-function createMockKVNamespace(): KVNamespace {
-  const store = new Map<string, string>();
-  return {
-    get: vi.fn(async (key: string) => store.get(key) ?? null),
-    put: vi.fn(async (key: string, value: string) => {
-      store.set(key, value);
-    }),
-    delete: vi.fn(),
-    list: vi.fn(),
-    getWithMetadata: vi.fn(),
-  } as unknown as KVNamespace;
-}
-
-function createMockEnv(): Env {
-  return {
-    ASSETS: { fetch: vi.fn() } as unknown as Fetcher,
-    SESAP_BUCKET: createMockR2Bucket(),
-    SESAP_KV: createMockKVNamespace(),
-    PROCESSING_WORKER: { fetch: vi.fn() } as unknown as Fetcher,
-    PROCESSING_QUEUE: { send: vi.fn() } as unknown as Queue<ProcessingQueueMessage>,
-    INDEXING_WORKER: { fetch: vi.fn() } as unknown as Fetcher,
+function makeEnv(): Env {
+  return createMockEnv<Env>({
+    ASSETS: createMockFetcher(),
+    PROCESSING_WORKER: createMockFetcher(),
+    PROCESSING_QUEUE: createMockQueue<ProcessingQueueMessage>(),
+    NOTIFICATION_QUEUE: createMockQueue<NotificationMessage>(),
+    INDEXING_WORKER: createMockFetcher(),
     ENVIRONMENT: 'development',
     SHOWCASE_URL: 'http://localhost:8790',
     KALTURA_PARTNER_ID: '391241',
     KALTURA_UICONF_ID: '55338833',
-  };
+  });
 }
 
 const sampleAnalysis: Analysis = {
@@ -87,7 +56,7 @@ describe('interview-service', () => {
   let env: Env;
 
   beforeEach(() => {
-    env = createMockEnv();
+    env = makeEnv();
   });
 
   describe('createInterview', () => {
@@ -120,22 +89,27 @@ describe('interview-service', () => {
       expect(env.SESAP_KV.put).toHaveBeenCalled();
     });
 
-    it('should add interview ID to the list in KV', async () => {
-      const request: CreateInterviewRequest = {
-        title: 'Test',
+    it('lists concurrently-created interviews without losing any', async () => {
+      // Regression: the interview index used to be a single JSON array in KV,
+      // mutated read-modify-write on every create. Two creates racing meant one
+      // of them vanished from the dashboard. The index is now the key space.
+      const request = (title: string): CreateInterviewRequest => ({
+        title,
         demographics: { college: 'Arts', graduationYear: '2023', major: 'History' },
         metadata: { interviewDate: '2024-01-01', interviewer: 'Test' },
-      };
+      });
 
-      const record = await createInterview(env, request, 'transcript text');
+      const created = await Promise.all([
+        createInterview(env, request('One'), 'transcript one'),
+        createInterview(env, request('Two'), 'transcript two'),
+        createInterview(env, request('Three'), 'transcript three'),
+        createInterview(env, request('Four'), 'transcript four'),
+      ]);
 
-      // The list should contain the new ID
-      const listCall = (env.SESAP_KV.put as ReturnType<typeof vi.fn>).mock.calls.find(
-        (call: unknown[]) => call[0] === 'interviews:list',
+      const listed = await listInterviews(env);
+      expect(listed.map((record) => record.id).sort()).toEqual(
+        created.map((record) => record.id).sort(),
       );
-      expect(listCall).toBeDefined();
-      const list = JSON.parse(listCall![1] as string);
-      expect(list).toContain(record.id);
     });
   });
 
@@ -218,35 +192,143 @@ describe('interview-service', () => {
   });
 
   describe('approveInterview', () => {
-    it('preserves display video metadata in the approved interview repository object', async () => {
-      const request: CreateInterviewRequest = {
-        title: 'Video Approval',
+    async function completedRecord(overrides: Partial<InterviewRecord> = {}): Promise<InterviewRecord> {
+      const now = '2026-01-01T00:00:00.000Z';
+      const record: InterviewRecord = {
+        id: 'int_approve0001',
+        title: 'Approvable',
         demographics: { college: 'Engineering', graduationYear: '2024', major: 'CS' },
         metadata: { interviewDate: '2024-01-15' },
+        source: 'transcript',
+        processing: { status: 'completed', completedAt: now },
+        approval: { status: 'pending_review' },
+        artifacts: { transcript: true, analysis: true, embeddings: true },
+        createdAt: now,
+        updatedAt: now,
+        ...overrides,
       };
+      await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+      await env.SESAP_BUCKET.put(R2_PATHS.transcript(record.id), 'Q: Tell me? A: Enough words here.');
+      await env.SESAP_BUCKET.put(R2_PATHS.analysis(record.id), JSON.stringify(sampleAnalysis));
+      return record;
+    }
 
-      const created = await createInterview(
-        env,
-        request,
-        'Q: Tell me about your experience? A: This transcript is long enough to approve.',
-        {
-          provider: 'youtube',
-          embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
-          sourceUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-        },
-      );
-      await env.SESAP_BUCKET.put(R2_PATHS.analysis(created.id), JSON.stringify(sampleAnalysis));
+    it('approves a completed interview awaiting review and marks the build dirty', async () => {
+      const record = await completedRecord();
 
-      await approveInterview(env, created.id);
+      const approved = await approveInterview(env, record.id);
 
-      const stored = await env.SESAP_BUCKET.get(R2_PATHS.interview(created.id));
-      const interview = await stored!.json<{ video?: { provider: string; embedUrl: string } }>();
-      expect(interview.video?.provider).toBe('youtube');
-      expect(interview.video?.embedUrl).toBe('https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ');
+      expect(approved.approval.status).toBe('approved');
+      // No approve-time snapshot: indexing assembles the public document from
+      // the record and its artifacts at build time.
+      expect(await env.SESAP_BUCKET.head(R2_PATHS.interview(record.id))).toBeNull();
+      const dirty = JSON.parse((await env.SESAP_KV.get(KV_KEYS.buildDirty))!);
+      expect(dirty).toMatchObject({ isDirty: true, lastChangeType: 'approve' });
+    });
+
+    it('refuses to approve an interview still awaiting its submitter', async () => {
+      const record = await completedRecord({
+        origin: 'self_service',
+        approval: { status: 'pending_submitter_review' },
+        submitterReview: { revisionRound: 0, tokenHash: 'abc' },
+      });
+
+      await expect(approveInterview(env, record.id)).rejects.toThrow(/cannot be approved/);
+      expect((await getInterview(env, record.id)).approval.status).toBe('pending_submitter_review');
+    });
+
+    it('refuses to approve before processing completes', async () => {
+      const record = await completedRecord({ processing: { status: 'processing' } });
+      await expect(approveInterview(env, record.id)).rejects.toThrow(/until processing completes/);
+    });
+
+    it('burns any outstanding review link when approving a submitted self-service interview', async () => {
+      const record = await completedRecord({
+        origin: 'self_service',
+        approval: { status: 'pending_review' },
+        submitterReview: { revisionRound: 0, tokenHash: 'stale', tokenExpiresAt: '2099-01-01T00:00:00.000Z' },
+      });
+
+      const approved = await approveInterview(env, record.id);
+
+      expect(approved.submitterReview?.tokenHash).toBeUndefined();
+      expect(approved.submitterReview?.tokenExpiresAt).toBeUndefined();
+      const queue = env.NOTIFICATION_QUEUE as unknown as { sent: { kind: string }[] };
+      expect(queue.sent).toEqual([expect.objectContaining({ kind: 'approved' })]);
+    });
+
+    it('refuses to approve when the analysis artifact is missing', async () => {
+      const record = await completedRecord({ id: 'int_noanalysis01' });
+      await env.SESAP_BUCKET.delete(R2_PATHS.analysis(record.id));
+      await expect(approveInterview(env, record.id)).rejects.toThrow(/Analysis not found/);
     });
   });
 
-  describe('title route', () => {
+  describe('rejectInterview', () => {
+    it('marks the build dirty when rejecting a published interview', async () => {
+      const now = '2026-01-01T00:00:00.000Z';
+      const record: InterviewRecord = {
+        id: 'int_unpublish01',
+        title: 'Published',
+        demographics: {},
+        metadata: { interviewDate: '2024-01-15' },
+        source: 'transcript',
+        processing: { status: 'completed', completedAt: now },
+        approval: { status: 'approved', reviewedAt: now },
+        artifacts: { transcript: true, analysis: true, embeddings: true },
+        createdAt: now,
+        updatedAt: now,
+      };
+      await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+
+      const rejected = await rejectInterview(env, record.id, 'Withdrawn at the participant\'s request');
+
+      expect(rejected.approval.status).toBe('rejected');
+      const dirty = JSON.parse((await env.SESAP_KV.get(KV_KEYS.buildDirty))!);
+      expect(dirty).toMatchObject({ isDirty: true, lastChangeType: 'reject' });
+    });
+  });
+
+  describe('deleteInterview', () => {
+    it('removes self-service media and archives the consent record', async () => {
+      const now = '2026-01-01T00:00:00.000Z';
+      const id = 'int_delete00001';
+      const record: InterviewRecord = {
+        id,
+        title: 'To delete',
+        demographics: {},
+        metadata: { interviewDate: '2024-01-15' },
+        source: 'audio',
+        origin: 'self_service',
+        submitter: { email: 'beaver@oregonstate.edu', name: 'Casey', verifiedAt: now },
+        processing: { status: 'completed', completedAt: now },
+        approval: { status: 'approved', reviewedAt: now },
+        artifacts: { transcript: true, analysis: true, embeddings: true },
+        createdAt: now,
+        updatedAt: now,
+      };
+      await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
+      await env.SESAP_BUCKET.put(R2_PATHS.media(id, 'webm'), 'video-bytes');
+      await env.SESAP_BUCKET.put(R2_PATHS.transcript(id), 'text');
+      await env.SESAP_BUCKET.put(R2_PATHS.consent(id), JSON.stringify({ interviewId: id, attribution: 'named' }));
+
+      await deleteInterview(env, id, 'reviewer@example.edu');
+
+      expect(await env.SESAP_BUCKET.head(R2_PATHS.media(id, 'webm'))).toBeNull();
+      expect(await env.SESAP_BUCKET.head(R2_PATHS.transcript(id))).toBeNull();
+      expect(await env.SESAP_BUCKET.head(R2_PATHS.consent(id))).toBeNull();
+      const withdrawn = await env.SESAP_BUCKET.get(R2_PATHS.consentWithdrawn(id));
+      expect(await withdrawn!.json()).toMatchObject({
+        attribution: 'named',
+        withdrawn: { deletedBy: 'reviewer@example.edu' },
+      });
+      expect(await env.SESAP_KV.get(KV_KEYS.interview(id))).toBeNull();
+      const dirty = JSON.parse((await env.SESAP_KV.get(KV_KEYS.buildDirty))!);
+      expect(dirty).toMatchObject({ isDirty: true, lastChangeType: 'delete' });
+    });
+  });
+
+  describe('draft route', () => {
     it('updates title on a pending interview and persists to KV', async () => {
       const now = '2026-01-01T00:00:00.000Z';
       const record: InterviewRecord = {
@@ -264,7 +346,7 @@ describe('interview-service', () => {
       await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
 
       const response = await interviews.request(
-        `/api/interviews/${record.id}/title`,
+        `/api/interviews/${record.id}/draft`,
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -274,8 +356,8 @@ describe('interview-service', () => {
       );
 
       expect(response.status).toBe(200);
-      const body = await response.json<{ data: InterviewRecord }>();
-      expect(body.data.title).toBe('Updated Title');
+      const body = await response.json<{ data: { record: InterviewRecord } }>();
+      expect(body.data.record.title).toBe('Updated Title');
 
       const persistedRaw = await env.SESAP_KV.get(KV_KEYS.interview(record.id));
       const persisted = JSON.parse(persistedRaw!) as InterviewRecord;
@@ -303,7 +385,7 @@ describe('interview-service', () => {
       await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
 
       const response = await interviews.request(
-        `/api/interviews/${record.id}/title`,
+        `/api/interviews/${record.id}/draft`,
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -317,7 +399,7 @@ describe('interview-service', () => {
       expect(response.status).not.toBe(200);
     });
 
-    it('updates title on an approved interview, patches R2 object, and marks build dirty', async () => {
+    it('marks the build dirty for any edit to an approved interview', async () => {
       const now = '2026-01-01T00:00:00.000Z';
       const record: InterviewRecord = {
         id: 'int_title003',
@@ -332,43 +414,69 @@ describe('interview-service', () => {
         updatedAt: now,
       };
       await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
-
-      // Seed a minimal R2 interview repository object
-      await env.SESAP_BUCKET.put(
-        R2_PATHS.interview(record.id),
-        JSON.stringify({ id: record.id, title: 'Approved Original', updatedAt: now }),
-      );
       vi.clearAllMocks();
 
+      // Demographics, not just the title: the public document is assembled at
+      // build time, so every slice of an approved edit must trigger a rebuild.
       const response = await interviews.request(
-        `/api/interviews/${record.id}/title`,
+        `/api/interviews/${record.id}/draft`,
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ title: 'Approved Updated' }),
+          body: JSON.stringify({ demographics: { college: 'Engineering', graduationYear: '2025', major: 'CS' } }),
         },
         env,
       );
 
       expect(response.status).toBe(200);
 
-      // KV record should have new title
-      const persistedRaw = await env.SESAP_KV.get(KV_KEYS.interview(record.id));
-      const persisted = JSON.parse(persistedRaw!) as InterviewRecord;
-      expect(persisted.title).toBe('Approved Updated');
+      const persisted = JSON.parse((await env.SESAP_KV.get(KV_KEYS.interview(record.id)))!) as InterviewRecord;
+      expect(persisted.demographics.graduationYear).toBe('2025');
 
-      // R2 interview repository object should have new title and a different updatedAt
-      const stored = await env.SESAP_BUCKET.get(R2_PATHS.interview(record.id));
-      const storedInterview = await stored!.json<{ title: string; updatedAt: string }>();
-      expect(storedInterview.title).toBe('Approved Updated');
-      expect(storedInterview.updatedAt).not.toBe(now);
-
-      // Build should be marked dirty
       const dirtyRaw = await env.SESAP_KV.get(KV_KEYS.buildDirty);
       expect(JSON.parse(dirtyRaw!)).toMatchObject({
         isDirty: true,
         lastChangeType: 'edit',
       });
+    });
+
+    it('saves an edited analysis and mints ids for editor-created items', async () => {
+      const now = '2026-01-01T00:00:00.000Z';
+      const record: InterviewRecord = {
+        id: 'int_analysis01',
+        title: 'Analysis edit',
+        demographics: {},
+        metadata: { interviewDate: '2024-01-15' },
+        source: 'transcript',
+        processing: { status: 'completed', completedAt: now },
+        approval: { status: 'pending_review' },
+        artifacts: { transcript: true, analysis: true, embeddings: true },
+        createdAt: now,
+        updatedAt: now,
+      };
+      await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+
+      const response = await interviews.request(
+        `/api/interviews/${record.id}/draft`,
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            analysis: {
+              ...sampleAnalysis,
+              interviewId: record.id,
+              summaries: [{ id: 'temp_1', summaryText: 'Edited', category: 'academic', confidence: 1 }],
+            },
+          }),
+        },
+        env,
+      );
+
+      expect(response.status).toBe(200);
+      const stored = await env.SESAP_BUCKET.get(R2_PATHS.analysis(record.id));
+      const analysis = await stored!.json<Analysis>();
+      expect(analysis.summaries[0].id).toBe(`${record.id}_sum_0`);
+      expect(analysis.promptVersion).toBeDefined();
     });
   });
 
@@ -425,5 +533,130 @@ describe('interview-service', () => {
         lastChangeType: 'reprocess',
       });
     });
+
+    it('burns the submitter review link: a reprocess is an admin matter', async () => {
+      const now = '2026-01-01T00:00:00.000Z';
+      const record: InterviewRecord = {
+        id: 'int_reprocess002',
+        title: 'Self-service reprocess',
+        demographics: {},
+        metadata: { interviewDate: '2024-01-15' },
+        source: 'audio',
+        origin: 'self_service',
+        submitterReview: { revisionRound: 0, tokenHash: 'live', tokenExpiresAt: '2099-01-01T00:00:00.000Z' },
+        processing: { status: 'completed', completedAt: now },
+        approval: { status: 'pending_submitter_review' },
+        artifacts: { transcript: true, analysis: true, embeddings: true },
+        createdAt: now,
+        updatedAt: now,
+      };
+      await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+
+      const response = await interviews.request(`/api/interviews/${record.id}/reprocess`, { method: 'POST' }, env);
+      expect(response.status).toBe(200);
+
+      const persisted = JSON.parse((await env.SESAP_KV.get(KV_KEYS.interview(record.id)))!) as InterviewRecord;
+      expect(persisted.approval.status).toBe('pending_review');
+      expect(persisted.submitterReview?.tokenHash).toBeUndefined();
+    });
+  });
+
+  describe('retry route', () => {
+    const inFlight = (startedAt: string): InterviewRecord => ({
+      id: 'int_retry000001',
+      title: 'In flight',
+      demographics: {},
+      metadata: { interviewDate: '2024-01-15' },
+      source: 'transcript',
+      processing: { status: 'processing', startedAt },
+      approval: { status: 'pending_review' },
+      artifacts: { transcript: true, analysis: false, embeddings: false },
+      createdAt: startedAt,
+      updatedAt: startedAt,
+    });
+
+    it('refuses to re-queue a run that started a moment ago', async () => {
+      const record = inFlight(new Date().toISOString());
+      await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+
+      const response = await retry.request(`/api/interviews/${record.id}/retry`, { method: 'POST' }, env);
+
+      expect(response.status).not.toBe(200);
+      expect(env.PROCESSING_QUEUE.send).not.toHaveBeenCalled();
+      expect((await getInterview(env, record.id)).processing.status).toBe('processing');
+    });
+
+    it('re-queues a run that has been in flight past the stuck window', async () => {
+      const record = inFlight(new Date(Date.now() - 11 * 60 * 1000).toISOString());
+      await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+
+      const response = await retry.request(`/api/interviews/${record.id}/retry`, { method: 'POST' }, env);
+
+      expect(response.status).toBe(200);
+      expect(env.PROCESSING_QUEUE.send).toHaveBeenCalledWith(
+        expect.objectContaining({ interviewId: record.id, metadata: expect.objectContaining({ reason: 'retry_admin' }) }),
+      );
+      expect((await getInterview(env, record.id)).processing.status).toBe('queued');
+    });
+  });
+});
+
+describe('self-service revision loop', () => {
+  let env: Env;
+
+  const selfServiceRecord = (revisionRound: number): InterviewRecord => ({
+    id: 'int_selfserve01',
+    title: 'Alumni interview',
+    demographics: {},
+    metadata: { interviewDate: '2026-01-01' },
+    source: 'audio',
+    origin: 'self_service',
+    submitter: { email: 'beaver@oregonstate.edu', name: 'Casey', verifiedAt: '2026-01-01T00:00:00.000Z' },
+    submitterReview: { revisionRound },
+    processing: { status: 'completed' },
+    approval: { status: 'pending_review' },
+    artifacts: { transcript: true, analysis: true, embeddings: true },
+    createdAt: '2026-01-01T00:00:00.000Z',
+    updatedAt: '2026-01-01T00:00:00.000Z',
+  });
+
+  beforeEach(() => {
+    env = makeEnv();
+  });
+
+  it('sends a self-service interview back to its submitter and counts the round', async () => {
+    const record = selfServiceRecord(0);
+    await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+
+    const rejected = await rejectInterview(env, record.id, 'Please fix the timeline.');
+
+    expect(rejected.approval.status).toBe('pending_submitter_review');
+    expect(rejected.submitterReview?.revisionRound).toBe(1);
+    // The previous token must not survive a re-open; intake mints a new one.
+    expect(rejected.submitterReview?.tokenHash).toBeUndefined();
+
+    const queue = env.NOTIFICATION_QUEUE as unknown as { sent: { kind: string }[] };
+    expect(queue.sent).toEqual([expect.objectContaining({ kind: 'rejected' })]);
+  });
+
+  it('makes rejection terminal once the revision cap is reached', async () => {
+    const record = selfServiceRecord(MAX_REVISION_ROUNDS);
+    await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+
+    const rejected = await rejectInterview(env, record.id, 'Still not usable.');
+
+    expect(rejected.approval.status).toBe('rejected');
+    expect(rejected.submitterReview?.revisionRound).toBe(MAX_REVISION_ROUNDS);
+
+    const queue = env.NOTIFICATION_QUEUE as unknown as { sent: unknown[] };
+    expect(queue.sent).toHaveLength(0);
+  });
+
+  it('keeps admin-authored rejections terminal', async () => {
+    const record = { ...selfServiceRecord(0), origin: 'admin' as const, submitter: undefined };
+    await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+
+    const rejected = await rejectInterview(env, record.id, 'Out of scope.');
+    expect(rejected.approval.status).toBe('rejected');
   });
 });

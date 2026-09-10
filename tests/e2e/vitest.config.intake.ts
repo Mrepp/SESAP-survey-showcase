@@ -13,17 +13,19 @@ export default defineConfig({
         compatibilityFlags: ['nodejs_compat'],
         r2Buckets: ['SESAP_BUCKET'],
         kvNamespaces: ['SESAP_KV'],
-        queueProducers: { PROCESSING_QUEUE: 'interview-processing' },
+        // No PROCESSING_QUEUE producer: since the pre-analysis moderation gate,
+        // intake never enqueues, and the binding was removed from `Env`.
         queueConsumers: { 'interview-notifications': { maxBatchSize: 1 } },
         durableObjects: { INTAKE_VERIFY: 'IntakeVerificationGuard' },
         bindings: {
           ENVIRONMENT: 'development',
-          INTAKE_URL: 'http://localhost:8791',
-          SHOWCASE_URL: 'http://localhost:8790',
-          ALLOWED_EMAIL_DOMAIN: 'oregonstate.edu',
+          INTAKE_URL: 'http://localhost:8891',
+          SHOWCASE_URL: 'http://localhost:8890',
           EMAIL_FROM: 'sesap@example.edu',
-          MEDIA_RETENTION_DAYS: '365',
           INTAKE_SESSION_SECRET: 'e2e-session-secret',
+          // Empty: the wizard renders no widget and the worker skips the
+          // challenge, which it does in development only.
+          TURNSTILE_SITE_KEY: '',
         },
         serviceBindings: {
           // The static export is not built in CI; every asset request 404s,

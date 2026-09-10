@@ -108,7 +108,7 @@ if [ ! -d "$SHOWCASE_PUBLIC" ]; then
   cat > "$SHOWCASE_PUBLIC/index.html" <<'HTML'
 <!doctype html>
 <title>SESAP showcase (dev placeholder)</title>
-<p>In local dev, the showcase worker (port 8790) proxies UI requests to <code>next dev</code> on port 3000 via <code>NEXT_DEV_URL</code>. If you see this page, that proxy is unset and no static build has populated this directory; run <code>make dev</code>.</p>
+<p>In local dev, the showcase worker (port 8890) proxies UI requests to <code>next dev</code> on port 3100 via <code>NEXT_DEV_URL</code>. If you see this page, that proxy is unset and no static build has populated this directory; run <code>make dev</code>.</p>
 HTML
   echo "  [created] $SHOWCASE_PUBLIC/ (placeholder for wrangler dev)"
 else

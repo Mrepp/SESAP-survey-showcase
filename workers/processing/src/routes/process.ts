@@ -4,13 +4,34 @@ import { KV_KEYS } from '@sesap/types';
 import { Logger, ValidationError } from '@sesap/shared';
 import type { ApiResponse, InterviewRecord } from '@sesap/types';
 import { processInterview } from '../services/process-interview';
+import { isDevelopmentEnv, requireInternalSecret } from '../middleware/require-internal';
 
 const logger = new Logger({ service: 'process-route' });
 
 const processRoutes = new Hono<{ Bindings: Env }>();
 
-// HTTP endpoint for local dev (wrangler doesn't simulate queues) and retries
+// Nothing on this router is public. Applied before the handlers below, so a
+// route added later inherits it rather than shipping open.
+processRoutes.use('/api/process', requireInternalSecret);
+processRoutes.use('/api/process/*', requireInternalSecret);
+
+// HTTP endpoint for local dev (wrangler doesn't simulate queues) and retries.
+// Development only: in a deploy, work reaches this worker through the
+// interview-processing queue, which admin produces onto after a staff member
+// has moderated the media. Leaving an HTTP trigger for it in production means
+// anyone who reaches the worker can force AI spend on any non-completed id.
 processRoutes.post('/api/process', async (c) => {
+  if (!isDevelopmentEnv(c.env)) {
+    const refused: ApiResponse<never> = {
+      success: false,
+      error: {
+        code: 'NOT_AVAILABLE',
+        message: 'Processing is triggered by the interview-processing queue outside development.',
+      },
+    };
+    return c.json(refused, 404);
+  }
+
   const body = await c.req.json<{ interviewId?: string }>();
   const { interviewId } = body;
 

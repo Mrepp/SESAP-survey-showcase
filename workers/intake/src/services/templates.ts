@@ -9,7 +9,11 @@ import type { OutboundEmail } from './mailer';
 export function verificationCodeEmail(to: string, code: string, ttlMinutes: number): OutboundEmail {
   return {
     to,
-    subject: `Your SESAP verification code: ${code}`,
+    // The code stays out of the Subject. A subject line is a credential in a
+    // header: it shows in lock-screen previews, notification banners and
+    // mailbox list views, all of which are readable without unlocking the
+    // device the mail was sent to prove control of.
+    subject: 'Your SESAP verification code',
     text: [
       `Your verification code is ${code}.`,
       '',
@@ -74,6 +78,19 @@ export function approvedEmail(to: string, showcaseUrl: string): OutboundEmail {
       '',
       'If you would like it withdrawn, reply to this message and we will remove',
       'it.',
+    ].join('\n'),
+  };
+}
+
+export function rejectedBeforeAnalysisEmail(to: string, reason: string): OutboundEmail {
+  return {
+    to,
+    subject: 'Your SESAP interview submission was not accepted',
+    text: [
+      'Thank you for offering to share an interview with SESAP.', '',
+      'A program administrator reviewed the submitted media and cannot accept it for analysis.', '',
+      `Reason: ${reason}`, '',
+      'The submitted media has been deleted. No transcription or AI analysis was performed.',
     ].join('\n'),
   };
 }

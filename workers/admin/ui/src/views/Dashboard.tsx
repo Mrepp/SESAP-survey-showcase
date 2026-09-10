@@ -154,6 +154,8 @@ export function Dashboard() {
           }}
         >
           <option value="all">All Approvals</option>
+          <option value="pending_media_review">Awaiting Media Review</option>
+          <option value="pending_submitter_review">Awaiting Contributor Review</option>
           <option value="pending_review">Pending Review</option>
           <option value="approved">Approved</option>
           <option value="rejected">Rejected</option>
@@ -314,7 +316,16 @@ export function Dashboard() {
                   </Box>
                   <Flex gap={2} alignItems="center" flexShrink={0} ml={4}>
                     <StatusBadge status={interview.processing.status} />
-                    {(interview.processing.status === 'completed' || interview.processing.status === 'failed') && (
+                    {/* A new self-service submission sits at processing
+                        'pending' with approval 'pending_media_review'. Gating
+                        the approval badge on a finished processing run hid the
+                        one state that requires a human decision — and
+                        pre-analysis moderation is the control protecting the AI
+                        pipeline from unvetted media, so its queue is the last
+                        thing that should be invisible here. */}
+                    {(interview.processing.status === 'completed' ||
+                      interview.processing.status === 'failed' ||
+                      interview.approval.status === 'pending_media_review') && (
                       <StatusBadge status={interview.approval.status} />
                     )}
                     {interview.approval.status === 'approved' && canEvaluatePublishState && !publishedIds.has(interview.id) && (

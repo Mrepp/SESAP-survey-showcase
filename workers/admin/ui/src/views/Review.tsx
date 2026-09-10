@@ -163,6 +163,24 @@ export function Review() {
     });
   }
 
+  async function handleApproveForAnalysis() {
+    if (!id || !confirm('Approve this submitted media for transcription and AI analysis?')) return;
+    await run(async () => {
+      applyRecord(await api.approveForAnalysis(id));
+      return 'Media approved and analysis queued.';
+    });
+  }
+
+  async function handleRejectBeforeAnalysis() {
+    if (!id || !rejectReason.trim()) return;
+    await run(async () => {
+      applyRecord(await api.rejectBeforeAnalysis(id, rejectReason.trim()));
+      setRejectModalOpen(false);
+      setRejectReason('');
+      return 'Media rejected. The contributor was notified and submitted media was deleted.';
+    });
+  }
+
   async function handleDelete() {
     if (!id || !confirm('Permanently delete this interview? This cannot be undone.')) return;
     await run(async () => {
@@ -228,7 +246,7 @@ export function Review() {
             onClick={(e) => e.stopPropagation()}
           >
             <Text fontFamily="heading" fontSize="lg" fontWeight="600" mb={3}>
-              Reject Interview
+              {interview?.approval.status === 'pending_media_review' ? 'Reject Before Analysis' : 'Reject Interview'}
             </Text>
             <Text fontSize="sm" color="gray.600" mb={3}>
               Please provide a reason for rejection:
@@ -250,7 +268,7 @@ export function Review() {
               <Button
                 colorPalette="red"
                 size="sm"
-                onClick={handleReject}
+                onClick={interview?.approval.status === 'pending_media_review' ? handleRejectBeforeAnalysis : handleReject}
                 disabled={!rejectReason.trim() || saving}
               >
                 {saving ? 'Rejecting...' : 'Confirm Rejection'}
@@ -283,10 +301,7 @@ export function Review() {
 
       <Flex gap={3} mb={6}>
         <StatusBadge status={interview.processing.status} />
-        {(interview.processing.status === 'completed' ||
-          interview.processing.status === 'failed') && (
-          <StatusBadge status={interview.approval.status} />
-        )}
+        <StatusBadge status={interview.approval.status} />
         {interview.approval.status === 'approved' &&
           (buildManifest === null || Array.isArray(buildManifest.interviewIds)) &&
           !(buildManifest?.interviewIds ?? []).includes(interview.id) && (
@@ -294,6 +309,28 @@ export function Review() {
           )}
         {interview.stale && <StatusBadge status="out_of_sync" />}
       </Flex>
+
+      {interview.approval.status === 'pending_media_review' && (
+        <Box bg="orange.50" border="1px solid" borderColor="orange.200" p={4} borderRadius="md" mb={6}>
+          <Text fontWeight="600" mb={2}>Review submitted media before analysis</Text>
+          <Text fontSize="sm" color="gray.700" mb={3}>
+            This private playback is available only to administrators. Approving it permits transcription and AI analysis.
+          </Text>
+          {interview.media && (
+            <Box mb={3}>
+              {interview.media.kind === 'video' ? (
+                <video controls preload="metadata" style={{ maxWidth: '100%', maxHeight: 360 }} src={`/api/interviews/${encodeURIComponent(interview.id)}/media`} />
+              ) : (
+                <audio controls preload="metadata" style={{ width: '100%' }} src={`/api/interviews/${encodeURIComponent(interview.id)}/media`} />
+              )}
+            </Box>
+          )}
+          <Flex gap={3}>
+            <Button colorPalette="green" disabled={saving} onClick={handleApproveForAnalysis}>Approve for analysis</Button>
+            <Button colorPalette="red" variant="outline" disabled={saving} onClick={() => setRejectModalOpen(true)}>Reject before analysis</Button>
+          </Flex>
+        </Box>
+      )}
 
       {interview.stale && (
         <Box

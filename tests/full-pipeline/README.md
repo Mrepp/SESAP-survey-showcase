@@ -35,10 +35,10 @@ This is a **local** test. Run it before merging anything that touches the pipeli
 
 The Playwright config starts the local dev stack automatically:
 
-- admin + processing + indexing worker on `:8787`
-- showcase worker on `:8790`
-- admin Next dev server on `:3001`
-- showcase Next dev server on `:3000`
+- admin + processing + indexing worker on `:8887`
+- showcase worker on `:8890`
+- admin Next dev server on `:3101`
+- showcase Next dev server on `:3100`
 
 If any of those servers are already running, Playwright reuses them.
 
@@ -71,10 +71,10 @@ KALTURA_SOURCE='<iframe src="https://cdnapisec.kaltura.com/p/12345/sp/..."></ifr
 | Var | Required | Default | Notes |
 |---|---|---|---|
 | `KALTURA_SOURCE` | yes | — | iframe HTML, media URL, or bare entry id |
-| `ADMIN_WORKER_URL` | no | `http://127.0.0.1:8787` | admin worker base URL |
-| `ADMIN_UI_URL` | no | `http://127.0.0.1:3001` | admin Next dev base URL |
-| `SHOWCASE_UI_URL` | no | `http://127.0.0.1:3000` | showcase Next dev base URL (the showcase worker proxies UI routes here in dev) |
-| `SHOWCASE_WORKER_URL` | no | `http://127.0.0.1:8790` | showcase worker base URL |
+| `ADMIN_WORKER_URL` | no | `http://127.0.0.1:8887` | admin worker base URL |
+| `ADMIN_UI_URL` | no | `http://127.0.0.1:3101` | admin Next dev base URL |
+| `SHOWCASE_UI_URL` | no | `http://127.0.0.1:3100` | showcase Next dev base URL (the showcase worker proxies UI routes here in dev) |
+| `SHOWCASE_WORKER_URL` | no | `http://127.0.0.1:8890` | showcase worker base URL |
 | `PROCESSING_TIMEOUT_MS` | no | `900000` | how long to wait for `processingStatus === 'completed'` (Whisper on a long video can take many minutes) |
 | `BUILD_TIMEOUT_MS` | no | `60000` | how long to wait for `POST /api/build` to return |
 | `PIPELINE_POLL_INTERVAL_MS` | no | `10000` | poll interval while waiting for processing |

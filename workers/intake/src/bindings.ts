@@ -1,4 +1,4 @@
-import type { NotificationMessage, ProcessingQueueMessage } from '@sesap/types';
+import type { NotificationMessage } from '@sesap/types';
 
 /** Cloudflare Email Service binding (`[[send_email]]`). */
 export interface SendEmailBinding {
@@ -22,9 +22,6 @@ export interface Env {
   SESAP_BUCKET: R2Bucket;
   SESAP_KV: KVNamespace;
 
-  /** Producer for the existing interview-processing queue. */
-  PROCESSING_QUEUE: Queue<ProcessingQueueMessage>;
-
   /**
    * Intake is the sole consumer of interview-notifications and the only worker
    * that sends mail — that is what keeps processing → intake acyclic.
@@ -47,6 +44,17 @@ export interface Env {
   RL_VERIFY_EMAIL?: RateLimitBinding;
   RL_VERIFY_IP?: RateLimitBinding;
   RL_CONFIRM_IP?: RateLimitBinding;
+  /**
+   * Guesses per address. `RL_CONFIRM_IP` alone leaves one mailbox open to a
+   * distributed run: every fresh code resets the attempt counter, so without
+   * this an attacker spread over many IPs gets unlimited tries at one address.
+   */
+  RL_CONFIRM_EMAIL?: RateLimitBinding;
+  /** Uploads are the only route that writes to R2; both keys are enforced. */
+  RL_UPLOAD_IP?: RateLimitBinding;
+  RL_UPLOAD_SESSION?: RateLimitBinding;
+  /** The submitter's review editor, which writes `analysis/<id>.json`. */
+  RL_REVIEW_IP?: RateLimitBinding;
 
   ENVIRONMENT: string;
   /** Public origin of this worker, used to build review links in emails. */
@@ -57,15 +65,12 @@ export interface Env {
    * intake has no published-interview page of its own.
    */
   SHOWCASE_URL: string;
-  /** Only addresses at this domain may verify, e.g. `oregonstate.edu`. */
-  ALLOWED_EMAIL_DOMAIN: string;
   EMAIL_FROM: string;
-  /**
-   * How long submitter media is kept. Declared and configurable, but nothing
-   * enforces it yet — the retention policy itself is still open, so no sweeper
-   * runs against a provisional number.
-   */
-  MEDIA_RETENTION_DAYS: string;
+  // TODO(retention): contributor media and the IP/user-agent on the archived
+  // consent record are kept indefinitely. There is no sweeper and no
+  // `MEDIA_RETENTION_DAYS` var — the var was removed rather than left in place
+  // reading like an active control it never was. Adding one means adding a
+  // scheduled handler that actually deletes.
 
   /** HMAC key for the session cookie signature. */
   INTAKE_SESSION_SECRET: string;
@@ -74,6 +79,13 @@ export interface Env {
    * development the challenge is skipped.
    */
   TURNSTILE_SECRET_KEY?: string;
+  /**
+   * Turnstile site key. Public by design — it is handed to the browser by
+   * `GET /api/intake/config` so the static UI export does not have to be
+   * rebuilt per environment. Unset means "render no widget", which the server
+   * only tolerates in development (see `services/turnstile.ts`).
+   */
+  TURNSTILE_SITE_KEY?: string;
 
   NEXT_DEV_URL?: string;
   /**

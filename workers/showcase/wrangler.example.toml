@@ -10,8 +10,8 @@ html_handling = "auto-trailing-slash"
 run_worker_first = ["/*"]
 
 [dev]
-port = 8790
-inspector_port = 9232
+port = 8890
+inspector_port = 9332
 
 [[r2_buckets]]
 binding = "SESAP_BUCKET"

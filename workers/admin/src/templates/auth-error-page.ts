@@ -1,4 +1,24 @@
+/**
+ * Escape text for an HTML text node or a quoted attribute value.
+ *
+ * Both interpolations below were unescaped, and `errorMessage` carries the
+ * caller-supplied identity from the auth middleware. Server-rendered HTML on
+ * the admin origin is the one place in this codebase that builds markup by
+ * concatenation — every UI is React, with no `dangerouslySetInnerHTML`
+ * anywhere — so this is the one place that needs it.
+ */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export function renderAuthErrorPage(errorMessage: string, details?: string): string {
+  const safeMessage = escapeHtml(errorMessage);
+  const safeDetails = details ? escapeHtml(details) : '';
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -123,12 +143,12 @@ export function renderAuthErrorPage(errorMessage: string, details?: string): str
   <div class="error-container">
     <div class="error-icon">🔒</div>
     <h1>Authentication Required</h1>
-    <p>${errorMessage}</p>
+    <p>${safeMessage}</p>
 
     ${
-      details
+      safeDetails
         ? `<div class="details">
-        <strong>Details:</strong> ${details}
+        <strong>Details:</strong> ${safeDetails}
       </div>`
         : ''
     }

@@ -6,6 +6,8 @@ const statusColors: Record<string, string> = {
   processing: 'blue',
   completed: 'green',
   failed: 'red',
+  pending_media_review: 'orange',
+  pending_submitter_review: 'blue',
   pending_review: 'orange',
   approved: 'green',
   rejected: 'red',

@@ -4,8 +4,13 @@ import { KV_KEYS, R2_PATHS } from '@sesap/types';
 import type { ApiResponse, IntakeSession, InterviewRecord, SubmitterMedia } from '@sesap/types';
 import { Logger } from '@sesap/worker-runtime';
 import type { Env } from '../bindings';
-import { clientIp } from '../services/rate-limit';
-import { loadSessionFromRequest, putSession, requireSession } from '../services/session';
+import { clientIp, enforceRateLimit } from '../services/rate-limit';
+import {
+  emailKeyHash,
+  loadSessionFromRequest,
+  putSession,
+  requireSession,
+} from '../services/session';
 import { createSelfServiceInterview } from '../services/interview';
 
 const logger = new Logger({ worker: 'sesap-intake', module: 'upload-routes' });
@@ -24,6 +29,31 @@ const MEDIA_EXTENSIONS: Record<string, string> = {
   'audio/wav': 'wav',
 };
 
+/**
+ * Byte budgets. Nothing upstream of R2 caps a request body, so these are the
+ * only thing standing between a public endpoint and an unbounded write surface.
+ *
+ * The client sends 8 MiB parts (`ui/src/lib/api.ts`), so 16 MiB leaves room for
+ * a differently-chunked client without leaving the part size open. The session
+ * budget covers a long recording — roughly two hours of 720p — with margin, and
+ * counts every accepted byte including retried parts: a retry costs a write
+ * whether or not its bytes survive to the finished object.
+ */
+export const MAX_PART_BYTES = 16 * 1024 * 1024;
+export const MAX_AUDIO_BYTES = 64 * 1024 * 1024;
+export const MAX_SESSION_UPLOAD_BYTES = 2 * 1024 * 1024 * 1024;
+
+/**
+ * Interviews one verified address may submit. The session-scoped guards below
+ * are per-session by construction and so cap nothing on their own; this is the
+ * quota that actually holds, and it is keyed by the address that proved inbox
+ * control rather than by the cookie in front of it.
+ */
+export const MAX_SUBMISSIONS_PER_EMAIL = 3;
+
+/** Submission counts outlive a session but should not outlive the project. */
+const SUBMISSION_COUNT_TTL_SECONDS = 365 * 24 * 60 * 60;
+
 function mediaExtension(contentType: string): string {
   const base = contentType.split(';')[0].trim().toLowerCase();
   const ext = MEDIA_EXTENSIONS[base];
@@ -31,6 +61,20 @@ function mediaExtension(contentType: string): string {
     throw new ValidationError(`Unsupported media type: ${base}`);
   }
   return ext;
+}
+
+/**
+ * The audio track is transcribed, so it must actually be audio. `/upload/start`
+ * has enforced this allow-list since it was written; this route took the raw
+ * header and stored it as R2 metadata.
+ */
+function assertAudioContentType(contentType: string): string {
+  const base = contentType.split(';')[0].trim().toLowerCase();
+  mediaExtension(base);
+  if (!base.startsWith('audio/')) {
+    throw new ValidationError(`Unsupported audio type: ${base}`);
+  }
+  return base;
 }
 
 function assertReadyToUpload(session: IntakeSession): void {
@@ -47,6 +91,51 @@ function assertReadyToUpload(session: IntakeSession): void {
   }
 }
 
+/** Both upload rate-limit rules, applied together on every upload route. */
+async function enforceUploadLimits(env: Env, request: Request, sessionId: string): Promise<void> {
+  await enforceRateLimit(env, 'RL_UPLOAD_IP', clientIp(request));
+  await enforceRateLimit(env, 'RL_UPLOAD_SESSION', sessionId);
+}
+
+async function readSubmissionCount(env: Env, email: string): Promise<number> {
+  const raw = await env.SESAP_KV.get(KV_KEYS.intakeSubmissionCount(await emailKeyHash(email)));
+  const count = raw ? Number(raw) : 0;
+  return Number.isFinite(count) && count > 0 ? count : 0;
+}
+
+/** Refuse a new upload once the address behind it is at its quota. */
+async function assertSubmissionQuota(env: Env, email: string): Promise<void> {
+  if ((await readSubmissionCount(env, email)) >= MAX_SUBMISSIONS_PER_EMAIL) {
+    throw new ValidationError(
+      'This address has submitted the maximum number of interviews. Contact the program if you need another.',
+    );
+  }
+}
+
+async function recordSubmission(env: Env, email: string): Promise<void> {
+  const emailHash = await emailKeyHash(email);
+  const next = (await readSubmissionCount(env, email)) + 1;
+  await env.SESAP_KV.put(KV_KEYS.intakeSubmissionCount(emailHash), String(next), {
+    expirationTtl: SUBMISSION_COUNT_TTL_SECONDS,
+  });
+}
+
+/**
+ * Charge bytes against the session's budget and persist the running total.
+ *
+ * Returns the session to write back, so the caller makes one `putSession` call
+ * with both the byte total and whatever else it changed.
+ */
+function chargeBytes(session: IntakeSession, byteLength: number): IntakeSession {
+  const used = (session.uploadedBytes ?? 0) + byteLength;
+  if (used > MAX_SESSION_UPLOAD_BYTES) {
+    throw new ValidationError(
+      'This submission has exceeded its upload size limit. Record a shorter interview or contact the program.',
+    );
+  }
+  return { ...session, uploadedBytes: used };
+}
+
 // POST /api/intake/upload/start — allocate an interview id and open an R2
 // multipart upload. Student video routinely exceeds the Workers request-body
 // cap, so the browser sends parts rather than one body.
@@ -54,7 +143,9 @@ upload.post('/api/intake/upload/start', async (c) => {
   const { sessionId, session } = requireSession(
     await loadSessionFromRequest(c.env, c.req.header('Cookie')),
   );
+  await enforceUploadLimits(c.env, c.req.raw, sessionId);
   assertReadyToUpload(session);
+  await assertSubmissionQuota(c.env, session.email);
 
   const body = await c.req.json<{ contentType?: unknown }>();
   if (typeof body.contentType !== 'string') {
@@ -72,8 +163,23 @@ upload.post('/api/intake/upload/start', async (c) => {
     );
   }
   if (session.upload && session.upload.contentType !== contentType) {
-    // A new recording with a different type gets a fresh key; the abandoned
-    // multipart upload is left for R2's own expiry.
+    // A new recording with a different type gets a fresh key. Abort the
+    // abandoned multipart rather than leaving it for R2's expiry: looping
+    // start → parts → start with a different type would otherwise strand
+    // arbitrarily many partially-uploaded objects that nothing ever cleans up.
+    try {
+      await c.env.SESAP_BUCKET.resumeMultipartUpload(
+        session.upload.key,
+        session.upload.uploadId,
+      ).abort();
+    } catch (error) {
+      // A multipart that R2 already expired aborts with an error; that is the
+      // outcome we wanted anyway, so it must not fail the new upload.
+      logger.warn('Could not abort superseded multipart upload', {
+        key: session.upload.key,
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
     id = generateInterviewId();
   }
   const key = R2_PATHS.media(id, mediaExtension(contentType));
@@ -104,6 +210,7 @@ upload.put('/api/intake/upload/part', async (c) => {
   const { sessionId, session } = requireSession(
     await loadSessionFromRequest(c.env, c.req.header('Cookie')),
   );
+  await enforceUploadLimits(c.env, c.req.raw, sessionId);
   if (!session.upload) {
     throw new ValidationError('No upload in progress. Start one first.');
   }
@@ -117,6 +224,13 @@ upload.put('/api/intake/upload/part', async (c) => {
   if (bytes.byteLength === 0) {
     throw new ValidationError('Part is empty.');
   }
+  if (bytes.byteLength > MAX_PART_BYTES) {
+    throw new ValidationError(
+      `Part is too large: ${bytes.byteLength} bytes exceeds the ${MAX_PART_BYTES}-byte limit.`,
+    );
+  }
+  // Charged before the write, so an over-budget part is never stored.
+  const charged = chargeBytes(session, bytes.byteLength);
 
   const multipart = c.env.SESAP_BUCKET.resumeMultipartUpload(
     session.upload.key,
@@ -130,7 +244,7 @@ upload.put('/api/intake/upload/part', async (c) => {
     { partNumber: uploaded.partNumber, etag: uploaded.etag },
   ].sort((a, b) => a.partNumber - b.partNumber);
 
-  await putSession(c.env, sessionId, { ...session, upload: { ...session.upload, parts } });
+  await putSession(c.env, sessionId, { ...charged, upload: { ...session.upload, parts } });
 
   const response: ApiResponse<{ partNumber: number; received: number }> = {
     success: true,
@@ -142,19 +256,34 @@ upload.put('/api/intake/upload/part', async (c) => {
 // PUT /api/intake/upload/audio — the browser-extracted mp3 that processing
 // transcribes. Small enough for a single body, unlike the source media.
 upload.put('/api/intake/upload/audio', async (c) => {
-  const { session } = requireSession(await loadSessionFromRequest(c.env, c.req.header('Cookie')));
+  const { sessionId, session } = requireSession(
+    await loadSessionFromRequest(c.env, c.req.header('Cookie')),
+  );
+  await enforceUploadLimits(c.env, c.req.raw, sessionId);
+  // The same profile-and-consent precondition the other routes carry. Without
+  // it this route wrote contributor audio to R2 before consent was recorded.
+  assertReadyToUpload(session);
   if (!session.interviewId) {
     throw new ValidationError('Start the media upload before sending audio.');
   }
 
-  const contentType = c.req.header('Content-Type') ?? 'audio/mpeg';
+  const contentType = assertAudioContentType(c.req.header('Content-Type') ?? 'audio/mpeg');
   const bytes = await c.req.arrayBuffer();
   if (bytes.byteLength === 0) {
     throw new ValidationError('Audio is empty.');
   }
+  if (bytes.byteLength > MAX_AUDIO_BYTES) {
+    throw new ValidationError(
+      `Audio is too large: ${bytes.byteLength} bytes exceeds the ${MAX_AUDIO_BYTES}-byte limit.`,
+    );
+  }
+  const charged = chargeBytes(session, bytes.byteLength);
 
+  // The key keeps the `.mp3` extension the wizard's extractor produces and
+  // `upload/complete` looks for; the validated type rides as R2 metadata.
   const key = R2_PATHS.audioTemp(session.interviewId, 'mp3');
   await c.env.SESAP_BUCKET.put(key, bytes, { httpMetadata: { contentType } });
+  await putSession(c.env, sessionId, charged);
 
   const response: ApiResponse<{ key: string; sizeBytes: number }> = {
     success: true,
@@ -164,12 +293,15 @@ upload.put('/api/intake/upload/audio', async (c) => {
 });
 
 // POST /api/intake/upload/complete — assemble the parts, create the interview
-// record, archive consent and enqueue processing.
+// record and archive consent. Nothing is enqueued: a self-service interview
+// waits for staff media moderation before any AI service is called.
 upload.post('/api/intake/upload/complete', async (c) => {
   const { sessionId, session } = requireSession(
     await loadSessionFromRequest(c.env, c.req.header('Cookie')),
   );
+  await enforceUploadLimits(c.env, c.req.raw, sessionId);
   assertReadyToUpload(session);
+  await assertSubmissionQuota(c.env, session.email);
 
   if (!session.upload || !session.interviewId) {
     throw new ValidationError('No upload in progress.');
@@ -212,6 +344,11 @@ upload.post('/api/intake/upload/complete', async (c) => {
     ip: clientIp(c.req.raw),
     userAgent: c.req.header('User-Agent'),
   });
+
+  // Counted against the address, not the session, so a fresh cookie does not
+  // reset it. Recorded after the record exists: a failed submission must not
+  // consume the contributor's quota.
+  await recordSubmission(c.env, session.email);
 
   // The wizard is finished. Clear the upload and remember what was submitted,
   // so a refreshed session lands on the thank-you step rather than recording

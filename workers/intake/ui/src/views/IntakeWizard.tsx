@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Box, Button, Flex, Heading, Input, Text, Textarea } from '@chakra-ui/react';
 import { ATTRIBUTION_PROMPT, CONSENT_TEXT, CONSENT_VERSION } from '@sesap/core';
 import type { AttributionChoice } from '@sesap/types';
 import { Recorder } from '../components/Recorder';
+import { Turnstile } from '../components/Turnstile';
 import { api, uploadInParts } from '../lib/api';
 import { extractAudio } from '@sesap/ui-media';
 import { PROMPT_SCRIPT, RECORDING_TIPS } from '../lib/prompt-script';
@@ -71,6 +72,11 @@ export function IntakeWizard() {
 
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
+  // '' before the config call answers, and '' again whenever the widget has no
+  // valid token. `turnstileSiteKey === ''` means the worker reported no key,
+  // which only a development deployment does.
+  const [turnstileSiteKey, setTurnstileSiteKey] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState('');
   const [name, setName] = useState('');
   const [major, setMajor] = useState('');
   const [graduationYear, setGraduationYear] = useState('');
@@ -78,6 +84,17 @@ export function IntakeWizard() {
 
   const [recording, setRecording] = useState<{ blob: Blob; kind: 'video' | 'audio' } | null>(null);
   const [progress, setProgress] = useState('');
+
+  useEffect(() => {
+    api
+      .config()
+      .then(({ turnstileSiteKey: key }) => setTurnstileSiteKey(key))
+      // A failed config call must not strand the wizard on a blank step; the
+      // worker still refuses a token-less request wherever one is required.
+      .catch(() => setTurnstileSiteKey(''));
+  }, []);
+
+  const handleTurnstileToken = useCallback((token: string) => setTurnstileToken(token), []);
 
   // Resume: a valid signed cookie restores whichever steps are already done.
   useEffect(() => {
@@ -152,8 +169,9 @@ export function IntakeWizard() {
         Share your Oregon State story
       </Heading>
       <Text color="osuGray" mb={6}>
-        Record an interview about your time here. You will read and correct the
-        written analysis of your own words before anything is published.
+        Record an interview about your time here. Staff first review submitted
+        media; if accepted for analysis, you will read and correct the written
+        analysis before anything is published.
       </Text>
 
       <Flex gap={2} mb={6} wrap="wrap">
@@ -189,24 +207,35 @@ export function IntakeWizard() {
       )}
 
       {step === 'verify' && (
-        <Section title="Verify your OSU email">
+        <Section title="Verify your email">
           <Text fontSize="sm" color="osuGray" mb={4}>
-            We send a six-digit code to confirm you are who you say you are. Your
-            address is never published.
+            We send a six-digit code to confirm you can receive your private
+            links. Any valid email address is welcome; your address is never published.
           </Text>
           <Field
             label="Email address"
             type="email"
             value={email}
             onChange={setEmail}
-            placeholder="you@oregonstate.edu"
+            placeholder="you@example.com"
           />
+          {turnstileSiteKey !== null && (
+            <Turnstile siteKey={turnstileSiteKey} onToken={handleTurnstileToken} />
+          )}
           <Button
             colorPalette="orange"
-            disabled={busy || !email.trim()}
+            // A widget that is rendered but unsolved leaves the token empty, so
+            // the button stays disabled rather than sending a request the
+            // worker will refuse.
+            disabled={
+              busy ||
+              !email.trim() ||
+              turnstileSiteKey === null ||
+              (turnstileSiteKey !== '' && !turnstileToken)
+            }
             onClick={() =>
               run(async () => {
-                await api.startVerification(email.trim());
+                await api.startVerification(email.trim(), turnstileToken);
                 setNotice('Check your inbox for a six-digit code.');
                 setStep('code');
               })
@@ -359,10 +388,10 @@ export function IntakeWizard() {
       {step === 'done' && (
         <Section title="Thank you">
           <Text fontSize="sm" color="osuGray">
-            Your interview is being transcribed and analyzed. When it is ready we
-            will email <strong>{email}</strong> a link to review and correct the
-            analysis. Nothing is published until you submit it and a program
-            administrator approves it.
+            A program administrator will first review the submitted media. If
+            it is accepted for analysis, we will email <strong>{email}</strong>{' '}
+            a private link to review and correct the resulting analysis before
+            any final approval.
           </Text>
         </Section>
       )}

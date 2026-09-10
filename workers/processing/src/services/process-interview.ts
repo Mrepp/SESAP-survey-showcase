@@ -18,12 +18,34 @@ import { fetchMedia as fetchKalturaMedia } from './kaltura-service';
 const DEFAULT_COLLEGE = 'Oregon State University';
 const DEMOGRAPHIC_KEYS = ['college', 'graduationYear', 'major', 'gender', 'ethnicity'] as const;
 
+/**
+ * Demographics the model may never write onto a self-service record.
+ *
+ * The transcript is the contributor's own audio, so the analysis prompt is an
+ * injectable surface, and the prompt's own "do not infer gender or ethnicity"
+ * guardrail is itself an instruction to the model being injected. A
+ * self-service record arrives with `major` and `graduationYear` already
+ * self-reported through the wizard, so inference of these two adds no data —
+ * and writing a gender or ethnicity onto a record the contributor asked to
+ * publish anonymously is a re-identification risk in exchange for nothing.
+ *
+ * Admin-authored interviews keep the previous behavior: their transcripts come
+ * from staff-conducted interviews rather than from the open internet.
+ */
+const SELF_SERVICE_BLOCKED_DEMOGRAPHICS = ['gender', 'ethnicity'] as const;
+
 function mergeDemographics(
   existing: Demographics | undefined,
   inferred: Partial<Demographics>,
+  { allowInferredIdentity }: { allowInferredIdentity: boolean },
 ): Demographics {
   const next: Demographics = { ...(existing ?? {}) };
+  const blocked: readonly string[] = allowInferredIdentity
+    ? []
+    : SELF_SERVICE_BLOCKED_DEMOGRAPHICS;
+
   for (const key of DEMOGRAPHIC_KEYS) {
+    if (blocked.includes(key)) continue;
     if (!next[key] && inferred[key]) {
       next[key] = inferred[key];
     }
@@ -51,6 +73,17 @@ export async function processInterview(
   }
 
   const record: InterviewRecord = JSON.parse(recordRaw);
+
+  // Queue messages are not authority to process contributor media. This is
+  // deliberately checked here as well as at the admin endpoint, so injected,
+  // retried, and HTTP-development invocations cannot bypass moderation.
+  if (
+    record.origin === 'self_service' &&
+    (!record.approval.preAnalysisReviewedAt || record.approval.status === 'rejected')
+  ) {
+    log.warn('Refusing unmoderated self-service processing request');
+    return;
+  }
 
   // 2. Idempotency: skip if already completed
   if (record.processing.status === 'completed') {
@@ -133,9 +166,15 @@ export async function processInterview(
     // 5a. Merge LLM-inferred demographics into the record (blanks only).
     //     The normalizer collapses common abbreviations and casing so that
     //     "CS" / "computer science" / "Computer Science" all sort together.
+    //     Inferred `gender`/`ethnicity` are dropped for self-service records;
+    //     see SELF_SERVICE_BLOCKED_DEMOGRAPHICS.
     const inferred = normalizeDemographics(analysis.demographics);
-    record.demographics = mergeDemographics(record.demographics, inferred);
+    const allowInferredIdentity = record.origin !== 'self_service';
+    record.demographics = mergeDemographics(record.demographics, inferred, {
+      allowInferredIdentity,
+    });
     log.info('Demographics merged', {
+      allowInferredIdentity,
       inferredKeys: Object.keys(inferred).filter((k) => (inferred as Record<string, unknown>)[k]),
     });
 
@@ -171,9 +210,27 @@ export async function processInterview(
     // 10. Update to 'completed'
     record.processing.status = 'completed';
     record.processing.completedAt = new Date().toISOString();
+    // The raw-media gate has passed and analysis now exists. The next gate is
+    // the contributor's review; intake mints its one-time link from the event.
+    if (record.origin === 'self_service' && record.approval.status === 'pending_media_review') {
+      record.approval.status = 'pending_submitter_review';
+    }
     record.updatedAt = new Date().toISOString();
     await env.SESAP_KV.put(KV_KEYS.interview(interviewId), JSON.stringify(record));
     log.info('Processing completed');
+    if (record.origin === 'self_service' && env.NOTIFICATION_QUEUE) {
+      try {
+        await env.NOTIFICATION_QUEUE.send({
+          kind: 'processed', interviewId, queuedAt: new Date().toISOString(), reason: message.metadata?.reason,
+        });
+      } catch (notificationError) {
+        // Completion is durable already; a courtesy-mail outage must not
+        // convert a successful analysis into a failed processing run.
+        log.error('Failed to enqueue completion notification', {
+          error: notificationError instanceof Error ? notificationError.message : String(notificationError),
+        });
+      }
+    }
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : String(err);
     const errorDetails = err instanceof ProcessingError ? err.details : undefined;

@@ -154,6 +154,47 @@ interviews.get('/api/interviews/:id/analysis', async (c) => {
   return c.json(response);
 });
 
+// GET /api/interviews/:id/media - authenticated raw-media stream for pre-analysis moderation.
+interviews.get('/api/interviews/:id/media', async (c) => {
+  const record = await interviewService.getInterview(c.env, c.req.param('id'));
+  if (record.origin !== 'self_service' || !record.media) {
+    throw new ValidationError('Submitted media is unavailable.');
+  }
+  const size = record.media.sizeBytes;
+  const rangeHeader = c.req.header('Range');
+  let range: R2Range | undefined;
+  let status: 200 | 206 = 200;
+  const headers = new Headers({
+    // The content type is whatever the contributor's browser declared, so it is
+    // client-controlled even though `/upload/start` constrains it to a
+    // seven-entry allow-list. `nosniff` means the browser honours that type
+    // rather than sniffing its way to something scriptable.
+    'Content-Type': record.media.contentType,
+    'X-Content-Type-Options': 'nosniff',
+    'Accept-Ranges': 'bytes',
+    'Cache-Control': 'private, no-store',
+  });
+  if (rangeHeader) {
+    const match = /^bytes=(\d*)-(\d*)$/.exec(rangeHeader);
+    if (!match) return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${size}` } });
+    const requestedStart = match[1] ? Number(match[1]) : undefined;
+    const requestedEnd = match[2] ? Number(match[2]) : undefined;
+    // `bytes=-N` means the final N bytes (used by some media clients).
+    const start = requestedStart ?? Math.max(0, size - (requestedEnd ?? 0));
+    const end = requestedStart === undefined ? size - 1 : (requestedEnd ?? size - 1);
+    if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start > end || start >= size) {
+      return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${size}` } });
+    }
+    range = { offset: start, length: Math.min(end, size - 1) - start + 1 };
+    status = 206;
+    headers.set('Content-Range', `bytes ${start}-${start + range.length - 1}/${size}`);
+  }
+  const object = await storageService.getMedia(c.env.SESAP_BUCKET, record.media.key, range);
+  if (!object) throw new ValidationError('Submitted media is unavailable.');
+  headers.set('Content-Length', String(range?.length ?? object.size));
+  return new Response(object.body, { status, headers });
+});
+
 // PUT /api/interviews/:id/draft - save every editable slice of one interview
 // atomically. The same `applyInterviewDraft` the submitter's editor goes
 // through; only the persistence and the build bookkeeping are admin's.
@@ -187,12 +228,34 @@ interviews.put('/api/interviews/:id/draft', async (c) => {
 // POST /api/interviews/:id/approve
 interviews.post('/api/interviews/:id/approve', async (c) => {
   const id = c.req.param('id');
-  const record = await interviewService.approveInterview(c.env, id);
+  const record = await interviewService.approveInterview(c.env, id, c.get('user')?.email);
   const response: ApiResponse<InterviewRecord> = {
     success: true,
     data: record,
   };
   return c.json(response);
+});
+
+interviews.post('/api/interviews/:id/approve-for-analysis', async (c) => {
+  const id = c.req.param('id');
+  const record = await interviewService.approveForAnalysis(c.env, id, c.get('user')?.email ?? 'unknown');
+  return c.json({ success: true, data: record } satisfies ApiResponse<InterviewRecord>);
+});
+
+/** A moderation reason is quoted verbatim into an email body; keep it a note. */
+const MAX_REJECTION_REASON_LENGTH = 1_000;
+
+interviews.post('/api/interviews/:id/reject-before-analysis', async (c) => {
+  const id = c.req.param('id');
+  const body = await c.req.json<{ reason?: string }>();
+  const reason = (body.reason ?? '').trim();
+  if (reason.length > MAX_REJECTION_REASON_LENGTH) {
+    throw new ValidationError(
+      `Rejection reason must be ${MAX_REJECTION_REASON_LENGTH} characters or fewer.`,
+    );
+  }
+  const record = await interviewService.rejectBeforeAnalysis(c.env, id, reason, c.get('user')?.email ?? 'unknown');
+  return c.json({ success: true, data: record } satisfies ApiResponse<InterviewRecord>);
 });
 
 // POST /api/interviews/:id/reject

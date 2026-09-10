@@ -34,7 +34,7 @@ function makeEnv(): Env {
     NOTIFICATION_QUEUE: createMockQueue<NotificationMessage>(),
     INDEXING_WORKER: createMockFetcher(),
     ENVIRONMENT: 'development',
-    SHOWCASE_URL: 'http://localhost:8790',
+    SHOWCASE_URL: 'http://localhost:8890',
     KALTURA_PARTNER_ID: '391241',
     KALTURA_UICONF_ID: '55338833',
   });
@@ -309,12 +309,18 @@ describe('interview-service', () => {
       };
       await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
       await env.SESAP_BUCKET.put(R2_PATHS.media(id, 'webm'), 'video-bytes');
+      await env.SESAP_BUCKET.put(R2_PATHS.audioTemp(id, 'mp3'), 'audio-bytes');
       await env.SESAP_BUCKET.put(R2_PATHS.transcript(id), 'text');
       await env.SESAP_BUCKET.put(R2_PATHS.consent(id), JSON.stringify({ interviewId: id, attribution: 'named' }));
 
       await deleteInterview(env, id, 'reviewer@example.edu');
 
+      // This is the consent-withdrawal path. It used to call a function that
+      // did not exist, so it threw before the `await` and deleted nothing: the
+      // contributor's video stayed in R2, the KV record was orphaned, and an
+      // approved-then-"deleted" interview stayed in the published build.
       expect(await env.SESAP_BUCKET.head(R2_PATHS.media(id, 'webm'))).toBeNull();
+      expect(await env.SESAP_BUCKET.head(R2_PATHS.audioTemp(id, 'mp3'))).toBeNull();
       expect(await env.SESAP_BUCKET.head(R2_PATHS.transcript(id))).toBeNull();
       expect(await env.SESAP_BUCKET.head(R2_PATHS.consent(id))).toBeNull();
       const withdrawn = await env.SESAP_BUCKET.get(R2_PATHS.consentWithdrawn(id));
@@ -322,6 +328,41 @@ describe('interview-service', () => {
         attribution: 'named',
         withdrawn: { deletedBy: 'reviewer@example.edu' },
       });
+      expect(await env.SESAP_KV.get(KV_KEYS.interview(id))).toBeNull();
+      const dirty = JSON.parse((await env.SESAP_KV.get(KV_KEYS.buildDirty))!);
+      expect(dirty).toMatchObject({ isDirty: true, lastChangeType: 'delete' });
+    });
+
+    it('still removes the record and marks the build when one artifact fails', async () => {
+      // Erasure must not be all-or-nothing across seven independent deletes: a
+      // single R2 hiccup leaving the KV record behind, and an unpublished
+      // interview still in the build, is the worse outcome.
+      const now = '2026-01-01T00:00:00.000Z';
+      const id = 'int_delete00002';
+      const record: InterviewRecord = {
+        id,
+        title: 'Partial failure',
+        demographics: {},
+        metadata: { interviewDate: '2024-01-15' },
+        source: 'audio',
+        origin: 'self_service',
+        processing: { status: 'completed', completedAt: now },
+        approval: { status: 'approved', reviewedAt: now },
+        artifacts: { transcript: true, analysis: true, embeddings: true },
+        createdAt: now,
+        updatedAt: now,
+      };
+      await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
+      await env.SESAP_BUCKET.put(R2_PATHS.transcript(id), 'text');
+
+      const realDelete = env.SESAP_BUCKET.delete.bind(env.SESAP_BUCKET);
+      vi.spyOn(env.SESAP_BUCKET, 'delete').mockImplementation(async (key: string | string[]) => {
+        if (key === R2_PATHS.transcript(id)) throw new Error('R2 unavailable');
+        return realDelete(key as string);
+      });
+
+      await expect(deleteInterview(env, id, 'reviewer@example.edu')).resolves.toBeUndefined();
+
       expect(await env.SESAP_KV.get(KV_KEYS.interview(id))).toBeNull();
       const dirty = JSON.parse((await env.SESAP_KV.get(KV_KEYS.buildDirty))!);
       expect(dirty).toMatchObject({ isDirty: true, lastChangeType: 'delete' });

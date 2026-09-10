@@ -10,6 +10,8 @@ const logger = new Logger({ worker: 'sesap-intake', module: 'verification' });
 
 export const CODE_TTL_SECONDS = 15 * 60;
 export const MAX_CODE_ATTEMPTS = 5;
+/** RFC 5321 caps a path at 256 octets; anything longer is not a mailbox. */
+export const MAX_EMAIL_LENGTH = 254;
 
 /**
  * Normalize an address for keying and comparison. Case is folded because email
@@ -21,22 +23,24 @@ export function normalizeEmail(email: string): string {
 }
 
 /**
- * Enforce the institutional domain. Only exact-domain and subdomain addresses
- * pass — `oregonstate.edu.attacker.com` must not.
+ * Enrollment is open: any address on the internet may verify. A verification
+ * address proves inbox control, not institutional affiliation, so there is no
+ * domain allow-list to consult — only syntax, deliberately conservative, and
+ * mailbox ownership proven by the emailed code.
+ *
+ * Because that makes this an internet-facing endpoint, the volumetric controls
+ * around it are load-bearing: Turnstile on `verify/start`, the per-address and
+ * per-IP rate limits, and the per-address submission quota in `routes/upload`.
  */
-export function isAllowedEmail(email: string, allowedDomain: string): boolean {
+export function isAllowedEmail(email: string): boolean {
   const normalized = normalizeEmail(email);
-  // Deliberately strict: one @, no spaces, a dot in the domain.
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) return false;
-
-  const domain = normalized.slice(normalized.lastIndexOf('@') + 1);
-  const allowed = allowedDomain.trim().toLowerCase();
-  return domain === allowed || domain.endsWith(`.${allowed}`);
+  if (normalized.length > MAX_EMAIL_LENGTH) return false;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized);
 }
 
-export function assertAllowedEmail(email: string, allowedDomain: string): string {
-  if (!isAllowedEmail(email, allowedDomain)) {
-    throw new ValidationError(`Use your @${allowedDomain} email address.`);
+export function assertAllowedEmail(email: string): string {
+  if (!isAllowedEmail(email)) {
+    throw new ValidationError('Enter a valid email address.');
   }
   return normalizeEmail(email);
 }

@@ -3,8 +3,8 @@ main = "src/index.ts"
 compatibility_date = "2024-12-18"
 
 [dev]
-port = 8789
-inspector_port = 9231
+port = 8889
+inspector_port = 9331
 
 [ai]
 binding = "AI"

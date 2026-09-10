@@ -10,10 +10,10 @@ packages/
   shared/       Shared utilities & validation   (@sesap/shared)
 
 workers/
-  admin/        Admin dashboard + API (Hono + React)   → :8787
-  processing/   Interview processing (Cloudflare AI)   → :8788
-  indexing/     Search index builder (Lunr, embeddings) → :8789
-  showcase/     Public search/display UI (React + Vite) → :8790
+  admin/        Admin dashboard + API (Hono + React)   → :8887
+  processing/   Interview processing (Cloudflare AI)   → :8888
+  indexing/     Search index builder (Lunr, embeddings) → :8889
+  showcase/     Public search/display UI (React + Vite) → :8890
 ```
 
 **Data flow:** Admin receives uploads → Processing runs LLM analysis → Indexing builds search indices → Showcase serves the public UI.
@@ -43,7 +43,7 @@ wrangler r2 bucket list          # → R2 bucket name
 pnpm dev
 ```
 
-This starts all four workers with hot-reload. Each worker runs on its own port (8787–8790).
+This starts all four workers with hot-reload. Each worker runs on its own port (8887–8890).
 
 To start a single worker:
 

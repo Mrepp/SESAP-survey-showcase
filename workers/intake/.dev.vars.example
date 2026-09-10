@@ -3,7 +3,7 @@
 
 # Proxy non-API paths to the intake `next dev` server instead of the built
 # static export, so UI edits hot-reload. Comment out to serve ./public.
-NEXT_DEV_URL = "http://127.0.0.1:3002"
+NEXT_DEV_URL = "http://127.0.0.1:3102"
 
 # HMAC key for the session cookie signature. In staging and production this is
 # a secret (`wrangler secret put INTAKE_SESSION_SECRET`); locally `make setup`
@@ -14,7 +14,16 @@ INTAKE_SESSION_SECRET = "<GENERATE_ME>"
 # Cloudflare Turnstile secret. Left unset locally, which skips the challenge —
 # in development only. Staging and production refuse verification requests
 # with 503 until it is set (`wrangler secret put TURNSTILE_SECRET_KEY`).
+#
+# To exercise the widget locally, set BOTH of these to Cloudflare's always-pass
+# test pair. Setting only the secret makes every signup fail: the server then
+# demands a token the UI cannot produce without a site key.
+#   TURNSTILE_SECRET_KEY = "1x0000000000000000000000000000000AA"
+#   TURNSTILE_SITE_KEY   = "1x00000000000000000000AA"
+# The site key is a plain var (wrangler.toml) in staging and production; it is
+# repeated here only so a local run can override the empty default.
 # TURNSTILE_SECRET_KEY = ""
+# TURNSTILE_SITE_KEY = ""
 
 # Deliver mail to a local Mailpit inbox instead of logging it. Read only when
 # ENVIRONMENT = "development" and the `EMAIL` binding is absent. Without it the

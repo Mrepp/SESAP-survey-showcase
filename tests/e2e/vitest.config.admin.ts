@@ -20,7 +20,7 @@ export default defineWorkersConfig({
           queueConsumers: { 'interview-processing': { maxBatchSize: 1 } },
           bindings: {
             ENVIRONMENT: 'development',
-            SHOWCASE_URL: 'http://localhost:8790',
+            SHOWCASE_URL: 'http://localhost:8890',
           },
           serviceBindings: {
             PROCESSING_WORKER: () => new Response('stub', { status: 200 }),

@@ -60,10 +60,10 @@ async function json(
   });
 }
 
-describe('self-service intake: verify → profile → consent → upload → queued', () => {
+describe('self-service intake: verify → profile → consent → upload → awaiting moderation', () => {
   beforeEach(clearAll);
 
-  it('walks a contributor from an unverified address to a queued interview', async () => {
+  it('walks a contributor from an unverified address to a moderation-queued interview', async () => {
     const start = await json('/api/intake/verify/start', { email: EMAIL });
     expect(start.status).toBe(200);
 
@@ -111,8 +111,11 @@ describe('self-service intake: verify → profile → consent → upload → que
     const record = JSON.parse(stored!) as InterviewRecord;
 
     expect(record.origin).toBe('self_service');
-    expect(record.approval.status).toBe('pending_submitter_review');
-    expect(record.processing.status).toBe('queued');
+    // Pre-analysis moderation: the submission waits for a staff member to watch
+    // the media, and nothing is queued for AI until they approve it. This is
+    // the control protecting the pipeline from unvetted contributor media.
+    expect(record.approval.status).toBe('pending_media_review');
+    expect(record.processing.status).toBe('pending');
     expect(record.submitter?.email).toBe(EMAIL);
 
     // Anonymous attribution must not carry a display name into the archive.
@@ -151,9 +154,46 @@ describe('self-service intake: verify → profile → consent → upload → que
     expect(real.status).toBe(400);
   });
 
-  it('refuses an address outside the institutional domain', async () => {
-    const response = await json('/api/intake/verify/start', { email: 'someone@gmail.com' });
-    expect(response.status).toBe(400);
+  it('accepts any valid address and refuses a malformed one', async () => {
+    // Enrollment is open on purpose: there is no domain allow-list, and inbox
+    // control is what an address proves. The bot, rate and quota controls are
+    // what make that safe to expose, not the shape of the domain.
+    const external = await json('/api/intake/verify/start', { email: 'someone@gmail.com' });
+    expect(external.status).toBe(200);
+
+    const malformed = await json('/api/intake/verify/start', { email: 'not an address' });
+    expect(malformed.status).toBe(400);
+  });
+
+  it('ends a session on logout', async () => {
+    await json('/api/intake/verify/start', { email: EMAIL });
+    const code = readCodeFromLog();
+    const confirmed = await json('/api/intake/verify/confirm', { email: EMAIL, code });
+    const cookie = cookieFrom(confirmed);
+
+    const before = await SELF.fetch(`${BASE}/api/intake/session`, { headers: { Cookie: cookie } });
+    expect((await before.json<{ data: { session: unknown } }>()).data.session).not.toBeNull();
+
+    const loggedOut = await SELF.fetch(`${BASE}/api/intake/session/logout`, {
+      method: 'POST',
+      headers: { Cookie: cookie },
+    });
+    expect(loggedOut.status).toBe(200);
+
+    // The server-side session is gone, so the cookie is inert even if the
+    // browser kept it — a shared machine needs more than an expiry header.
+    const after = await SELF.fetch(`${BASE}/api/intake/session`, { headers: { Cookie: cookie } });
+    expect((await after.json<{ data: { session: unknown } }>()).data.session).toBeNull();
+  });
+
+  it('serves the Turnstile site key at the public config endpoint', async () => {
+    // The wizard reads this to decide whether to render the widget. It exists
+    // because the UI is one static export serving every environment; a
+    // build-time NEXT_PUBLIC_ value could not do that.
+    const response = await SELF.fetch(`${BASE}/api/intake/config`);
+    expect(response.status).toBe(200);
+    const { data } = await response.json<{ data: { turnstileSiteKey: string } }>();
+    expect(data).toHaveProperty('turnstileSiteKey');
   });
 
   it('refuses to upload before consent is given', async () => {

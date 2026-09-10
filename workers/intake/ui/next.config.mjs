@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const isDev = process.env.NODE_ENV !== 'production';
-const intakeWorkerUrl = process.env.INTAKE_WORKER_URL ?? 'http://127.0.0.1:8791';
+const intakeWorkerUrl = process.env.INTAKE_WORKER_URL ?? 'http://127.0.0.1:8891';
 
 export default {
   // `output: 'export'` is only valid for the production build — the one shipped

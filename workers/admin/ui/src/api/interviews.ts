@@ -95,6 +95,16 @@ export const api = {
     return request(`/api/interviews/${id}/approve`, { method: 'POST' });
   },
 
+  approveForAnalysis(id: string): Promise<InterviewRecord> {
+    return request(`/api/interviews/${id}/approve-for-analysis`, { method: 'POST' });
+  },
+
+  rejectBeforeAnalysis(id: string, reason: string): Promise<InterviewRecord> {
+    return request(`/api/interviews/${id}/reject-before-analysis`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ reason }),
+    });
+  },
+
   rejectInterview(id: string, reason: string): Promise<InterviewRecord> {
     return request(`/api/interviews/${id}/reject`, {
       method: 'POST',

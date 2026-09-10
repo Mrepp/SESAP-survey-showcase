@@ -7,6 +7,7 @@ import { sendEmail } from './mailer';
 import {
   analysisReadyEmail,
   approvedEmail,
+  rejectedBeforeAnalysisEmail,
   revisionRequestedEmail,
 } from './templates';
 import { REVIEW_TOKEN_TTL_DAYS, mintReviewToken } from './review-token';
@@ -75,6 +76,10 @@ export async function handleNotification(env: Env, message: NotificationMessage)
       // as a query param on the directory form of the route.
       const showcase = env.SHOWCASE_URL.replace(/\/+$/, '');
       await sendEmail(env, approvedEmail(email, `${showcase}${SHOWCASE_ROUTES.interviewView(record.id)}`));
+      break;
+    }
+    case 'rejected_before_analysis': {
+      await sendEmail(env, rejectedBeforeAnalysisEmail(email, record.approval.rejectionReason ?? 'No reason given.'));
       break;
     }
   }

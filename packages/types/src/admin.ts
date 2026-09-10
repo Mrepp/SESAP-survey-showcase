@@ -11,6 +11,7 @@ export type ProcessingStatus =
  * meaning — awaiting an admin.
  */
 export type ApprovalStatus =
+  | 'pending_media_review'
   | 'pending_review'
   | 'pending_submitter_review'
   | 'approved'
@@ -68,6 +69,13 @@ export interface InterviewRecord {
 
   approval: {
     status: ApprovalStatus;
+    /** Staff decision made before any self-service media is sent to AI. */
+    preAnalysisReviewedAt?: string;
+    preAnalysisReviewedBy?: string;
+    /** Administrative eligibility confirmation made at final approval. */
+    adminConfirmed?: boolean;
+    adminConfirmedAt?: string;
+    adminConfirmedBy?: string;
     reviewedAt?: string;
     reviewedBy?: string;
     rejectionReason?: string;

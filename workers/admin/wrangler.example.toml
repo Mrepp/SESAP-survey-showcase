@@ -2,6 +2,12 @@ name = "sesap-admin"
 main = "src/index.ts"
 compatibility_date = "2024-12-18"
 
+# Admin must be reachable only through the Cloudflare Access-protected
+# hostname. The auth middleware verifies the Access JWT, so a live workers.dev
+# hostname is no longer full admin by way of a spoofed header — but it would
+# still expose the origin, so it stays off.
+workers_dev = false
+
 [assets]
 directory = "./public"
 binding = "ASSETS"
@@ -10,8 +16,8 @@ html_handling = "auto-trailing-slash"
 run_worker_first = ["/*"]
 
 [dev]
-port = 8787
-inspector_port = 9229
+port = 8887
+inspector_port = 9329
 
 [[r2_buckets]]
 binding = "SESAP_BUCKET"
@@ -24,7 +30,16 @@ preview_id = "<YOUR_KV_PREVIEW_ID>"
 
 [vars]
 ENVIRONMENT = "development"
-SHOWCASE_URL = "http://localhost:8790"  # Update to production URL when deploying
+SHOWCASE_URL = "http://localhost:8890"  # Update to production URL when deploying
+# Cloudflare Access team domain and application audience (AUD) tag. Both are
+# required outside development: the middleware verifies `Cf-Access-Jwt-Assertion`
+# against this team's JWKS and checks the token's `aud` against the tag. With
+# either unset the worker refuses every request rather than falling back to the
+# `Cf-Access-Authenticated-User-Email` header, which any client can set.
+#
+# Team domain is the bare label, e.g. "acme" for acme.cloudflareaccess.com.
+CF_ACCESS_TEAM_DOMAIN = ""
+CF_ACCESS_AUD = ""
 # Default Kaltura partner id used when an admin pastes a media-page URL that
 # doesn't carry the partner id (iframe embeds do). Leave empty to require
 # the iframe form.

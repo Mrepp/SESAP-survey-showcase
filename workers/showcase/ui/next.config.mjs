@@ -5,7 +5,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const isDev = process.env.NODE_ENV !== 'production';
 const showcaseWorkerUrl =
-  process.env.SHOWCASE_WORKER_URL ?? 'http://127.0.0.1:8790';
+  process.env.SHOWCASE_WORKER_URL ?? 'http://127.0.0.1:8890';
 
 export default {
   // `output: 'export'` is only valid for the production build (which is what

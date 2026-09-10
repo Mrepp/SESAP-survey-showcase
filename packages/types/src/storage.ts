@@ -60,4 +60,16 @@ export const KV_KEYS = {
   intakeSession: (sessionId: string) => `intake:session:${sessionId}`,
   /** Hashed self-review token, mapping to the interview it unlocks. */
   intakeReviewToken: (tokenHash: string) => `intake:review:${tokenHash}`,
+  /**
+   * How many interviews one verified address has submitted. Keyed by SHA-256 of
+   * the normalized address, so the quota survives a fresh session — a session
+   * counter caps nothing when new sessions are three code requests away — and a
+   * KV listing does not yield a list of contributors' addresses.
+   */
+  intakeSubmissionCount: (emailHash: string) => `intake:submissions:${emailHash}`,
+  /**
+   * Newest session id for an address. Verifying again retires the previous
+   * session rather than accumulating parallel ones.
+   */
+  intakeEmailSession: (emailHash: string) => `intake:email-session:${emailHash}`,
 } as const;

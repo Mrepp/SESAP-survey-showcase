@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --webpack -p 3002",
+    "dev": "next dev --webpack -p 3102",
     "build": "next build && rm -rf ../public && cp -r out ../public && cp -r public/. ../public/ 2>/dev/null || true",
     "start": "next start",
     "typecheck": "tsc --noEmit",

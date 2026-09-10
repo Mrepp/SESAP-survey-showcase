@@ -3,7 +3,7 @@
 help:
 	@echo "Available targets:"
 	@echo "  make dev                 - Build admin UI bundle and run all workers + showcase next dev locally"
-	@echo "  make dev-ui              - Run admin UI Vite dev server with HMR (proxies /api to :8787)"
+	@echo "  make dev-ui              - Run admin UI Vite dev server with HMR (proxies /api to :8887)"
 	@echo "  make ui-build            - Build admin UI bundle into workers/admin/public/"
 	@echo "  make deploy              - Deploy all workers (in correct order)"
 	@echo "  make deploy-admin        - Deploy admin worker (requires processing & indexing)"

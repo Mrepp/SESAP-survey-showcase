@@ -87,6 +87,12 @@ export interface IntakeSession {
    * and `upload/start` refuses to reuse or replace the record.
    */
   submittedInterviewId?: string;
+  /**
+   * Bytes this session has written to R2 across every upload route, retries
+   * included. Retried bytes still cost storage and still have to be paid for,
+   * so the budget is on bytes accepted rather than on bytes finally kept.
+   */
+  uploadedBytes?: number;
   /** In-flight R2 multipart upload, so a dropped upload resumes rather than restarts. */
   upload?: {
     key: string;
@@ -104,7 +110,7 @@ export interface IntakeSession {
  * the submitter from the interview record.
  */
 export interface NotificationMessage {
-  kind: 'processed' | 'rejected' | 'approved';
+  kind: 'processed' | 'rejected' | 'rejected_before_analysis' | 'approved';
   interviewId: string;
   queuedAt: string;
   /**

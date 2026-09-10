@@ -6,9 +6,14 @@ const logger = new Logger({ service: 'kaltura-service' });
 const MAX_BYTES = 100 * 1024 * 1024; // 100 MB safety cap
 
 function buildPlayManifestUrl(partnerId: string, entryId: string): string {
+  // Both come from an admin-entered embed today, so neither is attacker-
+  // controlled — but they are interpolated into a URL path, and encoding them
+  // is what keeps that true if the source ever changes.
+  const partner = encodeURIComponent(partnerId);
+  const entry = encodeURIComponent(entryId);
   return (
-    `https://cdnapisec.kaltura.com/p/${partnerId}/sp/${partnerId}00` +
-    `/playManifest/entryId/${entryId}/format/url/protocol/https/video.mp4`
+    `https://cdnapisec.kaltura.com/p/${partner}/sp/${partner}00` +
+    `/playManifest/entryId/${entry}/format/url/protocol/https/video.mp4`
   );
 }
 

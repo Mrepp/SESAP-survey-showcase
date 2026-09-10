@@ -1,7 +1,7 @@
-export const ADMIN_BASE = process.env.ADMIN_WORKER_URL ?? 'http://127.0.0.1:8787';
-export const ADMIN_UI_BASE = process.env.ADMIN_UI_URL ?? 'http://127.0.0.1:3001';
-export const SHOWCASE_BASE = process.env.SHOWCASE_WORKER_URL ?? 'http://127.0.0.1:8790';
-export const SHOWCASE_UI_BASE = process.env.SHOWCASE_UI_URL ?? 'http://127.0.0.1:3000';
+export const ADMIN_BASE = process.env.ADMIN_WORKER_URL ?? 'http://127.0.0.1:8887';
+export const ADMIN_UI_BASE = process.env.ADMIN_UI_URL ?? 'http://127.0.0.1:3101';
+export const SHOWCASE_BASE = process.env.SHOWCASE_WORKER_URL ?? 'http://127.0.0.1:8890';
+export const SHOWCASE_UI_BASE = process.env.SHOWCASE_UI_URL ?? 'http://127.0.0.1:3100';
 
 export const POLL_INTERVAL_MS = Number(process.env.PIPELINE_POLL_INTERVAL_MS ?? 10_000);
 export const PROCESSING_TIMEOUT_MS = Number(process.env.PROCESSING_TIMEOUT_MS ?? 900_000);

@@ -2,9 +2,16 @@ name = "sesap-processing"
 main = "src/index.ts"
 compatibility_date = "2024-12-18"
 
+# Processing has no public surface. Work arrives on the interview-processing
+# queue; the HTTP router exists for local dev and internal status checks, and
+# requires PROCESSING_SHARED_SECRET outside development. Leaving the
+# workers.dev hostname live would publish those endpoints to the internet
+# regardless — an unauthenticated POST /api/process forces AI spend on any id.
+workers_dev = false
+
 [dev]
-port = 8788
-inspector_port = 9230
+port = 8888
+inspector_port = 9330
 
 [ai]
 binding = "AI"
@@ -28,6 +35,15 @@ preview_id = "<YOUR_KV_PREVIEW_ID>"
 
 [vars]
 ENVIRONMENT = "development"
+
+# Secrets (set with `wrangler secret put`, never in this file):
+#   PROCESSING_SHARED_SECRET  Required on the HTTP routes outside development.
+#                             Without it the router answers 503 rather than
+#                             serving /api/process/:id/status unauthenticated.
+
+[[queues.producers]]
+binding = "NOTIFICATION_QUEUE"
+queue = "interview-notifications"
 
 # Queue consumer for interview processing
 [[queues.consumers]]

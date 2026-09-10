@@ -90,7 +90,7 @@ describe('intake queue() consumer', () => {
 
     const after = JSON.parse((await e2eEnv.SESAP_KV.get(KV_KEYS.interview(stored.id)))!) as InterviewRecord;
     expect(after.submitterReview?.tokenHash).toMatch(/^[0-9a-f]{64}$/);
-    expect(logged.join('\n')).toContain('http://localhost:8791/review/');
+    expect(logged.join('\n')).toContain('http://localhost:8891/review/');
   });
 
   it('points an approval at the showcase, not at a route intake does not serve', async () => {
@@ -102,7 +102,7 @@ describe('intake queue() consumer', () => {
 
     expect(result.explicitAcks).toContain('msg-0');
     expect(logged.join('\n')).toContain(
-      `http://localhost:8790/interviews/view/?id=${stored.id}`,
+      `http://localhost:8890/interviews/view/?id=${stored.id}`,
     );
   });
 

@@ -304,7 +304,7 @@ function clearSubmitterToken(record: InterviewRecord): void {
  * showcase on the next build. The artifacts are still checked so a record
  * cannot be approved without an analysis to publish.
  */
-export async function approveInterview(env: Env, id: string): Promise<InterviewRecord> {
+export async function approveInterview(env: Env, id: string, reviewedBy?: string): Promise<InterviewRecord> {
   const record = await getInterview(env, id);
   const now = new Date().toISOString();
 
@@ -317,6 +317,10 @@ export async function approveInterview(env: Env, id: string): Promise<InterviewR
 
   record.approval.status = 'approved';
   record.approval.reviewedAt = now;
+  record.approval.reviewedBy = reviewedBy;
+  record.approval.adminConfirmed = true;
+  record.approval.adminConfirmedAt = now;
+  record.approval.adminConfirmedBy = reviewedBy;
   record.approval.rejectionReason = undefined;
   // A live review link on a published interview would let the submitter keep
   // editing it, or hand it back to the admin queue.
@@ -330,6 +334,77 @@ export async function approveInterview(env: Env, id: string): Promise<InterviewR
   await notify(env, 'approved', record);
 
   logger.info('Interview approved — indexes marked dirty', { id });
+  return record;
+}
+
+/** Admit moderated self-service media to the processing pipeline exactly once. */
+export async function approveForAnalysis(
+  env: Env,
+  id: string,
+  reviewedBy: string,
+): Promise<InterviewRecord> {
+  const record = await getInterview(env, id);
+  if (record.origin !== 'self_service' || record.approval.status !== 'pending_media_review') {
+    throw new ValidationError('Only self-service submissions awaiting media review can be approved for analysis.');
+  }
+  if (!record.media || !record.audioRef) throw new ValidationError('Submitted media is unavailable.');
+
+  const now = new Date().toISOString();
+  record.approval.preAnalysisReviewedAt = now;
+  record.approval.preAnalysisReviewedBy = reviewedBy;
+  record.processing.status = 'queued';
+  record.processing.queuedAt = now;
+  record.updatedAt = now;
+  await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
+  try {
+    await env.PROCESSING_QUEUE.send({
+      interviewId: id,
+      queuedAt: now,
+      metadata: { triggeredBy: reviewedBy, reason: 'new_upload' },
+    });
+  } catch (error) {
+    // Keep the record actionable when enqueueing fails; without this rollback
+    // a staff member could not retry the approval endpoint.
+    record.approval.preAnalysisReviewedAt = undefined;
+    record.approval.preAnalysisReviewedBy = undefined;
+    record.processing = { status: 'pending' };
+    record.updatedAt = new Date().toISOString();
+    await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
+    throw error;
+  }
+  logger.info('Self-service media approved for analysis', { id, reviewedBy });
+  return record;
+}
+
+/** Terminal pre-analysis moderation rejection; consent/audit stays in KV/R2. */
+export async function rejectBeforeAnalysis(
+  env: Env,
+  id: string,
+  reason: string,
+  reviewedBy: string,
+): Promise<InterviewRecord> {
+  if (!reason.trim()) throw new ValidationError('A rejection reason is required.');
+  const record = await getInterview(env, id);
+  if (record.origin !== 'self_service' || record.approval.status !== 'pending_media_review') {
+    throw new ValidationError('Only self-service submissions awaiting media review can be rejected before analysis.');
+  }
+  const now = new Date().toISOString();
+  await Promise.all([
+    record.media ? storageService.deleteMediaByKey(env.SESAP_BUCKET, record.media.key) : Promise.resolve(),
+    storageService.deleteAudioTemp(env.SESAP_BUCKET, id),
+  ]);
+  record.media = undefined;
+  record.audioRef = undefined;
+  record.processing.status = 'failed';
+  record.processing.failedAt = now;
+  record.processing.error = 'Rejected before analysis';
+  record.approval.status = 'rejected';
+  record.approval.rejectionReason = reason.trim();
+  record.approval.preAnalysisReviewedAt = now;
+  record.approval.preAnalysisReviewedBy = reviewedBy;
+  record.updatedAt = now;
+  await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
+  await notify(env, 'rejected_before_analysis', record);
   return record;
 }
 
@@ -404,16 +479,29 @@ export async function deleteInterview(env: Env, id: string, deletedBy?: string):
     });
   }
 
-  await Promise.all([
-    env.SESAP_BUCKET.delete(R2_PATHS.transcript(id)),
-    env.SESAP_BUCKET.delete(R2_PATHS.analysis(id)),
-    env.SESAP_BUCKET.delete(R2_PATHS.embeddings(id)),
+  // `allSettled`, not `all`: erasure must reach the KV record and the build
+  // flag even if one artifact is already gone or its delete fails. A partial
+  // failure is logged and the withdrawal still completes.
+  const artifacts: [string, Promise<unknown>][] = [
+    ['transcript', env.SESAP_BUCKET.delete(R2_PATHS.transcript(id))],
+    ['analysis', env.SESAP_BUCKET.delete(R2_PATHS.analysis(id))],
+    ['embeddings', env.SESAP_BUCKET.delete(R2_PATHS.embeddings(id))],
     // Legacy approve-time snapshot, from before indexing assembled from source.
-    env.SESAP_BUCKET.delete(R2_PATHS.interview(id)),
-    env.SESAP_BUCKET.delete(R2_PATHS.consent(id)),
-    storageService.deleteAudioTemp(env.SESAP_BUCKET, id),
-    storageService.deleteMedia(env.SESAP_BUCKET, id),
-  ]);
+    ['interview', env.SESAP_BUCKET.delete(R2_PATHS.interview(id))],
+    ['consent', env.SESAP_BUCKET.delete(R2_PATHS.consent(id))],
+    ['audioTemp', storageService.deleteAudioTemp(env.SESAP_BUCKET, id)],
+    ['media', storageService.deleteMedia(env.SESAP_BUCKET, id)],
+  ];
+  const settled = await Promise.allSettled(artifacts.map(([, promise]) => promise));
+  settled.forEach((result, index) => {
+    if (result.status === 'rejected') {
+      logger.error('Failed to delete interview artifact', {
+        id,
+        artifact: artifacts[index][0],
+        error: result.reason instanceof Error ? result.reason.message : String(result.reason),
+      });
+    }
+  });
 
   // Deleting the record removes it from the index: the index *is* the key space.
   await env.SESAP_KV.delete(KV_KEYS.interview(id));

@@ -16,27 +16,12 @@ health.get('/api/health', (c) => {
   });
 });
 
-// Debug endpoint to check Cloudflare Access headers
-health.get('/api/debug/headers', (c) => {
-  const allCfHeaders: Record<string, string> = {};
-
-  c.req.raw.headers.forEach((value, key) => {
-    if (key.toLowerCase().startsWith('cf-')) {
-      allCfHeaders[key] = value;
-    }
-  });
-
-  const headers = {
-    email: c.req.header('Cf-Access-Authenticated-User-Email'),
-    username: c.req.header('Cf-Access-Authenticated-User-Login'),
-    allCfHeaders,
-  };
-
-  return c.json({
-    status: 'debug',
-    headers,
-    timestamp: new Date().toISOString(),
-  });
-});
+// `GET /api/debug/headers` used to live here, echoing the caller's `cf-*`
+// headers. This router is mounted before the auth middleware so that health
+// checks work without an Access session, which made the debug endpoint public
+// too. It only ever reflected the caller's own headers, so the exposure was
+// small — but a public endpoint that reports Access header state on the admin
+// origin has no reason to exist. Removed rather than moved behind auth: an
+// administrator who needs it can read the same headers from the browser.
 
 export { health };

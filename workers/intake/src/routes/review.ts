@@ -1,15 +1,47 @@
 import { Hono } from 'hono';
 import { InterviewDraftSchema, ValidationError } from '@sesap/core';
 import { R2_PATHS } from '@sesap/types';
-import type { Analysis, ApiResponse, InterviewDraft, SubmitterView } from '@sesap/types';
+import type {
+  Analysis,
+  ApiResponse,
+  InterviewDraft,
+  InterviewRecord,
+  SubmitterView,
+} from '@sesap/types';
 import { Logger, applyInterviewDraft } from '@sesap/worker-runtime';
 import type { Env } from '../bindings';
+import { clientIp, enforceRateLimit } from '../services/rate-limit';
 import { getInterview, putInterview } from '../services/interview';
 import { invalidateReviewToken, resolveReviewToken } from '../services/review-token';
 
 const logger = new Logger({ worker: 'sesap-intake', module: 'review-routes' });
 
 export const review = new Hono<{ Bindings: Env }>();
+
+/**
+ * The review editor writes `analysis/<id>.json` and reads the transcript, so it
+ * is rate-limited like the rest of the public surface. Applied to all three
+ * routes, including the read, so a leaked link cannot be used to hammer R2.
+ */
+review.use('/api/intake/review/*', async (c, next) => {
+  await enforceRateLimit(c.env, 'RL_REVIEW_IP', clientIp(c.req.raw));
+  await next();
+});
+
+/**
+ * The window in which a token holder may write.
+ *
+ * `submit` has always refused once the record moved on; the draft route did
+ * not, so an admin reprocess (which sets `pending_review` without clearing the
+ * token) left the submitter able to keep overwriting the analysis while it sat
+ * in the admin queue. Checking it here also means a draft write can never touch
+ * a published record, so there is no build to mark dirty from this worker.
+ */
+function assertDraftEditable(record: InterviewRecord): void {
+  if (record.approval.status !== 'pending_submitter_review') {
+    throw new ValidationError('This interview is no longer open for edits.');
+  }
+}
 
 async function loadAnalysis(env: Env, id: string): Promise<Analysis | null> {
   const object = await env.SESAP_BUCKET.get(R2_PATHS.analysis(id));
@@ -48,6 +80,7 @@ review.get('/api/intake/review/:token', async (c) => {
 // id-minting rule serve both.
 review.put('/api/intake/review/:token/draft', async (c) => {
   const record = await resolveReviewToken(c.env, c.req.param('token'), load(c.env));
+  assertDraftEditable(record);
 
   const parsed = InterviewDraftSchema.safeParse(await c.req.json());
   if (!parsed.success) {
@@ -55,8 +88,22 @@ review.put('/api/intake/review/:token/draft', async (c) => {
   }
   const draft = parsed.data as InterviewDraft;
 
-  const { analysis: savedAnalysis } = await applyInterviewDraft(c.env.SESAP_BUCKET, record, draft);
-  await putInterview(c.env, record);
+  // Re-read immediately before writing, and apply the draft to *that* record.
+  //
+  // `putInterview` writes the whole record back with no compare-and-set, so
+  // applying the draft to the copy read at the top of the request would let a
+  // slow submitter restore a stale record over a concurrent admin approval —
+  // reverting the status, wiping `adminConfirmed`, and reinstating the token
+  // that had just been burned. Re-checking the guard against the fresh record
+  // is what makes that race lose: once an admin has approved, this refuses.
+  const fresh = await getInterview(c.env, record.id);
+  assertDraftEditable(fresh);
+  if (fresh.submitterReview?.tokenHash !== record.submitterReview?.tokenHash) {
+    throw new ValidationError('This review link is no longer valid.');
+  }
+
+  const { analysis: savedAnalysis } = await applyInterviewDraft(c.env.SESAP_BUCKET, fresh, draft);
+  await putInterview(c.env, fresh);
 
   const response: ApiResponse<{ analysis?: Analysis }> = {
     success: true,

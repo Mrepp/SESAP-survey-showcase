@@ -31,7 +31,25 @@ export const api = {
     return request('/api/intake/session');
   },
 
-  startVerification(email: string, turnstileToken?: string): Promise<{ expiresInSeconds: number }> {
+  /**
+   * Public runtime configuration. The Turnstile site key lives here rather than
+   * in the bundle because one static export serves every environment.
+   */
+  config(): Promise<{ turnstileSiteKey: string }> {
+    return request('/api/intake/config');
+  },
+
+  /**
+   * `turnstileToken` is required, not optional. It was optional, and the wizard
+   * called this with one argument — so every configuration that actually had
+   * bot protection turned on rejected every signup, and the only configuration
+   * that worked was the one with no captcha at all. Requiring it here is what
+   * makes that regression a type error rather than a silent outage.
+   *
+   * Pass '' only when the worker reported no site key, which it does only in a
+   * development deployment.
+   */
+  startVerification(email: string, turnstileToken: string): Promise<{ expiresInSeconds: number }> {
     return request('/api/intake/verify/start', json({ email, turnstileToken }));
   },
 
@@ -89,6 +107,10 @@ export const api = {
 
   submitReview(token: string): Promise<{ interviewId: string }> {
     return request(`/api/intake/review/${encodeURIComponent(token)}/submit`, { method: 'POST' });
+  },
+
+  logout(): Promise<{ loggedOut: true }> {
+    return request('/api/intake/session/logout', { method: 'POST' });
   },
 };
 

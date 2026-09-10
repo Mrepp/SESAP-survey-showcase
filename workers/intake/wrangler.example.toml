@@ -10,8 +10,8 @@ html_handling = "auto-trailing-slash"
 run_worker_first = ["/*"]
 
 [dev]
-port = 8791
-inspector_port = 9233
+port = 8891
+inspector_port = 9333
 
 [[r2_buckets]]
 binding = "SESAP_BUCKET"
@@ -52,6 +52,32 @@ name = "RL_CONFIRM_IP"
 namespace_id = "1003"
 simple = { limit = 15, period = 60 }
 
+# Guesses per address. Without this a distributed attacker gets the per-address
+# issuance rate times the attempt cap — the Durable Object resets `attempts` on
+# every fresh code — and the per-IP rule above does nothing to stop it.
+[[ratelimits]]
+name = "RL_CONFIRM_EMAIL"
+namespace_id = "1004"
+simple = { limit = 6, period = 60 }
+
+# Upload routes. All four of them write to R2, and nothing else in the worker
+# does; both keys are enforced on every one.
+[[ratelimits]]
+name = "RL_UPLOAD_IP"
+namespace_id = "1005"
+simple = { limit = 120, period = 60 }
+
+[[ratelimits]]
+name = "RL_UPLOAD_SESSION"
+namespace_id = "1006"
+simple = { limit = 90, period = 60 }
+
+# The submitter's review editor, which writes analysis/<id>.json.
+[[ratelimits]]
+name = "RL_REVIEW_IP"
+namespace_id = "1007"
+simple = { limit = 60, period = 60 }
+
 [vars]
 ENVIRONMENT = "development"
 # Public origin of this worker. Review links in outbound email are built from
@@ -65,12 +91,28 @@ INTAKE_URL = "<YOUR_INTAKE_URL>"
 # Where the "your interview is published" mail sends the contributor. Intake has
 # no published-interview page of its own.
 SHOWCASE_URL = "<YOUR_SHOWCASE_URL>"
-ALLOWED_EMAIL_DOMAIN = "oregonstate.edu"
+# Enrollment is open by design: any address on the internet may verify. There is
+# no domain allow-list — inbox control is proven by the emailed code, and the
+# volumetric controls (Turnstile, the rate limits above, and the per-address
+# submission quota in routes/upload.ts) are what make that safe to expose.
+#
 # Substituted from `vars.EMAIL_FROM` at deploy time; the onboarded sending
 # domain differs between staging and production.
 EMAIL_FROM = "<YOUR_EMAIL_FROM>"
-# TODO(policy): provisional. Media is kept this long after publication.
-MEDIA_RETENTION_DAYS = "365"
+# Cloudflare Turnstile site key. Public by design — the worker hands it to the
+# browser at GET /api/intake/config and the widget renders it, so one static UI
+# export serves every environment. Its secret half is a wrangler secret.
+#
+# Leaving this empty renders no widget, which is only a working configuration in
+# development: with TURNSTILE_SECRET_KEY set the server refuses a request that
+# arrives without a token, and outside development it refuses one with no secret
+# configured at all.
+TURNSTILE_SITE_KEY = ""
+# TODO(retention): there is no MEDIA_RETENTION_DAYS var any more. Contributor
+# media and the IP/user-agent on the archived consent record are kept
+# indefinitely; the var was removed rather than left here reading like an active
+# control, because nothing ever read it. Implementing retention means adding a
+# scheduled handler that actually deletes.
 # NEXT_DEV_URL is intentionally not set here. It is a local-dev-only variable
 # that proxies non-API paths to the `next dev` server, honored only when
 # ENVIRONMENT is "development". It lives in .dev.vars, which `wrangler dev`
@@ -81,10 +123,10 @@ MEDIA_RETENTION_DAYS = "365"
 [define]
 SESAP_DEV_PROVIDERS = "false"
 
-# Producer for the existing processing pipeline.
-[[queues.producers]]
-binding = "PROCESSING_QUEUE"
-queue = "interview-processing"
+# No [[queues.producers]] block: since the pre-analysis moderation gate landed,
+# intake never enqueues processing — admin does, once a staff member has watched
+# the submitted media. Holding a producer binding it does not use would be
+# unnecessary privilege on the one worker the public can reach.
 
 # Intake is the SOLE consumer of interview-notifications. Processing and admin
 # produce onto it; routing completion mail through a queue rather than a
@@ -102,13 +144,16 @@ retry_delay = 60
 # mailer falls back to Mailpit or the log. In staging and production there is
 # no fallback: without this binding `verify/start` answers 503 rather than
 # claiming to have sent a code it only logged.
-# [[send_email]]
-# name = "EMAIL"
+[[send_email]]
+name = "EMAIL"
 
 # Secrets (set with `wrangler secret put`, never in this file):
 #   INTAKE_SESSION_SECRET  HMAC key for the session cookie signature
 #   TURNSTILE_SECRET_KEY   Turnstile secret. Skipped when unset in development
-#                          only; required in staging and production.
+#                          only; required in staging and production. Pair it
+#                          with the public TURNSTILE_SITE_KEY var above — a
+#                          secret with no site key means the widget never
+#                          renders and every signup is refused.
 #
 # Locally both live in workers/intake/.dev.vars, which `wrangler dev` loads and
 # no deploy ever sees. `make setup` creates it from .dev.vars.example and

@@ -31,7 +31,7 @@ verify.post('/api/intake/verify/start', async (c) => {
     throw new ValidationError('An email address is required.');
   }
 
-  const email = assertAllowedEmail(body.email, c.env.ALLOWED_EMAIL_DOMAIN);
+  const email = assertAllowedEmail(body.email);
 
   await verifyTurnstile(
     c.env,
@@ -59,6 +59,12 @@ verify.post('/api/intake/verify/confirm', async (c) => {
   }
 
   const email = normalizeEmail(body.email);
+  // Both keys. Per-IP alone leaves a single mailbox open to a distributed run:
+  // `IntakeVerificationGuard.issue` resets the attempt counter on every new
+  // code, so three issuances a minute buy fifteen guesses a minute against a
+  // 10^6 keyspace with no lockout, and spreading the guesses across IPs makes
+  // the per-IP rule irrelevant. The per-address rule is the one that binds.
+  await enforceRateLimit(c.env, 'RL_CONFIRM_EMAIL', email);
   await enforceRateLimit(c.env, 'RL_CONFIRM_IP', clientIp(c.req.raw));
 
   const result = await confirmVerificationCode(c.env, email, body.code);

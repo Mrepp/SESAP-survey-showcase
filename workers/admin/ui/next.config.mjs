@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const isDev = process.env.NODE_ENV !== 'production';
-const adminWorkerUrl = process.env.ADMIN_WORKER_URL ?? 'http://127.0.0.1:8787';
+const adminWorkerUrl = process.env.ADMIN_WORKER_URL ?? 'http://127.0.0.1:8887';
 
 export default {
   ...(isDev ? {} : { output: 'export' }),

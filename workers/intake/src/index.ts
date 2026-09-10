@@ -3,6 +3,7 @@ import type { NotificationMessage } from '@sesap/types';
 import { createErrorHandler, Logger } from '@sesap/worker-runtime';
 import type { Env } from './bindings';
 import { health } from './routes/health';
+import { config } from './routes/config';
 import { verify } from './routes/verify';
 import { sessionRoutes } from './routes/session';
 import { upload } from './routes/upload';
@@ -18,6 +19,7 @@ const app = new Hono<{ Bindings: Env }>();
 app.onError(createErrorHandler<{ Bindings: Env }>({ worker: 'sesap-intake' }));
 
 app.route('', health);
+app.route('', config);
 app.route('', verify);
 app.route('', sessionRoutes);
 app.route('', upload);

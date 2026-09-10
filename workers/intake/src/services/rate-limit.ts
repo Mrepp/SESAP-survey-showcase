@@ -37,6 +37,10 @@ export const RATE_LIMITS = {
   RL_VERIFY_EMAIL: { description: 'verification mails per address', windowSeconds: 60 },
   RL_VERIFY_IP: { description: 'verification mails per IP', windowSeconds: 60 },
   RL_CONFIRM_IP: { description: 'code guesses per IP', windowSeconds: 60 },
+  RL_CONFIRM_EMAIL: { description: 'code guesses per address', windowSeconds: 60 },
+  RL_UPLOAD_IP: { description: 'upload requests per IP', windowSeconds: 60 },
+  RL_UPLOAD_SESSION: { description: 'upload requests per session', windowSeconds: 60 },
+  RL_REVIEW_IP: { description: 'review-editor requests per IP', windowSeconds: 60 },
 } as const;
 
 export type RateLimitName = keyof typeof RATE_LIMITS;

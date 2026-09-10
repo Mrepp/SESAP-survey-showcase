@@ -32,11 +32,10 @@ export interface CreateSelfServiceInput {
 
 /**
  * Create the interview record for a completed self-service upload, archive the
- * consent, and hand it to the existing processing queue.
+ * consent, and wait for staff media moderation before any processing.
  *
- * The record starts `pending_submitter_review` rather than `pending_review`:
- * the first gate is the contributor's own review of their analysis, and only
- * their submission moves it into the admin queue.
+ * The first gate is staff review of raw media. No AI service is called until
+ * an administrator records a pre-analysis approval.
  */
 export async function createSelfServiceInterview(
   env: Env,
@@ -90,20 +89,14 @@ export async function createSelfServiceInterview(
       sizeBytes: audioSizeBytes,
       uploadedAt: media.uploadedAt,
     },
-    processing: { status: 'queued', queuedAt: now },
-    approval: { status: 'pending_submitter_review' },
+    processing: { status: 'pending' },
+    approval: { status: 'pending_media_review' },
     artifacts: { transcript: false, analysis: false, embeddings: false },
     createdAt: now,
     updatedAt: now,
   };
 
   await env.SESAP_KV.put(KV_KEYS.interview(id), JSON.stringify(record));
-  await env.PROCESSING_QUEUE.send({
-    interviewId: id,
-    queuedAt: now,
-    metadata: { triggeredBy: 'self_service', reason: 'new_upload' },
-  });
-
-  logger.info('Self-service interview created and queued', { id, attribution: consent.attribution });
+  logger.info('Self-service interview awaiting media review', { id, attribution: consent.attribution });
   return record;
 }

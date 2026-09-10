@@ -2,7 +2,13 @@ import { Hono } from 'hono';
 import { CONSENT_VERSION, DemographicsSchema, ValidationError } from '@sesap/core';
 import type { ApiResponse, AttributionChoice, IntakeSession } from '@sesap/types';
 import type { Env } from '../bindings';
-import { loadSessionFromRequest, putSession, requireSession } from '../services/session';
+import {
+  clearSessionCookie,
+  deleteSession,
+  loadSessionFromRequest,
+  putSession,
+  requireSession,
+} from '../services/session';
 
 export const sessionRoutes = new Hono<{ Bindings: Env }>();
 
@@ -91,5 +97,21 @@ sessionRoutes.post('/api/intake/session/consent', async (c) => {
   await putSession(c.env, sessionId, updated);
 
   const response: ApiResponse<IntakeSession> = { success: true, data: updated };
+  return c.json(response);
+});
+
+// POST /api/intake/session/logout — drop the server-side session and expire the
+// cookie. A shared or public machine needs a way to end the session that does
+// not depend on the 24-hour TTL running out.
+sessionRoutes.post('/api/intake/session/logout', async (c) => {
+  const loaded = await loadSessionFromRequest(c.env, c.req.header('Cookie'));
+  if (loaded) {
+    await deleteSession(c.env, loaded.sessionId);
+  }
+
+  // Unconditional: an unknown or already-expired cookie still gets cleared, and
+  // the answer does not distinguish the two.
+  c.header('Set-Cookie', clearSessionCookie());
+  const response: ApiResponse<{ loggedOut: true }> = { success: true, data: { loggedOut: true } };
   return c.json(response);
 });

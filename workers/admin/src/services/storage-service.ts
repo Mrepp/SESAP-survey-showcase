@@ -60,3 +60,23 @@ export async function deleteAudioTemp(bucket: R2Bucket, id: string): Promise<voi
   const list = await bucket.list({ prefix: R2_PATHS.audioTempPrefix(id) });
   await Promise.all(list.objects.map((object) => bucket.delete(object.key)));
 }
+
+export async function getMedia(bucket: R2Bucket, key: string, range?: R2Range): Promise<R2ObjectBody | null> {
+  return bucket.get(key, range ? { range } : undefined);
+}
+
+export async function deleteMediaByKey(bucket: R2Bucket, key: string): Promise<void> {
+  await bucket.delete(key);
+}
+
+/**
+ * Delete every media object recorded for one interview.
+ *
+ * Keyed by prefix rather than by `record.media.key` so erasure does not depend
+ * on the record still being intact: a record whose `media` was dropped, or one
+ * that changed container mid-upload, still has its objects removed.
+ */
+export async function deleteMedia(bucket: R2Bucket, id: string): Promise<void> {
+  const list = await bucket.list({ prefix: R2_PATHS.mediaPrefix(id) });
+  await Promise.all(list.objects.map((object) => bucket.delete(object.key)));
+}

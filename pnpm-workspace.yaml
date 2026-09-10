@@ -1,8 +1,24 @@
 packages:
   - "packages/*"
+  - "scripts/seed-worker"
   - "workers/*"
-  - "workers/admin/ui"
-  - "workers/showcase/ui"
+  - "workers/*/ui"
   - "tests/e2e"
   - "tests/smoke"
   - "tests/full-pipeline"
+
+# Single source of truth for the Cloudflare stack version — every manifest
+# references these via "catalog:" so the specifier never lies about what's
+# actually installed.
+catalog:
+  "@cloudflare/workers-types": 5.20260903.1
+  wrangler: ^4.129.0
+  # vitest and the Workers pool move together: the pool declares a hard peer
+  # range on vitest, so a mismatched pair fails at install. Bump both here.
+  # 0.22.x requires vitest ^4.1; vitest 5 is not supported by any pool release.
+  "@cloudflare/vitest-pool-workers": ^0.22.0
+  vitest: ^4.1.0
+  # vite is a non-optional peer of vitest. Declared explicitly (rather than
+  # left to auto-install-peers) because pnpm otherwise reuses whatever vite
+  # the lockfile already had — which silently kept vite 5 under vitest 4.
+  vite: ^8.2.2

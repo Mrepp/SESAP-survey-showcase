@@ -92,7 +92,11 @@ describe('multipart upload', () => {
 
     await upload.request(
       '/api/intake/upload/audio',
-      withCookie(cookie, { method: 'PUT', body: 'fake-mp3-bytes' }),
+      withCookie(cookie, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'audio/mpeg' },
+        body: 'fake-mp3-bytes',
+      }),
       env,
     );
 
@@ -160,7 +164,11 @@ describe('multipart upload', () => {
     );
     await upload.request(
       '/api/intake/upload/audio',
-      withCookie(cookie, { method: 'PUT', body: 'audio' }),
+      withCookie(cookie, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'audio/mpeg' },
+        body: 'audio',
+      }),
       env,
     );
     const completed = await upload.request(
@@ -215,7 +223,15 @@ describe('one interview per session', () => {
       env,
     );
     await upload.request('/api/intake/upload/part?partNumber=1', withCookie(cookie, { method: 'PUT', body: 'media' }), env);
-    await upload.request('/api/intake/upload/audio', withCookie(cookie, { method: 'PUT', body: 'audio' }), env);
+    await upload.request(
+      '/api/intake/upload/audio',
+      withCookie(cookie, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'audio/mpeg' },
+        body: 'audio',
+      }),
+      env,
+    );
     const completed = await upload.request(
       '/api/intake/upload/complete',
       withCookie(cookie, { method: 'POST', body: '{}' }),

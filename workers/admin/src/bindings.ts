@@ -1,4 +1,4 @@
-import type { ProcessingQueueMessage } from '@sesap/types';
+import type { NotificationMessage, ProcessingQueueMessage } from '@sesap/types';
 
 export interface Env {
   ASSETS: Fetcher;
@@ -6,6 +6,7 @@ export interface Env {
   SESAP_KV: KVNamespace;
   PROCESSING_WORKER: Fetcher;
   PROCESSING_QUEUE: Queue<ProcessingQueueMessage>;
+  NOTIFICATION_QUEUE?: Queue<NotificationMessage>;
   INDEXING_WORKER: Fetcher;
   ENVIRONMENT: string;
   SHOWCASE_URL: string;

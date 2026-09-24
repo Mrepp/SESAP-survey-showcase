@@ -6,12 +6,14 @@ import {
 } from '@sesap/test-utils';
 import {
   approveInterview,
+  approveForAnalysis,
   createInterview,
   createInterviewFromKaltura,
   deleteInterview,
   listInterviews,
   getInterview,
   rejectInterview,
+  rejectBeforeAnalysis,
   MAX_REVISION_ROUNDS,
 } from '../src/services/interview-service';
 import type { Env } from '../src/bindings';
@@ -131,6 +133,63 @@ describe('interview-service', () => {
       expect(record.video?.provider).toBe('kaltura');
       expect(record.video?.embedUrl).toContain('/p/391241/embedPlaykitJs/uiconf_id/55338833');
       expect(record.video?.embedUrl).toContain('entry_id=1_oixah593');
+    });
+  });
+
+  describe('self-service Kaltura moderation', () => {
+    function kalturaSubmission(): InterviewRecord {
+      const now = '2026-01-01T00:00:00.000Z';
+      return {
+        id: 'int_kalturamod1',
+        title: 'Self-service Kaltura interview',
+        demographics: {},
+        metadata: { interviewDate: '2026-01-01' },
+        source: 'kaltura',
+        origin: 'self_service',
+        kalturaRef: {
+          entryId: '1_oixah593',
+          partnerId: '391241',
+          sourceInput: 'https://media.oregonstate.edu/media/t/1_oixah593/example',
+        },
+        video: {
+          provider: 'kaltura',
+          embedUrl: 'https://cdnapisec.kaltura.com/p/391241/embedPlaykitJs/uiconf_id/55338833?entry_id=1_oixah593',
+        },
+        processing: { status: 'pending' },
+        approval: { status: 'pending_media_review' },
+        artifacts: { transcript: false, analysis: false, embeddings: false },
+        createdAt: now,
+        updatedAt: now,
+      };
+    }
+
+    it('approves a normalized Kaltura reference without requiring R2 media', async () => {
+      const record = kalturaSubmission();
+      await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+
+      const approved = await approveForAnalysis(env, record.id, 'admin@example.edu');
+
+      expect(approved.processing.status).toBe('queued');
+      expect(approved.approval.preAnalysisReviewedBy).toBe('admin@example.edu');
+      expect(env.PROCESSING_QUEUE.send).toHaveBeenCalledWith(
+        expect.objectContaining({ interviewId: record.id }),
+      );
+    });
+
+    it('removes an external Kaltura reference when rejected before analysis', async () => {
+      const record = kalturaSubmission();
+      await env.SESAP_KV.put(KV_KEYS.interview(record.id), JSON.stringify(record));
+
+      const rejected = await rejectBeforeAnalysis(
+        env,
+        record.id,
+        'Not an interview.',
+        'admin@example.edu',
+      );
+
+      expect(rejected.approval.status).toBe('rejected');
+      expect(rejected.kalturaRef).toBeUndefined();
+      expect(rejected.video).toBeUndefined();
     });
   });
 

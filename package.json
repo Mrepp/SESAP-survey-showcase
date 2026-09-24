@@ -1,7 +1,7 @@
 {
   "name": "sesap-survey-showcase",
   "private": true,
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@11.21.0",
   "scripts": {
     "typecheck": "turbo typecheck",
     "lint": "turbo lint",

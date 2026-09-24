@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import type { Env } from '../bindings';
 import type { ApiResponse, InterviewRecord, AuthenticatedUser } from '@sesap/types';
 import { KV_KEYS } from '@sesap/types';
+import { isProcessingStuck } from '@sesap/core';
 import { ValidationError, Logger } from '@sesap/shared';
 import * as interviewService from '../services/interview-service';
 
@@ -17,8 +18,11 @@ retry.post('/api/interviews/:id/retry', async (c) => {
   const id = c.req.param('id');
   const record = await interviewService.getInterview(c.env, id);
 
-  // Only allow retry if failed or stuck in processing
-  if (!['failed', 'processing'].includes(record.processing.status)) {
+  // A failed job is immediately retriable. An in-flight one must first exceed
+  // the shared stuck threshold; otherwise this creates concurrent processors
+  // for the same interview.
+  const retriable = record.processing.status === 'failed' || isProcessingStuck(record);
+  if (!retriable) {
     throw new ValidationError(
       `Interview is not in a retriable state. Current status: ${record.processing.status}`,
     );

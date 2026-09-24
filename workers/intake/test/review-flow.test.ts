@@ -209,6 +209,107 @@ describe('multipart upload', () => {
     // reintroduced `send` here would not compile.
     expect('PROCESSING_QUEUE' in env).toBe(false);
   });
+
+  it('derives audio-only media kind from the validated content type', async () => {
+    const env = makeEnv();
+    const cookie = await seedReadySession(env);
+
+    await upload.request(
+      '/api/intake/upload/start',
+      withCookie(cookie, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contentType: 'audio/mpeg' }),
+      }),
+      env,
+    );
+    await upload.request(
+      '/api/intake/upload/part?partNumber=1',
+      withCookie(cookie, { method: 'PUT', body: 'original-audio' }),
+      env,
+    );
+    await upload.request(
+      '/api/intake/upload/audio',
+      withCookie(cookie, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'audio/mpeg' },
+        body: 'normalized-audio',
+      }),
+      env,
+    );
+    const completed = await upload.request(
+      '/api/intake/upload/complete',
+      withCookie(cookie, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        // A client claim can no longer turn audio into video metadata.
+        body: JSON.stringify({ kind: 'video' }),
+      }),
+      env,
+    );
+
+    expect(completed.status).toBe(201);
+    const { data } = await completed.json<{ data: { interviewId: string } }>();
+    expect((await getInterview(env, data.interviewId)).media?.kind).toBe('audio');
+  });
+});
+
+describe('Kaltura submission', () => {
+  it('creates a public Kaltura record awaiting staff moderation', async () => {
+    const env = makeEnv();
+    const cookie = await seedReadySession(env);
+
+    const submitted = await upload.request(
+      '/api/intake/upload/kaltura',
+      withCookie(cookie, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'https://media.oregonstate.edu/media/t/1_oixah593/example',
+        }),
+      }),
+      env,
+    );
+
+    expect(submitted.status).toBe(201);
+    const { data } = await submitted.json<{ data: { interviewId: string } }>();
+    const record = await getInterview(env, data.interviewId);
+    expect(record).toMatchObject({
+      source: 'kaltura',
+      origin: 'self_service',
+      approval: { status: 'pending_media_review' },
+      processing: { status: 'pending' },
+      kalturaRef: { entryId: '1_oixah593', partnerId: '391241' },
+      video: { provider: 'kaltura' },
+    });
+    expect(record.media).toBeUndefined();
+    expect(record.audioRef).toBeUndefined();
+    expect(await env.SESAP_BUCKET.get(R2_PATHS.consent(data.interviewId))).not.toBeNull();
+
+    const sessionKey = (await env.SESAP_KV.list({ prefix: KV_KEYS.intakeSession('') })).keys[0].name;
+    const session = JSON.parse((await env.SESAP_KV.get(sessionKey))!) as IntakeSession;
+    expect(session.submittedInterviewId).toBe(data.interviewId);
+  });
+
+  it('rejects malformed and partner-less Kaltura sources without creating a record', async () => {
+    const env = makeEnv();
+    const cookie = await seedReadySession(env);
+
+    for (const source of ['not a Kaltura link', '1_oixah593']) {
+      const response = await upload.request(
+        '/api/intake/upload/kaltura',
+        withCookie(cookie, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ source }),
+        }),
+        env,
+      );
+      expect(response.status).not.toBe(201);
+    }
+
+    expect((await env.SESAP_KV.list({ prefix: KV_KEYS.interviewPrefix })).keys).toHaveLength(0);
+  });
 });
 
 describe('one interview per session', () => {
@@ -540,7 +641,7 @@ describe('upload bounds', () => {
     expect(await env.SESAP_BUCKET.get(R2_PATHS.audioTemp('int_noconsent001', 'mp3'))).toBeNull();
   });
 
-  it('aborts the superseded multipart when the content type changes', async () => {
+  it('aborts the superseded multipart even when the content type is unchanged', async () => {
     const env = makeEnv();
     const cookie = await seedReadySession(env);
     await startUpload(env, cookie);
@@ -555,7 +656,7 @@ describe('upload bounds', () => {
       withCookie(cookie, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contentType: 'audio/mpeg' }),
+        body: JSON.stringify({ contentType: 'video/webm' }),
       }),
       env,
     );

@@ -32,14 +32,14 @@ export function analysisReadyEmail(to: string, reviewUrl: string, days: number):
     text: [
       'Thanks for sharing your interview.',
       '',
-      'We have transcribed it and drafted an analysis — themes, quotes, a',
-      'timeline and a summary. Before anything is published, it is yours to',
-      'correct. Nothing goes into the public repository until you submit it and',
-      'a program administrator approves it.',
+      'We have transcribed your recording and drafted a description and',
+      'analysis. You can review and correct the draft before the SESAP team',
+      'decides whether to publish it. The transcript is available to read;',
+      'contact the team if it needs a correction.',
       '',
       `Review and edit your interview: ${reviewUrl}`,
       '',
-      `This link works for ${days} days and only for you. Please do not forward it.`,
+      `This private link works for ${days} days. Please do not forward it.`,
     ].join('\n'),
   };
 }
@@ -54,8 +54,8 @@ export function revisionRequestedEmail(
     to,
     subject: 'A change was requested on your SESAP interview',
     text: [
-      'A program administrator has asked for a change before your interview is',
-      'published.',
+      'The SESAP team has asked for a change before deciding whether to',
+      'publish your interview.',
       '',
       `What they said: ${reason}`,
       '',
@@ -69,15 +69,14 @@ export function revisionRequestedEmail(
 export function approvedEmail(to: string, showcaseUrl: string): OutboundEmail {
   return {
     to,
-    subject: 'Your SESAP interview has been published',
+    subject: 'Your SESAP interview was approved',
     text: [
-      'Your interview has been approved and is now part of the SESAP survey',
-      'showcase.',
+      'The SESAP team approved your interview for the SESAP site.',
       '',
-      `See it here: ${showcaseUrl}`,
+      'The public site may take a little time to update. Once it does, you can',
+      `find your interview here: ${showcaseUrl}`,
       '',
-      'If you would like it withdrawn, reply to this message and we will remove',
-      'it.',
+      'If you have a question or need to request a change, reply to this message.',
     ].join('\n'),
   };
 }
@@ -88,7 +87,7 @@ export function rejectedBeforeAnalysisEmail(to: string, reason: string): Outboun
     subject: 'Your SESAP interview submission was not accepted',
     text: [
       'Thank you for offering to share an interview with SESAP.', '',
-      'A program administrator reviewed the submitted media and cannot accept it for analysis.', '',
+      'The SESAP team reviewed your recording and cannot accept it for analysis.', '',
       `Reason: ${reason}`, '',
       'The submitted media has been deleted. No transcription or AI analysis was performed.',
     ].join('\n'),

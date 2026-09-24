@@ -11,10 +11,11 @@
   "dependencies": {
     "@chakra-ui/react": "^3.29.0",
     "@emotion/react": "^11.14.0",
-    "@ffmpeg/ffmpeg": "^0.12.15",
-    "@ffmpeg/util": "^0.12.2",
+    "@sesap/analysis-editor": "workspace:*",
+    "@sesap/design-system": "workspace:*",
     "@sesap/shared": "workspace:*",
     "@sesap/types": "workspace:*",
+    "@sesap/ui-media": "workspace:*",
     "next": "^16.0.1",
     "next-themes": "^0.4.6",
     "react": "^19.2.0",

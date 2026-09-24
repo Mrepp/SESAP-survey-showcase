@@ -325,6 +325,19 @@ export function Review() {
               )}
             </Box>
           )}
+          {!interview.media &&
+            interview.source === 'kaltura' &&
+            interview.video?.provider === 'kaltura' && (
+              <Box mb={3}>
+                <iframe
+                  title="Submitted Kaltura interview"
+                  src={interview.video.embedUrl}
+                  allow="autoplay; fullscreen; encrypted-media"
+                  allowFullScreen
+                  style={{ width: '100%', maxWidth: 640, aspectRatio: '16 / 9', border: 0 }}
+                />
+              </Box>
+            )}
           <Flex gap={3}>
             <Button colorPalette="green" disabled={saving} onClick={handleApproveForAnalysis}>Approve for analysis</Button>
             <Button colorPalette="red" variant="outline" disabled={saving} onClick={() => setRejectModalOpen(true)}>Reject before analysis</Button>

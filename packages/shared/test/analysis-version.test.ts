@@ -12,8 +12,8 @@ describe('analysis-version', () => {
   // schema is modified. If this test fails, update both the version constant
   // and this expected hash in the same change.
   it('prompt hash is pinned', () => {
-    expect(ANALYSIS_PROMPT_HASH).toBe('3839443c');
-    expect(ANALYSIS_PROMPT_VERSION).toBe('2026-05-21.1');
+    expect(ANALYSIS_PROMPT_HASH).toBe('f53d0b15');
+    expect(ANALYSIS_PROMPT_VERSION).toBe('2026-09-10.1');
     expect(ANALYSIS_SCHEMA_VERSION).toBe('2.3.0');
   });
 

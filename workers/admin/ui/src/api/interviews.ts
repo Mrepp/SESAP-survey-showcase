@@ -1,4 +1,4 @@
-import type { InterviewRecord, Analysis, Demographics, InterviewMetadata, BuildDirtyState, BuildMetadata } from '@sesap/types';
+import type { InterviewRecord, Analysis, Demographics, InterviewMetadata, BuildDirtyState, BuildMetadata, InterviewDraft } from '@sesap/types';
 
 export type InterviewRecordWithStale = InterviewRecord & {
   stale: boolean;
@@ -64,6 +64,14 @@ export const api = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(analysis),
+    });
+  },
+
+  saveDraft(id: string, draft: InterviewDraft): Promise<{ record: InterviewRecord; analysis?: Analysis }> {
+    return request(`/api/interviews/${id}/draft`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(draft),
     });
   },
 

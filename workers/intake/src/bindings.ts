@@ -87,6 +87,10 @@ export interface Env {
    */
   TURNSTILE_SITE_KEY?: string;
 
+  /** Defaults used for public Kaltura media-page links that omit player ids. */
+  KALTURA_PARTNER_ID?: string;
+  KALTURA_UICONF_ID?: string;
+
   NEXT_DEV_URL?: string;
   /**
    * Local mail catcher endpoint (Mailpit's `/api/v1/send`). Honored only in

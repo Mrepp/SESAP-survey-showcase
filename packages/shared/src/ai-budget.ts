@@ -318,12 +318,13 @@ export class AiNeuronLimiter {
   }
 
   private async readMaxNeurons(): Promise<number> {
-    const raw = await this.env.SESAP_KV.get(KV_KEYS.aiNeuronsDailyMax);
+    const key = KV_KEYS.aiNeuronsDailyMax();
+    const raw = await this.env.SESAP_KV.get(key);
     const max = raw === null ? NaN : Number(raw);
     if (!Number.isFinite(max) || max <= 0) {
       throw new AiBudgetConfigError(
-        `Missing or invalid Workers AI daily neuron budget in KV key ${KV_KEYS.aiNeuronsDailyMax}`,
-        { key: KV_KEYS.aiNeuronsDailyMax, value: raw },
+        `Missing or invalid Workers AI daily neuron budget in KV key ${key}`,
+        { key, value: raw },
       );
     }
     return Math.floor(max);

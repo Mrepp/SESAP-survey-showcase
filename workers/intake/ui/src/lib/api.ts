@@ -89,8 +89,12 @@ export const api = {
     });
   },
 
-  completeUpload(kind: 'video' | 'audio'): Promise<{ interviewId: string; email: string }> {
-    return request('/api/intake/upload/complete', json({ kind }));
+  completeUpload(): Promise<{ interviewId: string; email: string }> {
+    return request('/api/intake/upload/complete', json({}));
+  },
+
+  submitKaltura(source: string): Promise<{ interviewId: string; email: string }> {
+    return request('/api/intake/upload/kaltura', json({ source }));
   },
 
   getReview(token: string): Promise<SubmitterView> {

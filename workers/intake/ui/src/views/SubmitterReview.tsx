@@ -96,7 +96,7 @@ export function SubmitterReview() {
   async function handleSubmit() {
     if (
       !confirm(
-        'Send this to the program for review? You will not be able to edit it again unless they ask for a change.',
+        'Send your edits to the SESAP team? You will not be able to edit again unless the team requests a change.',
       )
     ) {
       return;
@@ -142,9 +142,9 @@ export function SubmitterReview() {
           Thank you — it is with the program now
         </Heading>
         <Text fontSize="sm" color="osuGray">
-          A program administrator will review your interview before it joins the
-          public repository. If they ask for a change, we will email you a fresh
-          link.
+          The SESAP team will review your edits before deciding whether to
+          publish your interview on the SESAP site. If a change is needed, we
+          will email you a new link.
         </Text>
       </Box>
     );
@@ -192,17 +192,19 @@ export function SubmitterReview() {
         aria-label="Interview title"
       />
       <Text fontSize="sm" color="osuGray" mb={6}>
-        This is a draft written by our analysis tool from your own words. Correct
-        anything it got wrong — a theme it invented, a quote it clipped badly, a
-        date it misread. When you are happy with it, send it to the program.
+        This is a draft description and analysis of your recording. Correct
+        anything it got wrong, such as a theme, quote, or date. The transcript
+        is shown for reference; changes to it need help from the SESAP team.
+        When the draft is ready, send your edits to the team.
       </Text>
       <Box bg="surface.input" p={4} borderRadius="md" fontSize="sm">
         <Text fontWeight="600" mb={1}>
           What happens next
         </Text>
         <Text color="osuGray">
-          Once you submit, a program administrator reviews it. Nothing is
-          published until they approve it.
+          Once you send your edits, the SESAP team reviews them. The interview
+          can appear on the public SESAP site after the team approves it and
+          publishes an updated site index.
         </Text>
       </Box>
     </Box>
@@ -226,7 +228,7 @@ export function SubmitterReview() {
           backLabel="Home"
           extraActions={
             <Button colorPalette="green" size="sm" disabled={busy} onClick={handleSubmit}>
-              Send to the program
+              Send edits to SESAP
             </Button>
           }
         />

@@ -45,7 +45,7 @@ class MockKV {
 
   constructor(maxNeurons?: number) {
     if (maxNeurons !== undefined) {
-      this.store.set(KV_KEYS.aiNeuronsDailyMax, String(maxNeurons));
+      this.store.set(KV_KEYS.aiNeuronsDailyMax(), String(maxNeurons));
     }
   }
 
@@ -170,7 +170,7 @@ describe('AiNeuronLimiter', () => {
 
   it('reads an updated max from KV on each reservation', async () => {
     const { limiter, kv } = createLimiter(50);
-    kv.store.set(KV_KEYS.aiNeuronsDailyMax, '100');
+    kv.store.set(KV_KEYS.aiNeuronsDailyMax(), '100');
 
     const reserve = await post(limiter, '/reserve', { model: 'test', neurons: 75 });
     expect(reserve.status).toBe(200);

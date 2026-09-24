@@ -1,25 +1,20 @@
-/**
- * The prompt script alumni read before recording.
- *
- * TODO(content): placeholder. The real script comes from the program; when it
- * lands, replace these prompts wholesale. They are shown, not sent — nothing
- * downstream parses them.
+/** Preparation guidance adapted from the supplied self-submission example.
+ * Confirm final wording with the project partner and SESAP teammates before
+ * inviting real contributors. These prompts are shown only, not parsed.
  */
 export const PROMPT_SCRIPT: { heading: string; prompts: string[] } = {
-  heading: 'What to talk about',
+  heading: 'Tell the story of your experience as an engineering student',
   prompts: [
-    'Introduce yourself: what you studied, and when you graduated.',
-    'What made you choose Oregon State, and what did you expect before you arrived?',
-    'Tell us about a moment in your time here that changed something for you — a class, a person, a setback.',
-    'What was hardest, and what got you through it?',
-    'What did the university do well for you? What should it do differently for the next student?',
-    'What are you doing now, and how does it connect back to what you studied?',
+    'What brought you to this program? What was it like when you started?',
+    'How has the program fit into your life, and how have you found your place in it?',
+    'Which experiences, people, or parts of the program have mattered most to you?',
+    'What changes would help students feel supported and able to succeed?',
   ],
 };
 
 export const RECORDING_TIPS = [
-  'Find a quiet room. Audio matters more than picture.',
-  'Aim for 10–30 minutes. There is no minimum.',
-  'Speak as if to one person, not a committee.',
-  'You will get to read and correct the written analysis before anything is published.',
+  'These are suggestions, not questions you have to answer. Tell the parts of your story that matter to you.',
+  'Aim for about 15 minutes. Notes or a practice recording can help if you want them.',
+  'Choose a quiet place where your voice can be heard clearly.',
+  'You will be able to review the written description and analysis before it appears on the SESAP site.',
 ];

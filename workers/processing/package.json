@@ -12,9 +12,10 @@
     "deploy": "wrangler deploy"
   },
   "dependencies": {
-    "hono": "^4.6.0",
+    "@sesap/core": "workspace:*",
     "@sesap/types": "workspace:*",
-    "@sesap/shared": "workspace:*"
+    "@sesap/shared": "workspace:*",
+    "hono": "^4.6.0"
   },
   "devDependencies": {
     "typescript": "^5.7.0",

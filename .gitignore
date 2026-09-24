@@ -16,6 +16,9 @@ workers/showcase/ui/public/assets/interview_repository/
 workers/admin/public/
 workers/admin/ui/out/
 workers/admin/ui/next-env.d.ts
+workers/intake/public/
+workers/intake/ui/out/
+workers/intake/ui/next-env.d.ts
 .next/
 .pnpm-store/
 .claude/

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "wrangler dev --persist-to ../../.wrangler/state -c wrangler.toml -c ../processing/wrangler.toml -c ../indexing/wrangler.toml",
     "dev:ui": "cd ui && pnpm dev",
-    "ui:build": "cd ui && pnpm install && pnpm build",
+    "ui:build": "pnpm --dir ui build",
     "build": "pnpm ui:build && wrangler deploy --dry-run --outdir=dist",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/",
@@ -14,11 +14,14 @@
     "deploy": "wrangler deploy"
   },
   "dependencies": {
-    "hono": "^4.6.0",
+    "@sesap/core": "workspace:*",
     "@sesap/types": "workspace:*",
-    "@sesap/shared": "workspace:*"
+    "@sesap/shared": "workspace:*",
+    "@sesap/worker-runtime": "workspace:*",
+    "hono": "^4.6.0"
   },
   "devDependencies": {
+    "@sesap/test-utils": "workspace:*",
     "typescript": "^5.7.0",
     "@cloudflare/workers-types": "^4.20241218.0",
     "wrangler": "4.69.0",

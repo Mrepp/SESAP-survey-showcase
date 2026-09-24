@@ -9,7 +9,7 @@ const logger = new Logger({ service: 'aggregator-service' });
  * Load all approved interviews with their embeddings from KV and R2.
  *
  * Process:
- * 1. List all interview IDs from KV (interviews:list)
+ * 1. List all interview IDs from the KV interview key prefix
  * 2. Filter by approvalStatus === 'approved'
  * 3. Load each interview from R2 (interview_repository/{id}.json)
  * 4. Load embeddings from R2 (embeddings/{id}.json)
@@ -35,14 +35,17 @@ export async function loadApprovedInterviews(env: Env): Promise<AggregatorResult
 
   const drops: AggregatorDrop[] = [];
 
-  // Step 1: Get the list of all interview IDs from KV
-  const interviewListJson = await env.SESAP_KV.get(KV_KEYS.interviewsList);
-  if (!interviewListJson) {
-    logger.warn('No interview list found in KV');
-    return { interviews: [], drops };
-  }
-
-  const interviewIds: string[] = JSON.parse(interviewListJson);
+  // Step 1: List interview IDs from KV. The former interviews:list key was
+  // removed because concurrent creates could overwrite each other's updates.
+  const interviewIds: string[] = [];
+  let cursor: string | undefined;
+  do {
+    const page = await env.SESAP_KV.list({ prefix: KV_KEYS.interviewPrefix, cursor });
+    for (const key of page.keys) {
+      interviewIds.push(key.name.slice(KV_KEYS.interviewPrefix.length));
+    }
+    cursor = page.list_complete ? undefined : page.cursor;
+  } while (cursor);
   logger.debug('Found interview IDs', { count: interviewIds.length });
 
   // Step 2: Load metadata for each interview and filter by approval status

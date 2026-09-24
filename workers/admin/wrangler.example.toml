@@ -65,3 +65,8 @@ service = "sesap-indexing"
 [[queues.producers]]
 binding = "PROCESSING_QUEUE"
 queue = "interview-processing"
+
+# Best-effort contributor status emails for moderated self-service submissions.
+[[queues.producers]]
+binding = "NOTIFICATION_QUEUE"
+queue = "interview-notifications"

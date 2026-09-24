@@ -11,7 +11,10 @@ import {
   putSession,
   requireSession,
 } from '../services/session';
-import { createSelfServiceInterview } from '../services/interview';
+import {
+  createSelfServiceInterview,
+  createSelfServiceInterviewFromKaltura,
+} from '../services/interview';
 
 const logger = new Logger({ worker: 'sesap-intake', module: 'upload-routes' });
 
@@ -27,6 +30,11 @@ const MEDIA_EXTENSIONS: Record<string, string> = {
   'audio/mp4': 'm4a',
   'audio/ogg': 'ogg',
   'audio/wav': 'wav',
+  'audio/x-wav': 'wav',
+  'audio/wave': 'wav',
+  'audio/aac': 'aac',
+  'audio/flac': 'flac',
+  'audio/x-m4a': 'm4a',
 };
 
 /**
@@ -55,12 +63,16 @@ export const MAX_SUBMISSIONS_PER_EMAIL = 3;
 const SUBMISSION_COUNT_TTL_SECONDS = 365 * 24 * 60 * 60;
 
 function mediaExtension(contentType: string): string {
-  const base = contentType.split(';')[0].trim().toLowerCase();
+  const base = normalizeContentType(contentType);
   const ext = MEDIA_EXTENSIONS[base];
   if (!ext) {
     throw new ValidationError(`Unsupported media type: ${base}`);
   }
   return ext;
+}
+
+function normalizeContentType(contentType: string): string {
+  return contentType.split(';')[0].trim().toLowerCase();
 }
 
 /**
@@ -69,7 +81,7 @@ function mediaExtension(contentType: string): string {
  * header and stored it as R2 metadata.
  */
 function assertAudioContentType(contentType: string): string {
-  const base = contentType.split(';')[0].trim().toLowerCase();
+  const base = normalizeContentType(contentType);
   mediaExtension(base);
   if (!base.startsWith('audio/')) {
     throw new ValidationError(`Unsupported audio type: ${base}`);
@@ -136,6 +148,49 @@ function chargeBytes(session: IntakeSession, byteLength: number): IntakeSession 
   return { ...session, uploadedBytes: used };
 }
 
+/** Dispose of browser media that was superseded by a new file or Kaltura link. */
+async function discardPendingUpload(env: Env, session: IntakeSession): Promise<void> {
+  if (session.upload) {
+    try {
+      await env.SESAP_BUCKET.resumeMultipartUpload(
+        session.upload.key,
+        session.upload.uploadId,
+      ).abort();
+    } catch (error) {
+      logger.warn('Could not abort superseded multipart upload', {
+        key: session.upload.key,
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
+  }
+  if (session.interviewId) {
+    await env.SESAP_BUCKET.delete(R2_PATHS.audioTemp(session.interviewId, 'mp3'));
+  }
+}
+
+async function assertInterviewIdUnused(env: Env, session: IntakeSession): Promise<void> {
+  if (session.interviewId && (await env.SESAP_KV.get(KV_KEYS.interview(session.interviewId)))) {
+    throw new ValidationError(
+      'This session has already submitted an interview. Watch your inbox for the review link.',
+    );
+  }
+}
+
+async function finishSession(
+  env: Env,
+  sessionId: string,
+  session: IntakeSession,
+  record: InterviewRecord,
+): Promise<void> {
+  await recordSubmission(env, session.email);
+  await putSession(env, sessionId, {
+    ...session,
+    upload: undefined,
+    interviewId: undefined,
+    submittedInterviewId: record.id,
+  });
+}
+
 // POST /api/intake/upload/start — allocate an interview id and open an R2
 // multipart upload. Student video routinely exceeds the Workers request-body
 // cap, so the browser sends parts rather than one body.
@@ -152,36 +207,14 @@ upload.post('/api/intake/upload/start', async (c) => {
     throw new ValidationError('contentType is required.');
   }
 
-  const contentType = body.contentType;
-  // Resume an in-flight upload's id; never one that already has a record.
-  // A session that reaches here with a completed interview would otherwise
-  // overwrite it — media, consent, processing state and all.
-  let id = session.interviewId ?? generateInterviewId();
-  if (session.interviewId && (await c.env.SESAP_KV.get(KV_KEYS.interview(session.interviewId)))) {
-    throw new ValidationError(
-      'This session has already submitted an interview. Watch your inbox for the review link.',
-    );
-  }
-  if (session.upload && session.upload.contentType !== contentType) {
-    // A new recording with a different type gets a fresh key. Abort the
-    // abandoned multipart rather than leaving it for R2's expiry: looping
-    // start → parts → start with a different type would otherwise strand
-    // arbitrarily many partially-uploaded objects that nothing ever cleans up.
-    try {
-      await c.env.SESAP_BUCKET.resumeMultipartUpload(
-        session.upload.key,
-        session.upload.uploadId,
-      ).abort();
-    } catch (error) {
-      // A multipart that R2 already expired aborts with an error; that is the
-      // outcome we wanted anyway, so it must not fail the new upload.
-      logger.warn('Could not abort superseded multipart upload', {
-        key: session.upload.key,
-        error: error instanceof Error ? error.message : String(error),
-      });
-    }
-    id = generateInterviewId();
-  }
+  const contentType = normalizeContentType(body.contentType);
+  mediaExtension(contentType);
+  // The browser cannot recover its Blob after a reload, so every deliberate
+  // start is a replacement. Reusing same-type parts can corrupt a shorter
+  // second file with stale trailing parts from the first.
+  await assertInterviewIdUnused(c.env, session);
+  await discardPendingUpload(c.env, session);
+  const id = generateInterviewId();
   const key = R2_PATHS.media(id, mediaExtension(contentType));
 
   const multipart = await c.env.SESAP_BUCKET.createMultipartUpload(key, {
@@ -310,8 +343,9 @@ upload.post('/api/intake/upload/complete', async (c) => {
     throw new ValidationError('No parts were uploaded.');
   }
 
-  const body = await c.req.json<{ kind?: unknown }>().catch(() => ({ kind: undefined }));
-  const kind = body.kind === 'audio' ? 'audio' : 'video';
+  const kind = normalizeContentType(session.upload.contentType).startsWith('audio/')
+    ? 'audio'
+    : 'video';
 
   const multipart = c.env.SESAP_BUCKET.resumeMultipartUpload(
     session.upload.key,
@@ -348,18 +382,48 @@ upload.post('/api/intake/upload/complete', async (c) => {
   // Counted against the address, not the session, so a fresh cookie does not
   // reset it. Recorded after the record exists: a failed submission must not
   // consume the contributor's quota.
-  await recordSubmission(c.env, session.email);
-
   // The wizard is finished. Clear the upload and remember what was submitted,
   // so a refreshed session lands on the thank-you step rather than recording
   // again over this interview.
-  await putSession(c.env, sessionId, {
-    ...session,
-    upload: undefined,
-    interviewId: undefined,
-    submittedInterviewId: record.id,
+  await finishSession(c.env, sessionId, session, record);
+
+  const response: ApiResponse<{ interviewId: string; email: string }> = {
+    success: true,
+    data: { interviewId: record.id, email: session.email },
+  };
+  return c.json(response, 201);
+});
+
+// POST /api/intake/upload/kaltura — create a moderated self-service record
+// from a public Kaltura entry. The parser extracts identifiers and constructs a
+// trusted CDN embed; raw contributor HTML is never rendered.
+upload.post('/api/intake/upload/kaltura', async (c) => {
+  const { sessionId, session } = requireSession(
+    await loadSessionFromRequest(c.env, c.req.header('Cookie')),
+  );
+  await enforceUploadLimits(c.env, c.req.raw, sessionId);
+  assertReadyToUpload(session);
+  await assertSubmissionQuota(c.env, session.email);
+  await assertInterviewIdUnused(c.env, session);
+
+  const body = await c.req.json<{ source?: unknown }>();
+  if (typeof body.source !== 'string' || !body.source.trim()) {
+    throw new ValidationError('Kaltura link or embed is required.');
+  }
+
+  await discardPendingUpload(c.env, session);
+  const id = generateInterviewId();
+  const record = await createSelfServiceInterviewFromKaltura(c.env, {
+    id,
+    session,
+    source: body.source.trim(),
+    fallbackPartnerId: c.env.KALTURA_PARTNER_ID || undefined,
+    fallbackUiconfId: c.env.KALTURA_UICONF_ID || undefined,
+    ip: clientIp(c.req.raw),
+    userAgent: c.req.header('User-Agent'),
   });
 
+  await finishSession(c.env, sessionId, session, record);
   const response: ApiResponse<{ interviewId: string; email: string }> = {
     success: true,
     data: { interviewId: record.id, email: session.email },

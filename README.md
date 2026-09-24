@@ -21,7 +21,7 @@ workers/
 ## Prerequisites
 
 - **Node.js 20+**
-- **pnpm 10.14+** — `corepack enable` to activate the version pinned in `package.json`
+- **pnpm 11.21+** — `corepack enable` to activate the version pinned in `package.json`
 - **Wrangler CLI** — installed as a workspace dependency, no global install needed
 
 ## Getting Started

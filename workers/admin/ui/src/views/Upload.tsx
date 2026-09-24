@@ -4,7 +4,7 @@ import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { Box, Flex, Text, Button, Input, Textarea } from '@chakra-ui/react';
 import { api } from '../api/interviews';
-import { extractAudio } from '../lib/extractAudio';
+import { extractAudio } from '@sesap/ui-media';
 import { previewVideoEmbed } from '../lib/kalturaPreview';
 
 type Mode = 'url' | 'video' | 'transcript';

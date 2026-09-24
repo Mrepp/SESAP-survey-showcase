@@ -347,7 +347,13 @@ export async function approveForAnalysis(
   if (record.origin !== 'self_service' || record.approval.status !== 'pending_media_review') {
     throw new ValidationError('Only self-service submissions awaiting media review can be approved for analysis.');
   }
-  if (!record.media || !record.audioRef) throw new ValidationError('Submitted media is unavailable.');
+  const hasUploadedMedia = record.source === 'audio' && Boolean(record.media && record.audioRef);
+  const hasKalturaMedia =
+    record.source === 'kaltura' &&
+    Boolean(record.kalturaRef && record.video?.provider === 'kaltura');
+  if (!hasUploadedMedia && !hasKalturaMedia) {
+    throw new ValidationError('Submitted media is unavailable.');
+  }
 
   const now = new Date().toISOString();
   record.approval.preAnalysisReviewedAt = now;
@@ -395,6 +401,12 @@ export async function rejectBeforeAnalysis(
   ]);
   record.media = undefined;
   record.audioRef = undefined;
+  // A rejected external submission should not remain playable from the admin
+  // record after locally uploaded media would have been deleted.
+  if (record.source === 'kaltura') {
+    record.kalturaRef = undefined;
+    record.video = undefined;
+  }
   record.processing.status = 'failed';
   record.processing.failedAt = now;
   record.processing.error = 'Rejected before analysis';

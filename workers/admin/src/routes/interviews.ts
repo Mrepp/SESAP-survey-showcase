@@ -163,6 +163,7 @@ interviews.get('/api/interviews/:id/media', async (c) => {
   const size = record.media.sizeBytes;
   const rangeHeader = c.req.header('Range');
   let range: R2Range | undefined;
+  let contentLength = size;
   let status: 200 | 206 = 200;
   const headers = new Headers({
     // The content type is whatever the contributor's browser declared, so it is
@@ -185,13 +186,15 @@ interviews.get('/api/interviews/:id/media', async (c) => {
     if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start > end || start >= size) {
       return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${size}` } });
     }
-    range = { offset: start, length: Math.min(end, size - 1) - start + 1 };
+    const length = Math.min(end, size - 1) - start + 1;
+    range = { offset: start, length };
+    contentLength = length;
     status = 206;
-    headers.set('Content-Range', `bytes ${start}-${start + range.length - 1}/${size}`);
+    headers.set('Content-Range', `bytes ${start}-${start + length - 1}/${size}`);
   }
   const object = await storageService.getMedia(c.env.SESAP_BUCKET, record.media.key, range);
   if (!object) throw new ValidationError('Submitted media is unavailable.');
-  headers.set('Content-Length', String(range?.length ?? object.size));
+  headers.set('Content-Length', String(contentLength));
   return new Response(object.body, { status, headers });
 });
 

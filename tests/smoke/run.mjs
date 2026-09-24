@@ -4,12 +4,13 @@
 
 const ENVS = {
   ADMIN_URL: (process.env.ADMIN_URL ?? '').trim(),
+  INTAKE_URL: (process.env.INTAKE_URL ?? '').trim(),
   PROCESSING_URL: (process.env.PROCESSING_URL ?? '').trim(),
   INDEXING_URL: (process.env.INDEXING_URL ?? '').trim(),
   SHOWCASE_URL: (process.env.SHOWCASE_URL ?? '').trim(),
 };
 
-const REQUIRED = ['SHOWCASE_URL', 'PROCESSING_URL', 'INDEXING_URL'];
+const REQUIRED = ['SHOWCASE_URL', 'PROCESSING_URL', 'INDEXING_URL', 'INTAKE_URL'];
 const missing = REQUIRED.filter((k) => !ENVS[k]);
 if (missing.length > 0) {
   console.error(`Missing required env var(s): ${missing.join(', ')}`);
@@ -67,9 +68,17 @@ function addHealthCheck(workerName, urlKey) {
 }
 
 addHealthCheck('sesap-admin', 'ADMIN_URL');
+addHealthCheck('sesap-intake', 'INTAKE_URL');
 addHealthCheck('sesap-processing', 'PROCESSING_URL');
 addHealthCheck('sesap-indexing', 'INDEXING_URL');
 addHealthCheck('sesap-showcase', 'SHOWCASE_URL');
+
+check('intake GET /', async () => {
+  const res = await fetchWithRetry(`${stripTrailingSlash(ENVS.INTAKE_URL)}/`);
+  if (res.status !== 200) throw new Error(`expected 200, got ${res.status}`);
+  const ct = res.headers.get('content-type') ?? '';
+  if (!ct.includes('text/html')) throw new Error(`content-type: ${ct}`);
+});
 
 if (!ENVS.SHOWCASE_URL) {
   check('showcase GET /', async () => ({ skipped: true, reason: 'SHOWCASE_URL not set' }));

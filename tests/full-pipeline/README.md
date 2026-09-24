@@ -1,10 +1,10 @@
 # @sesap/full-pipeline
 
-One Playwright spec that runs the **entire** user-visible pipeline against locally-running workers with **real** external services: real Kaltura download, real Whisper transcription, real analysis LLM, real embeddings.
+One Playwright spec that runs the **admin Kaltura-to-showcase** path against locally running workers with real external services: Kaltura download, Whisper transcription, analysis LLM, and embeddings. It does not exercise contributor self intake. See [testing](../../docs/testing.md) for the suite map and [partner verification](../../docs/partner-verification.md) for the full release dry run.
 
 ## What it proves
 
-A single passing run proves all of this end-to-end:
+A single passing run proves this path end-to-end:
 
 1. The admin `POST /api/interviews` (source=kaltura) accepts and persists.
 2. The processing queue consumer fetches the media from Kaltura, runs Whisper, runs the analysis LLM, and generates embeddings.
@@ -13,7 +13,7 @@ A single passing run proves all of this end-to-end:
 5. The freshly-built `metadata.json` includes the new interview ID.
 6. The showcase detail page renders the title and at least some LLM-derived content.
 
-If this passes, the full pipeline is alive. If it fails, the step that fails tells you exactly which layer broke.
+If this passes, the tested admin path is alive. If it fails, the step that fails tells you which layer in that path broke.
 
 ## Why it isn't in CI
 
@@ -85,6 +85,7 @@ Each run creates one interview tagged `E2E-<timestamp>` and best-effort deletes 
 
 ## What this test does NOT cover
 
+- Contributor verification, release forms, upload, review, and staff media moderation.
 - Audio-file upload code path (Kaltura is exercised; raw audio is not).
 - Transcript-only path (we always run Whisper here).
 - Production Cloudflare Access (admin dev bypass is on).

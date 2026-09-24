@@ -2,7 +2,9 @@
 
 **Goal:** Bring the full SESAP site onto a stable public domain, bring `main` up to date with the work that is ready to ship, make the contributor and staff journeys usable, and give the SESAP project partner and teammates a working site and materials to verify and decide what to publish, transfer, revise, retain, or dispose of. A complete outcome also includes an agreed path for approved materials to reach the OSU Library.
 
-**This is a working plan, not a launch claim.** The local repository was reviewed September 24, 2026. The branch contains work that is not in `main`; the current CI and deployment workflows do not include the intake worker; the contributor consent text is still marked as draft; and a library deposit mechanism is not present. Confirm product, form, domain, and handoff decisions with the project partner and SESAP teammates before inviting real contributors.
+**This is a working plan, not a launch claim.** The local repository was reviewed September 24, 2026. The branch contains work that is not in `main`; intake was added to CI and deployment configuration but has not been verified on staging; the contributor consent text is still marked as draft; and a library deposit mechanism is not present. Confirm product, form, domain, and handoff decisions with the project partner and SESAP teammates before inviting real contributors.
+
+See [deployment](deployment.md) for the current release path, [operations](operations.md) for staff work, and [partner verification](partner-verification.md) for the staging rehearsal.
 
 ## What “ready” looks like
 
@@ -16,7 +18,7 @@
 
 ### 1. Reconcile the branches and make staging representative
 
-**Do:** Inventory the uncommitted work on this branch and the changes on `main` and `staging`. Integrate the needed `main` changes here, resolve conflicts deliberately, and review the resulting diff. Make the CI and deployment workflows build, test, deploy, and smoke-check the intake worker alongside admin, processing, indexing, and showcase. Update the release instructions so they describe all five workers and the actual path from feature branch to staging to `main`. Keep staging resources and data separate from production.
+**Do:** Inventory the uncommitted work on this branch and the changes on `main` and `staging`. Integrate the needed `main` changes here, resolve conflicts deliberately, and review the resulting diff. Verify the five worker CI, deployment, and smoke changes on staging. Keep staging resources and data separate from production. Follow the branch path in [deployment](deployment.md).
 
 **Exit check:** The complete five-worker flow deploys from a known commit to staging. CI passes; staging smoke checks cover the public site, intake, admin, processing, and publication. The same commit can be promoted to `main` after review without reconstructing changes by hand.
 

@@ -1,14 +1,21 @@
 # @sesap/smoke
 
-Live post-deploy smoke tests. Run after a deploy to confirm the live edge is
-serving the expected content. Zero runtime dependencies (Node 20 built-in
-`fetch` only). Idempotent and safe to re-run.
+Live post-deploy smoke tests for the five workers configured in the deployment
+workflow. Run after a staging deploy to confirm the live edge is serving the
+expected content. The runner uses built-in `fetch` and is idempotent. See
+[testing](../../docs/testing.md) for which check to choose.
 
 ## What it checks
+
+A successful run does not show that contributors can verify email, upload
+media, or review a draft. Use [partner verification](../../docs/partner-verification.md)
+for that rehearsal.
 
 | Endpoint | Assertion |
 |---|---|
 | `GET {ADMIN_URL}/api/health` | skipped if `ADMIN_URL` is empty (see below); else 200 + `{ status: 'ok', worker: 'sesap-admin' }` |
+| `GET {INTAKE_URL}/api/health` | 200 + `{ status: 'ok', worker: 'sesap-intake' }` |
+| `GET {INTAKE_URL}/` | 200, `text/html` |
 | `GET {PROCESSING_URL}/api/health` | 200 + `{ status: 'ok', worker: 'sesap-processing' }` |
 | `GET {INDEXING_URL}/api/health` | 200 + `{ status: 'ok', worker: 'sesap-indexing' }` |
 | `GET {SHOWCASE_URL}/api/health` | 200 + `{ status: 'ok', worker: 'sesap-showcase' }` |
@@ -21,6 +28,7 @@ serving the expected content. Zero runtime dependencies (Node 20 built-in
 | Var | Required | Notes |
 |---|---|---|
 | `SHOWCASE_URL` | yes | e.g. `https://sesap-showcase.<acct>.workers.dev` |
+| `INTAKE_URL` | yes | staging intake origin |
 | `PROCESSING_URL` | yes | |
 | `INDEXING_URL` | yes | |
 | `ADMIN_URL` | optional | leave empty by default; the admin worker sits behind Cloudflare Access, so an unauthenticated probe redirects to the Access login |
@@ -32,12 +40,14 @@ serving the expected content. Zero runtime dependencies (Node 20 built-in
 
 ```sh
 SHOWCASE_URL=https://<showcase-url> \
+INTAKE_URL=https://<intake-url> \
 PROCESSING_URL=https://<processing-url> \
 INDEXING_URL=https://<indexing-url> \
 pnpm test:smoke
 ```
 
-Or from the repo root: `pnpm test:smoke`.
+Run from the repo root with all required URLs set. Running without them exits
+with a configuration error rather than testing a deployment.
 
 ## In CI
 

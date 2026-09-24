@@ -29,5 +29,5 @@ INTAKE_SESSION_SECRET = "<GENERATE_ME>"
 # ENVIRONMENT = "development" and the `EMAIL` binding is absent. Without it the
 # development mailer logs the message (including the verification code); that
 # fallback exists in development only.
-#   docker compose -f docker-compose.dev.yml up -d mailpit   # then :8025
-DEV_MAIL_URL = "http://127.0.0.1:8025/api/v1/send"
+#   Start a local Mailpit instance separately, then open :8025.
+# DEV_MAIL_URL = "http://127.0.0.1:8025/api/v1/send"

@@ -31,6 +31,7 @@ jobs:
           - workers/processing
           - workers/indexing
           - workers/showcase
+          - workers/intake
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -40,14 +41,13 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter ./${{ matrix.package }} test
-        continue-on-error: true
 
   build:
     runs-on: ubuntu-latest
     needs: test
     strategy:
       matrix:
-        worker: [admin, processing, indexing, showcase]
+        worker: [admin, processing, indexing, showcase, intake]
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -64,4 +64,11 @@ jobs:
           sed -i 's|<YOUR_R2_BUCKET_NAME>|ci-placeholder-bucket|g' wrangler.toml
           sed -i 's|<YOUR_KV_NAMESPACE_ID>|00000000000000000000000000000000|g' wrangler.toml
           sed -i 's|<YOUR_KV_PREVIEW_ID>|00000000000000000000000000000001|g' wrangler.toml
+          if [ "${{ matrix.worker }}" = intake ]; then
+            sed -i 's|<YOUR_INTAKE_URL>|https://intake.example.invalid|g' wrangler.toml
+            sed -i 's|<YOUR_SHOWCASE_URL>|https://showcase.example.invalid|g' wrangler.toml
+            sed -i 's|<YOUR_EMAIL_FROM>|sesap@example.invalid|g' wrangler.toml
+          fi
+      - if: matrix.worker == 'intake'
+        run: pnpm --filter sesap-intake build:ui
       - run: pnpm --filter sesap-${{ matrix.worker }} build

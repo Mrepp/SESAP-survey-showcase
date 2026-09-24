@@ -1,4 +1,4 @@
-.PHONY: dev dev-down dev-ui ui-build deploy deploy-admin deploy-processing deploy-showcase deploy-indexing setup test-pipeline-headed help
+.PHONY: dev dev-down dev-ui ui-build deploy deploy-admin deploy-processing deploy-showcase deploy-indexing deploy-intake setup test-pipeline-headed help
 
 help:
 	@echo "Available targets:"
@@ -11,6 +11,7 @@ help:
 	@echo "  make deploy-processing   - Deploy processing worker"
 	@echo "  make deploy-showcase     - Deploy showcase worker"
 	@echo "  make deploy-indexing     - Deploy indexing worker"
+	@echo "  make deploy-intake       - Deploy intake worker"
 	@echo "  make setup               - Create wrangler.toml files from templates"
 	@echo "  make test-pipeline-headed - Start the dev stack and run the full-pipeline e2e test with a visible browser"
 
@@ -57,7 +58,7 @@ ui-build:
 	@cd workers/intake/ui && node ./node_modules/next/dist/bin/next build && rm -rf ../public && cp -r out ../public && cp -r public/. ../public/ 2>/dev/null || true
 
 # Deploy in dependency order: processing and indexing first, then admin and showcase
-deploy: deploy-processing deploy-indexing deploy-admin deploy-showcase
+deploy: deploy-processing deploy-indexing deploy-admin deploy-showcase deploy-intake
 	@echo "✅ All workers deployed successfully!"
 
 # Admin depends on processing and indexing workers
@@ -76,6 +77,10 @@ deploy-showcase:
 deploy-indexing:
 	@echo "🚀 Deploying indexing worker..."
 	@cd workers/indexing && pnpm run deploy
+
+deploy-intake:
+	@echo "🚀 Deploying intake worker..."
+	@cd workers/intake && pnpm run build:ui && pnpm run deploy
 
 setup:
 	@bash scripts/setup-wrangler.sh

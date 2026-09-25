@@ -7,6 +7,13 @@ packages:
   - "tests/smoke"
   - "tests/full-pipeline"
 
+# Native build steps used by the pinned toolchain. pnpm 11 fails a clean CI
+# install when these are left unreviewed.
+allowBuilds:
+  esbuild: true
+  sharp: true
+  workerd: true
+
 # Single source of truth for the Cloudflare stack version — every manifest
 # references these via "catalog:" so the specifier never lies about what's
 # actually installed.
